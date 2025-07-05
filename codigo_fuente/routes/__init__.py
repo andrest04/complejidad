@@ -1,0 +1,4 @@
+from .main import main_bp
+from .api_clientes import clientes_bp as api_clientes_bp
+from .api_vehiculos import vehiculos_bp as api_vehiculos_bp
+from .api_algoritmos import algoritmos_bp as api_algoritmos_bp

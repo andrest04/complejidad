@@ -23,7 +23,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">
                 <i class="fas fa-route me-2"></i>
                 Optimización de Rutas
             </a>
@@ -35,27 +35,27 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('index') }}">
+                        <a class="nav-link" href="{{ url_for('main.index') }}">
                             <i class="fas fa-home me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('gestionar_vehiculos') }}">
+                        <a class="nav-link" href="{{ url_for('main.gestionar_vehiculos') }}">
                             <i class="fas fa-truck me-1"></i>Vehículos
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('gestionar_clientes') }}">
+                        <a class="nav-link" href="{{ url_for('main.gestionar_clientes') }}">
                             <i class="fas fa-users me-1"></i>Clientes
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('ejecutar') }}">
+                        <a class="nav-link" href="{{ url_for('main.ejecutar') }}">
                             <i class="fas fa-cogs me-1"></i>Ejecutar
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('resultados') }}">
+                        <a class="nav-link" href="{{ url_for('main.resultados') }}">
                             <i class="fas fa-chart-line me-1"></i>Resultados
                         </a>
                     </li>
