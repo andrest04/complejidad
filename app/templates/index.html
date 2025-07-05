@@ -1,418 +1,672 @@
-{% extends "layout.html" %}
-
-{% block title %}Dashboard - Optimización de Rutas{% endblock %}
-
-{% block content %}
-
+{% extends "layout.html" %} {% block title %}Dashboard - Optimización de Rutas{%
+endblock %} {% block content %}
 
 <div class="row">
-    <!-- Estadísticas -->
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card bg-primary text-white h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h4 class="card-title">{{ clientes_count }}</h4>
-                        <p class="card-text">Clientes Registrados</p>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-users fa-2x"></i>
-                    </div>
-                </div>
-            </div>
+  <!-- Estadísticas -->
+  <div class="col-lg-3 col-md-6 mb-4">
+    <div class="card bg-primary text-white h-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h4 class="card-title">{{ clientes_count }}</h4>
+            <p class="card-text">Clientes Registrados</p>
+          </div>
+          <div class="align-self-center">
+            <i class="fas fa-users fa-2x"></i>
+          </div>
         </div>
+      </div>
     </div>
-    
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card bg-success text-white h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h4 class="card-title">{{ vehiculos_count }}</h4>
-                        <p class="card-text">Vehículos Disponibles</p>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-truck fa-2x"></i>
-                    </div>
-                </div>
-            </div>
+  </div>
+
+  <div class="col-lg-3 col-md-6 mb-4">
+    <div class="card bg-success text-white h-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h4 class="card-title">{{ vehiculos_count }}</h4>
+            <p class="card-text">Vehículos Disponibles</p>
+          </div>
+          <div class="align-self-center">
+            <i class="fas fa-truck fa-2x"></i>
+          </div>
         </div>
+      </div>
     </div>
-    
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card bg-warning text-white h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h4 class="card-title" id="pedidos-total">0</h4>
-                        <p class="card-text">Total Pedidos (kg)</p>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-box fa-2x"></i>
-                    </div>
-                </div>
-            </div>
+  </div>
+
+  <div class="col-lg-3 col-md-6 mb-4">
+    <div class="card bg-warning text-white h-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h4 class="card-title" id="pedidos-total">0</h4>
+            <p class="card-text">Total Pedidos (kg)</p>
+          </div>
+          <div class="align-self-center">
+            <i class="fas fa-box fa-2x"></i>
+          </div>
         </div>
+      </div>
     </div>
-    
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card bg-info text-white h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h4 class="card-title" id="capacidad-total">0</h4>
-                        <p class="card-text">Capacidad Total (kg)</p>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-weight-hanging fa-2x"></i>
-                    </div>
-                </div>
-            </div>
+  </div>
+
+  <div class="col-lg-3 col-md-6 mb-4">
+    <div class="card bg-info text-white h-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h4 class="card-title" id="capacidad-total">0</h4>
+            <p class="card-text">Capacidad Total (kg)</p>
+          </div>
+          <div class="align-self-center">
+            <i class="fas fa-weight-hanging fa-2x"></i>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="row">
-    <!-- Mapa Principal -->
-    <div class="col-lg-8 mb-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">
-                    <i class="fas fa-map me-2"></i>Mapa de Distribución - Lima, Perú
-                </h5>
-            </div>
-            <div class="card-body p-0">
-                <div id="mapa-principal" style="height: 500px;"></div>
-            </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-md-6">
-                        <small class="text-muted">
-                            <i class="fas fa-info-circle me-1"></i>
-                            Haz clic en los marcadores para ver detalles
-                        </small>
-                    </div>
-                    <div class="col-md-6 text-end">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-outline-primary" onclick="toggleCapa('clientes')">
-                                <i class="fas fa-users"></i> Clientes
-                            </button>
-                            <button type="button" class="btn btn-outline-success" onclick="toggleCapa('rutas')">
-                                <i class="fas fa-route"></i> Rutas
-                            </button>
-                            <button type="button" class="btn btn-outline-warning" onclick="toggleCapa('congestion')">
-                                <i class="fas fa-traffic-light"></i> Congestión
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Mapa Principal -->
+  <div class="col-lg-8 mb-4">
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-map me-2"></i>Mapa de Distribución - Lima, Perú
+          </h5>
+          <div class="btn-group btn-group-sm">
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="cargarMapaManual()"
+              title="Cargar Mapa"
+            >
+              <i class="fas fa-map"></i> Cargar Mapa
+            </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              onclick="cargarEstadisticasManual()"
+              title="Actualizar Estadísticas"
+            >
+              <i class="fas fa-sync"></i> Estadísticas
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning"
+              onclick="mostrarInfo()"
+              title="Información de Debug"
+            >
+              <i class="fas fa-info"></i> Debug
+            </button>
+          </div>
         </div>
+      </div>
+      <div class="card-body p-0">
+        <div
+          id="mapa-principal"
+          style="height: 500px; width: 100%; position: relative"
+        ></div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <small class="text-muted">
+              <i class="fas fa-info-circle me-1"></i>
+              Haz clic en los marcadores para ver detalles
+            </small>
+          </div>
+          <div class="col-md-6 text-end">
+            <div class="btn-group btn-group-sm" role="group">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                onclick="toggleCapa('clientes')"
+              >
+                <i class="fas fa-users"></i> Clientes
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-success"
+                onclick="toggleCapa('rutas')"
+              >
+                <i class="fas fa-route"></i> Rutas
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-warning"
+                onclick="toggleCapa('congestion')"
+              >
+                <i class="fas fa-traffic-light"></i> Congestión
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <!-- Estadísticas Rápidas y Gráficos -->
-    <div class="col-lg-4 mb-4">
-        <!-- Estadísticas Rápidas -->
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title mb-0">
-                    <i class="fas fa-chart-pie me-2"></i>Estadísticas Rápidas
-                </h6>
+  </div>
+
+  <!-- Estadísticas Rápidas y Gráficos -->
+  <div class="col-lg-4 mb-4">
+    <!-- Estadísticas Rápidas -->
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title mb-0">
+          <i class="fas fa-chart-pie me-2"></i>Estadísticas Rápidas
+        </h6>
+      </div>
+      <div class="card-body">
+        <div class="row text-center">
+          <div class="col-6">
+            <div class="border rounded p-2">
+              <small class="text-muted">Prioridad Alta</small>
+              <div class="fw-bold text-danger" id="prioridad-alta">0</div>
             </div>
-            <div class="card-body">
-                <div class="row text-center">
-                    <div class="col-6">
-                        <div class="border rounded p-2">
-                            <small class="text-muted">Prioridad Alta</small>
-                            <div class="fw-bold text-danger" id="prioridad-alta">0</div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="border rounded p-2">
-                            <small class="text-muted">Ventanas Críticas</small>
-                            <div class="fw-bold text-warning" id="ventanas-criticas">0</div>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-6">
+            <div class="border rounded p-2">
+              <small class="text-muted">Ventanas Críticas</small>
+              <div class="fw-bold text-warning" id="ventanas-criticas">0</div>
             </div>
+          </div>
         </div>
-        
-        <!-- Gráfico de Distribución -->
-        <div class="card mt-4">
-            <div class="card-header">
-                <h6 class="card-title mb-0">
-                    <i class="fas fa-chart-bar me-2"></i>Distribución por Prioridad
-                </h6>
-            </div>
-            <div class="card-body">
-                <canvas id="chart-prioridades" width="300" height="200"></canvas>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <!-- Gráfico de Distribución -->
+    <div class="card mt-4">
+      <div class="card-header">
+        <h6 class="card-title mb-0">
+          <i class="fas fa-chart-bar me-2"></i>Distribución por Prioridad
+        </h6>
+      </div>
+      <div class="card-body">
+        <canvas id="chart-prioridades" width="300" height="200"></canvas>
+      </div>
+    </div>
+  </div>
 </div>
 
-
-{% endblock %}
-
-{% block extra_js %}
+{% endblock %} {% block extra_js %}
 <script>
-let mapa;
-let marcadores = {};
-let capas = {
+  // Funciones de utilidad
+  function formatNumber(num) {
+    return new Intl.NumberFormat("es-PE").format(num);
+  }
+
+  function formatTime(minutes) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hours}h ${mins}m`;
+  }
+
+  function formatDistance(km) {
+    return `${formatNumber(km)} km`;
+  }
+
+  // Función de notificaciones
+  function showToast(title, message, type = "info") {
+    console.log("Toast:", title, message, type);
+    // Buscar el elemento toast
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toast-title");
+    const toastMessage = document.getElementById("toast-message");
+
+    if (toast && toastTitle && toastMessage) {
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+
+      // Cambiar clase según tipo
+      toast.className = `toast ${
+        type === "error"
+          ? "bg-danger text-white"
+          : type === "success"
+          ? "bg-success text-white"
+          : ""
+      }`;
+
+      const bsToast = new bootstrap.Toast(toast);
+      bsToast.show();
+    } else {
+      // Fallback si no existe el toast
+      console.log(`${title}: ${message}`);
+      alert(`${title}: ${message}`);
+    }
+  }
+
+  let mapa;
+  let marcadores = {};
+  let capas = {
     clientes: true,
     rutas: false,
-    congestion: false
-};
+    congestion: false,
+  };
 
-// Inicializar mapa
-document.addEventListener('DOMContentLoaded', function() {
-    inicializarMapa();
-    cargarEstadisticas();
-    actualizarEstadisticas();
-});
+  // Inicializar mapa
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM loaded, iniciando aplicación...");
 
-function inicializarMapa() {
-    // Crear mapa centrado en Lima
-    mapa = L.map('mapa-principal').setView([-12.0464, -77.0428], 12);
-    
-    // Agregar capa de OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(mapa);
-    
-    // Agregar marcador del depósito
-    const depositoIcon = L.divIcon({
-        className: 'custom-div-icon',
+    // Esperar a que todas las librerías se carguen
+    function iniciarAplicacion() {
+      // Verificar que las librerías están cargadas
+      if (typeof L === "undefined") {
+        console.error("Leaflet no está cargado");
+        showToast(
+          "Error",
+          "Error al cargar el mapa (Leaflet no disponible)",
+          "error"
+        );
+        setTimeout(iniciarAplicacion, 1000); // Reintentar en 1 segundo
+        return;
+      }
+
+      if (typeof Chart === "undefined") {
+        console.warn("Chart.js no está cargado");
+      }
+
+      if (typeof bootstrap === "undefined") {
+        console.warn("Bootstrap no está cargado");
+      }
+
+      console.log("Librerías verificadas, inicializando aplicación...");
+
+      try {
+        inicializarMapa();
+        cargarEstadisticas();
+        setTimeout(() => {
+          actualizarEstadisticas();
+        }, 1000); // Dar tiempo para que el mapa se inicialice
+      } catch (error) {
+        console.error("Error al inicializar aplicación:", error);
+        showToast(
+          "Error",
+          "Error al inicializar la aplicación: " + error.message,
+          "error"
+        );
+      }
+    }
+
+    // Iniciar aplicación con un pequeño delay para asegurar que todo esté cargado
+    setTimeout(iniciarAplicacion, 500);
+  });
+
+  function inicializarMapa() {
+    console.log("Inicializando mapa...");
+    try {
+      // Crear mapa centrado en Lima
+      mapa = L.map("mapa-principal").setView([-12.0464, -77.0428], 12);
+      console.log("Mapa creado correctamente");
+
+      // Agregar capa de OpenStreetMap
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(mapa);
+      console.log("Capa de tiles agregada");
+
+      // Agregar marcador del depósito
+      const depositoIcon = L.divIcon({
+        className: "custom-div-icon",
         html: '<i class="fas fa-warehouse fa-2x text-primary"></i>',
         iconSize: [30, 30],
-        iconAnchor: [15, 15]
-    });
-    
-    L.marker([-12.0464, -77.0428], {icon: depositoIcon})
-        .addTo(mapa)
-        .bindPopup('<b>Depósito Central</b><br>Punto de partida de todas las rutas');
-    
-    // Cargar datos del mapa
-    cargarDatosMapa();
-}
+        iconAnchor: [15, 15],
+      });
 
-function cargarDatosMapa() {
-    fetch('/api/obtener_datos_mapa')
-        .then(response => response.json())
-        .then(data => {
-            // Limpiar marcadores existentes
-            Object.values(marcadores).forEach(marker => mapa.removeLayer(marker));
-            marcadores = {};
-            
-            // Agregar marcadores de clientes
-            if (data.clientes && data.clientes.length > 0) {
-                data.clientes.forEach(cliente => {
-                    const icon = L.divIcon({
-                        className: 'custom-div-icon',
-                        html: `<i class="fas fa-store fa-lg" style="color: ${cliente.color}"></i>`,
-                        iconSize: [20, 20],
-                        iconAnchor: [10, 10]
-                    });
-                    
-                    const marker = L.marker([cliente.lat, cliente.lng], {icon: icon})
-                        .addTo(mapa)
-                        .bindPopup(`
-                            <b>${cliente.nombre}</b><br>
-                            Prioridad: ${cliente.prioridad}<br>
-                            Pedido: ${formatNumber(cliente.pedido)} kg<br>
-                            Ventana: ${cliente.ventana_inicio} - ${cliente.ventana_fin}
-                        `);
-                    
-                    marcadores[cliente.id] = marker;
-                });
+      L.marker([-12.0464, -77.0428], { icon: depositoIcon })
+        .addTo(mapa)
+        .bindPopup(
+          "<b>Depósito Central</b><br>Punto de partida de todas las rutas"
+        );
+      console.log("Marcador de depósito agregado");
+
+      // Cargar datos del mapa
+      console.log("Cargando datos del mapa...");
+      cargarDatosMapa();
+    } catch (error) {
+      console.error("Error al inicializar mapa:", error);
+      showToast(
+        "Error",
+        "Error al inicializar el mapa: " + error.message,
+        "error"
+      );
+    }
+  }
+
+  function cargarDatosMapa() {
+    console.log("Iniciando carga de datos del mapa...");
+    fetch("/api/obtener_datos_mapa")
+      .then((response) => {
+        console.log("Respuesta recibida:", response.status);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Datos recibidos:", data);
+        console.log(
+          "Número de clientes:",
+          data.clientes ? data.clientes.length : 0
+        );
+
+        // Limpiar marcadores existentes
+        Object.values(marcadores).forEach((marker) => mapa.removeLayer(marker));
+        marcadores = {};
+
+        // Agregar marcadores de clientes (limitamos a 100 para mejor rendimiento)
+        if (data.clientes && data.clientes.length > 0) {
+          console.log("Agregando marcadores de clientes...");
+          let clientesAgregados = 0;
+
+          // Solo mostrar los primeros 100 clientes para mejor rendimiento
+          const clientesAMostrar = data.clientes.slice(0, 100);
+
+          clientesAMostrar.forEach((cliente) => {
+            try {
+              const icon = L.divIcon({
+                className: "custom-div-icon",
+                html: `<i class="fas fa-store" style="color: ${cliente.color}"></i>`,
+                iconSize: [15, 15],
+                iconAnchor: [7, 7],
+              });
+
+              const marker = L.marker([cliente.lat, cliente.lng], {
+                icon: icon,
+              }).addTo(mapa).bindPopup(`
+                                <b>${cliente.nombre}</b><br>
+                                Prioridad: ${cliente.prioridad}<br>
+                                Pedido: ${formatNumber(cliente.pedido)} kg<br>
+                                Ventana: ${cliente.ventana_inicio} - ${
+                cliente.ventana_fin
+              }
+                            `);
+
+              marcadores[cliente.id] = marker;
+              clientesAgregados++;
+            } catch (error) {
+              console.error("Error al agregar cliente:", cliente, error);
             }
-            
-            // Agregar rutas si existen
-            if (data.rutas && data.rutas.length > 0) {
-                data.rutas.forEach(ruta => {
-                    const polyline = L.polyline(ruta.coordenadas, {
-                        color: ruta.color,
-                        weight: 3,
-                        opacity: 0.7
-                    }).addTo(mapa);
-                    
-                    polyline.bindPopup(`
+          });
+          console.log(
+            `${clientesAgregados} marcadores de clientes agregados (de ${data.clientes.length} totales)`
+          );
+
+          // Mostrar notificación si hay más clientes
+          if (data.clientes.length > 100) {
+            showToast(
+              "Info",
+              `Mostrando 100 de ${data.clientes.length} clientes para mejor rendimiento`,
+              "info"
+            );
+          }
+        } else {
+          console.warn("No se encontraron clientes en los datos");
+          showToast(
+            "Advertencia",
+            "No se encontraron datos de clientes",
+            "warning"
+          );
+        }
+
+        // Agregar rutas si existen
+        if (data.rutas && data.rutas.length > 0) {
+          console.log("Agregando rutas...");
+          data.rutas.forEach((ruta) => {
+            const polyline = L.polyline(ruta.coordenadas, {
+              color: ruta.color,
+              weight: 3,
+              opacity: 0.7,
+            }).addTo(mapa);
+
+            polyline.bindPopup(`
                         <b>Ruta ${ruta.id}</b><br>
                         Vehículo: ${ruta.placa}<br>
                         Distancia: ${formatDistance(ruta.distancia_total)}<br>
                         Tiempo: ${formatTime(ruta.tiempo_estimado)}<br>
                         Carga: ${formatNumber(ruta.carga_total)} kg
                     `);
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error al cargar datos del mapa:', error);
-            showToast('Error', 'No se pudieron cargar los datos del mapa', 'error');
-        });
-}
-
-function cargarEstadisticas() {
-    Promise.all([
-        fetch('/api/estadisticas'),
-        fetch('/api/obtener_vehiculos')
-    ])
-    .then(responses => Promise.all(responses.map(r => r.json())))
-    .then(([stats, vehiculosData]) => {
-        document.getElementById('pedidos-total').textContent = formatNumber(stats.pedidos_total);
-        document.getElementById('capacidad-total').textContent = formatNumber(stats.capacidad_total);
-        
-        // Actualizar estadísticas de vehículos si están disponibles
-        if (vehiculosData && vehiculosData.vehiculos) {
-            const totalVehiculos = vehiculosData.vehiculos.length;
-            const capacidadTotal = vehiculosData.vehiculos.reduce((sum, v) => sum + v.capacidad, 0);
-            
-            // Actualizar el contador de vehículos en la tarjeta
-            const vehiculosCard = document.querySelector('.card.bg-success h4');
-            if (vehiculosCard) {
-                vehiculosCard.textContent = totalVehiculos;
-            }
-            
-            // Actualizar capacidad total si no está disponible en stats
-            if (!stats.capacidad_total || stats.capacidad_total === 0) {
-                document.getElementById('capacidad-total').textContent = formatNumber(capacidadTotal);
-            }
+          });
+          console.log("Rutas agregadas");
+        } else {
+          console.log("No hay rutas para mostrar");
         }
-        
+      })
+      .catch((error) => {
+        console.error("Error al cargar datos del mapa:", error);
+        showToast(
+          "Error",
+          "No se pudieron cargar los datos del mapa: " + error.message,
+          "error"
+        );
+      });
+  }
+
+  function cargarEstadisticas() {
+    console.log("Iniciando carga de estadísticas...");
+    Promise.all([fetch("/api/estadisticas"), fetch("/api/obtener_vehiculos")])
+      .then((responses) => {
+        console.log(
+          "Respuestas recibidas:",
+          responses.map((r) => r.status)
+        );
+        return Promise.all(responses.map((r) => r.json()));
+      })
+      .then(([stats, vehiculosData]) => {
+        console.log("Estadísticas:", stats);
+        console.log("Datos de vehículos:", vehiculosData);
+
+        // Actualizar estadísticas en la página con verificación
+        const pedidosElement = document.getElementById("pedidos-total");
+        const capacidadElement = document.getElementById("capacidad-total");
+
+        if (pedidosElement && stats.pedidos_total !== undefined) {
+          pedidosElement.textContent = formatNumber(stats.pedidos_total);
+          console.log("Pedidos total actualizado:", stats.pedidos_total);
+        }
+
+        if (capacidadElement && stats.capacidad_total !== undefined) {
+          capacidadElement.textContent = formatNumber(stats.capacidad_total);
+          console.log("Capacidad total actualizada:", stats.capacidad_total);
+        }
+
+        // Actualizar contadores de las tarjetas principales
+        const clientesCard = document.querySelector(".card.bg-primary h4");
+        const vehiculosCard = document.querySelector(".card.bg-success h4");
+
+        if (clientesCard && stats.total_clientes !== undefined) {
+          clientesCard.textContent = stats.total_clientes;
+          console.log(
+            "Contador de clientes actualizado:",
+            stats.total_clientes
+          );
+        }
+
+        if (vehiculosCard && stats.total_vehiculos !== undefined) {
+          vehiculosCard.textContent = stats.total_vehiculos;
+          console.log(
+            "Contador de vehículos actualizado:",
+            stats.total_vehiculos
+          );
+        }
+
         // Actualizar estadísticas de prioridad
         actualizarEstadisticasPrioridad();
-    })
-    .catch(error => {
-        console.error('Error al cargar estadísticas:', error);
-    });
-}
+      })
+      .catch((error) => {
+        console.error("Error al cargar estadísticas:", error);
+        showToast(
+          "Error",
+          "Error al cargar estadísticas: " + error.message,
+          "error"
+        );
+      });
+  }
 
-function actualizarEstadisticas() {
-    showLoading('Actualizando estadísticas...');
-    
+  function actualizarEstadisticas() {
+    showLoading("Actualizando estadísticas...");
+
     Promise.all([
-        fetch('/api/estadisticas'),
-        fetch('/api/obtener_datos_mapa'),
-        fetch('/api/obtener_vehiculos')
+      fetch("/api/estadisticas"),
+      fetch("/api/obtener_datos_mapa"),
+      fetch("/api/obtener_vehiculos"),
     ])
-    .then(responses => Promise.all(responses.map(r => r.json())))
-    .then(([stats, mapaData, vehiculosData]) => {
+      .then((responses) => Promise.all(responses.map((r) => r.json())))
+      .then(([stats, mapaData, vehiculosData]) => {
         // Actualizar estadísticas
-        document.getElementById('pedidos-total').textContent = formatNumber(stats.pedidos_total);
-        document.getElementById('capacidad-total').textContent = formatNumber(stats.capacidad_total);
-        
+        document.getElementById("pedidos-total").textContent = formatNumber(
+          stats.pedidos_total
+        );
+        document.getElementById("capacidad-total").textContent = formatNumber(
+          stats.capacidad_total
+        );
+
         // Actualizar estadísticas de vehículos si están disponibles
         if (vehiculosData && vehiculosData.vehiculos) {
-            const totalVehiculos = vehiculosData.vehiculos.length;
-            const capacidadTotal = vehiculosData.vehiculos.reduce((sum, v) => sum + v.capacidad, 0);
-            
-            // Actualizar el contador de vehículos en la tarjeta
-            const vehiculosCard = document.querySelector('.card.bg-success h4');
-            if (vehiculosCard) {
-                vehiculosCard.textContent = totalVehiculos;
-            }
-            
-            // Actualizar capacidad total si no está disponible en stats
-            if (!stats.capacidad_total || stats.capacidad_total === 0) {
-                document.getElementById('capacidad-total').textContent = formatNumber(capacidadTotal);
-            }
+          const totalVehiculos = vehiculosData.vehiculos.length;
+          const capacidadTotal = vehiculosData.vehiculos.reduce(
+            (sum, v) => sum + v.capacidad,
+            0
+          );
+
+          // Actualizar el contador de vehículos en la tarjeta
+          const vehiculosCard = document.querySelector(".card.bg-success h4");
+          if (vehiculosCard) {
+            vehiculosCard.textContent = totalVehiculos;
+          }
+
+          // Actualizar capacidad total si no está disponible en stats
+          if (!stats.capacidad_total || stats.capacidad_total === 0) {
+            document.getElementById("capacidad-total").textContent =
+              formatNumber(capacidadTotal);
+          }
         }
-        
+
         // Actualizar mapa
         cargarDatosMapa();
-        
+
         // Actualizar gráfico
         actualizarGraficoPrioridades(mapaData.clientes);
-        
-        hideLoading();
-        showToast('Éxito', 'Estadísticas actualizadas correctamente', 'success');
-    })
-    .catch(error => {
-        hideLoading();
-        console.error('Error al actualizar estadísticas:', error);
-        showToast('Error', 'No se pudieron actualizar las estadísticas', 'error');
-    });
-}
 
-function actualizarEstadisticasPrioridad() {
-    fetch('/api/obtener_datos_mapa')
-        .then(response => response.json())
-        .then(data => {
-            const prioridadAlta = data.clientes.filter(c => c.prioridad <= 2).length;
-            const ventanasCriticas = data.clientes.filter(c => {
-                const inicio = c.ventana_inicio;
-                const fin = c.ventana_fin;
-                return inicio === '08:00' || fin === '18:00';
-            }).length;
-            
-            document.getElementById('prioridad-alta').textContent = prioridadAlta;
-            document.getElementById('ventanas-criticas').textContent = ventanasCriticas;
-            
-            // Actualizar gráfico
-            actualizarGraficoPrioridades(data.clientes);
-        })
-        .catch(error => {
-            console.error('Error al actualizar estadísticas de prioridad:', error);
-        });
-}
+        hideLoading();
+        showToast(
+          "Éxito",
+          "Estadísticas actualizadas correctamente",
+          "success"
+        );
+      })
+      .catch((error) => {
+        hideLoading();
+        console.error("Error al actualizar estadísticas:", error);
+        showToast(
+          "Error",
+          "No se pudieron actualizar las estadísticas",
+          "error"
+        );
+      });
+  }
 
-function actualizarGraficoPrioridades(clientes) {
-    const ctx = document.getElementById('chart-prioridades').getContext('2d');
-    
+  function actualizarEstadisticasPrioridad() {
+    fetch("/api/obtener_datos_mapa")
+      .then((response) => response.json())
+      .then((data) => {
+        const prioridadAlta = data.clientes.filter(
+          (c) => c.prioridad <= 2
+        ).length;
+        const ventanasCriticas = data.clientes.filter((c) => {
+          const inicio = c.ventana_inicio;
+          const fin = c.ventana_fin;
+          return inicio === "08:00" || fin === "18:00";
+        }).length;
+
+        document.getElementById("prioridad-alta").textContent = prioridadAlta;
+        document.getElementById("ventanas-criticas").textContent =
+          ventanasCriticas;
+
+        // Actualizar gráfico
+        actualizarGraficoPrioridades(data.clientes);
+      })
+      .catch((error) => {
+        console.error("Error al actualizar estadísticas de prioridad:", error);
+      });
+  }
+
+  function actualizarGraficoPrioridades(clientes) {
+    const ctx = document.getElementById("chart-prioridades").getContext("2d");
+
     // Contar clientes por prioridad
     const prioridades = [1, 2, 3, 4, 5];
-    const datos = prioridades.map(p => clientes.filter(c => c.prioridad === p).length);
-    
-    const colores = ['#FF0000', '#FF6600', '#FFCC00', '#00CC00', '#0066CC'];
-    
-    new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Prioridad 1', 'Prioridad 2', 'Prioridad 3', 'Prioridad 4', 'Prioridad 5'],
-            datasets: [{
-                data: datos,
-                backgroundColor: colores,
-                borderWidth: 2,
-                borderColor: '#fff'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        font: {
-                            size: 10
-                        }
-                    }
-                }
-            }
-        }
-    });
-}
+    const datos = prioridades.map(
+      (p) => clientes.filter((c) => c.prioridad === p).length
+    );
 
-function toggleCapa(tipo) {
+    const colores = ["#FF0000", "#FF6600", "#FFCC00", "#00CC00", "#0066CC"];
+
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: [
+          "Prioridad 1",
+          "Prioridad 2",
+          "Prioridad 3",
+          "Prioridad 4",
+          "Prioridad 5",
+        ],
+        datasets: [
+          {
+            data: datos,
+            backgroundColor: colores,
+            borderWidth: 2,
+            borderColor: "#fff",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              font: {
+                size: 10,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  function toggleCapa(tipo) {
     capas[tipo] = !capas[tipo];
-    
+
     // Actualizar botones
-    const boton = event.target.closest('button');
+    const boton = event.target.closest("button");
     if (capas[tipo]) {
-        boton.classList.remove('btn-outline-primary', 'btn-outline-success', 'btn-outline-warning');
-        boton.classList.add('btn-primary', 'btn-success', 'btn-warning');
+      boton.classList.remove(
+        "btn-outline-primary",
+        "btn-outline-success",
+        "btn-outline-warning"
+      );
+      boton.classList.add("btn-primary", "btn-success", "btn-warning");
     } else {
-        boton.classList.remove('btn-primary', 'btn-success', 'btn-warning');
-        boton.classList.add('btn-outline-primary', 'btn-outline-success', 'btn-outline-warning');
+      boton.classList.remove("btn-primary", "btn-success", "btn-warning");
+      boton.classList.add(
+        "btn-outline-primary",
+        "btn-outline-success",
+        "btn-outline-warning"
+      );
     }
-    
+
     // Recargar mapa con capas actualizadas
     cargarDatosMapa();
-}
+  }
 
-function cargarDatosEjemplo() {
-    showLoading('Cargando datos de ejemplo...');
-    
+  function cargarDatosEjemplo() {
+    showLoading("Cargando datos de ejemplo...");
+
     // Crear datos de ejemplo
     const datosEjemplo = `id,nombre,latitud,longitud,prioridad,ventana_inicio,ventana_fin,pedido
 1,Cliente A,-12.0464,-77.0428,1,08:00,12:00,150.5
@@ -420,72 +674,141 @@ function cargarDatosEjemplo() {
 3,Cliente C,-12.0364,-77.0528,3,10:00,16:00,75.25
 4,Cliente D,-12.0664,-77.0228,1,08:30,11:30,300.0
 5,Cliente E,-12.0264,-77.0628,4,14:00,18:00,125.75`;
-    
-    const blob = new Blob([datosEjemplo], { type: 'text/csv' });
-    const file = new File([blob], 'clientes_ejemplo.csv', { type: 'text/csv' });
-    
+
+    const blob = new Blob([datosEjemplo], { type: "text/csv" });
+    const file = new File([blob], "clientes_ejemplo.csv", { type: "text/csv" });
+
     const formData = new FormData();
-    formData.append('archivo', file);
-    
-    fetch('/api/cargar_csv', {
-        method: 'POST',
-        body: formData
+    formData.append("archivo", file);
+
+    fetch("/api/cargar_csv", {
+      method: "POST",
+      body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         hideLoading();
         if (data.success) {
-            showToast('Éxito', data.message, 'success');
-            actualizarEstadisticas();
+          showToast("Éxito", data.message, "success");
+          actualizarEstadisticas();
         } else {
-            showToast('Error', data.error, 'error');
+          showToast("Error", data.error, "error");
         }
-    })
-    .catch(error => {
+      })
+      .catch((error) => {
         hideLoading();
-        showToast('Error', 'Error al cargar datos de ejemplo', 'error');
-    });
-}
+        showToast("Error", "Error al cargar datos de ejemplo", "error");
+      });
+  }
 
-function registrarVehiculosEjemplo() {
-    showLoading('Registrando vehículos de ejemplo...');
-    
+  function registrarVehiculosEjemplo() {
+    showLoading("Registrando vehículos de ejemplo...");
+
     const vehiculosEjemplo = [
-        { placa: 'ABC-123', capacidad: 1000, tipo: 'Camión' },
-        { placa: 'XYZ-789', capacidad: 500, tipo: 'Furgón' },
-        { placa: 'DEF-456', capacidad: 200, tipo: 'Camioneta' }
+      { placa: "ABC-123", capacidad: 1000, tipo: "Camión" },
+      { placa: "XYZ-789", capacidad: 500, tipo: "Furgón" },
+      { placa: "DEF-456", capacidad: 200, tipo: "Camioneta" },
     ];
-    
+
     let registrados = 0;
     const total = vehiculosEjemplo.length;
-    
-    vehiculosEjemplo.forEach(vehiculo => {
-        fetch('/api/registrar_vehiculo', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(vehiculo)
+
+    vehiculosEjemplo.forEach((vehiculo) => {
+      fetch("/api/registrar_vehiculo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(vehiculo),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          registrados++;
+          if (registrados === total) {
+            hideLoading();
+            showToast(
+              "Éxito",
+              `${registrados} vehículos registrados correctamente`,
+              "success"
+            );
+            actualizarEstadisticas();
+          }
         })
-        .then(response => response.json())
-        .then(data => {
-            registrados++;
-            if (registrados === total) {
-                hideLoading();
-                showToast('Éxito', `${registrados} vehículos registrados correctamente`, 'success');
-                actualizarEstadisticas();
-            }
-        })
-        .catch(error => {
-            registrados++;
-            if (registrados === total) {
-                hideLoading();
-                showToast('Error', 'Error al registrar algunos vehículos', 'error');
-            }
+        .catch((error) => {
+          registrados++;
+          if (registrados === total) {
+            hideLoading();
+            showToast("Error", "Error al registrar algunos vehículos", "error");
+          }
         });
     });
-}
+  }
 
+  // Funciones manuales para debugging
+  function cargarMapaManual() {
+    console.log("🔄 Carga manual del mapa iniciada...");
+    showToast("Info", "Cargando mapa manualmente...", "info");
 
+    try {
+      if (!mapa) {
+        console.log("Mapa no existe, inicializando...");
+        inicializarMapa();
+      } else {
+        console.log("Mapa existe, cargando datos...");
+        cargarDatosMapa();
+      }
+    } catch (error) {
+      console.error("Error en carga manual:", error);
+      showToast("Error", "Error en carga manual: " + error.message, "error");
+    }
+  }
+
+  function cargarEstadisticasManual() {
+    console.log("🔄 Carga manual de estadísticas iniciada...");
+    showToast("Info", "Actualizando estadísticas...", "info");
+
+    try {
+      cargarEstadisticas();
+      setTimeout(() => {
+        actualizarEstadisticas();
+      }, 500);
+    } catch (error) {
+      console.error("Error en estadísticas:", error);
+      showToast(
+        "Error",
+        "Error al cargar estadísticas: " + error.message,
+        "error"
+      );
+    }
+  }
+
+  function mostrarInfo() {
+    const info = `
+📊 INFORMACIÓN DE DEBUG:
+• Leaflet: ${typeof L !== "undefined" ? "✅" : "❌"}
+• Bootstrap: ${typeof bootstrap !== "undefined" ? "✅" : "❌"}
+• Mapa creado: ${mapa ? "✅" : "❌"}
+• Marcadores: ${Object.keys(marcadores).length}
+• URL actual: ${window.location.href}
+    `;
+
+    console.log("🔍 INFO DEBUG:", info);
+    alert(info);
+  }
 </script>
-{% endblock %} 
+
+<!-- CSS personalizado para marcadores -->
+<style>
+  .custom-div-icon {
+    background: none !important;
+    border: none !important;
+  }
+  .custom-div-icon i {
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+  }
+  #mapa-principal {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+</style>
+{% endblock %}

@@ -1,299 +1,444 @@
-{% extends "layout.html" %}
-
-{% block title %}Gestionar Flota de Vehículos{% endblock %}
-
-{% block content %}
+{% extends "layout.html" %} {% block title %}Gestionar Flota de Vehículos{%
+endblock %} {% block content %}
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h3 mb-0">
-                    <i class="fas fa-truck me-2"></i>Gestionar Flota de Vehículos
-                </h1>
-            </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">
+          <i class="fas fa-truck me-2"></i>Gestionar Flota de Vehículos
+        </h1>
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-success"
+            onclick="cargarVehiculosManual()"
+            title="Cargar Vehículos"
+          >
+            <i class="fas fa-truck"></i> Cargar Vehículos
+          </button>
+          <button
+            type="button"
+            class="btn btn-info"
+            onclick="actualizarEstadisticasManual()"
+            title="Actualizar Estadísticas"
+          >
+            <i class="fas fa-sync"></i> Estadísticas
+          </button>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Estadísticas de la flota -->
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card bg-primary text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6 class="card-title">Total Vehículos</h6>
-                            <h3 class="mb-0" id="totalVehiculos">0</h3>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-truck fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
+  <!-- Estadísticas de la flota -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card bg-primary text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="card-title">Total Vehículos</h6>
+              <h3 class="mb-0" id="totalVehiculos">0</h3>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card bg-success text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6 class="card-title">Disponibles</h6>
-                            <h3 class="mb-0" id="vehiculosDisponibles">0</h3>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-check-circle fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
+            <div class="align-self-center">
+              <i class="fas fa-truck fa-2x"></i>
             </div>
+          </div>
         </div>
-        <div class="col-md-3">
-            <div class="card bg-info text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6 class="card-title">Capacidad Total</h6>
-                            <h3 class="mb-0" id="capacidadTotal">0 kg</h3>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-weight-hanging fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6 class="card-title">Tipos Diferentes</h6>
-                            <h3 class="mb-0" id="tiposDiferentes">0</h3>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-tags fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="col-md-3">
+      <div class="card bg-success text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="card-title">Disponibles</h6>
+              <h3 class="mb-0" id="vehiculosDisponibles">0</h3>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-check-circle fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card bg-info text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="card-title">Capacidad Total</h6>
+              <h3 class="mb-0" id="capacidadTotal">0 kg</h3>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-weight-hanging fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card bg-warning text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="card-title">Tipos Diferentes</h6>
+              <h3 class="mb-0" id="tiposDiferentes">0</h3>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-tags fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Tabla de vehículos -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-list me-2"></i>Flota de Vehículos
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover" id="tablaVehiculos">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Placa</th>
-                                    <th>Tipo</th>
-                                    <th>Capacidad (kg)</th>
-                                    <th>Estado</th>
-                                    <th>Fecha Registro</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodyVehiculos">
-                                <!-- Los vehículos se cargarán dinámicamente -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+  <!-- Tabla de vehículos -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-list me-2"></i>Flota de Vehículos
+          </h5>
         </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover" id="tablaVehiculos">
+              <thead class="table-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Placa</th>
+                  <th>Tipo</th>
+                  <th>Capacidad (kg)</th>
+                  <th>Estado</th>
+                  <th>Fecha Registro</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyVehiculos">
+                <!-- Los vehículos se cargarán dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-
-
 
 <!-- Modal para editar vehículo -->
-<div class="modal fade" id="modalEditarVehiculo" tabindex="-1" aria-labelledby="modalEditarVehiculoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalEditarVehiculoLabel">
-                    <i class="fas fa-edit me-2"></i>Editar Vehículo
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div
+  class="modal fade"
+  id="modalEditarVehiculo"
+  tabindex="-1"
+  aria-labelledby="modalEditarVehiculoLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditarVehiculoLabel">
+          <i class="fas fa-edit me-2"></i>Editar Vehículo
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form id="formEditarVehiculo">
+        <div class="modal-body">
+          <input type="hidden" id="editId" name="id" />
+          <div class="mb-3">
+            <label for="editPlaca" class="form-label">Placa *</label>
+            <input
+              type="text"
+              class="form-control"
+              id="editPlaca"
+              name="placa"
+              required
+              pattern="[A-Z]{3}-[0-9]{3}"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="editTipo" class="form-label">Tipo de Vehículo *</label>
+            <select class="form-select" id="editTipo" name="tipo" required>
+              <option value="Camión">Camión</option>
+              <option value="Furgón">Furgón</option>
+              <option value="Camioneta">Camioneta</option>
+              <option value="Moto">Moto</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="editCapacidad" class="form-label"
+              >Capacidad (kg) *</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="editCapacidad"
+              name="capacidad"
+              required
+              min="100"
+              max="5000"
+              step="0.1"
+            />
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="editDisponible"
+                name="disponible"
+              />
+              <label class="form-check-label" for="editDisponible">
+                Vehículo disponible
+              </label>
             </div>
-            <form id="formEditarVehiculo">
-                <div class="modal-body">
-                    <input type="hidden" id="editId" name="id">
-                    <div class="mb-3">
-                        <label for="editPlaca" class="form-label">Placa *</label>
-                        <input type="text" class="form-control" id="editPlaca" name="placa" required 
-                               pattern="[A-Z]{3}-[0-9]{3}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editTipo" class="form-label">Tipo de Vehículo *</label>
-                        <select class="form-select" id="editTipo" name="tipo" required>
-                            <option value="Camión">Camión</option>
-                            <option value="Furgón">Furgón</option>
-                            <option value="Camioneta">Camioneta</option>
-                            <option value="Moto">Moto</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editCapacidad" class="form-label">Capacidad (kg) *</label>
-                        <input type="number" class="form-control" id="editCapacidad" name="capacidad" 
-                               required min="100" max="5000" step="0.1">
-                    </div>
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="editDisponible" name="disponible">
-                            <label class="form-check-label" for="editDisponible">
-                                Vehículo disponible
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>Guardar Cambios
-                    </button>
-                </div>
-            </form>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save me-2"></i>Guardar Cambios
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener("DOMContentLoaded", function () {
     cargarVehiculos();
     actualizarEstadisticas();
-    
+
     // Formulario para editar vehículo
-    document.getElementById('formEditarVehiculo').addEventListener('submit', function(e) {
+    document
+      .getElementById("formEditarVehiculo")
+      .addEventListener("submit", function (e) {
         e.preventDefault();
         actualizarVehiculo();
-    });
-});
+      });
+  });
 
-function cargarVehiculos() {
-    fetch('/api/obtener_vehiculos')
-        .then(response => response.json())
-        .then(data => {
-            if (data.vehiculos) {
-                mostrarVehiculos(data.vehiculos);
-            }
-        })
-        .catch(error => {
-            console.error('Error al cargar vehículos:', error);
-            mostrarAlerta('Error al cargar vehículos', 'danger');
-        });
-}
+  function cargarVehiculos() {
+    console.log("Cargando lista de vehículos...");
+    fetch("/api/obtener_vehiculos")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Vehículos recibidos:", data);
+        const tbody = document.getElementById("tbodyVehiculos");
+        if (data.vehiculos && data.vehiculos.length > 0) {
+          tbody.innerHTML = "";
+          data.vehiculos.forEach((vehiculo) => {
+            const row = `
+                        <tr>
+                            <td>${vehiculo.id}</td>
+                            <td><span class="badge bg-secondary">${
+                              vehiculo.placa
+                            }</span></td>
+                            <td>${vehiculo.tipo}</td>
+                            <td>${formatearPeso(vehiculo.capacidad)}</td>
+                            <td>
+                                <span class="badge ${
+                                  vehiculo.disponible
+                                    ? "bg-success"
+                                    : "bg-danger"
+                                }">
+                                    ${
+                                      vehiculo.disponible
+                                        ? "Disponible"
+                                        : "Ocupado"
+                                    }
+                                </span>
+                            </td>
+                            <td>${
+                              vehiculo.fecha_registro
+                                ? formatearFecha(vehiculo.fecha_registro)
+                                : "N/A"
+                            }</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary me-1" onclick="editarVehiculo(${
+                                  vehiculo.id
+                                })" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="eliminarVehiculo(${
+                                  vehiculo.id
+                                })" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+            tbody.innerHTML += row;
+          });
+          console.log(
+            `${data.vehiculos.length} vehículos cargados en la tabla`
+          );
+        } else {
+          tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center py-4">
+                            <i class="fas fa-truck fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">No hay vehículos registrados</p>
+                            <p class="text-muted small">Agregue vehículos usando el botón "Agregar Vehículo"</p>
+                        </td>
+                    </tr>
+                `;
+          console.log("No se encontraron vehículos");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar vehículos:", error);
+        const tbody = document.getElementById("tbodyVehiculos");
+        tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="text-center py-4">
+                        <i class="fas fa-exclamation-triangle fa-2x text-danger mb-2"></i>
+                        <p class="text-danger">Error al cargar vehículos</p>
+                        <p class="text-muted small">${error.message}</p>
+                    </td>
+                </tr>
+            `;
+      });
+  }
 
-function mostrarVehiculos(vehiculos) {
-    const tbody = document.getElementById('tbodyVehiculos');
-    tbody.innerHTML = '';
-    
-    vehiculos.forEach(vehiculo => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
+  function mostrarVehiculos(vehiculos) {
+    const tbody = document.getElementById("tbodyVehiculos");
+    tbody.innerHTML = "";
+
+    vehiculos.forEach((vehiculo) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
             <td>${vehiculo.id}</td>
             <td><span class="badge bg-secondary">${vehiculo.placa}</span></td>
             <td>${vehiculo.tipo}</td>
             <td>${formatearPeso(vehiculo.capacidad)}</td>
             <td>
-                <span class="badge ${vehiculo.disponible ? 'bg-success' : 'bg-danger'}">
-                    ${vehiculo.disponible ? 'Disponible' : 'Ocupado'}
+                <span class="badge ${
+                  vehiculo.disponible ? "bg-success" : "bg-danger"
+                }">
+                    ${vehiculo.disponible ? "Disponible" : "Ocupado"}
                 </span>
             </td>
             <td>${formatearFecha(vehiculo.fecha_registro)}</td>
             <td>
-                <button class="btn btn-sm btn-outline-primary" onclick="editarVehiculo(${vehiculo.id})">
+                <button class="btn btn-sm btn-outline-primary" onclick="editarVehiculo(${
+                  vehiculo.id
+                })">
                     <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn btn-sm btn-outline-danger" onclick="eliminarVehiculo(${vehiculo.id})">
+                <button class="btn btn-sm btn-outline-danger" onclick="eliminarVehiculo(${
+                  vehiculo.id
+                })">
                     <i class="fas fa-trash"></i>
                 </button>
             </td>
         `;
-        tbody.appendChild(row);
+      tbody.appendChild(row);
     });
-}
+  }
 
-
-
-function editarVehiculo(id) {
+  function editarVehiculo(id) {
     // Cargar datos del vehículo en el modal
-    fetch('/api/obtener_vehiculos')
-        .then(response => response.json())
-        .then(data => {
-            const vehiculo = data.vehiculos.find(v => v.id === id);
-            if (vehiculo) {
-                document.getElementById('editId').value = vehiculo.id;
-                document.getElementById('editPlaca').value = vehiculo.placa;
-                document.getElementById('editTipo').value = vehiculo.tipo;
-                document.getElementById('editCapacidad').value = vehiculo.capacidad;
-                document.getElementById('editDisponible').checked = vehiculo.disponible;
-                
-                new bootstrap.Modal(document.getElementById('modalEditarVehiculo')).show();
-            }
-        });
-}
+    fetch("/api/obtener_vehiculos")
+      .then((response) => response.json())
+      .then((data) => {
+        const vehiculo = data.vehiculos.find((v) => v.id === id);
+        if (vehiculo) {
+          document.getElementById("editId").value = vehiculo.id;
+          document.getElementById("editPlaca").value = vehiculo.placa;
+          document.getElementById("editTipo").value = vehiculo.tipo;
+          document.getElementById("editCapacidad").value = vehiculo.capacidad;
+          document.getElementById("editDisponible").checked =
+            vehiculo.disponible;
 
-function actualizarVehiculo() {
-    const formData = new FormData(document.getElementById('formEditarVehiculo'));
+          new bootstrap.Modal(
+            document.getElementById("modalEditarVehiculo")
+          ).show();
+        }
+      });
+  }
+
+  function actualizarVehiculo() {
+    const formData = new FormData(
+      document.getElementById("formEditarVehiculo")
+    );
     const data = {
-        id: parseInt(formData.get('id')),
-        placa: formData.get('placa'),
-        tipo: formData.get('tipo'),
-        capacidad: parseFloat(formData.get('capacidad')),
-        disponible: formData.get('disponible') === 'on'
+      id: parseInt(formData.get("id")),
+      placa: formData.get("placa"),
+      tipo: formData.get("tipo"),
+      capacidad: parseFloat(formData.get("capacidad")),
+      disponible: formData.get("disponible") === "on",
     };
-    
+
     // Aquí se implementaría la API para actualizar vehículo
-    mostrarAlerta('Función de edición en desarrollo', 'info');
-    bootstrap.Modal.getInstance(document.getElementById('modalEditarVehiculo')).hide();
-}
+    mostrarAlerta("Función de edición en desarrollo", "info");
+    bootstrap.Modal.getInstance(
+      document.getElementById("modalEditarVehiculo")
+    ).hide();
+  }
 
-function eliminarVehiculo(id) {
-    if (confirm('¿Está seguro de eliminar este vehículo?')) {
-        // Aquí se implementaría la API para eliminar vehículo
-        mostrarAlerta('Función de eliminación en desarrollo', 'info');
+  function eliminarVehiculo(id) {
+    if (confirm("¿Está seguro de eliminar este vehículo?")) {
+      // Aquí se implementaría la API para eliminar vehículo
+      mostrarAlerta("Función de eliminación en desarrollo", "info");
     }
-}
+  }
 
-function actualizarEstadisticas() {
-    Promise.all([
-        fetch('/api/estadisticas'),
-        fetch('/api/obtener_vehiculos')
-    ])
-    .then(responses => Promise.all(responses.map(r => r.json())))
-    .then(([stats, vehiculosData]) => {
-        document.getElementById('totalVehiculos').textContent = stats.total_vehiculos || 0;
-        document.getElementById('vehiculosDisponibles').textContent = stats.vehiculos_disponibles || 0;
-        document.getElementById('capacidadTotal').textContent = formatearPeso(stats.capacidad_total || 0);
-        
+  function actualizarEstadisticas() {
+    Promise.all([fetch("/api/estadisticas"), fetch("/api/obtener_vehiculos")])
+      .then((responses) => Promise.all(responses.map((r) => r.json())))
+      .then(([stats, vehiculosData]) => {
+        document.getElementById("totalVehiculos").textContent =
+          stats.total_vehiculos || 0;
+        document.getElementById("vehiculosDisponibles").textContent =
+          stats.vehiculos_disponibles || 0;
+        document.getElementById("capacidadTotal").textContent = formatearPeso(
+          stats.capacidad_total || 0
+        );
+
         // Calcular tipos diferentes
         if (vehiculosData && vehiculosData.vehiculos) {
-            const tipos = new Set(vehiculosData.vehiculos.map(v => v.tipo));
-            document.getElementById('tiposDiferentes').textContent = tipos.size;
+          const tipos = new Set(vehiculosData.vehiculos.map((v) => v.tipo));
+          document.getElementById("tiposDiferentes").textContent = tipos.size;
         }
-    })
-    .catch(error => {
-        console.error('Error al cargar estadísticas:', error);
-    });
-}
+      })
+      .catch((error) => {
+        console.error("Error al cargar estadísticas:", error);
+      });
+  }
 
-function formatearPeso(peso) {
+  function formatearPeso(peso) {
     return `${peso.toLocaleString()} kg`;
-}
+  }
 
-function formatearFecha(fecha) {
-    return new Date(fecha).toLocaleDateString('es-ES');
-}
+  function formatearFecha(fecha) {
+    return new Date(fecha).toLocaleDateString("es-ES");
+  }
+
+  // Funciones manuales para debugging
+  function cargarVehiculosManual() {
+    console.log("🔄 Carga manual de vehículos iniciada...");
+    showToast("Info", "Cargando vehículos manualmente...", "info");
+    cargarVehiculos();
+  }
+
+  function actualizarEstadisticasManual() {
+    console.log("🔄 Actualización manual de estadísticas iniciada...");
+    showToast("Info", "Actualizando estadísticas...", "info");
+    actualizarEstadisticas();
+  }
 </script>
-{% endblock %} 
+{% endblock %}

@@ -1,356 +1,514 @@
-{% extends "layout.html" %}
-
-{% block title %}Ejecutar Algoritmos{% endblock %}
-
+{% extends "layout.html" %} {% block title %}Ejecutar Algoritmos{% endblock %}
 {% block content %}
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h3 mb-0">
-                    <i class="fas fa-cogs me-2"></i>Ejecutar Algoritmos de Optimización
-                </h1>
-                <button class="btn btn-success" onclick="ejecutarAlgoritmo()" id="btnEjecutar">
-                    <i class="fas fa-play me-2"></i>Ejecutar Optimización
-                </button>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">
+          <i class="fas fa-cogs me-2"></i>Ejecutar Algoritmos de Optimización
+        </h1>
+        <button
+          class="btn btn-success"
+          onclick="ejecutarAlgoritmo()"
+          id="btnEjecutar"
+        >
+          <i class="fas fa-play me-2"></i>Ejecutar Optimización
+        </button>
+      </div>
     </div>
+  </div>
 
-
-
-    <!-- Selección de algoritmo -->
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-robot me-2"></i>Selección de Algoritmo
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="algoritmo" id="bellmanFord" value="bellman_ford" checked>
-                                <label class="form-check-label" for="bellmanFord">
-                                    <strong>Bellman-Ford</strong>
-                                    <br><small class="text-muted">Caminos mínimos con restricciones</small>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="algoritmo" id="programacionDinamica" value="programacion_dinamica">
-                                <label class="form-check-label" for="programacionDinamica">
-                                    <strong>Programación Dinámica</strong>
-                                    <br><small class="text-muted">Optimización de secuencias</small>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="algoritmo" id="backtracking" value="backtracking">
-                                <label class="form-check-label" for="backtracking">
-                                    <strong>Backtracking</strong>
-                                    <br><small class="text-muted">Búsqueda exhaustiva con poda</small>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Selección de algoritmo -->
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-robot me-2"></i>Selección de Algoritmo
+          </h5>
         </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-sliders-h me-2"></i>Parámetros
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="tiempoMaximo" class="form-label">Tiempo máximo (minutos)</label>
-                        <input type="number" class="form-control" id="tiempoMaximo" value="5" min="1" max="60">
-                    </div>
-                    <div class="mb-3">
-                        <label for="iteracionesMaximas" class="form-label">Iteraciones máximas</label>
-                        <input type="number" class="form-control" id="iteracionesMaximas" value="10000" min="1000" max="100000">
-                    </div>
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="considerarPrioridades" checked>
-                            <label class="form-check-label" for="considerarPrioridades">
-                                Considerar prioridades
-                            </label>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="considerarVentanas" checked>
-                            <label class="form-check-label" for="considerarVentanas">
-                                Considerar ventanas horarias
-                            </label>
-                        </div>
-                    </div>
-                </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="algoritmo"
+                  id="bellmanFord"
+                  value="bellman_ford"
+                  checked
+                />
+                <label class="form-check-label" for="bellmanFord">
+                  <strong>Bellman-Ford</strong>
+                  <br /><small class="text-muted"
+                    >Caminos mínimos con restricciones</small
+                  >
+                </label>
+              </div>
             </div>
+            <div class="col-md-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="algoritmo"
+                  id="programacionDinamica"
+                  value="programacion_dinamica"
+                />
+                <label class="form-check-label" for="programacionDinamica">
+                  <strong>Programación Dinámica</strong>
+                  <br /><small class="text-muted"
+                    >Optimización de secuencias</small
+                  >
+                </label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="algoritmo"
+                  id="backtracking"
+                  value="backtracking"
+                />
+                <label class="form-check-label" for="backtracking">
+                  <strong>Backtracking</strong>
+                  <br /><small class="text-muted"
+                    >Búsqueda exhaustiva con poda</small
+                  >
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-    <!-- Progreso de ejecución -->
-    <div class="row" id="seccionProgreso" style="display: none;">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-spinner fa-spin me-2"></i>Progreso de Ejecución
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="progress mb-3">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
-                             role="progressbar" style="width: 0%" id="barraProgreso">0%</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><strong>Algoritmo:</strong> <span id="algoritmoEjecutando">-</span></p>
-                            <p><strong>Estado:</strong> <span id="estadoEjecucion">Iniciando...</span></p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Tiempo transcurrido:</strong> <span id="tiempoTranscurrido">0s</span></p>
-                            <p><strong>Iteraciones:</strong> <span id="iteracionesActuales">0</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-sliders-h me-2"></i>Parámetros
+          </h5>
         </div>
-    </div>
-
-    <!-- Resultados preliminares -->
-    <div class="row" id="seccionResultados" style="display: none;">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-chart-bar me-2"></i>Resultados Preliminares
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="text-center">
-                                <h4 id="distanciaTotal">0 km</h4>
-                                <p class="text-muted">Distancia Total</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-center">
-                                <h4 id="tiempoEstimado">0 min</h4>
-                                <p class="text-muted">Tiempo Estimado</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-center">
-                                <h4 id="vehiculosUtilizados">0</h4>
-                                <p class="text-muted">Vehículos Utilizados</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-center">
-                                <h4 id="eficiencia">0%</h4>
-                                <p class="text-muted">Eficiencia</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-3">
-                        <a href="/resultados" class="btn btn-primary">
-                            <i class="fas fa-eye me-2"></i>Ver Resultados Completos
-                        </a>
-                    </div>
-                </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="tiempoMaximo" class="form-label"
+              >Tiempo máximo (minutos)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="tiempoMaximo"
+              value="5"
+              min="1"
+              max="60"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="iteracionesMaximas" class="form-label"
+              >Iteraciones máximas</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="iteracionesMaximas"
+              value="10000"
+              min="1000"
+              max="100000"
+            />
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="considerarPrioridades"
+                checked
+              />
+              <label class="form-check-label" for="considerarPrioridades">
+                Considerar prioridades
+              </label>
             </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="considerarVentanas"
+                checked
+              />
+              <label class="form-check-label" for="considerarVentanas">
+                Considerar ventanas horarias
+              </label>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <!-- Progreso de ejecución -->
+  <div class="row" id="seccionProgreso" style="display: none">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-spinner fa-spin me-2"></i>Progreso de Ejecución
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="progress mb-3">
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              style="width: 0%"
+              id="barraProgreso"
+            >
+              0%
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <p>
+                <strong>Algoritmo:</strong>
+                <span id="algoritmoEjecutando">-</span>
+              </p>
+              <p>
+                <strong>Estado:</strong>
+                <span id="estadoEjecucion">Iniciando...</span>
+              </p>
+            </div>
+            <div class="col-md-6">
+              <p>
+                <strong>Tiempo transcurrido:</strong>
+                <span id="tiempoTranscurrido">0s</span>
+              </p>
+              <p>
+                <strong>Iteraciones:</strong>
+                <span id="iteracionesActuales">0</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resultados preliminares -->
+  <div class="row" id="seccionResultados" style="display: none">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-chart-bar me-2"></i>Resultados Preliminares
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="text-center">
+                <h4 id="distanciaTotal">0 km</h4>
+                <p class="text-muted">Distancia Total</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="text-center">
+                <h4 id="tiempoEstimado">0 min</h4>
+                <p class="text-muted">Tiempo Estimado</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="text-center">
+                <h4 id="vehiculosUtilizados">0</h4>
+                <p class="text-muted">Vehículos Utilizados</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="text-center">
+                <h4 id="eficiencia">0%</h4>
+                <p class="text-muted">Eficiencia</p>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <a href="/resultados" class="btn btn-primary">
+              <i class="fas fa-eye me-2"></i>Ver Resultados Completos
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script>
-let tiempoInicio;
-let intervaloProgreso;
+  let tiempoInicio;
+  let intervaloProgreso;
 
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener("DOMContentLoaded", function () {
     cargarEstadisticas();
-    
+
     // Actualizar información del algoritmo seleccionado
-    document.querySelectorAll('input[name="algoritmo"]').forEach(radio => {
-        radio.addEventListener('change', actualizarInformacionAlgoritmo);
+    document.querySelectorAll('input[name="algoritmo"]').forEach((radio) => {
+      radio.addEventListener("change", actualizarInformacionAlgoritmo);
     });
-    
+
     // Actualizar información inicial
     actualizarInformacionAlgoritmo();
-});
+  });
 
-function cargarEstadisticas() {
-    fetch('/api/estadisticas')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('clientesCargados').textContent = data.total_clientes || 0;
-            document.getElementById('vehiculosRegistrados').textContent = data.total_vehiculos || 0;
-            document.getElementById('capacidadTotal').textContent = formatearPeso(data.capacidad_total || 0);
-            document.getElementById('pedidosTotales').textContent = formatearPeso(data.pedidos_total || 0);
-            
-            // Verificar si hay datos suficientes
-            const btnEjecutar = document.getElementById('btnEjecutar');
-            if ((data.total_clientes || 0) === 0 || (data.total_vehiculos || 0) === 0) {
-                btnEjecutar.disabled = true;
-                btnEjecutar.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Faltan Datos';
-            } else {
-                btnEjecutar.disabled = false;
-                btnEjecutar.innerHTML = '<i class="fas fa-play me-2"></i>Ejecutar Optimización';
-            }
-        })
-        .catch(error => {
-            console.error('Error al cargar estadísticas:', error);
-        });
-}
+  function cargarEstadisticas() {
+    fetch("/api/estadisticas")
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("clientesCargados").textContent =
+          data.total_clientes || 0;
+        document.getElementById("vehiculosRegistrados").textContent =
+          data.total_vehiculos || 0;
+        document.getElementById("capacidadTotal").textContent = formatearPeso(
+          data.capacidad_total || 0
+        );
+        document.getElementById("pedidosTotales").textContent = formatearPeso(
+          data.pedidos_total || 0
+        );
 
-function actualizarInformacionAlgoritmo() {
-    const algoritmoSeleccionado = document.querySelector('input[name="algoritmo"]:checked').value;
-    const algoritmos = {
-        'bellman_ford': {
-            nombre: 'Bellman-Ford',
-            descripcion: 'Algoritmo de caminos mínimos que considera restricciones de capacidad y tiempo.',
-            complejidad: 'O(VE)',
-            tiempoEstimado: '1-3 minutos'
-        },
-        'programacion_dinamica': {
-            nombre: 'Programación Dinámica',
-            descripcion: 'Resuelve el problema del viajante optimizando secuencias de entrega.',
-            complejidad: 'O(n²2ⁿ)',
-            tiempoEstimado: '2-5 minutos'
-        },
-        'backtracking': {
-            nombre: 'Backtracking con Poda',
-            descripcion: 'Búsqueda exhaustiva con optimizaciones para encontrar la solución óptima.',
-            complejidad: 'O(n!) con podas',
-            tiempoEstimado: '3-10 minutos'
+        // Verificar si hay datos suficientes
+        const btnEjecutar = document.getElementById("btnEjecutar");
+        if (
+          (data.total_clientes || 0) === 0 ||
+          (data.total_vehiculos || 0) === 0
+        ) {
+          btnEjecutar.disabled = true;
+          btnEjecutar.innerHTML =
+            '<i class="fas fa-exclamation-triangle me-2"></i>Faltan Datos';
+        } else {
+          btnEjecutar.disabled = false;
+          btnEjecutar.innerHTML =
+            '<i class="fas fa-play me-2"></i>Ejecutar Optimización';
         }
+      })
+      .catch((error) => {
+        console.error("Error al cargar estadísticas:", error);
+      });
+  }
+
+  function actualizarInformacionAlgoritmo() {
+    const algoritmoSeleccionado = document.querySelector(
+      'input[name="algoritmo"]:checked'
+    ).value;
+    const algoritmos = {
+      bellman_ford: {
+        nombre: "Bellman-Ford",
+        descripcion:
+          "Algoritmo de caminos mínimos que considera restricciones de capacidad y tiempo.",
+        complejidad: "O(VE)",
+        tiempoEstimado: "1-3 minutos",
+      },
+      programacion_dinamica: {
+        nombre: "Programación Dinámica",
+        descripcion:
+          "Resuelve el problema del viajante optimizando secuencias de entrega.",
+        complejidad: "O(n²2ⁿ)",
+        tiempoEstimado: "2-5 minutos",
+      },
+      backtracking: {
+        nombre: "Backtracking con Poda",
+        descripcion:
+          "Búsqueda exhaustiva con optimizaciones para encontrar la solución óptima.",
+        complejidad: "O(n!) con podas",
+        tiempoEstimado: "3-10 minutos",
+      },
     };
-    
+
     const info = algoritmos[algoritmoSeleccionado];
     // Aquí se podría actualizar información adicional en la interfaz
-}
+  }
 
-function ejecutarAlgoritmo() {
-    const algoritmo = document.querySelector('input[name="algoritmo"]:checked').value;
-    const tiempoMaximo = document.getElementById('tiempoMaximo').value;
-    const iteracionesMaximas = document.getElementById('iteracionesMaximas').value;
-    const considerarPrioridades = document.getElementById('considerarPrioridades').checked;
-    const considerarVentanas = document.getElementById('considerarVentanas').checked;
-    
+  function ejecutarAlgoritmo() {
+    const algoritmo = document.querySelector(
+      'input[name="algoritmo"]:checked'
+    ).value;
+    const tiempoMaximo = document.getElementById("tiempoMaximo").value;
+    const iteracionesMaximas =
+      document.getElementById("iteracionesMaximas").value;
+    const considerarPrioridades = document.getElementById(
+      "considerarPrioridades"
+    ).checked;
+    const considerarVentanas =
+      document.getElementById("considerarVentanas").checked;
+
     // Mostrar sección de progreso
-    document.getElementById('seccionProgreso').style.display = 'block';
-    document.getElementById('seccionResultados').style.display = 'none';
-    
+    document.getElementById("seccionProgreso").style.display = "block";
+    document.getElementById("seccionResultados").style.display = "none";
+
     // Inicializar progreso
     tiempoInicio = Date.now();
-    document.getElementById('algoritmoEjecutando').textContent = algoritmo.replace('_', ' ').toUpperCase();
-    document.getElementById('estadoEjecucion').textContent = 'Iniciando algoritmo...';
-    document.getElementById('barraProgreso').style.width = '0%';
-    document.getElementById('barraProgreso').textContent = '0%';
-    
+    document.getElementById("algoritmoEjecutando").textContent = algoritmo
+      .replace("_", " ")
+      .toUpperCase();
+    document.getElementById("estadoEjecucion").textContent =
+      "Iniciando algoritmo...";
+    document.getElementById("barraProgreso").style.width = "0%";
+    document.getElementById("barraProgreso").textContent = "0%";
+
     // Simular progreso
     let progreso = 0;
     intervaloProgreso = setInterval(() => {
-        progreso += Math.random() * 10;
-        if (progreso > 100) progreso = 100;
-        
-        document.getElementById('barraProgreso').style.width = progreso + '%';
-        document.getElementById('barraProgreso').textContent = Math.round(progreso) + '%';
-        
-        const tiempoTranscurrido = Math.floor((Date.now() - tiempoInicio) / 1000);
-        document.getElementById('tiempoTranscurrido').textContent = tiempoTranscurrido + 's';
-        document.getElementById('iteracionesActuales').textContent = Math.floor(progreso * 100);
-        
-        if (progreso >= 100) {
-            clearInterval(intervaloProgreso);
-            finalizarEjecucion();
-        }
+      progreso += Math.random() * 10;
+      if (progreso > 100) progreso = 100;
+
+      document.getElementById("barraProgreso").style.width = progreso + "%";
+      document.getElementById("barraProgreso").textContent =
+        Math.round(progreso) + "%";
+
+      const tiempoTranscurrido = Math.floor((Date.now() - tiempoInicio) / 1000);
+      document.getElementById("tiempoTranscurrido").textContent =
+        tiempoTranscurrido + "s";
+      document.getElementById("iteracionesActuales").textContent = Math.floor(
+        progreso * 100
+      );
+
+      if (progreso >= 100) {
+        clearInterval(intervaloProgreso);
+        finalizarEjecucion();
+      }
     }, 500);
-    
+
     // Llamar a la API
     const data = {
-        algoritmo: algoritmo,
-        tiempo_maximo: parseInt(tiempoMaximo),
-        iteraciones_maximas: parseInt(iteracionesMaximas),
-        considerar_prioridades: considerarPrioridades,
-        considerar_ventanas: considerarVentanas
+      algoritmo: algoritmo,
+      tiempo_maximo: parseInt(tiempoMaximo),
+      iteraciones_maximas: parseInt(iteracionesMaximas),
+      considerar_prioridades: considerarPrioridades,
+      considerar_ventanas: considerarVentanas,
     };
-    
-    fetch('/api/ejecutar_algoritmo', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            document.getElementById('estadoEjecucion').textContent = 'Optimización completada';
-            mostrarResultados(result.resultados);
-        } else {
-            document.getElementById('estadoEjecucion').textContent = 'Error: ' + result.error;
-            mostrarAlerta(result.error, 'danger');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('estadoEjecucion').textContent = 'Error en la ejecución';
-        mostrarAlerta('Error al ejecutar algoritmo', 'danger');
-    });
-}
 
-function finalizarEjecucion() {
+    fetch("/api/ejecutar_algoritmo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          document.getElementById("estadoEjecucion").textContent =
+            "Optimización completada";
+          mostrarResultados(result.resultados);
+        } else {
+          document.getElementById("estadoEjecucion").textContent =
+            "Error: " + result.error;
+          mostrarAlerta(result.error, "danger");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        document.getElementById("estadoEjecucion").textContent =
+          "Error en la ejecución";
+        mostrarAlerta("Error al ejecutar algoritmo", "danger");
+      });
+  }
+
+  function finalizarEjecucion() {
     clearInterval(intervaloProgreso);
-    document.getElementById('estadoEjecucion').textContent = 'Optimización completada';
-    
+    document.getElementById("estadoEjecucion").textContent =
+      "Optimización completada";
+
     // Simular resultados
     setTimeout(() => {
-        document.getElementById('seccionProgreso').style.display = 'none';
-        document.getElementById('seccionResultados').style.display = 'block';
-        
-        // Mostrar resultados simulados
-        document.getElementById('distanciaTotal').textContent = '125.5 km';
-        document.getElementById('tiempoEstimado').textContent = '180 min';
-        document.getElementById('vehiculosUtilizados').textContent = '3';
-        document.getElementById('eficiencia').textContent = '85%';
+      document.getElementById("seccionProgreso").style.display = "none";
+      document.getElementById("seccionResultados").style.display = "block";
+
+      // Mostrar resultados simulados
+      document.getElementById("distanciaTotal").textContent = "125.5 km";
+      document.getElementById("tiempoEstimado").textContent = "180 min";
+      document.getElementById("vehiculosUtilizados").textContent = "3";
+      document.getElementById("eficiencia").textContent = "85%";
     }, 1000);
-}
+  }
 
-function mostrarResultados(resultados) {
+  function mostrarResultados(resultados) {
     if (resultados) {
-        document.getElementById('distanciaTotal').textContent = formatearDistancia(resultados.distancia_total || 0);
-        document.getElementById('tiempoEstimado').textContent = formatearTiempo(resultados.tiempo_estimado || 0);
-        document.getElementById('vehiculosUtilizados').textContent = resultados.vehiculos_utilizados || 0;
-        document.getElementById('eficiencia').textContent = (resultados.eficiencia || 0) + '%';
+      document.getElementById("distanciaTotal").textContent =
+        formatearDistancia(resultados.distancia_total || 0);
+      document.getElementById("tiempoEstimado").textContent = formatearTiempo(
+        resultados.tiempo_estimado || 0
+      );
+      document.getElementById("vehiculosUtilizados").textContent =
+        resultados.vehiculos_utilizados || 0;
+      document.getElementById("eficiencia").textContent =
+        (resultados.eficiencia || 0) + "%";
     }
-}
+  }
 
-function formatearPeso(peso) {
+  function formatearPeso(peso) {
     return `${peso.toLocaleString()} kg`;
-}
+  }
 
-function formatearDistancia(distancia) {
+  function formatearDistancia(distancia) {
     return `${distancia.toFixed(1)} km`;
-}
+  }
 
-function formatearTiempo(tiempo) {
+  function formatearTiempo(tiempo) {
     const horas = Math.floor(tiempo / 60);
     const minutos = tiempo % 60;
     return `${horas}h ${minutos}min`;
-}
+  }
+
+  function verificarDatos() {
+    console.log("Verificando datos disponibles...");
+    Promise.all([
+      fetch("/api/estadisticas"),
+      fetch("/api/obtener_vehiculos"),
+      fetch("/api/obtener_clientes"),
+    ])
+      .then((responses) => Promise.all(responses.map((r) => r.json())))
+      .then(([stats, vehiculos, clientes]) => {
+        console.log("Datos verificados:", { stats, vehiculos, clientes });
+
+        // Actualizar estadísticas en la página
+        if (stats) {
+          const infoElement = document.querySelector(".card-text");
+          if (infoElement) {
+            infoElement.innerHTML = `
+                    <strong>Datos disponibles:</strong><br>
+                    • ${stats.total_clientes || 0} clientes registrados<br>
+                    • ${stats.total_vehiculos || 0} vehículos disponibles<br>
+                    • ${formatearPeso(
+                      stats.pedidos_total || 0
+                    )} en pedidos totales<br>
+                    • ${formatearPeso(
+                      stats.capacidad_total || 0
+                    )} capacidad total de flota
+                `;
+          }
+        }
+
+        // Habilitar/deshabilitar botón según disponibilidad de datos
+        const btnEjecutar = document.getElementById("btnEjecutar");
+        if (stats && stats.total_clientes > 0 && stats.total_vehiculos > 0) {
+          btnEjecutar.disabled = false;
+          btnEjecutar.innerHTML =
+            '<i class="fas fa-play me-2"></i>Ejecutar Optimización';
+        } else {
+          btnEjecutar.disabled = true;
+          btnEjecutar.innerHTML =
+            '<i class="fas fa-exclamation-triangle me-2"></i>Datos insuficientes';
+        }
+      })
+      .catch((error) => {
+        console.error("Error al verificar datos:", error);
+      });
+  }
+
+  // Inicializar página al cargar
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("Página de ejecutar cargada, verificando datos...");
+    verificarDatos();
+  });
 </script>
-{% endblock %} 
+{% endblock %}

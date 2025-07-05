@@ -564,5 +564,212 @@ window.AppUtils = {
     exportToJSON,
     populateSelect,
     clearForm,
-    animateValue
-}; 
+    animateValue,
+    // Nuevas funciones de carga manual
+    cargarClientesManual,
+    cargarVehiculosManual,
+    cargarMapaManual,
+    cargarEstadisticasManual,
+    mostrarDebugInfo
+};
+
+// Funciones de carga manual centralizadas
+async function cargarClientesManual() {
+    console.log("🔄 Carga manual de clientes iniciada...");
+    showToast("Info", "Cargando clientes manualmente...", "info");
+    
+    try {
+        const response = await apiCall('/api/obtener_clientes');
+        console.log("✅ Clientes cargados:", response);
+        
+        if (response && response.clientes) {
+            // Actualizar tabla si existe
+            const tbody = document.querySelector('#tabla-clientes tbody');
+            if (tbody) {
+                tbody.innerHTML = '';
+                response.clientes.forEach(cliente => {
+                    const row = tbody.insertRow();
+                    row.innerHTML = `
+                        <td>${cliente.id}</td>
+                        <td>${cliente.nombre}</td>
+                        <td>${cliente.distrito}</td>
+                        <td><span class="badge bg-primary">P${cliente.prioridad}</span></td>
+                        <td>${formatNumber(cliente.pedido)} kg</td>
+                        <td>${cliente.ventana_inicio} - ${cliente.ventana_fin}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary" onclick="verDetalle(${cliente.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    `;
+                });
+            }
+            
+            // Actualizar contador
+            const contador = document.getElementById('total-clientes');
+            if (contador) {
+                contador.textContent = response.clientes.length;
+            }
+            
+            showToast("Éxito", `${response.clientes.length} clientes cargados correctamente`, "success");
+        }
+    } catch (error) {
+        console.error("❌ Error al cargar clientes:", error);
+        showToast("Error", "Error al cargar clientes: " + error.message, "error");
+    }
+}
+
+async function cargarVehiculosManual() {
+    console.log("🔄 Carga manual de vehículos iniciada...");
+    showToast("Info", "Cargando vehículos manualmente...", "info");
+    
+    try {
+        const response = await apiCall('/api/obtener_vehiculos');
+        console.log("✅ Vehículos cargados:", response);
+        
+        if (response && response.vehiculos) {
+            // Actualizar tabla si existe
+            const tbody = document.querySelector('#tabla-vehiculos tbody');
+            if (tbody) {
+                tbody.innerHTML = '';
+                response.vehiculos.forEach(vehiculo => {
+                    const row = tbody.insertRow();
+                    row.innerHTML = `
+                        <td>${vehiculo.id}</td>
+                        <td>${vehiculo.placa}</td>
+                        <td>${vehiculo.modelo}</td>
+                        <td>${formatNumber(vehiculo.capacidad)} kg</td>
+                        <td><span class="badge bg-success">Disponible</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary" onclick="verDetalle(${vehiculo.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    `;
+                });
+            }
+            
+            // Actualizar contador
+            const contador = document.getElementById('total-vehiculos');
+            if (contador) {
+                contador.textContent = response.vehiculos.length;
+            }
+            
+            showToast("Éxito", `${response.vehiculos.length} vehículos cargados correctamente`, "success");
+        }
+    } catch (error) {
+        console.error("❌ Error al cargar vehículos:", error);
+        showToast("Error", "Error al cargar vehículos: " + error.message, "error");
+    }
+}
+
+async function cargarMapaManual() {
+    console.log("🔄 Carga manual del mapa iniciada...");
+    showToast("Info", "Cargando mapa manualmente...", "info");
+    
+    try {
+        // Verificar si existe el contenedor del mapa
+        const mapaContainer = document.getElementById('mapa-principal');
+        if (!mapaContainer) {
+            throw new Error("Contenedor del mapa no encontrado");
+        }
+        
+        // Inicializar mapa si no existe
+        if (!mapa) {
+            console.log("Inicializando mapa...");
+            mapa = initializeMap('mapa-principal', [-12.0464, -77.0428], 11);
+            addDepositMarker(mapa);
+        }
+        
+        // Cargar clientes para el mapa
+        const response = await apiCall('/api/obtener_clientes');
+        if (response && response.clientes) {
+            console.log(`Agregando ${response.clientes.length} marcadores al mapa...`);
+            
+            // Limitar a los primeros 500 clientes para mejor rendimiento
+            const clientesLimitados = response.clientes.slice(0, 500);
+            addClientMarkers(mapa, clientesLimitados);
+            
+            showToast("Éxito", `Mapa cargado con ${clientesLimitados.length} clientes`, "success");
+        }
+    } catch (error) {
+        console.error("❌ Error al cargar mapa:", error);
+        showToast("Error", "Error al cargar mapa: " + error.message, "error");
+    }
+}
+
+async function cargarEstadisticasManual() {
+    console.log("🔄 Carga manual de estadísticas iniciada...");
+    showToast("Info", "Actualizando estadísticas...", "info");
+    
+    try {
+        const [clientesResponse, vehiculosResponse] = await Promise.all([
+            apiCall('/api/obtener_clientes'),
+            apiCall('/api/obtener_vehiculos')
+        ]);
+        
+        if (clientesResponse && clientesResponse.clientes) {
+            const clientes = clientesResponse.clientes;
+            
+            // Actualizar contadores
+            const clientesCount = document.querySelector('.card-title:contains("Clientes")') || 
+                                document.getElementById('total-clientes');
+            if (clientesCount) {
+                clientesCount.textContent = clientes.length;
+            }
+            
+            // Calcular total de pedidos
+            const totalPedidos = clientes.reduce((sum, c) => sum + (c.pedido || 0), 0);
+            const pedidosElement = document.getElementById('pedidos-total');
+            if (pedidosElement) {
+                animateValue(pedidosElement, 0, totalPedidos, 1000);
+            }
+        }
+        
+        if (vehiculosResponse && vehiculosResponse.vehiculos) {
+            const vehiculos = vehiculosResponse.vehiculos;
+            
+            // Actualizar contador de vehículos
+            const vehiculosCount = document.querySelector('.card-title:contains("Vehículos")') || 
+                                 document.getElementById('total-vehiculos');
+            if (vehiculosCount) {
+                vehiculosCount.textContent = vehiculos.length;
+            }
+            
+            // Calcular capacidad total
+            const capacidadTotal = vehiculos.reduce((sum, v) => sum + (v.capacidad || 0), 0);
+            const capacidadElement = document.getElementById('capacidad-total');
+            if (capacidadElement) {
+                animateValue(capacidadElement, 0, capacidadTotal, 1000);
+            }
+        }
+        
+        showToast("Éxito", "Estadísticas actualizadas correctamente", "success");
+    } catch (error) {
+        console.error("❌ Error al cargar estadísticas:", error);
+        showToast("Error", "Error al cargar estadísticas: " + error.message, "error");
+    }
+}
+
+function mostrarDebugInfo() {
+    const info = `
+🔍 INFORMACIÓN DE DEBUG:
+• Leaflet disponible: ${typeof L !== 'undefined' ? '✅' : '❌'}
+• Bootstrap disponible: ${typeof bootstrap !== 'undefined' ? '✅' : '❌'}
+• Mapa inicializado: ${mapa ? '✅' : '❌'}
+• Marcadores en mapa: ${Object.keys(marcadores).length}
+• AppUtils disponible: ${typeof window.AppUtils !== 'undefined' ? '✅' : '❌'}
+• URL actual: ${window.location.href}
+• Página: ${document.title}
+    `;
+    
+    console.log(info);
+    alert(info);
+}
+
+// Hacer funciones disponibles globalmente para compatibilidad
+window.cargarClientesManual = cargarClientesManual;
+window.cargarVehiculosManual = cargarVehiculosManual;
+window.cargarMapaManual = cargarMapaManual;
+window.cargarEstadisticasManual = cargarEstadisticasManual;
+window.mostrarDebugInfo = mostrarDebugInfo;
