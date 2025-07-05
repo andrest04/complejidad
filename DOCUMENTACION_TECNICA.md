@@ -179,6 +179,57 @@ def backtracking_rutas(self, ruta_actual, clientes_restantes, vehiculos_disponib
 - Cuando se requiere explorar todas las posibilidades
 - Problemas de tamaño pequeño a mediano
 
+## Datasets de Prueba
+
+### 1. Dataset de Lima, Perú (1500 Clientes)
+El archivo `Dataset/clientes_lima_1500.csv` contiene un dataset sintético completo con 1500 clientes distribuidos por el área metropolitana de Lima, Perú.
+
+#### Características del Dataset:
+- **Total de clientes**: 1500
+- **Pedido total**: 345,437.44 kg
+- **Pedido promedio**: 230.29 kg
+- **Área cubierta**: 3,825.83 km²
+- **Distritos únicos**: 42
+- **Densidad**: 0.39 clientes/km²
+
+#### Distribución por Prioridades:
+- Prioridad 1: 310 clientes (20.7%) - Máxima prioridad
+- Prioridad 2: 412 clientes (27.5%)
+- Prioridad 3: 399 clientes (26.6%)
+- Prioridad 4: 240 clientes (16.0%)
+- Prioridad 5: 139 clientes (9.3%) - Mínima prioridad
+
+#### Tipos de Establecimientos Incluidos:
+- Supermercados (Metro, Plaza Vea, Wong, Tottus, etc.)
+- Farmacias (InkaFarma, Boticas, Mifarma, etc.)
+- Centros Comerciales (Jockey Plaza, Larcomar, MegaPlaza, etc.)
+- Restaurantes (La Mar, Central, Maido, etc.)
+- Hoteles (Sheraton, Marriott, Hilton, etc.)
+- Universidades (Católica, San Marcos, de Lima, etc.)
+- Hospitales (Rebagliati, Anglo Americana, Delgado, etc.)
+- Parques (Kennedy, de la Reserva, El Olivar, etc.)
+- Plazas (Mayor, San Martín, Dos de Mayo, etc.)
+
+#### Formato del CSV:
+```csv
+id,nombre,latitud,longitud,prioridad,ventana_inicio,ventana_fin,pedido,distrito
+1,Farmacia Boticas Plus,-12.058,-77.1321,1,13:00,15:00,233.05,Bellavista
+2,Hotel Westin Terciario,-12.4753,-77.0762,5,07:00,19:00,111.42,Pachacámac
+3,Universidad Privada del Norte 1,-12.4565,-77.1413,3,09:00,11:00,126.16,Chosica
+```
+
+### 2. Dataset de Ejemplo (20 Clientes)
+El archivo `Dataset/clientes_rutas.csv` contiene un dataset pequeño para pruebas rápidas:
+
+```csv
+id,nombre,latitud,longitud,prioridad,ventana_inicio,ventana_fin,pedido
+1,Supermercado Metro,-12.0464,-77.0428,1,08:00,12:00,150.5
+2,Farmacia InkaFarma,-12.0564,-77.0328,2,09:00,17:00,200.0
+3,Restaurante La Mar,-12.0364,-77.0528,3,10:00,16:00,75.25
+4,Centro Comercial Jockey Plaza,-12.0664,-77.0228,1,08:30,11:30,300.0
+5,Hotel Sheraton,-12.0264,-77.0628,4,14:00,18:00,125.75
+```
+
 ## Estructura de Datos
 
 ### 1. Grafo de Rutas

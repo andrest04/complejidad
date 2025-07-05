@@ -1,0 +1,1501 @@
+id,nombre,latitud,longitud,prioridad,ventana_inicio,ventana_fin,pedido,distrito
+1,Farmacia Boticas Plus,-12.058,-77.1321,1,13:00,15:00,233.05,Bellavista
+2,Hotel Westin Terciario,-12.4753,-77.0762,5,07:00,19:00,111.42,Pachacámac
+3,Universidad Privada del Norte 1,-12.4565,-77.1413,3,09:00,11:00,126.16,Chosica
+4,Supermercado El Tigre Plus,-11.9958,-77.0581,2,06:00,14:00,246.75,San Martín de Porres
+5,Restaurante Maido Terciario,-12.1391,-77.0199,4,12:00,14:00,149.76,Barranco
+6,Universidad del Pacífico Premium,-12.0769,-77.1621,3,13:00,17:00,102.18,La Punta
+7,Restaurante La Picantería Plus,-12.3715,-76.9857,2,08:00,14:00,367.11,Chaclacayo
+8,Universidad San Martín - San Juan de Lurigancho,-12.0551,-76.9471,3,09:00,15:00,113.09,Ate
+9,Plaza Bolognesi Este,-11.95,-77.0535,5,06:00,18:00,142.23,Comas
+10,Hotel Country Club 3,-12.1536,-77.1527,2,11:00,14:00,156.22,Chaclacayo
+11,Plaza Mayor de Lima 3,-12.025,-77.022,3,11:00,14:00,214.56,Rímac
+12,Centro Comercial Open Plaza Oeste,-11.8975,-77.2028,4,14:00,17:00,143.56,Ventanilla
+13,Centro Comercial Plaza Lima Sur Express,-11.959,-77.0834,2,08:00,20:00,341.69,Santiago de Surco
+14,Plaza Dos de Mayo Premium,-12.0893,-77.0765,2,17:00,21:00,208.14,Magdalena
+15,Restaurante La Mar Premium,-12.4113,-77.1113,1,08:00,14:00,427.4,Chaclacayo
+16,Universidad de Lima 1,-12.0424,-77.0167,5,17:00,19:00,145.84,El Agustino
+17,Aeropuerto Jorge Chávez Plus,-11.9625,-77.1534,1,11:00,23:00,372.79,Santa Rosa
+18,Plaza Francia Terciario,-12.0779,-77.0312,1,12:00,14:00,256.57,La Victoria
+19,Hospital Alberto Sabogal Premium,-11.7547,-77.1493,2,12:00,18:00,205.09,Ancón
+20,Clínica Ricardo Palma Express,-12.0726,-77.0237,1,09:00,21:00,488.6,La Victoria
+21,Plaza de Acho Plus,-12.378,-77.1366,4,08:00,10:00,128.52,Chaclacayo
+22,Hospital Edgardo Rebagliati Norte,-12.0895,-76.9404,1,16:00,19:00,468.3,La Molina
+23,Hospital Edgardo Rebagliati 2,-11.9065,-77.1973,1,12:00,20:00,309.4,Ventanilla
+24,Farmacia Universal - Villa El Salvador,-12.4002,-76.9327,4,09:00,21:00,86.3,Chosica
+25,Centro Comercial Plaza Central Express,-12.0767,-77.066,1,18:00,23:00,212.29,Magdalena
+26,Parque El Olivar Sur,-11.8903,-77.0545,4,19:00,23:00,112.17,Carabayllo
+27,Restaurante Maido 2,-12.4585,-77.0486,5,10:00,22:00,45.49,Santiago de Surco
+28,Clínica Anglo Americana Terciario,-12.0897,-76.9556,1,07:00,19:00,466.53,La Molina
+29,Plaza de la Democracia Express,-12.0546,-77.0566,4,15:00,23:00,193.99,Breña
+30,Hotel Belmond Plus,-12.0421,-77.0551,2,06:00,10:00,239.42,Breña
+31,Hotel Sheraton 2,-11.9476,-77.0565,1,11:00,15:00,259.83,Comas
+32,Restaurante El Chinito Premium,-12.0853,-77.0133,1,13:00,16:00,260.77,San Luis
+33,Universidad Científica del Sur Oeste,-12.3715,-77.1403,4,19:00,23:00,112.15,San Juan de Miraflores
+34,Plaza Dos de Mayo 1,-12.089,-77.064,5,11:00,17:00,51.6,Magdalena
+35,Hotel Sonesta Premium,-12.0642,-77.1621,2,11:00,14:00,191.61,La Punta
+36,Restaurante La Picantería Plus,-12.0518,-77.0481,4,11:00,23:00,186.36,Breña
+37,Farmacia Boticas Premium,-12.1583,-76.9949,2,15:00,19:00,237.39,Surco
+38,Clínica San Borja 4,-12.0953,-77.0186,5,15:00,19:00,37.32,San Luis
+39,Mercado de Barranco - Rímac,-11.83,-77.0328,5,18:00,23:00,30.98,Santa Rosa
+40,Aeropuerto Jorge Chávez 1,-12.0542,-77.1597,1,07:00,10:00,455.09,San Juan de Lurigancho
+41,Parque Reducto Plus,-12.0727,-77.0027,4,16:00,22:00,168.58,San Borja
+42,Mercado de Barranco 2,-11.7573,-77.1593,1,10:00,13:00,371.06,Ancón
+43,Supermercado Peruanito 4,-11.893,-77.2071,5,08:00,20:00,45.58,Ventanilla
+44,Parque El Olivar - Pachacámac,-12.0683,-77.0516,4,14:00,22:00,128.97,Pueblo Libre
+45,Parque de la Media Luna - Villa El Salvador,-12.4586,-76.8005,3,16:00,22:00,219.87,Chaclacayo
+46,Plaza de la Democracia - Independencia,-12.4532,-77.1611,3,12:00,14:00,134.86,Santa Rosa
+47,Plaza Bolognesi Plus,-11.8544,-76.8669,5,09:00,13:00,46.31,Chosica
+48,Restaurante La Mar Premium,-12.1029,-77.1728,4,17:00,23:00,164.16,San Juan de Lurigancho
+49,Mercado de Surquillo Plus,-12.0633,-77.0274,2,18:00,23:00,322.3,La Victoria
+50,Mercado de Miraflores Principal,-11.8657,-76.8416,1,14:00,16:00,407.63,Lurigancho
+51,Centro Financiero Premium,-11.9579,-77.0539,5,06:00,18:00,128.07,Comas
+52,Universidad UPC Express,-12.0614,-77.0705,2,18:00,22:00,371.66,San Miguel
+53,Universidad San Martín Este,-11.7567,-77.1505,2,16:00,18:00,280.67,Ancón
+54,Centro Comercial Jockey Plaza Sur,-12.1356,-77.0134,2,10:00,13:00,210.91,Barranco
+55,Hotel Sonesta - Santa Rosa,-12.0598,-77.1442,3,16:00,23:00,222.63,Callao
+56,Hotel Country Club - San Miguel,-12.0842,-77.0122,1,15:00,18:00,281.26,San Luis
+57,Clínica Internacional - Chorrillos,-12.0937,-77.0221,3,20:00,23:00,291.83,San Luis
+58,Restaurante Maido Terciario,-12.0417,-76.9777,3,07:00,13:00,222.87,Villa El Salvador
+59,Hospital María Auxiliadora Plus,-11.945,-76.9262,1,13:00,17:00,499.36,Chosica
+60,Santa Isabel Premium,-11.8385,-76.8564,2,15:00,23:00,394.22,Mi Perú
+61,Vivanda 2,-12.2102,-76.9881,1,11:00,15:00,356.36,Pachacámac
+62,Hospital Alberto Sabogal Express,-11.9081,-77.055,1,13:00,17:00,305.11,Carabayllo
+63,Clínica Internacional Secundario,-12.0533,-77.0483,3,10:00,13:00,149.68,Jesús María
+64,Clínica Ricardo Palma Express,-11.9743,-77.0717,2,13:00,15:00,367.28,Los Olivos
+65,Plaza de la Democracia Principal,-11.9181,-76.9369,4,06:00,08:00,147.16,Lurín
+66,Farmacia Mifarma - Ventanilla,-12.0544,-77.1281,5,10:00,22:00,102.53,Bellavista
+67,Universidad de Lima Express,-12.0342,-77.0186,4,19:00,21:00,163.02,Rímac
+68,Universidad UPC Plus,-12.1673,-77.0006,1,18:00,23:00,470.48,Surco
+69,Farmacia San Pablo Premium,-11.9434,-77.0515,5,14:00,17:00,52.37,Comas
+70,Restaurante Osaka - La Victoria,-12.0002,-77.0463,4,12:00,20:00,78.84,San Martín de Porres
+71,Hotel Belmond - Jesús María,-12.333,-76.8808,1,07:00,11:00,462.49,San Juan de Miraflores
+72,Centro Comercial Plaza Lima Sur 2,-12.0614,-77.132,1,20:00,23:00,344.63,Bellavista
+73,Farmacia Universal - San Juan de Lurigancho,-11.9063,-77.19,3,10:00,14:00,201.16,Ventanilla
+74,Universidad Privada del Norte Plus,-12.1078,-77.0326,5,17:00,19:00,147.64,San Isidro
+75,Mercado de San Isidro Express,-12.2393,-77.1878,2,11:00,17:00,371.02,Santa Rosa
+76,Universidad Científica del Sur Premium,-12.1133,-77.0279,3,06:00,08:00,287.87,Miraflores
+77,Restaurante El Rincón del Ceviche Principal,-12.0427,-77.1228,3,20:00,23:00,142.59,Carmen de la Legua
+78,Hotel Country Club Premium,-12.052,-76.841,3,18:00,23:00,233.19,Santiago de Surco
+79,Restaurante La Mar Express,-12.0965,-77.0293,4,19:00,22:00,131.03,San Luis
+80,Hotel Hilton Plus,-11.993,-77.0409,1,12:00,18:00,410.45,San Martín de Porres
+81,Restaurante El Chinito Plus,-12.0883,-76.9943,4,12:00,18:00,109.75,San Borja
+82,Vivanda Express,-12.0871,-77.0683,3,12:00,15:00,147.45,Magdalena
+83,Supermercado Metro Secundario,-11.9767,-77.1949,3,08:00,20:00,297.64,Chosica
+84,Plaza Grau Terciario,-12.0535,-77.0724,3,20:00,23:00,282.63,San Miguel
+85,Parque de la Amistad Plus,-11.7433,-77.1599,2,07:00,15:00,236.98,Ancón
+86,Plaza de Acho Plus,-12.0018,-77.0406,4,18:00,22:00,101.33,San Martín de Porres
+87,Centro Comercial Jockey Plaza Plus,-12.031,-77.0148,4,13:00,16:00,92.97,Rímac
+88,Farmacia Cruz Verde 5,-12.1112,-77.0342,5,08:00,16:00,111.51,Miraflores
+89,Plaza de Acho - Villa El Salvador,-11.859,-77.1041,1,20:00,23:00,334.32,Puente Piedra
+90,Clínica Anglo Americana Express,-12.0748,-77.1611,1,13:00,15:00,299.98,La Punta
+91,Universidad UPC Express,-12.0689,-77.1299,3,18:00,23:00,242.41,Bellavista
+92,Hospital María Auxiliadora Principal,-12.0804,-77.0764,1,07:00,11:00,311.12,Magdalena
+93,Hospital Alberto Sabogal 2,-12.0463,-76.9447,3,06:00,14:00,263.82,Ate
+94,Plaza Francia Express,-12.1098,-77.0846,1,11:00,15:00,291.4,Lurín
+95,Restaurante El Rincón del Ceviche Este,-12.1665,-77.0826,4,18:00,23:00,108.96,San Juan de Lurigancho
+96,Supermercado El Tigre Plus,-12.4765,-77.0496,4,07:00,15:00,179.17,San Juan de Miraflores
+97,Hospital María Auxiliadora Express,-11.7531,-77.1456,2,11:00,14:00,168.67,Ancón
+98,Universidad de Lima Secundario,-12.031,-77.0119,3,07:00,09:00,241.46,Rímac
+99,Restaurante El Mercado Plus,-12.0669,-77.0329,2,06:00,14:00,159.98,La Victoria
+100,Centro Comercial Plaza Central - Magdalena,-12.0299,-76.8619,2,11:00,17:00,268.63,Chorrillos
+101,Supermercado El Ahorro Premium,-12.0765,-77.0721,4,08:00,11:00,174.48,Magdalena
+102,Supermercado Metro - Callao,-11.9076,-77.0511,2,16:00,19:00,328.47,Carabayllo
+103,Parque de la Familia Plus,-12.0665,-76.9389,3,19:00,22:00,258.22,Villa María del Triunfo
+104,Parque de las Leyendas Principal,-12.0453,-77.1293,2,11:00,23:00,263.74,Carmen de la Legua
+105,Restaurante El Rincón del Ceviche - Surco,-12.0524,-77.1538,2,14:00,23:00,203.58,Callao
+106,Tottus Oeste,-11.8909,-77.1872,5,10:00,12:00,60.88,Chaclacayo
+107,Supermercado El Súper - Jesús María,-12.0735,-76.9937,2,16:00,20:00,186.72,San Borja
+108,Parque Kennedy 3,-11.9723,-77.0464,3,19:00,22:00,195.94,Pachacámac
+109,Mercado de Miraflores - Jesús María,-12.0644,-77.0595,1,09:00,17:00,457.16,Pueblo Libre
+110,Restaurante La Mar - Ancón,-12.1218,-77.024,4,06:00,10:00,182.03,Miraflores
+111,Universidad del Pacífico Norte,-12.3517,-77.1535,1,19:00,23:00,286.49,Villa María del Triunfo
+112,Farmacia San Pablo Premium,-11.7563,-77.1477,2,20:00,23:00,206.28,Ancón
+113,Parque de la Exposición Express,-12.019,-76.9055,3,12:00,23:00,214.11,Chaclacayo
+114,Plaza de la Bandera Plus,-11.9891,-77.0609,5,07:00,19:00,90.03,Los Olivos
+115,Plaza de la Revolución Express,-12.086,-77.0797,4,10:00,18:00,161.3,Magdalena
+116,Farmacia Boticas Premium,-11.8655,-77.0306,3,10:00,12:00,253.04,Villa El Salvador
+117,Centro Comercial Plaza Lima Sur Oeste,-12.3627,-77.1826,5,11:00,23:00,144.95,San Juan de Lurigancho
+118,Hotel JW Marriott 3,-12.0791,-77.0338,4,19:00,23:00,60.99,La Victoria
+119,Parque de las Leyendas Premium,-12.0415,-77.0981,2,16:00,18:00,394.37,Chorrillos
+120,Hospital Edgardo Rebagliati 2,-11.9557,-77.0459,2,13:00,19:00,348.58,Comas
+121,Farmacia Cruz Verde Sur,-12.1618,-77.005,4,13:00,23:00,105.7,Surco
+122,Universidad Ricardo Palma Plus,-12.2607,-77.1105,3,18:00,23:00,264.93,Santiago de Surco
+123,Restaurante Central Premium,-11.9896,-77.075,3,10:00,22:00,214.27,Los Olivos
+124,Santa Isabel 5,-11.8984,-77.0564,3,19:00,22:00,193.98,Carabayllo
+125,Restaurante Central 3,-11.9963,-77.0251,2,06:00,10:00,239.4,Independencia
+126,Hospital Nacional Dos de Mayo Plus,-12.0268,-77.0125,3,11:00,19:00,283.3,Rímac
+127,Plaza Francia Plus,-12.3196,-77.0051,3,17:00,23:00,237.09,San Juan de Lurigancho
+128,Hotel JW Marriott Express,-12.0743,-77.0216,3,20:00,22:00,119.69,La Victoria
+129,Restaurante El Chinito Plus,-11.908,-77.2095,5,20:00,23:00,110.11,Ventanilla
+130,Parque de la Exposición Sur,-11.9806,-77.0799,4,08:00,16:00,84.72,Los Olivos
+131,Supermercado Peruanito Sur,-12.328,-76.8653,1,11:00,14:00,329.33,Villa María del Triunfo
+132,Universidad San Martín Sur,-12.0705,-77.1691,2,08:00,16:00,388.19,La Punta
+133,Santa Isabel Plus,-12.1014,-77.0367,2,09:00,15:00,292.46,San Isidro
+134,Universidad San Martín Premium,-11.893,-77.0392,2,17:00,19:00,235.71,Chaclacayo
+135,Centro Comercial MegaPlaza Plus,-11.9991,-77.0513,4,07:00,10:00,81.99,San Martín de Porres
+136,Mercado de Chorrillos 5,-12.4216,-77.0097,3,06:00,10:00,196.71,Mi Perú
+137,Centro Comercial Real Plaza Premium,-12.0799,-77.1674,1,17:00,20:00,205.54,La Punta
+138,Mercado de Miraflores - Callao,-11.9518,-76.8554,5,11:00,23:00,125.75,Chaclacayo
+139,Farmacia Cruz Verde Plus,-12.0352,-77.0256,2,18:00,22:00,252.77,Rímac
+140,Hospital María Auxiliadora Sur,-12.3004,-77.0798,2,13:00,16:00,159.72,Pachacámac
+141,Aeropuerto Jorge Chávez 2,-12.0675,-77.1315,3,08:00,20:00,144.51,Bellavista
+142,Universidad del Pacífico Premium,-12.0392,-77.1107,2,17:00,23:00,156.04,Carmen de la Legua
+143,Centro Comercial Real Plaza 4,-11.9054,-77.045,4,12:00,16:00,161.42,Carabayllo
+144,Parque de la Reserva Premium,-12.051,-77.1352,2,18:00,22:00,334.33,Bellavista
+145,Universidad Científica del Sur Plus,-12.0956,-77.0274,3,12:00,16:00,276.47,San Luis
+146,Supermercado Peruanito Este,-11.9902,-77.0523,3,13:00,15:00,208.54,San Martín de Porres
+147,Santa Isabel Express,-12.0519,-77.0274,3,13:00,17:00,108.02,El Agustino
+148,Farmacia Universal 1,-12.1335,-77.0293,1,18:00,20:00,239.48,Barranco
+149,Plaza de la Bandera Premium,-12.0872,-77.0637,3,10:00,18:00,277.52,Magdalena
+150,Mercado de Barranco Norte,-12.0873,-77.003,5,19:00,23:00,112.71,San Borja
+151,Parque de la Media Luna Express,-12.0579,-76.9548,2,08:00,10:00,257.79,Ate
+152,Parque de las Leyendas Principal,-12.0884,-77.0015,2,17:00,23:00,270.06,San Borja
+153,Supermercado Peruanito 3,-12.1491,-77.0145,3,09:00,11:00,233.39,Barranco
+154,Farmacia El Súper Premium,-12.08,-77.0513,1,12:00,18:00,460.01,Lince
+155,Mercado de Miraflores Oeste,-12.0439,-77.045,2,17:00,23:00,385.06,Breña
+156,Restaurante Amaz 3,-12.0111,-76.8835,2,12:00,15:00,370.59,Santiago de Surco
+157,Santa Isabel - Chorrillos,-12.106,-77.0496,2,20:00,23:00,265.86,San Isidro
+158,Plaza San Martín Express,-12.0499,-77.0141,4,11:00,15:00,125.23,El Agustino
+159,Mercado de Chorrillos 4,-12.0217,-77.0283,4,08:00,10:00,111.07,Rímac
+160,Supermercado El Ahorro Sur,-11.9446,-77.0475,1,07:00,10:00,211.36,Comas
+161,Hotel Wyndham - Los Olivos,-11.9942,-77.0215,3,10:00,12:00,112.55,Independencia
+162,Centro Comercial Mall Aventura 5,-12.0445,-76.8802,1,17:00,21:00,356.94,Chaclacayo
+163,Restaurante Rafael Norte,-11.9979,-77.0266,5,09:00,12:00,67.69,Independencia
+164,Plaza de la Democracia Premium,-12.4497,-77.0982,2,15:00,19:00,168.57,Chaclacayo
+165,Universidad ESAN - Santa Rosa,-12.3208,-76.8848,4,19:00,23:00,125.8,Lurigancho
+166,Centro Financiero 3,-12.0592,-77.0852,2,06:00,09:00,336.42,San Miguel
+167,Restaurante El Mercado Plus,-12.0621,-77.1348,3,13:00,15:00,272.22,Bellavista
+168,Plaza Vea Express,-12.0565,-77.0481,1,06:00,08:00,316.05,Jesús María
+169,Mercado de Magdalena Norte,-12.0768,-77.0342,2,20:00,23:00,292.42,La Victoria
+170,Parque de la Familia Plus,-12.056,-77.142,2,16:00,23:00,155.05,Callao
+171,Centro Comercial Mall Aventura Express,-12.0556,-77.0426,1,11:00,15:00,338.14,Breña
+172,Universidad San Martín 1,-11.892,-77.2008,1,11:00,13:00,423.91,Ventanilla
+173,Restaurante Rafael Plus,-12.0729,-77.1927,2,18:00,23:00,353.23,Chorrillos
+174,Mercado de Magdalena Express,-11.9562,-77.0475,2,07:00,09:00,167.99,Comas
+175,Restaurante La Mar Premium,-12.0686,-77.0802,2,14:00,22:00,363.72,San Miguel
+176,Parque de la Media Luna - Chorrillos,-12.0399,-77.0293,3,17:00,20:00,211.76,Rímac
+177,Hotel JW Marriott Premium,-12.1626,-77.0084,2,10:00,13:00,385.31,Surco
+178,Centro Comercial Plaza Bellavista Sur,-12.4527,-77.143,3,15:00,18:00,242.9,Chorrillos
+179,Plaza Dos de Mayo Este,-12.0792,-77.0213,4,19:00,23:00,68.55,La Victoria
+180,Clínica Anglo Americana Terciario,-11.8542,-77.1091,2,17:00,19:00,393.86,Puente Piedra
+181,Farmacia El Súper - Magdalena,-12.1671,-76.9963,1,19:00,23:00,338.86,Surco
+182,Plaza San Martín - Puente Piedra,-12.0243,-77.0203,1,14:00,23:00,459.4,Rímac
+183,Hospital María Auxiliadora Plus,-12.3289,-76.8951,1,07:00,09:00,381.74,Villa María del Triunfo
+184,Centro Comercial Larcomar Oeste,-11.9922,-77.0224,2,08:00,14:00,378.35,Independencia
+185,Universidad Católica Secundario,-12.0557,-77.0424,1,13:00,15:00,281.6,Breña
+186,Parque de las Leyendas - Breña,-12.293,-76.9237,2,13:00,23:00,201.66,Santa Rosa
+187,Parque de la Exposición 1,-12.3134,-76.8709,3,10:00,13:00,145.93,Santa Rosa
+188,Clínica Delgado Este,-12.0269,-76.8957,5,20:00,23:00,72.02,Villa El Salvador
+189,Mercado de Magdalena 3,-11.9906,-77.0233,1,10:00,16:00,492.63,Pachacámac
+190,Restaurante La Picantería Plus,-11.8541,-77.0912,3,13:00,23:00,228.52,Puente Piedra
+191,Hotel Radisson Secundario,-12.3076,-76.9793,2,15:00,19:00,251.24,Lurigancho
+192,Plaza San Martín Plus,-12.0778,-77.1641,3,11:00,14:00,131.15,La Punta
+193,Parque de las Leyendas - Carabayllo,-12.152,-77.1844,2,12:00,23:00,387.62,Mi Perú
+194,Universidad de Lima Oeste,-11.8518,-77.1817,3,10:00,18:00,160.8,Lurigancho
+195,Hotel Belmond Express,-12.0671,-77.0464,3,13:00,23:00,226.65,Jesús María
+196,Restaurante Rafael Premium,-12.0537,-77.0512,3,15:00,21:00,267.05,Jesús María
+197,Universidad San Martín 5,-12.0599,-77.0236,1,17:00,19:00,268.63,El Agustino
+198,Universidad ESAN Premium,-12.0906,-77.0388,1,17:00,19:00,313.05,San Isidro
+199,Vivanda - Breña,-12.0856,-76.9935,1,10:00,14:00,393.04,San Borja
+200,Universidad Científica del Sur Premium,-11.9936,-77.0343,1,10:00,14:00,259.26,Independencia
+201,Restaurante El Rincón del Ceviche - Miraflores,-12.332,-76.9182,3,08:00,14:00,207.91,Villa El Salvador
+202,Hotel Country Club Premium,-12.0781,-77.0677,3,18:00,22:00,149.07,Pueblo Libre
+203,Centro Comercial Plaza San Miguel Plus,-12.211,-76.9909,3,19:00,23:00,113.22,Santa Rosa
+204,Parque de la Exposición - Carabayllo,-12.0785,-77.0572,4,16:00,18:00,160.28,Lince
+205,Centro Comercial Larcomar - Ate,-12.0612,-77.1259,2,16:00,19:00,225.19,Bellavista
+206,Farmacia InkaFarma Secundario,-12.1393,-76.9066,2,06:00,12:00,184.19,Mi Perú
+207,Parque de la Exposición Premium,-12.0727,-77.0305,4,18:00,23:00,195.01,La Victoria
+208,Plaza de Acho 4,-12.0717,-77.0627,1,18:00,22:00,399.0,Magdalena
+209,Centro Comercial Plaza Lima Sur Premium,-12.1011,-77.0305,4,20:00,23:00,158.94,San Isidro
+210,Restaurante Osaka Sur,-12.079,-77.0793,2,18:00,23:00,177.45,Magdalena
+211,Parque Reducto - La Punta,-12.3843,-77.0742,5,11:00,15:00,105.66,Santiago de Surco
+212,Parque Kennedy Express,-12.0661,-77.055,1,20:00,23:00,402.62,Pueblo Libre
+213,Mercado de Barranco Express,-11.7513,-77.1567,2,08:00,16:00,397.39,Ancón
+214,Estadio Nacional Plus,-12.1586,-77.1564,3,09:00,12:00,219.65,Chaclacayo
+215,Centro Comercial Plaza Norte Terciario,-12.046,-76.9597,2,17:00,23:00,359.87,Ate
+216,Hotel Radisson Secundario,-12.1692,-77.1598,5,09:00,13:00,121.68,Santa Rosa
+217,Centro Comercial MegaPlaza 2,-12.0574,-77.0403,4,09:00,21:00,161.46,Jesús María
+218,Clínica Ricardo Palma - San Isidro,-12.2725,-77.1862,2,06:00,12:00,356.25,Chorrillos
+219,Parque de la Pera Premium,-11.9063,-77.2038,2,15:00,23:00,167.43,Ventanilla
+220,Parque de la Familia Norte,-12.4085,-77.1613,1,12:00,23:00,316.46,Lurín
+221,Clínica San Felipe Terciario,-12.0794,-76.9955,2,19:00,21:00,395.94,San Borja
+222,Hospital María Auxiliadora Terciario,-11.9988,-77.0276,3,17:00,21:00,180.42,Independencia
+223,Farmacia El Súper Norte,-12.0928,-77.0426,1,12:00,18:00,450.43,San Isidro
+224,Universidad de Lima 2,-12.2919,-76.8472,1,09:00,21:00,381.51,Santiago de Surco
+225,Parque Reducto - Barranco,-12.0617,-77.1759,5,17:00,19:00,95.37,La Punta
+226,Supermercado El Súper Express,-12.0731,-77.0498,2,07:00,19:00,367.09,Lince
+227,Hospital María Auxiliadora Plus,-12.0513,-77.1399,5,12:00,15:00,29.11,Bellavista
+228,Universidad ESAN 3,-12.1185,-77.0228,2,18:00,23:00,215.26,Miraflores
+229,Farmacia Mifarma Norte,-11.8466,-77.0988,4,18:00,23:00,72.94,Puente Piedra
+230,Restaurante La Mar Express,-12.0531,-77.0771,4,10:00,12:00,55.11,San Miguel
+231,Farmacia Boticas Premium,-11.808,-76.9679,3,13:00,19:00,152.32,Mi Perú
+232,Hotel Sheraton - Chaclacayo,-12.0892,-76.9438,2,20:00,22:00,389.79,La Molina
+233,Mercado de Chorrillos Plus,-12.0586,-77.0529,3,06:00,10:00,202.08,Jesús María
+234,Supermercado El Ahorro 4,-12.0386,-77.0261,3,12:00,23:00,138.89,Rímac
+235,Restaurante Amaz Express,-11.8243,-76.959,2,16:00,22:00,276.58,Chosica
+236,Plaza San Martín Express,-12.0233,-77.0207,1,09:00,12:00,322.69,Rímac
+237,Restaurante El Chinito - Ate,-12.0861,-77.0514,3,13:00,19:00,209.32,Lince
+238,Hotel Country Club - San Miguel,-12.0859,-77.0769,2,06:00,14:00,279.0,Magdalena
+239,Clínica San Felipe Plus,-12.4199,-76.9643,2,12:00,16:00,189.72,Villa El Salvador
+240,Centro Comercial Plaza Central Oeste,-12.044,-77.0591,5,19:00,21:00,88.46,Villa María del Triunfo
+241,Farmacia San Pablo Premium,-12.0897,-76.9917,4,10:00,22:00,179.8,San Borja
+242,Farmacia Cruz Verde Premium,-12.0772,-77.0703,3,10:00,18:00,197.46,Magdalena
+243,Hospital María Auxiliadora Plus,-11.9818,-77.066,2,09:00,11:00,249.5,Los Olivos
+244,Parque de la Exposición - Miraflores,-11.9818,-76.8544,1,12:00,20:00,281.43,Pachacámac
+245,Parque de la Amistad 1,-12.2793,-76.868,3,12:00,20:00,294.34,San Juan de Miraflores
+246,Supermercado El Triunfo Plus,-11.9843,-77.0319,3,11:00,23:00,126.82,Independencia
+247,Universidad San Marcos 3,-12.0632,-77.0564,4,13:00,23:00,141.11,Pueblo Libre
+248,Hotel Westin - Santa Rosa,-12.0713,-77.1759,1,15:00,18:00,408.08,La Punta
+249,Clínica San Felipe Plus,-12.485,-76.8016,4,15:00,21:00,185.86,Lurín
+250,Mercado de Barranco Express,-12.0582,-77.0842,2,18:00,23:00,230.48,San Miguel
+251,Centro Comercial Larcomar Express,-12.0331,-77.0001,5,09:00,13:00,59.63,Pachacámac
+252,Plaza de Acho Express,-11.8564,-77.1065,2,16:00,22:00,155.69,Puente Piedra
+253,Centro Comercial Plaza San Miguel Secundario,-12.3057,-77.0623,3,07:00,13:00,185.75,Lurín
+254,Hotel Westin Terciario,-11.9737,-77.0615,3,09:00,11:00,193.88,Los Olivos
+255,Estadio Nacional 2,-12.4647,-76.9505,2,10:00,16:00,319.0,Chaclacayo
+256,Farmacia El Ahorro - Magdalena,-12.0596,-77.1484,5,09:00,15:00,149.48,Callao
+257,Centro Comercial Plaza Lima Sur - Pachacámac,-12.056,-77.1544,4,11:00,23:00,193.5,Callao
+258,Hotel Radisson - La Molina,-12.0732,-77.1391,3,07:00,19:00,218.86,Chosica
+259,Plaza de la Revolución Express,-12.1119,-77.0237,3,17:00,19:00,115.28,Miraflores
+260,Clínica Internacional - Los Olivos,-12.2598,-77.0259,3,12:00,18:00,132.91,Villa El Salvador
+261,Restaurante Maido Plus,-12.0089,-77.059,3,07:00,13:00,123.42,San Martín de Porres
+262,Parque El Olivar 2,-12.0911,-77.0422,2,19:00,23:00,361.39,San Isidro
+263,Universidad Privada del Norte - Villa El Salvador,-12.1504,-76.9927,1,13:00,19:00,410.47,Surco
+264,Centro Comercial Plaza San Miguel Sur,-12.0513,-76.9528,3,16:00,22:00,166.66,Ate
+265,Hotel Country Club - San Isidro,-12.2653,-77.1596,2,11:00,15:00,294.89,Chorrillos
+266,Farmacia El Súper Norte,-12.0909,-77.0195,4,09:00,15:00,174.07,San Luis
+267,Hotel Sheraton Express,-12.0524,-77.0599,1,17:00,20:00,273.07,Breña
+268,Clínica Anglo Americana - La Molina,-11.9824,-77.0652,3,20:00,23:00,122.17,Los Olivos
+269,Centro Comercial Plaza Lima Sur Oeste,-11.8559,-77.0441,5,12:00,14:00,43.99,Lurín
+270,Hotel Country Club - Ventanilla,-12.408,-76.857,3,16:00,18:00,142.58,Chaclacayo
+271,Hotel Country Club Express,-12.4408,-77.1052,5,13:00,19:00,109.27,Lurín
+272,Parque de las Leyendas 2,-12.0568,-77.0583,2,17:00,21:00,365.54,Breña
+273,Supermercado El Rey - Carabayllo,-12.044,-77.0515,5,20:00,23:00,105.73,Breña
+274,Farmacia InkaFarma Premium,-12.0426,-76.9484,1,15:00,23:00,258.8,Ate
+275,Mercado de Miraflores Este,-12.2109,-76.8936,5,20:00,22:00,65.07,Mi Perú
+276,Hotel Radisson 4,-11.9922,-77.0542,1,19:00,23:00,271.69,San Martín de Porres
+277,Plaza de la Revolución 5,-12.0525,-76.934,2,14:00,16:00,273.49,San Juan de Lurigancho
+278,Parque Kennedy Norte,-12.0797,-77.0783,2,19:00,23:00,374.71,Magdalena
+279,Mercado Central Plus,-11.995,-77.0306,1,13:00,23:00,206.12,Independencia
+280,Restaurante La Mar - Miraflores,-12.0876,-77.059,4,07:00,15:00,61.75,Lince
+281,Restaurante Central Express,-12.0563,-77.0442,2,20:00,22:00,209.99,Jesús María
+282,Clínica Ricardo Palma 5,-12.0512,-77.0211,3,19:00,21:00,290.33,El Agustino
+283,Centro Comercial Plaza Lima Sur Plus,-12.067,-77.1386,1,13:00,17:00,459.78,Bellavista
+284,Hospital Edgardo Rebagliati Premium,-12.0849,-76.9509,1,10:00,18:00,214.58,La Molina
+285,Hotel JW Marriott - La Victoria,-12.4895,-77.1686,3,15:00,18:00,120.21,Santa Rosa
+286,Universidad San Marcos - Miraflores,-11.907,-76.9674,1,06:00,10:00,308.87,Chorrillos
+287,Mercado de Surquillo Express,-12.0577,-77.0464,2,11:00,19:00,240.15,Jesús María
+288,Parque de las Leyendas Premium,-11.7483,-77.1545,4,09:00,21:00,163.89,Ancón
+289,Parque El Olivar Plus,-12.0604,-77.0295,5,20:00,23:00,56.45,La Victoria
+290,Restaurante Central Plus,-11.9977,-77.039,3,11:00,17:00,142.82,Independencia
+291,Restaurante Osaka Express,-11.8237,-77.0026,5,15:00,21:00,41.07,San Juan de Lurigancho
+292,Centro Comercial Larcomar Plus,-12.0272,-76.9324,1,15:00,23:00,217.06,Villa El Salvador
+293,Hotel Hilton Premium,-12.0786,-76.9939,3,10:00,16:00,142.39,San Borja
+294,Restaurante Osaka Premium,-12.0999,-77.0382,3,12:00,20:00,292.15,San Isidro
+295,Aeropuerto Jorge Chávez Plus,-12.0827,-76.9924,1,15:00,23:00,430.88,San Borja
+296,Hotel JW Marriott Premium,-11.9944,-77.0528,2,20:00,23:00,303.67,San Martín de Porres
+297,Mercado de Chorrillos Express,-12.0221,-77.0265,4,19:00,23:00,181.51,Rímac
+298,Restaurante Osaka 1,-11.9099,-77.048,1,11:00,14:00,276.06,Carabayllo
+299,Centro Comercial Larcomar Plus,-11.9057,-77.1925,4,18:00,23:00,128.44,Ventanilla
+300,Parque Reducto - Los Olivos,-12.0607,-77.1605,3,13:00,17:00,145.41,La Punta
+301,Centro Comercial Plaza Lima Sur Plus,-12.4784,-77.0911,3,11:00,14:00,118.0,Villa María del Triunfo
+302,Parque El Olivar Secundario,-12.082,-77.0011,5,17:00,23:00,107.89,San Borja
+303,Universidad del Pacífico Express,-12.142,-77.0137,2,20:00,23:00,343.61,Barranco
+304,Parque de la Amistad Oeste,-12.051,-77.0362,5,07:00,15:00,132.84,Pachacámac
+305,Clínica Internacional Premium,-12.0562,-77.043,3,06:00,09:00,133.03,Jesús María
+306,Universidad del Pacífico Premium,-12.3328,-76.9272,5,19:00,23:00,84.88,Lurín
+307,Hospital María Auxiliadora Plus,-12.0809,-77.0624,3,11:00,23:00,271.81,Magdalena
+308,Hospital María Auxiliadora Express,-12.0893,-76.9918,3,17:00,23:00,246.21,San Borja
+309,Universidad del Pacífico Express,-11.9453,-76.8597,2,08:00,16:00,243.54,Mi Perú
+310,Plaza Bolognesi - Chorrillos,-12.0752,-76.9599,4,09:00,15:00,88.97,La Molina
+311,Hotel Hilton Plus,-12.4547,-76.9516,1,14:00,18:00,366.65,Chosica
+312,Restaurante Rafael - Puente Piedra,-11.9545,-77.0522,1,09:00,15:00,374.4,Comas
+313,Clínica San Felipe Terciario,-12.0635,-77.1617,1,20:00,23:00,384.09,La Punta
+314,Clínica Delgado Terciario,-12.0555,-77.0578,4,13:00,23:00,126.36,Jesús María
+315,Hotel Radisson Premium,-12.1662,-76.9548,2,10:00,22:00,197.1,Santa Rosa
+316,Plaza Grau Express,-11.9509,-77.0534,3,17:00,23:00,159.88,Comas
+317,Farmacia El Rey 4,-12.1236,-77.0255,5,11:00,13:00,51.11,Miraflores
+318,Plaza Grau Premium,-12.2822,-76.9594,1,18:00,23:00,212.5,Villa María del Triunfo
+319,Universidad Católica - Bellavista,-12.0717,-77.1798,4,20:00,23:00,121.32,La Punta
+320,Centro Financiero 4,-12.1586,-77.0977,4,14:00,23:00,95.19,Lurigancho
+321,Restaurante El Chinito Express,-12.0615,-77.1755,3,14:00,18:00,210.55,La Punta
+322,Parque de la Reserva Plus,-12.4761,-77.06,4,11:00,17:00,119.21,Chorrillos
+323,Hotel Marriott 4,-11.7472,-77.1561,3,07:00,09:00,108.06,Ancón
+324,Farmacia InkaFarma Express,-11.891,-77.0487,4,07:00,15:00,89.1,Carabayllo
+325,Hotel Country Club 5,-12.0158,-76.8463,2,19:00,23:00,263.4,Chosica
+326,Parque Reducto 4,-12.2658,-77.1628,2,12:00,18:00,159.57,San Juan de Miraflores
+327,Estadio Nacional Premium,-11.8732,-76.9713,2,06:00,12:00,216.14,Santa Rosa
+328,Mercado de Miraflores - Independencia,-12.0548,-77.0521,2,07:00,19:00,252.24,Breña
+329,Plaza Francia - Rímac,-12.1554,-76.9988,4,16:00,23:00,73.27,Surco
+330,Centro Comercial Larcomar Sur,-12.0869,-77.0249,3,07:00,13:00,164.55,San Luis
+331,Farmacia El Rey - Surco,-12.0888,-77.0063,1,11:00,19:00,453.11,San Borja
+332,Universidad Ricardo Palma - Villa María del Triunfo,-12.0626,-77.0524,3,16:00,18:00,295.67,Pueblo Libre
+333,Restaurante Central - La Punta,-12.1693,-77.0091,2,09:00,11:00,201.25,Surco
+334,Farmacia Mifarma Plus,-12.1599,-76.9954,4,12:00,14:00,55.06,Surco
+335,Mercado de Barranco Express,-12.0793,-77.046,2,18:00,23:00,249.82,Lince
+336,Centro Comercial Real Plaza Express,-12.4435,-77.1147,1,18:00,20:00,478.78,Santa Rosa
+337,Parque de la Amistad Principal,-12.0628,-77.0742,1,15:00,19:00,302.97,San Miguel
+338,Hospital Nacional Dos de Mayo Express,-12.0595,-77.0127,4,12:00,14:00,54.85,El Agustino
+339,Supermercado El Ahorro Norte,-12.0527,-77.1317,1,14:00,22:00,265.21,Bellavista
+340,Mercado de Barranco Norte,-12.1523,-77.0031,2,07:00,10:00,342.74,Surco
+341,Farmacia San Pablo Premium,-12.0742,-77.0233,4,17:00,19:00,60.49,La Victoria
+342,Supermercado El Súper 2,-12.0341,-76.8971,1,13:00,15:00,329.45,Villa El Salvador
+343,Supermercado El Ahorro Express,-12.0209,-77.0104,1,15:00,23:00,450.17,Rímac
+344,Aeropuerto Jorge Chávez Terciario,-11.9034,-77.0428,1,19:00,23:00,456.47,Carabayllo
+345,Universidad San Marcos Express,-12.2517,-77.0887,5,06:00,18:00,38.38,Chaclacayo
+346,Santa Isabel Premium,-12.056,-77.0761,3,19:00,23:00,164.69,San Miguel
+347,Farmacia Mifarma Express,-11.8914,-77.1907,3,09:00,11:00,193.89,Ventanilla
+348,Mercado de San Isidro Oeste,-11.9814,-77.0347,2,16:00,22:00,298.75,Independencia
+349,Centro Comercial Plaza Bellavista 4,-12.0932,-77.0267,4,06:00,18:00,106.43,San Luis
+350,Supermercado Metro Premium,-12.0733,-77.1679,4,12:00,23:00,170.73,La Punta
+351,Plaza San Martín Premium,-12.0634,-77.0866,3,15:00,19:00,160.98,San Miguel
+352,Centro Comercial MegaPlaza Premium,-12.1396,-77.015,4,10:00,18:00,142.94,Barranco
+353,Universidad UPC Norte,-12.1609,-77.0037,1,10:00,16:00,256.52,Surco
+354,Plaza de la Revolución Premium,-11.9826,-77.0682,4,17:00,21:00,62.26,Los Olivos
+355,Plaza Grau Oeste,-12.0753,-77.1192,2,09:00,11:00,238.55,San Juan de Lurigancho
+356,Centro Comercial Plaza Lima Sur Principal,-12.1383,-77.0275,2,06:00,14:00,263.07,Barranco
+357,Santa Isabel Plus,-12.0646,-77.0635,3,19:00,23:00,197.0,Pueblo Libre
+358,Mercado de Chorrillos Express,-12.0849,-77.0612,4,11:00,14:00,186.96,Magdalena
+359,Hospital María Auxiliadora 3,-11.9065,-77.2034,1,15:00,18:00,408.83,Ventanilla
+360,Clínica Ricardo Palma Express,-11.7413,-77.153,4,10:00,18:00,115.77,Ancón
+361,Universidad San Marcos Principal,-12.1163,-77.0298,2,06:00,08:00,282.66,Miraflores
+362,Estadio Nacional Terciario,-11.947,-77.0575,4,10:00,12:00,119.43,Comas
+363,Universidad Ricardo Palma - Carmen de la Legua,-12.0433,-77.1217,4,10:00,22:00,126.62,Carmen de la Legua
+364,Centro Comercial Plaza Norte 1,-11.832,-77.0824,2,17:00,23:00,306.93,Chaclacayo
+365,Universidad San Martín Plus,-12.1147,-77.0375,3,16:00,22:00,161.42,Miraflores
+366,Plaza Vea Plus,-12.0934,-77.0499,3,11:00,19:00,111.89,San Isidro
+367,Clínica Internacional Plus,-12.066,-77.0666,3,15:00,23:00,132.34,Pueblo Libre
+368,Universidad San Marcos Plus,-12.0514,-77.0748,5,13:00,16:00,30.2,San Miguel
+369,Restaurante La Mar - La Victoria,-12.2003,-77.1078,2,18:00,20:00,162.4,San Juan de Miraflores
+370,Restaurante El Rincón del Ceviche Secundario,-11.9556,-76.8571,3,06:00,14:00,250.19,Chosica
+371,Restaurante El Mercado 3,-12.0299,-77.0286,3,16:00,18:00,159.05,Rímac
+372,Universidad de Lima Express,-12.0889,-76.9402,2,06:00,14:00,263.36,La Molina
+373,Centro Financiero Terciario,-12.051,-77.1526,4,08:00,16:00,173.73,Callao
+374,Parque Reducto - Ate,-12.4583,-77.0489,3,12:00,18:00,232.8,San Juan de Lurigancho
+375,Plaza de Acho 1,-12.0551,-77.1215,4,15:00,23:00,84.38,Bellavista
+376,Hotel Sheraton Express,-11.83,-77.1158,3,16:00,20:00,208.58,Chosica
+377,Hotel Westin Principal,-12.1537,-77.007,2,13:00,23:00,346.76,Surco
+378,Hotel Hilton Sur,-12.1521,-76.9607,1,19:00,22:00,384.58,Pachacámac
+379,Universidad Científica del Sur 4,-11.894,-77.0504,1,12:00,23:00,291.56,Carabayllo
+380,Farmacia Arcángel - San Borja,-11.755,-77.1597,3,13:00,15:00,201.13,Ancón
+381,Farmacia Universal 1,-12.4681,-76.8204,2,06:00,14:00,244.45,Villa El Salvador
+382,Universidad Ricardo Palma Oeste,-12.0351,-77.0143,4,13:00,15:00,107.75,Rímac
+383,Parque Kennedy Terciario,-11.9053,-77.0496,3,13:00,16:00,247.72,Carabayllo
+384,Aeropuerto Jorge Chávez 5,-12.0425,-76.9411,3,08:00,16:00,144.29,Ate
+385,Vivanda Terciario,-12.0324,-76.9181,3,20:00,23:00,121.82,Villa El Salvador
+386,Plaza de Acho - Lince,-11.9863,-77.0653,2,16:00,23:00,391.96,Los Olivos
+387,Centro Comercial Larcomar Plus,-11.9633,-76.9419,1,14:00,16:00,427.55,Chosica
+388,Farmacia Arcángel Plus,-12.035,-77.0121,2,14:00,17:00,342.94,Rímac
+389,Universidad San Marcos Oeste,-12.1444,-77.0489,5,08:00,12:00,41.57,Villa El Salvador
+390,Universidad Católica 2,-12.0774,-77.0239,4,08:00,14:00,169.31,La Victoria
+391,Farmacia Mifarma Premium,-11.9502,-76.8959,4,18:00,23:00,190.13,Villa El Salvador
+392,Universidad UPC Premium,-12.1193,-77.0222,2,09:00,17:00,351.85,Miraflores
+393,Restaurante Central Express,-11.9343,-77.1622,5,18:00,22:00,149.7,Villa El Salvador
+394,Supermercado El Súper Express,-12.0424,-77.025,1,17:00,23:00,487.29,El Agustino
+395,Centro Comercial Plaza Lima Sur Principal,-12.0952,-76.9263,2,18:00,23:00,203.56,Villa El Salvador
+396,Restaurante El Rincón del Ceviche Norte,-12.1111,-77.0223,1,09:00,17:00,343.42,Miraflores
+397,Hotel Marriott Secundario,-11.9942,-77.0272,1,08:00,16:00,275.42,Independencia
+398,Plaza de la Democracia Premium,-12.1185,-77.1825,2,11:00,14:00,214.89,Pachacámac
+399,Santa Isabel Premium,-11.8759,-77.1222,3,11:00,13:00,159.47,Santa Rosa
+400,Universidad Ricardo Palma - Carabayllo,-12.0831,-77.0682,4,06:00,10:00,160.04,Magdalena
+401,Hotel Hilton Sur,-11.9483,-77.0413,1,15:00,23:00,486.7,Comas
+402,Hotel Radisson Premium,-12.0782,-76.9592,2,16:00,23:00,301.33,La Molina
+403,Centro Comercial Plaza Norte Premium,-12.0002,-77.0594,2,13:00,17:00,379.67,San Martín de Porres
+404,Farmacia El Súper - Bellavista,-12.0872,-77.0767,5,12:00,23:00,44.88,Magdalena
+405,Centro Comercial Mall Aventura Plus,-12.0646,-77.0825,2,07:00,09:00,219.47,San Miguel
+406,Aeropuerto Jorge Chávez Premium,-12.4884,-77.0808,4,20:00,23:00,124.49,Villa María del Triunfo
+407,Centro Comercial MegaPlaza 1,-12.1565,-77.0062,2,08:00,12:00,240.63,Surco
+408,Estadio Nacional Express,-11.7432,-77.1516,2,07:00,19:00,179.7,Ancón
+409,Plaza Grau - Pachacámac,-11.9726,-77.0034,3,17:00,21:00,110.05,Mi Perú
+410,Hotel Wyndham 4,-12.2874,-77.1679,3,11:00,13:00,124.51,San Juan de Miraflores
+411,Hotel JW Marriott - Ventanilla,-12.0322,-77.123,4,16:00,23:00,198.28,Carmen de la Legua
+412,Farmacia San Pablo Express,-12.0435,-77.1966,4,16:00,23:00,184.34,Villa María del Triunfo
+413,Farmacia Universal Oeste,-12.1066,-77.0464,3,07:00,13:00,182.68,San Isidro
+414,Centro Comercial Larcomar Premium,-12.0847,-77.0661,4,06:00,10:00,177.43,Magdalena
+415,Centro Comercial Larcomar Secundario,-11.9548,-77.0542,3,15:00,18:00,112.64,Comas
+416,Centro Comercial Plaza Lima Sur Plus,-11.9941,-77.0392,1,08:00,10:00,360.12,Independencia
+417,Farmacia El Rey Express,-11.9874,-77.0638,1,08:00,11:00,279.33,Los Olivos
+418,Vivanda 3,-12.0797,-76.9925,2,20:00,23:00,258.93,San Borja
+419,Farmacia Mifarma Principal,-12.0786,-77.1658,2,16:00,18:00,298.33,La Punta
+420,Plaza de la Revolución Principal,-12.0375,-77.0216,2,16:00,18:00,362.53,Rímac
+421,Universidad de Lima Premium,-12.1432,-76.914,2,20:00,23:00,212.58,Chorrillos
+422,Farmacia Mifarma Principal,-11.9856,-77.0772,1,13:00,17:00,204.11,Los Olivos
+423,Centro Comercial Plaza Central - Chorrillos,-11.7532,-77.1482,2,20:00,23:00,276.23,Ancón
+424,Universidad Ricardo Palma Terciario,-11.8948,-77.1934,1,13:00,17:00,309.45,Ventanilla
+425,Parque de la Media Luna Premium,-12.3089,-77.1982,5,19:00,23:00,59.46,San Juan de Miraflores
+426,Parque de la Familia 1,-12.0552,-77.0501,1,18:00,23:00,449.3,Jesús María
+427,Centro Comercial Larcomar - Surco,-12.2231,-76.9824,2,15:00,21:00,385.96,Chaclacayo
+428,Plaza Vea 2,-12.0075,-77.0471,2,17:00,20:00,184.79,San Martín de Porres
+429,Clínica San Felipe - Jesús María,-12.4295,-77.1621,2,07:00,09:00,361.0,Lurín
+430,Clínica San Felipe Express,-12.366,-77.1612,1,15:00,21:00,393.93,Villa María del Triunfo
+431,Hotel Belmond Secundario,-11.7481,-77.1546,3,11:00,15:00,193.84,Ancón
+432,Hotel Hilton Premium,-12.0745,-77.0466,4,09:00,12:00,71.52,Lince
+433,Centro Comercial Mall Aventura - Lurigancho,-11.9425,-77.0484,1,08:00,20:00,218.3,Comas
+434,Centro Comercial MegaPlaza Norte,-11.9407,-77.0483,1,20:00,23:00,380.89,Comas
+435,Restaurante Rafael Principal,-12.0875,-77.0633,2,20:00,23:00,153.9,Magdalena
+436,Centro Comercial Open Plaza Terciario,-12.163,-76.9934,3,11:00,17:00,288.38,Surco
+437,Hotel Sonesta Plus,-12.0814,-76.9509,2,13:00,16:00,263.38,La Molina
+438,Parque de la Exposición 5,-12.0807,-76.8403,5,19:00,21:00,97.78,Santiago de Surco
+439,Plaza de la Democracia Premium,-12.0531,-77.0482,1,06:00,10:00,207.14,Breña
+440,Hotel Marriott Express,-11.981,-77.061,2,07:00,15:00,218.48,Los Olivos
+441,Parque de la Media Luna Terciario,-12.1509,-77.0048,3,13:00,16:00,102.89,Surco
+442,Restaurante Central Oeste,-12.0771,-76.9989,1,10:00,18:00,341.36,San Borja
+443,Parque de las Leyendas Express,-11.9819,-77.03,1,20:00,23:00,260.75,Independencia
+444,Aeropuerto Jorge Chávez Sur,-12.1395,-76.9022,3,16:00,23:00,222.95,Lurín
+445,Universidad UPC - Ventanilla,-12.0609,-77.0832,3,13:00,17:00,212.78,San Miguel
+446,Plaza de la Revolución Plus,-12.055,-77.056,3,07:00,15:00,230.52,Jesús María
+447,Farmacia Arcángel 1,-12.0784,-77.0076,3,06:00,08:00,174.21,San Borja
+448,Farmacia El Súper Sur,-11.7523,-77.1468,2,14:00,23:00,361.4,Ancón
+449,Restaurante La Picantería - Bellavista,-12.0743,-77.0463,4,10:00,16:00,70.75,Lince
+450,Mercado Central Premium,-12.0759,-77.05,1,11:00,15:00,239.27,Lince
+451,Centro Comercial Larcomar Plus,-12.3252,-77.0488,4,18:00,22:00,170.26,Chaclacayo
+452,Farmacia El Rey Premium,-12.0547,-77.0537,3,13:00,15:00,151.36,Breña
+453,Wong Secundario,-12.2223,-76.807,1,17:00,23:00,383.9,San Juan de Miraflores
+454,Hospital Nacional Dos de Mayo Premium,-12.0517,-77.0425,5,10:00,12:00,32.33,Breña
+455,Centro Comercial Plaza Bellavista 2,-12.3273,-76.9462,5,16:00,23:00,68.53,Chosica
+456,Centro Comercial Real Plaza Plus,-11.9072,-77.2006,1,06:00,18:00,238.41,Ventanilla
+457,Universidad Ricardo Palma Este,-12.0172,-76.8948,3,09:00,11:00,123.1,Pachacámac
+458,Plaza de Acho - San Juan de Miraflores,-12.0694,-77.1316,2,15:00,23:00,295.68,Bellavista
+459,Restaurante La Mar Oeste,-12.0603,-77.0426,3,09:00,21:00,276.28,Jesús María
+460,Centro Comercial Plaza San Miguel Express,-11.9769,-77.0891,2,18:00,20:00,257.32,Chaclacayo
+461,Mercado de Chorrillos - San Miguel,-12.0941,-77.0344,3,08:00,10:00,208.49,San Isidro
+462,Plaza Dos de Mayo - Pachacámac,-11.9833,-77.0313,3,13:00,19:00,254.59,Independencia
+463,Supermercado El Tigre Plus,-12.1037,-77.0411,5,17:00,23:00,129.29,San Isidro
+464,Centro Comercial Plaza Bellavista Premium,-12.0561,-77.0796,2,13:00,17:00,283.35,San Miguel
+465,Restaurante Maido 1,-12.2006,-76.9493,4,13:00,19:00,169.66,Villa María del Triunfo
+466,Plaza San Martín Premium,-12.0804,-77.0173,4,11:00,15:00,190.31,San Luis
+467,Plaza de la Bandera 5,-12.3298,-76.9006,2,09:00,12:00,377.94,Lurigancho
+468,Parque El Olivar - La Punta,-12.0871,-77.0599,1,11:00,19:00,280.82,Lince
+469,Plaza de la Bandera Express,-12.1571,-77.0072,3,20:00,23:00,196.16,Surco
+470,Centro Comercial Plaza Bellavista Premium,-11.9193,-77.18,3,13:00,19:00,257.95,Lurín
+471,Parque de la Exposición Express,-12.0066,-77.0411,2,12:00,18:00,208.63,San Martín de Porres
+472,Restaurante Maido Premium,-12.128,-77.0304,1,18:00,21:00,248.71,Miraflores
+473,Plaza de Acho Sur,-12.1492,-77.0174,3,08:00,10:00,241.99,Barranco
+474,Plaza Grau - Barranco,-12.463,-76.807,1,09:00,17:00,255.57,Mi Perú
+475,Centro Comercial Real Plaza Principal,-12.1673,-77.001,3,09:00,15:00,127.03,Surco
+476,Restaurante Rafael Plus,-12.0963,-77.0414,3,14:00,22:00,111.6,San Isidro
+477,Parque de la Media Luna - Santiago de Surco,-12.069,-77.0533,3,16:00,23:00,136.11,Pueblo Libre
+478,Universidad UPC - El Agustino,-12.0645,-77.0464,2,16:00,19:00,299.08,Jesús María
+479,Supermercado El Triunfo Plus,-12.1016,-77.0167,3,18:00,23:00,114.32,Chaclacayo
+480,Restaurante La Picantería 1,-12.1853,-76.8122,1,07:00,13:00,303.94,Villa El Salvador
+481,Hotel Wyndham Oeste,-12.0841,-76.9433,2,06:00,10:00,240.53,La Molina
+482,Hotel JW Marriott Express,-12.1346,-77.0165,1,08:00,14:00,356.05,Barranco
+483,Hospital María Auxiliadora Norte,-11.7588,-77.1403,2,12:00,23:00,391.55,Ancón
+484,Farmacia InkaFarma Express,-12.0003,-77.0426,1,18:00,23:00,470.13,San Martín de Porres
+485,Centro Comercial Open Plaza 3,-12.024,-76.9958,2,17:00,23:00,335.0,Chorrillos
+486,Mercado de Barranco 1,-12.0681,-77.0899,1,06:00,10:00,307.73,San Miguel
+487,Parque de las Leyendas 5,-12.079,-77.1753,1,19:00,21:00,284.81,La Punta
+488,Mercado de Miraflores Express,-12.0719,-77.0436,1,10:00,13:00,442.04,Lince
+489,Mercado de Miraflores Terciario,-12.2695,-76.892,3,15:00,23:00,257.32,Chorrillos
+490,Plaza San Martín Express,-11.7478,-77.1422,5,07:00,19:00,125.87,Ancón
+491,Plaza de la Bandera Plus,-12.072,-77.1686,4,08:00,16:00,193.23,La Punta
+492,Parque de la Pera 4,-12.0159,-76.9629,3,08:00,12:00,175.61,San Juan de Miraflores
+493,Restaurante Rafael Plus,-11.7474,-77.1535,2,11:00,13:00,387.92,Ancón
+494,Farmacia Mifarma Premium,-12.0307,-76.9634,3,20:00,23:00,238.59,Chaclacayo
+495,Restaurante Rafael - Barranco,-12.1416,-77.0105,2,18:00,23:00,224.79,Barranco
+496,Plaza de Acho Plus,-12.0515,-77.0444,2,13:00,23:00,352.55,Breña
+497,Universidad Privada del Norte Terciario,-12.3333,-76.887,1,11:00,13:00,235.58,Lurigancho
+498,Restaurante El Chinito Express,-12.318,-76.8593,2,07:00,19:00,174.31,Chaclacayo
+499,Clínica Delgado Oeste,-11.806,-76.9543,3,07:00,15:00,170.7,Santiago de Surco
+500,Universidad San Martín Principal,-12.0734,-77.0732,5,18:00,22:00,128.0,Magdalena
+501,Universidad Científica del Sur 2,-12.0473,-77.0515,5,15:00,17:00,116.73,Breña
+502,Restaurante El Chinito Norte,-12.0612,-77.0554,1,09:00,17:00,289.77,Pueblo Libre
+503,Restaurante Osaka Express,-12.1464,-77.008,2,15:00,19:00,327.6,Villa El Salvador
+504,Centro Comercial Plaza Bellavista Express,-12.0434,-76.8693,4,11:00,23:00,61.34,Villa María del Triunfo
+505,Universidad de Lima Express,-12.1794,-76.9638,2,07:00,11:00,282.05,Villa María del Triunfo
+506,Universidad ESAN Premium,-12.3933,-77.1596,2,12:00,16:00,254.4,Chaclacayo
+507,Supermercado El Ahorro Terciario,-12.0424,-77.1416,1,12:00,15:00,251.81,Callao
+508,Universidad del Pacífico Express,-12.0419,-77.0197,3,12:00,20:00,179.96,El Agustino
+509,Parque de la Reserva Express,-12.1381,-77.0113,3,14:00,23:00,297.63,Barranco
+510,Restaurante El Rincón del Ceviche Express,-12.0493,-76.9517,2,12:00,14:00,159.89,Ate
+511,Restaurante Amaz Oeste,-12.0992,-77.017,3,19:00,22:00,183.56,San Luis
+512,Mercado de Miraflores 2,-11.9419,-77.0425,2,14:00,18:00,341.51,Comas
+513,Universidad San Martín Plus,-12.0973,-77.0602,3,08:00,10:00,283.98,Pachacámac
+514,Supermercado El Súper Este,-11.842,-77.039,1,20:00,23:00,350.42,Pachacámac
+515,Centro Comercial Real Plaza 5,-12.0531,-77.0438,3,14:00,18:00,141.71,Breña
+516,Supermercado El Ahorro Express,-12.0329,-77.1245,2,07:00,11:00,156.07,Carmen de la Legua
+517,Plaza Francia Plus,-12.2112,-77.0597,4,13:00,21:00,137.27,San Juan de Miraflores
+518,Farmacia Boticas Secundario,-12.0788,-76.9547,4,09:00,12:00,62.66,La Molina
+519,Hotel Country Club Plus,-12.1513,-76.9974,3,17:00,20:00,211.63,Surco
+520,Farmacia El Ahorro Terciario,-12.1609,-76.9997,2,19:00,21:00,202.76,Surco
+521,Plaza de la Democracia Secundario,-12.0736,-77.1624,1,14:00,17:00,447.29,La Punta
+522,Supermercado Metro Plus,-12.0719,-77.0382,3,06:00,18:00,274.59,La Victoria
+523,Restaurante El Mercado 5,-11.9812,-77.037,5,06:00,10:00,68.82,Independencia
+524,Mercado de Chorrillos Premium,-12.0564,-77.0467,4,09:00,13:00,66.1,Breña
+525,Supermercado El Súper Este,-11.8557,-77.0968,2,11:00,19:00,355.04,Puente Piedra
+526,Farmacia Boticas Norte,-12.0306,-77.0255,1,20:00,22:00,309.18,Rímac
+527,Farmacia Mifarma 5,-12.0739,-77.0351,1,17:00,23:00,484.64,La Victoria
+528,Supermercado El Tigre 2,-11.9432,-77.0573,3,15:00,23:00,107.74,Comas
+529,Tottus Premium,-11.8982,-77.0402,2,13:00,23:00,369.63,Carabayllo
+530,Centro Comercial Larcomar - Lince,-12.0487,-77.1509,1,17:00,19:00,399.48,Callao
+531,Estadio Nacional Express,-12.0518,-76.9469,2,06:00,14:00,250.91,Ate
+532,Estadio Nacional Express,-12.0101,-76.9822,5,18:00,23:00,128.98,San Juan de Miraflores
+533,Vivanda Secundario,-12.0363,-77.122,2,20:00,23:00,375.02,Carmen de la Legua
+534,Hotel JW Marriott Express,-12.1129,-76.957,5,06:00,09:00,40.3,Villa El Salvador
+535,Parque de la Pera - Callao,-12.1771,-77.0102,3,14:00,20:00,233.7,Villa María del Triunfo
+536,Aeropuerto Jorge Chávez - Chaclacayo,-11.9594,-77.1578,4,15:00,23:00,185.61,Santiago de Surco
+537,Supermercado Metro Plus,-11.9563,-77.0494,3,10:00,14:00,263.57,Comas
+538,Plaza Vea Express,-11.9589,-77.0745,1,11:00,15:00,235.69,Villa El Salvador
+539,Mercado de Barranco Premium,-12.0759,-76.9943,3,10:00,13:00,136.23,San Borja
+540,Farmacia Arcángel - La Victoria,-12.0347,-77.1193,2,18:00,23:00,274.04,Carmen de la Legua
+541,Parque de la Amistad Premium,-12.059,-77.0872,4,06:00,18:00,128.35,San Miguel
+542,Plaza de la Bandera Express,-11.9509,-77.0465,1,06:00,18:00,302.48,Comas
+543,Hospital Nacional Dos de Mayo Express,-12.0139,-76.9837,4,19:00,23:00,67.39,Chaclacayo
+544,Supermercado El Rey Express,-12.0584,-77.0853,4,13:00,17:00,171.67,San Miguel
+545,Universidad del Pacífico - Independencia,-12.0778,-76.9941,2,13:00,16:00,344.53,San Borja
+546,Centro Financiero Norte,-11.8995,-77.2061,3,17:00,23:00,291.92,Ventanilla
+547,Parque de la Familia Principal,-12.0547,-77.0486,5,09:00,21:00,148.25,Breña
+548,Parque de la Media Luna Express,-12.0731,-77.0566,2,13:00,21:00,246.27,Pueblo Libre
+549,Centro Comercial Larcomar Plus,-11.9946,-76.9973,4,06:00,09:00,196.59,Villa El Salvador
+550,Clínica Anglo Americana Secundario,-12.0302,-77.016,1,09:00,15:00,218.65,Rímac
+551,Plaza de la Bandera 1,-12.2553,-77.1896,5,08:00,14:00,131.99,San Juan de Miraflores
+552,Parque El Olivar Secundario,-12.0542,-77.1292,4,09:00,11:00,185.42,Bellavista
+553,Wong Plus,-12.0594,-77.0493,1,12:00,15:00,469.69,Breña
+554,Restaurante El Rincón del Ceviche Oeste,-12.086,-76.9473,1,06:00,10:00,268.46,La Molina
+555,Plaza Grau Sur,-12.0857,-76.9503,4,18:00,20:00,117.43,La Molina
+556,Farmacia Cruz Verde Plus,-12.1283,-77.0219,3,07:00,10:00,161.52,Miraflores
+557,Clínica Internacional Plus,-12.4239,-77.0459,1,08:00,12:00,203.22,Santa Rosa
+558,Restaurante El Chinito Secundario,-11.9727,-76.9858,1,19:00,23:00,261.54,Chaclacayo
+559,Clínica Anglo Americana Premium,-12.0799,-76.9538,1,15:00,23:00,335.37,La Molina
+560,Plaza Francia Plus,-11.9972,-77.0259,4,13:00,16:00,116.1,Independencia
+561,Universidad Católica Oeste,-12.112,-77.0204,2,09:00,12:00,372.29,Miraflores
+562,Hospital María Auxiliadora Terciario,-12.0716,-77.0488,1,20:00,23:00,472.36,Lince
+563,Farmacia San Pablo Norte,-12.0203,-77.0122,2,09:00,17:00,260.62,Rímac
+564,Parque Reducto Terciario,-12.2606,-76.9429,3,17:00,23:00,251.14,Lurín
+565,Farmacia Cruz Verde - San Borja,-12.0692,-77.0425,1,17:00,23:00,327.43,Lurigancho
+566,Hospital Alberto Sabogal Secundario,-11.9453,-77.0429,5,09:00,15:00,84.89,Comas
+567,Restaurante La Picantería Plus,-11.8506,-77.1312,4,17:00,23:00,145.82,Villa María del Triunfo
+568,Centro Comercial Plaza Norte Sur,-12.0318,-77.0297,1,07:00,13:00,413.49,Rímac
+569,Plaza Bolognesi Sur,-11.9553,-77.0452,2,17:00,20:00,246.52,Comas
+570,Plaza Grau Express,-12.0698,-77.0202,4,11:00,14:00,134.05,La Victoria
+571,Restaurante Maido Premium,-12.0421,-77.049,3,13:00,19:00,271.09,Breña
+572,Plaza San Martín Secundario,-11.98,-77.0356,2,14:00,23:00,301.32,Independencia
+573,Parque de la Reserva Express,-12.2465,-77.0716,1,08:00,10:00,427.26,San Juan de Lurigancho
+574,Farmacia Mifarma Sur,-11.9078,-77.1989,3,10:00,16:00,107.03,Ventanilla
+575,Clínica Internacional Terciario,-11.9429,-77.0575,3,14:00,17:00,271.45,Comas
+576,Centro Comercial Real Plaza 2,-12.0198,-77.0325,2,14:00,16:00,291.09,Chosica
+577,Universidad de Lima Premium,-11.938,-76.9196,4,15:00,17:00,158.63,San Juan de Miraflores
+578,Clínica San Felipe Secundario,-11.9573,-77.0561,2,13:00,15:00,336.73,Comas
+579,Mercado de San Isidro Express,-12.044,-76.9511,1,13:00,17:00,445.64,Ate
+580,Plaza San Martín Terciario,-12.3577,-76.9967,3,12:00,20:00,134.15,Villa El Salvador
+581,Restaurante El Mercado Premium,-12.0353,-76.9351,3,19:00,22:00,265.75,Pachacámac
+582,Mercado de Surquillo Este,-12.07,-77.0423,1,16:00,22:00,228.87,Lince
+583,Plaza de la Revolución Terciario,-12.071,-77.0695,1,06:00,14:00,396.07,Pueblo Libre
+584,Hotel Belmond Plus,-12.2487,-76.903,2,16:00,18:00,160.25,Villa María del Triunfo
+585,Clínica San Borja Secundario,-12.0823,-77.0295,3,09:00,15:00,201.06,San Luis
+586,Plaza Grau Plus,-11.8955,-77.1948,2,08:00,20:00,389.38,Ventanilla
+587,Hotel Westin Principal,-11.9315,-77.1169,3,11:00,19:00,189.23,Villa María del Triunfo
+588,Plaza San Martín Express,-12.0414,-77.0112,1,20:00,23:00,303.85,El Agustino
+589,Restaurante El Chinito - Chosica,-12.2154,-77.1088,5,16:00,20:00,68.36,Lurigancho
+590,Mercado de Barranco Plus,-12.1457,-77.0139,3,08:00,11:00,180.92,Barranco
+591,Farmacia San Pablo Principal,-12.0302,-77.1203,2,17:00,20:00,229.74,Carmen de la Legua
+592,Hotel Wyndham Plus,-12.0967,-77.0163,3,09:00,17:00,147.4,San Luis
+593,Restaurante Maido Plus,-12.0874,-77.0138,2,18:00,22:00,335.71,San Luis
+594,Hotel Wyndham Terciario,-12.0582,-77.0483,1,12:00,16:00,286.03,Breña
+595,Farmacia Universal Express,-11.8453,-76.976,2,17:00,21:00,198.1,Lurín
+596,Farmacia Arcángel Norte,-12.3284,-76.9865,4,16:00,19:00,64.32,Chorrillos
+597,Universidad San Martín Secundario,-12.2602,-77.1173,3,13:00,17:00,114.96,Pachacámac
+598,Parque de las Leyendas 2,-12.0792,-76.9928,2,19:00,22:00,255.51,San Borja
+599,Farmacia InkaFarma Plus,-12.0437,-77.029,2,18:00,23:00,203.14,El Agustino
+600,Plaza de la Revolución Sur,-12.0445,-77.1133,5,11:00,14:00,88.98,Carmen de la Legua
+601,Farmacia Universal Plus,-12.0611,-77.1646,3,10:00,13:00,126.37,La Punta
+602,Parque Kennedy Plus,-12.4618,-76.9072,2,17:00,19:00,157.87,Chorrillos
+603,Plaza Mayor de Lima Norte,-12.1278,-77.0382,1,15:00,18:00,447.2,Miraflores
+604,Restaurante Maido Express,-12.3624,-76.9546,4,13:00,17:00,74.97,Chorrillos
+605,Supermercado Peruanito Express,-12.0491,-77.0103,4,09:00,15:00,69.15,El Agustino
+606,Hotel Sheraton - Barranco,-12.1178,-76.9869,3,20:00,23:00,293.34,Lurín
+607,Restaurante El Mercado Este,-12.1648,-77.0019,5,06:00,10:00,49.3,Surco
+608,Farmacia El Rey Terciario,-12.0608,-77.1731,2,19:00,23:00,334.34,La Punta
+609,Parque de las Leyendas Plus,-11.9999,-77.0564,4,17:00,23:00,120.93,San Martín de Porres
+610,Restaurante Amaz - San Luis,-12.1281,-77.0357,3,17:00,23:00,173.43,Miraflores
+611,Hospital Edgardo Rebagliati - La Victoria,-12.1373,-77.0105,2,15:00,17:00,290.07,Barranco
+612,Farmacia Arcángel Plus,-11.9029,-76.9144,2,13:00,16:00,165.76,Pachacámac
+613,Hotel Radisson 5,-12.0669,-77.134,3,17:00,21:00,295.06,Bellavista
+614,Farmacia Mifarma 4,-11.8435,-77.1014,1,20:00,23:00,457.45,Puente Piedra
+615,Plaza Bolognesi - San Martín de Porres,-12.0704,-77.0524,2,11:00,23:00,288.24,Lince
+616,Centro Comercial MegaPlaza Norte,-12.1497,-77.0104,2,19:00,23:00,183.22,Barranco
+617,Restaurante El Rincón del Ceviche - La Molina,-12.392,-77.0454,3,14:00,18:00,200.22,Lurigancho
+618,Supermercado El Triunfo - Surco,-12.0652,-77.1245,3,11:00,19:00,286.27,Bellavista
+619,Centro Comercial MegaPlaza Plus,-11.9885,-77.0396,1,06:00,09:00,402.12,Independencia
+620,Universidad de Lima 4,-12.0489,-77.1177,2,16:00,18:00,398.24,Carmen de la Legua
+621,Plaza de la Bandera 5,-12.3696,-76.9775,3,07:00,09:00,251.45,Mi Perú
+622,Centro Comercial Real Plaza Plus,-12.4918,-77.1802,1,09:00,12:00,218.2,San Juan de Lurigancho
+623,Restaurante La Mar Premium,-12.1149,-77.0263,2,20:00,23:00,282.62,Miraflores
+624,Centro Comercial Jockey Plaza Express,-12.4058,-76.8542,2,08:00,14:00,309.38,Lurín
+625,Hotel Country Club Secundario,-12.1399,-77.0253,2,07:00,10:00,335.12,Barranco
+626,Clínica San Borja Secundario,-12.089,-76.9475,3,17:00,19:00,147.76,La Molina
+627,Plaza San Martín Premium,-11.8994,-77.0415,3,19:00,22:00,184.54,Carabayllo
+628,Universidad del Pacífico Premium,-12.0891,-77.015,4,20:00,22:00,78.49,San Luis
+629,Hotel Sheraton Premium,-12.0797,-76.9599,5,19:00,23:00,102.19,La Molina
+630,Parque de la Pera Express,-12.0858,-77.0229,3,19:00,23:00,131.14,San Luis
+631,Universidad UPC Express,-12.0895,-77.0269,2,13:00,15:00,265.45,San Luis
+632,Plaza Mayor de Lima Premium,-12.4156,-77.1445,1,11:00,17:00,228.28,Chaclacayo
+633,Vivanda 3,-11.9814,-77.0678,4,08:00,14:00,87.72,Los Olivos
+634,Hospital Alberto Sabogal Terciario,-12.0438,-77.1523,2,18:00,20:00,386.19,Callao
+635,Santa Isabel Plus,-12.3434,-77.0418,3,14:00,17:00,185.58,San Juan de Lurigancho
+636,Santa Isabel Este,-11.9737,-77.073,4,06:00,09:00,86.53,Los Olivos
+637,Centro Comercial Plaza Bellavista Plus,-12.1416,-76.8641,4,07:00,10:00,176.05,Villa María del Triunfo
+638,Tottus Plus,-12.0629,-77.0325,2,08:00,14:00,274.15,La Victoria
+639,Supermercado Metro - Barranco,-11.9777,-77.0634,1,10:00,22:00,221.42,Los Olivos
+640,Supermercado El Ahorro Sur,-12.0004,-77.0551,3,11:00,14:00,199.46,San Martín de Porres
+641,Centro Comercial Mall Aventura 2,-12.12,-77.0352,3,16:00,22:00,205.46,Miraflores
+642,Mercado de Surquillo 4,-11.7574,-77.1448,3,13:00,16:00,150.1,Ancón
+643,Supermercado El Rey - Surco,-12.0874,-77.0579,2,11:00,13:00,187.3,Lince
+644,Plaza de la Revolución 3,-12.118,-77.0275,1,14:00,17:00,202.66,Miraflores
+645,Restaurante Maido Plus,-12.1643,-77.0068,5,07:00,19:00,139.29,Surco
+646,Farmacia San Pablo - Chosica,-12.2977,-76.9778,2,06:00,10:00,159.75,San Juan de Miraflores
+647,Restaurante Amaz Express,-12.2035,-76.8455,2,17:00,23:00,328.71,Villa El Salvador
+648,Plaza Vea 3,-11.9713,-76.8023,3,08:00,12:00,245.34,Santiago de Surco
+649,Clínica Delgado - Pachacámac,-12.2237,-77.0966,3,13:00,15:00,121.05,Mi Perú
+650,Parque Kennedy - San Miguel,-12.0498,-77.1202,3,12:00,16:00,263.42,Carmen de la Legua
+651,Clínica Internacional Premium,-12.0499,-77.1593,2,08:00,14:00,218.88,Callao
+652,Hospital Alberto Sabogal Plus,-12.0426,-77.0255,1,14:00,18:00,285.42,El Agustino
+653,Farmacia El Súper Norte,-11.9881,-77.0243,5,08:00,14:00,50.64,Independencia
+654,Mercado de San Isidro Terciario,-11.9805,-76.9675,3,09:00,12:00,299.06,Mi Perú
+655,Plaza de la Democracia - La Molina,-12.1456,-77.0129,2,14:00,22:00,257.7,Barranco
+656,Santa Isabel Premium,-12.0535,-77.0512,3,16:00,19:00,221.21,Jesús María
+657,Universidad San Martín Premium,-11.8464,-77.0949,2,06:00,10:00,207.69,Puente Piedra
+658,Wong 3,-11.8539,-77.1033,3,16:00,18:00,239.23,Puente Piedra
+659,Clínica San Borja Premium,-11.8163,-77.0821,2,20:00,23:00,386.8,San Juan de Lurigancho
+660,Hotel Belmond Plus,-12.1037,-77.0412,3,11:00,23:00,285.74,San Isidro
+661,Plaza Francia - Breña,-11.8904,-77.1986,3,09:00,12:00,194.0,Ventanilla
+662,Farmacia Cruz Verde 5,-12.0468,-77.1225,4,18:00,23:00,171.45,Carmen de la Legua
+663,Universidad San Marcos - Surco,-11.9556,-77.0577,3,07:00,13:00,123.55,Comas
+664,Parque Kennedy Oeste,-12.0035,-77.0578,4,08:00,10:00,71.73,San Martín de Porres
+665,Plaza de la Revolución - San Isidro,-11.9835,-77.0201,2,08:00,20:00,237.91,Independencia
+666,Hospital Alberto Sabogal Secundario,-12.052,-77.1391,4,07:00,11:00,182.92,Bellavista
+667,Hotel Country Club - Comas,-11.9921,-77.035,3,18:00,21:00,237.86,Independencia
+668,Plaza Bolognesi Express,-12.0752,-76.9965,2,13:00,16:00,185.27,San Borja
+669,Plaza Dos de Mayo Oeste,-12.0684,-77.1798,2,19:00,23:00,162.98,La Punta
+670,Parque Kennedy - Los Olivos,-11.9936,-76.9418,4,09:00,17:00,127.44,San Juan de Lurigancho
+671,Universidad ESAN 2,-12.0948,-77.0485,1,18:00,20:00,395.06,San Isidro
+672,Farmacia El Rey Express,-12.1519,-77.007,3,07:00,10:00,209.76,Surco
+673,Centro Comercial Jockey Plaza Este,-12.0853,-77.1799,5,14:00,23:00,97.87,Mi Perú
+674,Centro Comercial Jockey Plaza 3,-11.9084,-77.047,3,10:00,18:00,192.74,Carabayllo
+675,Centro Comercial Plaza Norte Terciario,-12.2135,-77.1167,5,20:00,23:00,41.06,Villa El Salvador
+676,Farmacia Universal Premium,-12.0493,-76.9491,3,17:00,23:00,262.38,Ate
+677,Centro Comercial Larcomar Premium,-12.1687,-77.0004,4,15:00,18:00,83.4,Surco
+678,Restaurante El Chinito Principal,-12.0798,-77.055,4,18:00,23:00,129.58,Lince
+679,Farmacia InkaFarma Secundario,-11.7567,-77.1544,2,20:00,23:00,350.41,Ancón
+680,Farmacia El Súper Secundario,-12.1425,-77.0935,5,19:00,23:00,66.46,Santa Rosa
+681,Hospital Nacional Dos de Mayo Oeste,-12.0524,-77.0594,4,09:00,21:00,156.88,Jesús María
+682,Wong Sur,-12.0754,-77.0755,1,17:00,21:00,492.8,Magdalena
+683,Farmacia El Ahorro Principal,-11.8286,-77.0826,4,20:00,23:00,163.83,Villa El Salvador
+684,Parque Kennedy 5,-11.8383,-77.1061,3,14:00,20:00,187.71,Lurigancho
+685,Wong Principal,-11.9841,-77.0654,3,17:00,21:00,275.89,Los Olivos
+686,Centro Comercial Plaza Norte Plus,-12.0475,-77.1423,4,11:00,13:00,143.02,Callao
+687,Supermercado El Triunfo - Ventanilla,-12.0132,-76.9835,2,15:00,23:00,165.82,Villa El Salvador
+688,Supermercado El Súper Express,-12.344,-77.0509,3,06:00,08:00,293.31,Santiago de Surco
+689,Hotel Country Club Secundario,-12.0465,-77.1473,2,19:00,23:00,327.35,Callao
+690,Plaza de la Revolución Plus,-12.0349,-77.0268,3,19:00,22:00,139.57,Rímac
+691,Plaza Bolognesi 5,-12.0611,-77.1657,5,12:00,16:00,25.93,La Punta
+692,Restaurante Amaz 1,-12.094,-77.039,4,08:00,10:00,82.89,San Isidro
+693,Plaza Grau Express,-12.0709,-77.0732,3,11:00,19:00,265.33,Magdalena
+694,Mercado de San Isidro Plus,-12.0548,-76.9552,2,10:00,16:00,344.41,Ate
+695,Restaurante La Mar Principal,-11.9767,-77.0683,3,14:00,18:00,279.66,Los Olivos
+696,Centro Comercial Real Plaza Sur,-12.3804,-76.8476,1,08:00,14:00,232.19,Santiago de Surco
+697,Centro Comercial Plaza Central - Villa María del Triunfo,-12.0793,-76.9577,5,15:00,19:00,117.89,La Molina
+698,Mercado de San Isidro Este,-11.8905,-77.2066,4,15:00,18:00,108.27,Ventanilla
+699,Universidad de Lima Oeste,-12.0508,-77.0426,1,15:00,23:00,371.54,Jesús María
+700,Restaurante Maido 5,-12.0474,-76.9577,1,07:00,15:00,483.56,Ate
+701,Plaza de la Bandera - Pueblo Libre,-12.0356,-77.029,1,19:00,23:00,249.72,Rímac
+702,Supermercado El Ahorro Express,-11.8923,-77.1996,5,17:00,21:00,52.85,Ventanilla
+703,Hospital Edgardo Rebagliati - Santa Rosa,-12.0734,-76.9484,2,18:00,22:00,382.54,La Molina
+704,Clínica Ricardo Palma Plus,-11.8291,-77.0221,4,19:00,23:00,136.28,Villa María del Triunfo
+705,Restaurante El Chinito - Lurín,-11.8437,-76.9629,4,17:00,23:00,140.9,Villa El Salvador
+706,Plaza Dos de Mayo Plus,-12.3946,-76.8395,3,16:00,20:00,268.67,Chaclacayo
+707,Farmacia InkaFarma 5,-12.0864,-77.0561,4,19:00,23:00,131.29,Lince
+708,Parque de la Pera 1,-12.0148,-76.9315,5,09:00,12:00,49.3,Pachacámac
+709,Mercado de Surquillo Express,-12.063,-77.1232,1,08:00,12:00,343.86,Bellavista
+710,Centro Comercial Mall Aventura 2,-12.0529,-77.1284,4,18:00,20:00,101.98,Bellavista
+711,Farmacia InkaFarma Plus,-11.9836,-77.0697,1,07:00,13:00,407.54,Los Olivos
+712,Santa Isabel Plus,-12.0442,-77.149,1,18:00,23:00,493.92,Callao
+713,Hotel Radisson Express,-12.0544,-77.0587,3,09:00,21:00,129.41,Jesús María
+714,Farmacia Universal Premium,-11.8227,-76.8788,5,20:00,22:00,103.91,Pachacámac
+715,Mercado de San Isidro Plus,-11.8258,-76.982,4,17:00,23:00,134.79,Mi Perú
+716,Vivanda Plus,-12.0595,-77.1317,2,10:00,13:00,366.52,Bellavista
+717,Supermercado El Ahorro Plus,-12.1184,-77.0305,5,11:00,14:00,35.18,Miraflores
+718,Hotel Westin Plus,-11.8126,-77.0385,3,19:00,23:00,154.0,Pachacámac
+719,Wong Express,-12.113,-77.0221,5,06:00,10:00,51.74,Miraflores
+720,Universidad del Pacífico Express,-12.0307,-77.1106,3,16:00,23:00,146.35,Carmen de la Legua
+721,Restaurante El Chinito Express,-12.0897,-77.065,5,20:00,23:00,148.59,Magdalena
+722,Centro Comercial Mall Aventura - Puente Piedra,-12.0413,-76.8432,3,16:00,22:00,117.01,Chaclacayo
+723,Hotel JW Marriott 1,-12.0903,-77.0385,1,14:00,16:00,238.61,San Isidro
+724,Restaurante La Mar Terciario,-12.1146,-77.0213,1,12:00,18:00,211.45,Miraflores
+725,Supermercado El Ahorro Premium,-12.0746,-77.0304,4,15:00,18:00,76.62,La Victoria
+726,Farmacia Boticas Plus,-12.0642,-77.1738,2,10:00,16:00,278.3,La Punta
+727,Hotel Country Club - La Punta,-12.0068,-77.1105,4,08:00,11:00,168.43,Santa Rosa
+728,Plaza Bolognesi Premium,-12.0643,-77.0441,3,19:00,21:00,104.79,Jesús María
+729,Restaurante El Chinito Sur,-11.9144,-77.1088,2,07:00,11:00,345.78,Villa El Salvador
+730,Restaurante La Mar 1,-12.0677,-77.023,4,08:00,16:00,82.95,La Victoria
+731,Supermercado El Triunfo Express,-12.0047,-77.0587,1,08:00,12:00,257.83,San Martín de Porres
+732,Farmacia El Rey Express,-12.0885,-77.0207,1,19:00,21:00,470.29,San Luis
+733,Centro Comercial Jockey Plaza Norte,-12.0555,-77.0426,2,18:00,22:00,187.99,Jesús María
+734,Restaurante Rafael 5,-11.9869,-77.0721,1,20:00,23:00,263.15,Los Olivos
+735,Mercado de Magdalena Premium,-12.0213,-77.0191,1,09:00,11:00,484.64,Rímac
+736,Clínica Delgado Este,-12.0752,-77.0562,2,15:00,23:00,247.64,Lince
+737,Hotel Radisson Premium,-12.0548,-76.9532,3,16:00,23:00,128.08,Ate
+738,Plaza de la Democracia Premium,-12.0609,-77.0877,2,07:00,09:00,257.24,San Miguel
+739,Centro Comercial Plaza Norte - Lurín,-12.1675,-77.0059,2,19:00,23:00,285.71,Surco
+740,Supermercado El Tigre Plus,-12.0929,-77.0308,4,08:00,16:00,142.31,San Isidro
+741,Mercado de San Isidro Premium,-12.046,-77.0297,2,11:00,17:00,393.8,El Agustino
+742,Mercado de San Isidro - Los Olivos,-12.047,-76.9594,1,15:00,17:00,360.95,Ate
+743,Restaurante El Mercado Plus,-12.4948,-77.1285,5,17:00,23:00,121.17,Pachacámac
+744,Supermercado El Tigre Express,-12.3004,-76.8427,3,20:00,22:00,277.32,San Juan de Lurigancho
+745,Centro Comercial Plaza San Miguel Premium,-11.8532,-77.0937,3,15:00,23:00,248.7,Puente Piedra
+746,Centro Comercial Real Plaza Plus,-12.055,-76.9521,3,08:00,10:00,173.47,Ate
+747,Supermercado Metro Express,-12.057,-77.0107,5,15:00,19:00,48.08,El Agustino
+748,Hotel Sonesta - Ancón,-12.3637,-77.1316,1,18:00,20:00,368.45,Chaclacayo
+749,Clínica Ricardo Palma Express,-12.0394,-77.1293,1,06:00,10:00,355.75,Carmen de la Legua
+750,Supermercado Peruanito - San Miguel,-12.0922,-77.0175,2,11:00,23:00,219.12,San Luis
+751,Mercado de San Isidro Principal,-12.1967,-76.9532,3,15:00,23:00,243.17,Chosica
+752,Centro Comercial Real Plaza Plus,-12.2621,-76.9063,1,15:00,23:00,454.03,San Juan de Miraflores
+753,Universidad Privada del Norte Secundario,-12.0623,-77.0519,3,15:00,19:00,292.71,Pueblo Libre
+754,Aeropuerto Jorge Chávez Premium,-11.897,-77.2064,2,07:00,11:00,153.9,Ventanilla
+755,Mercado de Miraflores Principal,-12.206,-77.1172,4,20:00,22:00,67.42,San Juan de Miraflores
+756,Farmacia Universal Sur,-11.9044,-77.0479,1,16:00,22:00,391.69,Carabayllo
+757,Parque El Olivar - Santa Rosa,-12.0248,-77.1403,3,10:00,22:00,182.57,Villa El Salvador
+758,Clínica Internacional Sur,-11.9058,-77.0488,1,20:00,23:00,285.06,Carabayllo
+759,Universidad San Marcos Oeste,-12.0911,-77.0494,1,15:00,23:00,496.38,San Isidro
+760,Plaza de Acho 4,-12.11,-77.0337,3,07:00,13:00,133.59,San Isidro
+761,Parque de las Leyendas Plus,-12.2509,-77.0582,2,14:00,18:00,189.84,Chosica
+762,Centro Comercial Plaza Central 3,-11.9232,-77.0199,3,18:00,20:00,256.25,Chaclacayo
+763,Farmacia Universal Terciario,-12.0578,-76.9512,5,07:00,11:00,103.57,Ate
+764,Hotel JW Marriott Plus,-12.0749,-77.0333,3,17:00,19:00,251.96,La Victoria
+765,Restaurante La Picantería Premium,-11.8961,-77.0486,2,11:00,17:00,263.08,Carabayllo
+766,Parque de la Media Luna Plus,-12.1655,-76.9947,2,09:00,11:00,233.71,Surco
+767,Supermercado El Ahorro Principal,-12.3266,-76.8202,2,19:00,23:00,297.47,Chaclacayo
+768,Clínica Internacional Plus,-12.3162,-77.0314,3,15:00,23:00,284.59,Lurigancho
+769,Centro Comercial Real Plaza - Chaclacayo,-12.3651,-77.1934,1,14:00,16:00,377.51,Lurigancho
+770,Restaurante Central Premium,-12.4696,-76.9099,2,19:00,23:00,250.89,Villa El Salvador
+771,Restaurante La Mar Terciario,-11.9815,-77.0611,4,20:00,23:00,131.7,Los Olivos
+772,Farmacia El Súper 1,-12.0505,-77.1447,4,15:00,17:00,127.07,Callao
+773,Farmacia El Súper Premium,-11.977,-77.0614,5,09:00,11:00,80.22,Los Olivos
+774,Universidad San Martín Sur,-11.9482,-77.0121,2,06:00,10:00,185.18,Pachacámac
+775,Hotel Sheraton Express,-12.1029,-77.0351,2,13:00,17:00,241.97,San Isidro
+776,Aeropuerto Jorge Chávez Express,-12.1243,-77.0383,2,08:00,11:00,230.12,Miraflores
+777,Hotel Westin Este,-12.2288,-76.8042,3,15:00,23:00,230.44,Lurín
+778,Restaurante La Mar Express,-12.4307,-76.8025,3,12:00,23:00,291.61,San Juan de Lurigancho
+779,Parque de la Familia Express,-12.006,-77.0555,4,10:00,22:00,125.65,San Martín de Porres
+780,Universidad Científica del Sur Premium,-12.455,-76.803,2,15:00,17:00,245.71,Chaclacayo
+781,Hotel JW Marriott Este,-12.0683,-77.0728,1,18:00,23:00,397.74,San Miguel
+782,Mercado de Surquillo Plus,-11.8479,-77.0021,2,11:00,13:00,259.77,Chaclacayo
+783,Aeropuerto Jorge Chávez Express,-12.0441,-77.0537,5,09:00,13:00,39.8,Breña
+784,Farmacia Universal Premium,-12.3093,-76.8703,3,18:00,21:00,217.21,Pachacámac
+785,Supermercado Peruanito Secundario,-12.188,-77.1085,1,11:00,13:00,332.41,Villa El Salvador
+786,Restaurante Osaka Principal,-12.0835,-76.9561,3,10:00,13:00,232.82,La Molina
+787,Centro Comercial Plaza Central Terciario,-12.237,-76.8292,3,16:00,23:00,241.32,Pachacámac
+788,Hotel JW Marriott Premium,-11.7442,-77.1493,1,06:00,14:00,387.44,Ancón
+789,Universidad Científica del Sur Express,-11.8953,-77.2055,2,09:00,11:00,267.05,Ventanilla
+790,Centro Comercial Mall Aventura Sur,-12.0402,-76.9562,3,11:00,14:00,153.82,Ate
+791,Universidad Privada del Norte Express,-11.8979,-77.0137,1,10:00,13:00,284.23,Pachacámac
+792,Parque de las Leyendas - Barranco,-12.2762,-76.9815,4,16:00,18:00,144.38,Chosica
+793,Universidad ESAN - Comas,-11.9894,-77.0728,3,13:00,16:00,193.57,Los Olivos
+794,Santa Isabel Terciario,-12.3032,-77.1795,3,20:00,23:00,281.43,Pachacámac
+795,Clínica Ricardo Palma Este,-12.0546,-77.0221,3,20:00,23:00,107.07,El Agustino
+796,Aeropuerto Jorge Chávez Premium,-12.0559,-77.0727,2,11:00,15:00,325.89,San Miguel
+797,Universidad Científica del Sur 3,-12.0443,-77.1189,2,10:00,16:00,254.23,Carmen de la Legua
+798,Parque El Olivar Terciario,-11.9568,-76.8306,1,16:00,22:00,316.06,Villa El Salvador
+799,Clínica San Borja Premium,-11.9941,-77.0397,4,17:00,21:00,196.46,Independencia
+800,Restaurante El Chinito Oeste,-12.0738,-77.0375,4,12:00,14:00,133.4,La Victoria
+801,Parque de la Media Luna Oeste,-11.7554,-77.1575,2,06:00,12:00,289.94,Ancón
+802,Plaza Bolognesi Plus,-12.0809,-77.0678,2,06:00,10:00,245.82,Magdalena
+803,Restaurante La Mar Express,-11.8998,-77.206,3,14:00,22:00,241.75,Ventanilla
+804,Parque de la Pera Express,-11.9983,-77.0504,2,08:00,11:00,258.61,San Martín de Porres
+805,Clínica Anglo Americana - Ventanilla,-12.0705,-76.9954,2,17:00,19:00,342.92,San Borja
+806,Farmacia InkaFarma 3,-12.0919,-77.0444,3,11:00,19:00,234.71,San Isidro
+807,Plaza Bolognesi 4,-12.0937,-77.0104,5,11:00,19:00,122.95,San Luis
+808,Centro Financiero Terciario,-12.1128,-77.02,4,12:00,23:00,192.45,Miraflores
+809,Plaza Bolognesi Plus,-12.0191,-77.1262,3,19:00,23:00,239.74,San Juan de Miraflores
+810,Farmacia InkaFarma Premium,-11.8942,-77.2074,5,11:00,15:00,53.16,Ventanilla
+811,Universidad Científica del Sur 5,-12.0754,-76.9429,5,17:00,19:00,43.7,La Molina
+812,Universidad del Pacífico Premium,-12.0781,-77.0406,4,18:00,20:00,81.82,Lince
+813,Plaza San Martín Express,-11.9736,-77.0722,1,07:00,09:00,341.34,Los Olivos
+814,Mercado de Surquillo Express,-11.754,-77.1496,2,10:00,18:00,246.92,Ancón
+815,Supermercado Peruanito Premium,-11.9194,-77.1895,5,15:00,17:00,102.84,Santa Rosa
+816,Hotel Sheraton - Santiago de Surco,-12.3391,-77.184,2,16:00,18:00,290.51,Lurigancho
+817,Hotel Belmond Premium,-11.8495,-77.0975,4,11:00,17:00,116.59,Puente Piedra
+818,Universidad ESAN - Jesús María,-12.0551,-77.1268,3,20:00,23:00,201.44,Bellavista
+819,Hotel Belmond Oeste,-12.0593,-77.1449,4,10:00,14:00,51.12,Callao
+820,Supermercado Metro Express,-12.063,-77.1288,1,18:00,22:00,490.07,Bellavista
+821,Parque El Olivar Norte,-12.1624,-76.9978,2,09:00,12:00,179.92,Surco
+822,Clínica Ricardo Palma Norte,-11.8512,-76.85,2,18:00,21:00,307.37,San Juan de Miraflores
+823,Hotel Sonesta Principal,-12.0577,-77.0703,2,08:00,14:00,253.57,San Miguel
+824,Universidad del Pacífico Este,-12.0678,-76.9685,2,08:00,10:00,295.32,Villa María del Triunfo
+825,Hotel Radisson Plus,-11.9947,-77.0415,2,10:00,16:00,313.88,San Martín de Porres
+826,Farmacia San Pablo Terciario,-11.8958,-76.8718,4,06:00,09:00,52.78,Chosica
+827,Hotel Marriott Express,-12.0647,-77.0201,4,15:00,17:00,144.82,La Victoria
+828,Centro Comercial Larcomar Principal,-12.0929,-77.0157,3,06:00,09:00,201.16,San Luis
+829,Mercado de Barranco Express,-12.348,-76.8937,1,09:00,21:00,276.48,Mi Perú
+830,Plaza de Acho Plus,-12.0837,-77.116,2,15:00,23:00,229.32,Villa El Salvador
+831,Plaza Dos de Mayo 4,-11.8904,-77.0494,1,17:00,19:00,455.25,Carabayllo
+832,Universidad Científica del Sur Este,-12.1924,-77.1652,2,08:00,12:00,355.86,Pachacámac
+833,Parque Kennedy Este,-11.8537,-77.107,3,13:00,15:00,292.92,Puente Piedra
+834,Plaza Dos de Mayo 2,-12.132,-77.0229,2,08:00,10:00,281.29,Barranco
+835,Farmacia InkaFarma Plus,-11.8961,-77.1953,3,14:00,18:00,119.6,Ventanilla
+836,Supermercado El Ahorro Express,-11.908,-77.1995,5,10:00,14:00,119.9,Ventanilla
+837,Hotel Wyndham Este,-12.0801,-77.0759,5,12:00,16:00,115.36,Santiago de Surco
+838,Parque de las Leyendas Express,-12.0594,-77.0267,1,08:00,12:00,372.95,Chaclacayo
+839,Plaza Mayor de Lima Plus,-12.4344,-76.8033,3,15:00,23:00,140.03,Villa El Salvador
+840,Centro Comercial Open Plaza Este,-12.0431,-77.0106,1,16:00,23:00,492.28,El Agustino
+841,Plaza Dos de Mayo Plus,-12.1473,-77.0283,2,12:00,23:00,163.69,Barranco
+842,Centro Comercial Larcomar Express,-11.9095,-77.059,1,12:00,14:00,441.94,Carabayllo
+843,Universidad ESAN Express,-12.4821,-76.8334,3,09:00,21:00,294.97,Villa María del Triunfo
+844,Parque El Olivar Este,-11.8596,-77.1073,2,16:00,23:00,255.92,Puente Piedra
+845,Plaza Grau Secundario,-12.2588,-76.8748,5,09:00,11:00,120.39,Pachacámac
+846,Universidad San Martín Principal,-12.0605,-77.1278,3,12:00,14:00,268.0,Bellavista
+847,Parque de la Media Luna Secundario,-12.0651,-77.0501,1,18:00,22:00,346.22,Jesús María
+848,Clínica Internacional Plus,-12.3563,-76.8817,3,08:00,16:00,173.59,Chorrillos
+849,Clínica Internacional 5,-12.1196,-77.0204,5,20:00,23:00,143.04,Miraflores
+850,Restaurante El Rincón del Ceviche Plus,-12.0863,-77.0445,1,08:00,20:00,228.58,Lince
+851,Supermercado El Rey Plus,-12.0587,-77.0411,3,10:00,18:00,121.32,Jesús María
+852,Farmacia Mifarma 5,-12.2992,-76.8318,4,06:00,08:00,137.23,Santa Rosa
+853,Clínica Internacional Express,-12.1009,-77.0325,4,14:00,17:00,93.92,San Isidro
+854,Centro Comercial Open Plaza Plus,-12.0633,-77.0639,4,06:00,09:00,66.13,Pueblo Libre
+855,Parque Reducto 4,-11.9721,-77.0765,1,11:00,14:00,273.94,Los Olivos
+856,Universidad del Pacífico Norte,-12.1014,-77.0499,3,08:00,10:00,228.76,San Isidro
+857,Mercado de San Isidro Este,-12.0639,-77.136,4,19:00,23:00,73.55,Bellavista
+858,Plaza Francia Premium,-12.1087,-76.9798,1,09:00,11:00,382.87,Villa El Salvador
+859,Centro Comercial Jockey Plaza 1,-12.0531,-76.9572,2,18:00,23:00,397.02,Ate
+860,Universidad Científica del Sur Plus,-12.073,-77.0544,3,12:00,14:00,246.02,Pueblo Libre
+861,Centro Financiero Premium,-11.9408,-76.969,1,13:00,15:00,249.43,Chorrillos
+862,Mercado de Miraflores Sur,-12.0559,-76.947,3,15:00,23:00,219.04,Ate
+863,Centro Financiero Premium,-12.074,-77.0502,3,07:00,09:00,196.56,Lince
+864,Mercado de Chorrillos Oeste,-12.0254,-76.9647,2,12:00,15:00,159.96,Villa El Salvador
+865,Vivanda 1,-12.0548,-77.0253,4,18:00,22:00,192.24,El Agustino
+866,Centro Comercial Plaza Central Principal,-12.213,-76.9552,2,08:00,11:00,247.87,Lurigancho
+867,Universidad Ricardo Palma - Pueblo Libre,-12.0957,-77.0278,3,14:00,22:00,196.52,San Luis
+868,Centro Comercial Real Plaza Terciario,-12.0345,-77.0132,5,09:00,11:00,130.48,Rímac
+869,Mercado de Surquillo Express,-12.1373,-77.0171,2,16:00,20:00,246.54,Barranco
+870,Clínica Internacional Oeste,-11.7555,-77.1527,1,19:00,21:00,373.46,Ancón
+871,Parque Reducto - Lurigancho,-12.0794,-77.0317,2,14:00,18:00,206.47,La Victoria
+872,Parque de la Exposición Premium,-12.0759,-77.075,2,10:00,16:00,260.82,Magdalena
+873,Plaza Mayor de Lima - Ancón,-12.236,-76.8176,4,06:00,18:00,177.75,Chaclacayo
+874,Universidad Científica del Sur Premium,-12.0626,-77.1263,2,15:00,21:00,319.86,Bellavista
+875,Plaza de la Revolución Plus,-12.279,-76.9572,5,18:00,21:00,108.43,Mi Perú
+876,Hotel JW Marriott Premium,-12.0408,-77.1157,1,16:00,20:00,383.17,Carmen de la Legua
+877,Restaurante La Mar Premium,-11.7558,-77.1485,2,20:00,23:00,333.25,Ancón
+878,Universidad San Marcos Principal,-12.0621,-77.0689,1,20:00,23:00,348.72,Pueblo Libre
+879,Clínica Delgado 3,-11.9508,-77.0529,3,17:00,23:00,107.39,Comas
+880,Restaurante El Rincón del Ceviche Express,-12.3346,-77.129,3,16:00,23:00,195.65,Pachacámac
+881,Mercado Central - Jesús María,-12.0555,-76.9233,2,09:00,15:00,261.57,Lurigancho
+882,Universidad UPC - Santiago de Surco,-11.8949,-77.0469,3,17:00,23:00,294.02,Carabayllo
+883,Farmacia Universal Terciario,-12.0614,-77.0867,2,07:00,19:00,371.33,San Miguel
+884,Clínica Anglo Americana Este,-12.2368,-76.8376,1,15:00,21:00,390.53,Santa Rosa
+885,Clínica Internacional Express,-11.8532,-77.1024,3,19:00,23:00,147.98,Puente Piedra
+886,Plaza de la Revolución Oeste,-11.8534,-77.1098,5,12:00,16:00,54.69,Puente Piedra
+887,Mercado de Chorrillos Principal,-11.8597,-76.9033,4,06:00,09:00,104.72,Lurín
+888,Centro Comercial Plaza San Miguel Secundario,-11.9587,-77.0544,1,18:00,22:00,235.84,Comas
+889,Farmacia Arcángel Premium,-12.1824,-76.8514,2,12:00,23:00,245.16,Santiago de Surco
+890,Hotel JW Marriott 2,-12.0572,-77.1506,1,13:00,19:00,258.05,Callao
+891,Mercado de Magdalena Premium,-12.2146,-76.8188,2,11:00,14:00,288.49,Lurigancho
+892,Universidad San Marcos Secundario,-12.1625,-76.998,2,14:00,22:00,156.06,Surco
+893,Restaurante Rafael - Magdalena,-11.8544,-77.0986,2,09:00,17:00,256.16,Puente Piedra
+894,Estadio Nacional 5,-11.9026,-77.0587,1,10:00,13:00,311.55,Carabayllo
+895,Clínica Internacional 3,-12.0669,-77.0894,2,16:00,18:00,235.42,San Miguel
+896,Mercado de San Isidro Terciario,-12.0613,-77.1618,3,20:00,23:00,147.45,La Punta
+897,Clínica Ricardo Palma Este,-11.8542,-77.0985,4,20:00,22:00,76.4,Puente Piedra
+898,Universidad Privada del Norte Premium,-12.0549,-77.1536,3,18:00,21:00,256.45,Callao
+899,Centro Comercial Real Plaza Sur,-12.0863,-77.0228,3,14:00,18:00,272.85,San Luis
+900,Hospital Nacional Dos de Mayo 1,-12.0068,-76.992,5,07:00,09:00,60.79,Villa María del Triunfo
+901,Hospital Nacional Dos de Mayo Plus,-12.1193,-77.0318,1,08:00,12:00,317.89,Miraflores
+902,Supermercado Metro - Santiago de Surco,-12.1464,-77.028,3,19:00,23:00,288.53,Barranco
+903,Universidad San Martín Este,-12.0995,-77.0615,2,18:00,22:00,166.23,Lurigancho
+904,Plaza de la Revolución Plus,-12.0609,-77.1249,3,08:00,10:00,148.7,Bellavista
+905,Restaurante La Picantería Premium,-12.0772,-76.9938,2,16:00,18:00,357.7,San Borja
+906,Parque Kennedy 2,-12.0651,-77.1373,4,19:00,22:00,134.58,Bellavista
+907,Plaza Grau Plus,-11.8907,-76.8332,2,11:00,19:00,252.94,Villa El Salvador
+908,Parque Kennedy Plus,-12.0456,-77.1219,3,19:00,23:00,294.2,Carmen de la Legua
+909,Restaurante Rafael - El Agustino,-12.0949,-77.0454,2,15:00,23:00,281.18,San Isidro
+910,Plaza Vea Express,-11.9226,-76.8063,3,08:00,16:00,160.15,Pachacámac
+911,Restaurante El Rincón del Ceviche - Santa Rosa,-12.0405,-77.0442,4,16:00,23:00,92.16,Breña
+912,Centro Comercial Plaza Norte 2,-11.9505,-77.0406,3,18:00,23:00,183.11,Comas
+913,Farmacia InkaFarma Express,-12.0388,-77.1155,1,07:00,19:00,287.36,Carmen de la Legua
+914,Restaurante El Rincón del Ceviche Express,-11.9773,-76.8902,3,20:00,23:00,225.94,Villa María del Triunfo
+915,Farmacia El Rey Plus,-12.029,-77.0231,3,08:00,12:00,228.11,Rímac
+916,Centro Comercial Jockey Plaza Premium,-12.0654,-77.0603,2,10:00,14:00,218.64,Pueblo Libre
+917,Farmacia El Ahorro Plus,-12.2801,-76.8615,2,16:00,20:00,316.35,Mi Perú
+918,Parque de la Reserva - Lurigancho,-11.9761,-77.0717,4,13:00,21:00,176.98,Los Olivos
+919,Restaurante El Mercado Premium,-12.0727,-77.0539,3,12:00,15:00,178.07,Lince
+920,Parque de la Pera Plus,-12.0511,-77.1395,4,08:00,16:00,187.84,Bellavista
+921,Hotel Sheraton Plus,-11.8747,-76.8838,3,12:00,14:00,131.78,Villa El Salvador
+922,Centro Comercial Plaza Central Plus,-11.9352,-76.8604,1,07:00,09:00,300.17,Villa El Salvador
+923,Parque de la Exposición Plus,-12.1072,-77.0306,3,09:00,21:00,218.35,San Isidro
+924,Restaurante La Mar Express,-12.0662,-77.0449,3,14:00,20:00,286.77,Jesús María
+925,Plaza Mayor de Lima Oeste,-12.0507,-77.0563,2,10:00,22:00,363.04,Jesús María
+926,Farmacia El Ahorro - La Punta,-12.0374,-76.8753,1,07:00,13:00,461.21,Villa María del Triunfo
+927,Santa Isabel Plus,-12.1441,-77.0202,2,18:00,23:00,365.44,Barranco
+928,Restaurante Osaka Principal,-11.8829,-77.0506,3,09:00,13:00,175.57,Pachacámac
+929,Plaza Francia Secundario,-11.9588,-77.0571,4,08:00,20:00,78.59,Comas
+930,Hotel Wyndham Express,-12.1611,-77.0011,1,18:00,21:00,356.74,Surco
+931,Plaza San Martín Express,-11.8207,-76.9453,2,17:00,23:00,196.67,Mi Perú
+932,Centro Comercial Jockey Plaza - Los Olivos,-12.0578,-77.054,2,17:00,19:00,235.5,Breña
+933,Hospital María Auxiliadora Plus,-12.071,-77.0525,2,17:00,21:00,336.28,Pueblo Libre
+934,Restaurante La Picantería Oeste,-11.8965,-77.0456,2,11:00,23:00,291.39,Carabayllo
+935,Hospital Nacional Dos de Mayo Premium,-12.0705,-77.0332,4,09:00,13:00,141.43,La Victoria
+936,Hospital Nacional Dos de Mayo - Santiago de Surco,-12.0555,-76.9571,1,19:00,21:00,221.56,Ate
+937,Hotel Radisson Norte,-11.8683,-77.0139,5,12:00,20:00,69.6,Pachacámac
+938,Plaza Mayor de Lima Premium,-11.9016,-77.05,2,14:00,18:00,366.66,Carabayllo
+939,Restaurante El Mercado Sur,-12.3097,-76.8387,1,07:00,09:00,201.22,Chosica
+940,Restaurante Maido Express,-12.2815,-77.1865,3,18:00,20:00,267.96,Chaclacayo
+941,Restaurante El Rincón del Ceviche Plus,-12.0476,-77.128,1,14:00,17:00,316.79,Carmen de la Legua
+942,Hotel Wyndham - Ate,-12.0403,-77.0206,1,12:00,14:00,437.37,El Agustino
+943,Clínica Anglo Americana 4,-12.0868,-76.955,4,09:00,11:00,163.34,La Molina
+944,Hospital María Auxiliadora Plus,-12.1317,-77.0178,4,10:00,14:00,172.92,Barranco
+945,Hospital Alberto Sabogal Premium,-11.8988,-77.2005,2,17:00,23:00,363.6,Ventanilla
+946,Farmacia San Pablo - La Molina,-12.0849,-77.0245,1,12:00,14:00,318.01,San Luis
+947,Farmacia El Rey 3,-12.0779,-77.0756,1,19:00,23:00,440.49,Magdalena
+948,Mercado Central Express,-12.0553,-77.0481,3,12:00,18:00,103.36,Jesús María
+949,Parque Kennedy - Lurigancho,-12.0629,-77.1381,3,09:00,12:00,216.0,Bellavista
+950,Parque de la Amistad - San Martín de Porres,-12.0818,-76.9918,3,09:00,13:00,112.37,San Borja
+951,Farmacia El Ahorro 2,-12.0431,-76.9469,1,12:00,15:00,373.51,Ate
+952,Hospital Alberto Sabogal Principal,-12.2194,-77.0617,1,09:00,17:00,257.25,Villa María del Triunfo
+953,Santa Isabel Express,-12.055,-77.1438,2,06:00,12:00,329.25,Callao
+954,Mercado de San Isidro Norte,-12.0842,-77.0026,1,15:00,21:00,346.49,San Borja
+955,Farmacia Mifarma Express,-12.0575,-77.1265,2,19:00,23:00,262.33,Bellavista
+956,Parque El Olivar Premium,-12.0691,-77.0516,2,14:00,20:00,385.12,Jesús María
+957,Plaza Vea Plus,-12.0857,-76.9992,3,13:00,17:00,125.76,San Borja
+958,Restaurante El Chinito 2,-12.1379,-76.8253,2,15:00,18:00,237.6,Villa María del Triunfo
+959,Mercado Central Express,-12.094,-77.0294,2,15:00,17:00,203.66,San Luis
+960,Plaza de Acho Express,-12.089,-77.0697,4,09:00,21:00,135.63,Magdalena
+961,Hospital Nacional Dos de Mayo Express,-11.8935,-77.1998,3,17:00,23:00,249.42,Ventanilla
+962,Universidad San Marcos 4,-11.8544,-77.0902,3,15:00,23:00,130.33,Puente Piedra
+963,Wong - San Martín de Porres,-12.3167,-76.8182,3,07:00,11:00,160.79,San Juan de Miraflores
+964,Mercado de Magdalena - Magdalena,-12.0787,-76.9445,3,19:00,23:00,272.68,La Molina
+965,Hotel Hilton - Chaclacayo,-11.9793,-77.0789,1,15:00,19:00,294.56,Los Olivos
+966,Hotel Country Club 3,-11.9332,-76.9779,3,14:00,22:00,116.17,Villa El Salvador
+967,Universidad Ricardo Palma - Pachacámac,-12.0031,-77.0456,4,13:00,23:00,93.6,San Martín de Porres
+968,Plaza Grau Este,-11.8972,-77.2029,3,17:00,21:00,249.47,Ventanilla
+969,Centro Comercial Plaza San Miguel Secundario,-12.0549,-77.0212,3,15:00,21:00,270.89,El Agustino
+970,Plaza Grau Principal,-12.0521,-77.0802,3,06:00,10:00,158.4,San Miguel
+971,Plaza Grau Oeste,-12.0956,-77.0133,3,08:00,20:00,297.48,San Luis
+972,Centro Comercial Plaza Central Premium,-12.0851,-76.9559,2,18:00,23:00,324.55,La Molina
+973,Supermercado El Triunfo - San Martín de Porres,-12.0531,-77.0113,2,10:00,22:00,385.09,El Agustino
+974,Restaurante La Picantería Express,-12.3703,-76.8206,1,19:00,23:00,402.7,Lurín
+975,Hotel Marriott 5,-11.8663,-77.1657,3,09:00,12:00,240.39,Villa María del Triunfo
+976,Clínica San Felipe - Pachacámac,-11.9802,-77.0284,3,08:00,14:00,258.3,Independencia
+977,Plaza Mayor de Lima Premium,-12.0872,-77.0541,1,15:00,23:00,244.91,Lince
+978,Clínica Anglo Americana Norte,-12.0227,-77.018,5,08:00,16:00,118.21,Rímac
+979,Plaza de la Revolución Plus,-12.0566,-77.1205,3,13:00,23:00,122.5,Bellavista
+980,Mercado de Miraflores - Los Olivos,-12.054,-77.0497,2,08:00,11:00,382.88,Jesús María
+981,Hotel Radisson Express,-12.0655,-77.1227,4,13:00,15:00,140.36,Bellavista
+982,Restaurante Rafael Sur,-11.9034,-77.0437,2,20:00,23:00,176.18,Carabayllo
+983,Farmacia Mifarma Norte,-12.0023,-77.0457,1,08:00,16:00,437.51,San Martín de Porres
+984,Mercado de Surquillo Premium,-11.962,-76.9468,1,13:00,15:00,221.55,Santa Rosa
+985,Centro Comercial Jockey Plaza Terciario,-12.0603,-77.0884,3,14:00,23:00,259.75,San Miguel
+986,Centro Comercial Real Plaza Plus,-12.2428,-77.0617,3,07:00,11:00,203.65,San Juan de Miraflores
+987,Centro Comercial Mall Aventura Este,-12.0824,-77.016,2,12:00,14:00,179.87,San Luis
+988,Universidad del Pacífico Express,-11.913,-77.0099,3,10:00,16:00,245.41,Pachacámac
+989,Restaurante Central - Chaclacayo,-12.0236,-77.0222,2,17:00,23:00,358.32,Rímac
+990,Mercado Central Plus,-12.1319,-76.865,2,13:00,15:00,215.36,Lurigancho
+991,Hospital Nacional Dos de Mayo Express,-12.0688,-76.9424,1,06:00,14:00,214.95,Lurigancho
+992,Centro Comercial Larcomar - San Miguel,-12.1513,-77.0088,1,07:00,11:00,283.57,Surco
+993,Universidad Privada del Norte - La Victoria,-12.4273,-77.1351,3,12:00,18:00,205.98,Chosica
+994,Farmacia San Pablo Premium,-12.1325,-77.0217,3,17:00,20:00,175.23,Barranco
+995,Restaurante El Mercado Secundario,-12.0764,-77.0536,4,07:00,10:00,166.06,Pueblo Libre
+996,Farmacia El Ahorro - Barranco,-12.1094,-77.0662,2,19:00,23:00,333.22,Santiago de Surco
+997,Universidad San Marcos Terciario,-12.0707,-77.1793,2,12:00,18:00,368.12,La Punta
+998,Centro Financiero 3,-12.0749,-77.0229,4,20:00,23:00,183.97,La Victoria
+999,Parque de la Pera Principal,-12.0457,-76.9548,3,12:00,20:00,114.38,Ate
+1000,Restaurante La Mar Premium,-12.0748,-76.943,5,13:00,16:00,91.3,Santa Rosa
+1001,Parque de la Exposición - Magdalena,-12.2021,-76.9221,3,16:00,23:00,252.64,Villa María del Triunfo
+1002,Supermercado El Súper Express,-12.0464,-77.0258,2,11:00,17:00,307.46,El Agustino
+1003,Farmacia El Súper 2,-11.7411,-77.1471,3,10:00,12:00,271.42,Ancón
+1004,Mercado de Chorrillos Secundario,-12.0542,-77.0141,3,19:00,23:00,135.79,El Agustino
+1005,Parque El Olivar Este,-12.1289,-77.0325,2,15:00,19:00,335.64,Miraflores
+1006,Hotel Wyndham Premium,-12.0685,-77.0476,2,20:00,23:00,354.94,Jesús María
+1007,Hotel Radisson Norte,-11.9273,-76.8367,5,20:00,22:00,113.06,Chorrillos
+1008,Plaza Bolognesi 1,-12.0589,-76.9483,2,18:00,20:00,244.12,Ate
+1009,Parque de la Familia Oeste,-11.9873,-77.0785,2,19:00,23:00,316.85,Los Olivos
+1010,Hospital Alberto Sabogal Plus,-12.0508,-77.1361,1,14:00,22:00,285.0,Bellavista
+1011,Hotel Sonesta - Breña,-12.0798,-76.9414,1,07:00,19:00,411.72,La Molina
+1012,Supermercado Metro Este,-12.0503,-77.1421,2,13:00,21:00,366.85,Callao
+1013,Hospital Nacional Dos de Mayo 1,-12.2849,-77.0877,1,17:00,23:00,314.02,Mi Perú
+1014,Hotel Sheraton Principal,-12.044,-77.1158,4,13:00,15:00,108.07,Carmen de la Legua
+1015,Clínica Delgado Principal,-11.8564,-77.1799,1,14:00,23:00,369.92,Chorrillos
+1016,Plaza de Acho 2,-12.0765,-77.0517,1,15:00,19:00,295.66,Lince
+1017,Restaurante El Chinito 5,-11.9018,-77.0588,2,17:00,21:00,282.13,Carabayllo
+1018,Centro Comercial Plaza Norte Plus,-11.7584,-77.1406,3,18:00,23:00,186.1,Ancón
+1019,Farmacia Arcángel Express,-12.0735,-77.0263,4,18:00,23:00,76.49,La Victoria
+1020,Plaza de la Revolución Express,-12.0763,-77.0581,2,08:00,12:00,152.05,Lince
+1021,Mercado de Magdalena 4,-12.0514,-77.0843,3,12:00,23:00,230.59,San Miguel
+1022,Centro Comercial Plaza Bellavista Premium,-12.1472,-77.0789,3,14:00,17:00,210.62,Pachacámac
+1023,Wong - Puente Piedra,-12.0586,-77.0253,5,09:00,13:00,64.03,El Agustino
+1024,Clínica San Felipe Sur,-12.1056,-76.8272,2,16:00,19:00,164.83,San Juan de Miraflores
+1025,Farmacia InkaFarma Premium,-12.1329,-77.1121,3,19:00,22:00,295.25,San Juan de Miraflores
+1026,Supermercado El Súper - La Punta,-12.0407,-77.0135,4,19:00,23:00,185.56,El Agustino
+1027,Supermercado Peruanito - La Punta,-12.0488,-77.0519,1,07:00,15:00,371.73,Breña
+1028,Plaza de Acho Express,-12.1047,-77.0432,1,07:00,10:00,233.59,San Isidro
+1029,Parque de la Familia 5,-12.287,-76.9009,1,11:00,14:00,451.83,Chaclacayo
+1030,Plaza de la Democracia Express,-12.0655,-77.1797,2,16:00,23:00,282.78,La Punta
+1031,Restaurante El Mercado Sur,-12.1461,-77.0218,5,11:00,14:00,146.77,Barranco
+1032,Centro Financiero Plus,-12.0662,-77.1275,2,12:00,16:00,187.09,Bellavista
+1033,Universidad de Lima 5,-12.0267,-77.0223,3,11:00,19:00,274.67,Rímac
+1034,Parque de la Reserva Premium,-11.7417,-77.1562,4,06:00,08:00,76.6,Ancón
+1035,Farmacia Cruz Verde 5,-12.0945,-77.0236,1,14:00,16:00,274.61,San Luis
+1036,Farmacia El Rey Terciario,-11.8121,-76.974,5,10:00,16:00,132.43,Santiago de Surco
+1037,Universidad del Pacífico Terciario,-12.0353,-76.9527,1,12:00,16:00,340.95,San Juan de Lurigancho
+1038,Parque Kennedy Premium,-12.3603,-76.9273,2,20:00,22:00,278.56,Villa María del Triunfo
+1039,Centro Comercial Open Plaza - Carmen de la Legua,-12.0862,-77.0517,3,20:00,23:00,205.03,Lince
+1040,Restaurante Osaka Este,-12.0608,-77.1621,4,16:00,18:00,167.84,La Punta
+1041,Centro Comercial Real Plaza - Mi Perú,-12.2008,-76.9831,3,20:00,23:00,261.07,Chaclacayo
+1042,Estadio Nacional Norte,-12.0627,-77.1632,2,13:00,16:00,392.04,La Punta
+1043,Centro Financiero Express,-12.3499,-77.0789,5,06:00,14:00,83.03,Villa El Salvador
+1044,Farmacia El Rey Express,-12.0435,-77.1181,2,18:00,23:00,257.05,Carmen de la Legua
+1045,Hotel Westin Premium,-12.0465,-77.1255,1,16:00,23:00,431.14,Carmen de la Legua
+1046,Farmacia El Rey Express,-11.9075,-76.9606,3,09:00,11:00,286.1,Mi Perú
+1047,Restaurante Maido Norte,-12.1282,-77.039,2,07:00,09:00,227.06,Miraflores
+1048,Plaza Bolognesi Premium,-11.8653,-77.0201,2,17:00,19:00,253.86,Santiago de Surco
+1049,Mercado de Miraflores 5,-11.8377,-76.8363,5,11:00,13:00,84.34,Villa María del Triunfo
+1050,Hotel Radisson Plus,-12.0488,-77.0479,3,10:00,13:00,139.39,Breña
+1051,Supermercado Peruanito - Miraflores,-12.3276,-76.8736,2,12:00,14:00,390.42,Lurín
+1052,Mercado de Miraflores Express,-12.4085,-76.9445,2,19:00,22:00,249.55,Lurigancho
+1053,Farmacia San Pablo - San Juan de Lurigancho,-12.0776,-77.0866,3,20:00,23:00,139.39,Pachacámac
+1054,Farmacia Universal Plus,-12.174,-76.8492,1,15:00,19:00,308.01,Chorrillos
+1055,Parque de la Reserva Express,-12.0783,-77.0686,5,20:00,23:00,133.26,Pueblo Libre
+1056,Plaza San Martín Terciario,-12.005,-77.052,5,19:00,23:00,91.65,San Martín de Porres
+1057,Restaurante Amaz 1,-11.7531,-77.1434,2,17:00,23:00,326.71,Ancón
+1058,Farmacia El Rey Secundario,-12.4708,-77.0814,5,10:00,12:00,28.46,Santiago de Surco
+1059,Centro Comercial Plaza San Miguel Premium,-12.0319,-77.1278,4,15:00,23:00,96.06,Carmen de la Legua
+1060,Hotel Sheraton 1,-12.0737,-77.1675,2,07:00,10:00,308.89,La Punta
+1061,Supermercado El Tigre Express,-11.8877,-76.9076,3,06:00,10:00,169.56,Chorrillos
+1062,Universidad San Martín Plus,-12.0582,-77.0739,1,16:00,18:00,382.11,San Miguel
+1063,Universidad UPC - Puente Piedra,-11.8936,-77.1948,3,06:00,12:00,233.52,Ventanilla
+1064,Clínica San Borja Plus,-12.491,-76.9684,3,10:00,18:00,155.42,Lurigancho
+1065,Universidad ESAN Express,-12.0568,-77.08,3,07:00,09:00,101.23,San Miguel
+1066,Parque de la Reserva 1,-11.9517,-77.1149,4,19:00,23:00,150.3,Santiago de Surco
+1067,Centro Comercial Plaza Norte Premium,-12.0673,-77.0576,5,07:00,10:00,56.0,Pueblo Libre
+1068,Clínica Internacional Express,-11.8931,-77.1991,1,19:00,23:00,325.29,Ventanilla
+1069,Farmacia El Rey Express,-12.0742,-76.9571,2,19:00,23:00,357.06,La Molina
+1070,Mercado de San Isidro 4,-12.0505,-77.1387,2,18:00,23:00,313.25,Bellavista
+1071,Plaza San Martín Premium,-12.1131,-77.1145,2,20:00,23:00,389.82,Santa Rosa
+1072,Restaurante Maido Este,-12.0656,-77.1203,5,07:00,09:00,68.24,Bellavista
+1073,Universidad San Martín 4,-12.0579,-77.1555,4,06:00,14:00,79.0,Callao
+1074,Universidad Científica del Sur - La Punta,-11.8304,-77.1573,5,16:00,23:00,140.59,San Juan de Lurigancho
+1075,Hospital Alberto Sabogal Norte,-12.0316,-77.1289,4,15:00,17:00,116.8,Carmen de la Legua
+1076,Restaurante Maido Plus,-11.9062,-77.0456,3,15:00,23:00,131.11,Carabayllo
+1077,Centro Comercial Plaza Bellavista Plus,-12.465,-77.1079,1,19:00,22:00,459.75,San Juan de Miraflores
+1078,Hotel Sonesta 1,-12.0485,-77.0424,4,15:00,18:00,96.47,Breña
+1079,Mercado de Surquillo Premium,-11.7542,-77.1577,4,14:00,17:00,87.43,Ancón
+1080,Mercado de Chorrillos Plus,-11.8959,-77.0447,2,14:00,23:00,388.35,Carabayllo
+1081,Restaurante El Mercado 1,-12.1541,-77.0062,5,11:00,23:00,114.96,Surco
+1082,Parque de la Amistad 4,-12.1329,-77.0139,1,09:00,15:00,276.64,Barranco
+1083,Restaurante El Chinito Express,-12.0311,-77.0173,4,15:00,21:00,146.33,Rímac
+1084,Hospital Edgardo Rebagliati 1,-11.8418,-77.0931,1,12:00,18:00,229.25,Puente Piedra
+1085,Restaurante Maido Express,-12.1331,-77.0188,1,20:00,23:00,444.12,Barranco
+1086,Mercado de Surquillo - Barranco,-12.0394,-77.0156,1,19:00,23:00,446.71,Rímac
+1087,Centro Comercial Plaza Central - Chaclacayo,-12.0235,-77.028,2,12:00,18:00,275.44,Rímac
+1088,Parque de las Leyendas - San Miguel,-11.9074,-77.1995,2,10:00,18:00,334.5,Ventanilla
+1089,Centro Comercial Jockey Plaza Terciario,-12.0757,-77.0418,4,08:00,10:00,80.87,Lince
+1090,Plaza Dos de Mayo Plus,-12.0813,-77.0795,2,11:00,15:00,268.33,Magdalena
+1091,Parque Reducto Express,-12.4786,-76.9838,4,09:00,11:00,66.3,San Juan de Lurigancho
+1092,Centro Comercial Plaza Norte - Villa María del Triunfo,-11.8445,-77.0902,1,16:00,23:00,246.66,Puente Piedra
+1093,Universidad del Pacífico - Independencia,-11.9026,-77.0446,1,12:00,14:00,357.66,Carabayllo
+1094,Restaurante Amaz - Carabayllo,-12.0801,-77.0089,1,19:00,23:00,396.37,San Borja
+1095,Restaurante Osaka - Chosica,-12.3145,-77.0239,3,14:00,22:00,156.13,San Juan de Miraflores
+1096,Parque de la Media Luna Secundario,-12.3918,-77.0838,2,17:00,23:00,181.91,Lurigancho
+1097,Restaurante Osaka Express,-12.0243,-77.0248,2,17:00,23:00,250.32,Rímac
+1098,Clínica Internacional Express,-11.9833,-77.0748,2,12:00,20:00,238.36,Los Olivos
+1099,Hospital Alberto Sabogal Plus,-12.0315,-77.1218,3,11:00,19:00,232.96,Carmen de la Legua
+1100,Hospital Nacional Dos de Mayo Express,-12.0639,-77.134,3,10:00,22:00,299.24,Bellavista
+1101,Clínica San Borja Premium,-11.958,-77.0483,2,15:00,21:00,189.52,Comas
+1102,Tottus Plus,-12.0548,-77.0561,3,10:00,16:00,255.98,Jesús María
+1103,Parque de las Leyendas Oeste,-12.1114,-77.0229,3,12:00,16:00,194.01,Miraflores
+1104,Estadio Nacional Plus,-12.0482,-76.9511,4,19:00,23:00,63.83,Ate
+1105,Restaurante El Chinito - Magdalena,-11.9904,-77.0314,1,06:00,14:00,380.2,Pachacámac
+1106,Hospital Nacional Dos de Mayo 1,-12.0079,-77.1765,2,20:00,23:00,159.03,Chorrillos
+1107,Parque de la Pera Express,-12.4067,-77.1929,2,10:00,13:00,262.22,Lurigancho
+1108,Farmacia San Pablo 5,-11.9054,-77.0478,3,10:00,16:00,137.51,Villa El Salvador
+1109,Plaza de la Democracia - Breña,-12.0498,-76.9585,2,14:00,17:00,304.11,Ate
+1110,Clínica San Borja - Mi Perú,-11.846,-76.9951,1,13:00,21:00,370.63,San Juan de Miraflores
+1111,Parque El Olivar - Jesús María,-11.8953,-77.0429,1,09:00,17:00,452.43,Carabayllo
+1112,Universidad Católica Terciario,-11.7462,-77.1434,2,08:00,16:00,237.86,Ancón
+1113,Hotel Marriott Oeste,-12.0462,-76.9517,3,06:00,14:00,184.14,Ate
+1114,Hospital María Auxiliadora Plus,-11.8148,-77.0758,3,12:00,16:00,271.26,Mi Perú
+1115,Farmacia San Pablo Plus,-12.1038,-77.1122,2,17:00,23:00,191.07,Villa El Salvador
+1116,Parque de la Reserva Este,-12.0285,-77.0236,1,15:00,23:00,441.32,Rímac
+1117,Restaurante Amaz Premium,-12.4789,-77.1564,3,08:00,20:00,200.97,Pachacámac
+1118,Hospital Alberto Sabogal Este,-11.989,-77.0765,2,13:00,16:00,201.55,Los Olivos
+1119,Farmacia Universal Secundario,-11.8094,-77.0306,1,20:00,23:00,201.95,Lurín
+1120,Universidad San Marcos - Carmen de la Legua,-12.0448,-77.0514,3,11:00,23:00,168.04,Breña
+1121,Mercado de Surquillo Secundario,-12.0403,-76.9506,1,08:00,20:00,381.83,Ate
+1122,Vivanda Plus,-12.0723,-77.1761,4,12:00,18:00,148.04,La Punta
+1123,Clínica San Borja 1,-12.0613,-77.0515,2,15:00,17:00,388.49,Pueblo Libre
+1124,Clínica Delgado - Pachacámac,-11.8918,-77.047,1,19:00,22:00,439.94,Carabayllo
+1125,Centro Comercial Larcomar - Callao,-12.4843,-77.0802,4,19:00,23:00,168.22,Villa María del Triunfo
+1126,Mercado de Surquillo 5,-12.0615,-77.179,3,10:00,16:00,108.45,La Punta
+1127,Plaza Dos de Mayo Express,-12.0054,-77.0594,2,10:00,14:00,299.43,San Martín de Porres
+1128,Farmacia Arcángel Principal,-12.0452,-77.1257,2,10:00,16:00,340.66,Carmen de la Legua
+1129,Parque Kennedy Premium,-12.4849,-77.0357,5,16:00,20:00,32.02,Chaclacayo
+1130,Plaza de Acho Express,-12.2125,-76.999,5,12:00,18:00,138.88,Villa El Salvador
+1131,Mercado Central - San Isidro,-11.7489,-77.1595,2,06:00,14:00,335.09,Ancón
+1132,Mercado Central Plus,-12.072,-77.009,2,15:00,21:00,365.39,San Borja
+1133,Hotel Sheraton Secundario,-12.4777,-77.1134,3,12:00,14:00,157.76,Chorrillos
+1134,Hotel Sonesta Plus,-11.7515,-77.1428,2,10:00,12:00,366.18,Ancón
+1135,Restaurante La Mar Secundario,-11.8198,-76.8138,1,14:00,20:00,294.73,Lurín
+1136,Centro Comercial Real Plaza 1,-11.9853,-77.0627,5,08:00,11:00,103.74,Los Olivos
+1137,Clínica San Borja Principal,-12.0479,-76.9587,4,10:00,12:00,118.47,Ate
+1138,Tottus Este,-12.0462,-77.0407,2,11:00,17:00,386.02,Breña
+1139,Supermercado El Súper - El Agustino,-12.0548,-77.0767,2,18:00,21:00,295.48,San Miguel
+1140,Supermercado El Súper - Santa Rosa,-12.3678,-77.1846,2,13:00,23:00,357.1,Chorrillos
+1141,Centro Comercial MegaPlaza - Surco,-12.3922,-77.0268,4,16:00,23:00,169.3,Chorrillos
+1142,Hospital Nacional Dos de Mayo Premium,-12.0707,-77.0478,1,12:00,23:00,243.1,Lince
+1143,Mercado de Miraflores Express,-12.1048,-77.0469,2,11:00,23:00,394.18,San Isidro
+1144,Supermercado El Triunfo Plus,-12.4282,-77.1967,5,06:00,10:00,95.32,Lurigancho
+1145,Parque El Olivar Premium,-12.3461,-77.1173,3,20:00,23:00,270.23,Chosica
+1146,Mercado de Chorrillos Plus,-12.0345,-77.1175,4,18:00,23:00,153.26,Carmen de la Legua
+1147,Restaurante Maido Terciario,-11.8233,-77.0952,2,13:00,17:00,269.53,Villa María del Triunfo
+1148,Farmacia Mifarma Secundario,-12.0726,-77.1664,5,17:00,23:00,123.83,La Punta
+1149,Parque de la Media Luna Premium,-12.0828,-77.1602,4,17:00,23:00,55.13,Santa Rosa
+1150,Universidad Ricardo Palma Este,-11.9008,-77.0454,3,07:00,19:00,140.74,Carabayllo
+1151,Mercado de Miraflores Plus,-12.1454,-77.0113,2,16:00,22:00,233.26,Barranco
+1152,Centro Comercial Plaza Lima Sur Plus,-11.9096,-76.8622,1,13:00,17:00,493.51,Chaclacayo
+1153,Mercado de Surquillo Plus,-11.8321,-76.8528,4,07:00,11:00,140.9,Lurigancho
+1154,Mercado de Magdalena Plus,-12.0097,-77.1572,1,07:00,15:00,471.46,Santa Rosa
+1155,Farmacia San Pablo Plus,-11.9773,-76.8849,4,18:00,23:00,180.96,Chosica
+1156,Plaza Grau 1,-12.1234,-76.8149,4,08:00,10:00,107.85,San Juan de Lurigancho
+1157,Restaurante Rafael 3,-12.0622,-77.0436,3,06:00,12:00,146.47,Chosica
+1158,Plaza Mayor de Lima 1,-12.3941,-76.8101,5,16:00,23:00,128.45,Chosica
+1159,Hospital Nacional Dos de Mayo Express,-11.9936,-77.0504,4,06:00,12:00,145.54,San Martín de Porres
+1160,Hotel Sonesta Plus,-12.0767,-77.051,4,20:00,22:00,68.36,Pueblo Libre
+1161,Hospital Edgardo Rebagliati Terciario,-11.8102,-76.9113,3,09:00,13:00,161.78,Lurín
+1162,Plaza Francia Premium,-12.0999,-77.0316,4,08:00,10:00,52.27,San Isidro
+1163,Restaurante Osaka Express,-11.7441,-77.1447,2,13:00,19:00,225.83,Ancón
+1164,Hospital Nacional Dos de Mayo Plus,-11.9168,-77.1532,4,12:00,20:00,81.0,Mi Perú
+1165,Hotel JW Marriott Plus,-11.9419,-77.0481,3,13:00,23:00,286.77,Comas
+1166,Parque de la Reserva Principal,-12.0777,-77.0313,3,16:00,22:00,204.66,La Victoria
+1167,Centro Comercial Plaza Norte Express,-12.0611,-76.8248,3,11:00,15:00,110.29,Chaclacayo
+1168,Universidad del Pacífico Plus,-11.9535,-77.0509,3,15:00,23:00,128.2,Comas
+1169,Farmacia Mifarma Principal,-12.3717,-76.9507,5,12:00,16:00,76.79,San Juan de Lurigancho
+1170,Restaurante El Chinito Norte,-12.0617,-77.1368,4,13:00,16:00,68.7,Bellavista
+1171,Farmacia Cruz Verde Plus,-12.1165,-77.0234,2,15:00,21:00,217.18,Miraflores
+1172,Universidad Privada del Norte - El Agustino,-12.1309,-77.0219,4,16:00,20:00,183.15,Barranco
+1173,Clínica Internacional Este,-12.4152,-76.9592,4,06:00,18:00,70.3,Villa María del Triunfo
+1174,Plaza Vea Plus,-11.9747,-77.0764,5,12:00,18:00,81.55,Los Olivos
+1175,Parque de la Reserva Express,-11.9035,-77.0467,1,13:00,23:00,407.59,Carabayllo
+1176,Plaza San Martín Premium,-12.0628,-77.0648,1,16:00,23:00,332.66,Pueblo Libre
+1177,Parque de la Media Luna - San Miguel,-12.0736,-77.0204,4,08:00,16:00,53.48,La Victoria
+1178,Universidad San Martín - Lurigancho,-12.0738,-76.9991,3,20:00,23:00,145.53,San Borja
+1179,Restaurante Amaz 1,-12.075,-76.9534,5,16:00,20:00,140.19,La Molina
+1180,Parque El Olivar Norte,-11.947,-77.0572,3,15:00,21:00,136.77,Comas
+1181,Tottus Express,-12.1009,-77.0441,5,09:00,11:00,139.88,San Isidro
+1182,Restaurante La Mar Plus,-11.8322,-77.1424,2,14:00,23:00,391.03,Pachacámac
+1183,Parque de la Exposición Norte,-11.8962,-77.0549,3,07:00,09:00,267.73,Carabayllo
+1184,Santa Isabel Oeste,-12.0657,-77.0524,3,12:00,15:00,265.64,Jesús María
+1185,Supermercado El Ahorro Express,-12.1117,-77.0204,4,15:00,21:00,181.77,Miraflores
+1186,Hotel Radisson - Santa Rosa,-12.0442,-76.9533,3,20:00,23:00,297.06,Ate
+1187,Farmacia El Ahorro Oeste,-11.8958,-77.143,3,18:00,23:00,111.76,San Juan de Miraflores
+1188,Hotel Sonesta - San Luis,-12.0633,-77.0683,2,16:00,18:00,396.44,Chosica
+1189,Hotel Belmond Premium,-12.0467,-76.9513,4,09:00,13:00,106.36,Ate
+1190,Restaurante La Mar Premium,-12.2206,-77.0175,3,16:00,20:00,201.95,San Juan de Miraflores
+1191,Restaurante La Picantería - Surco,-12.0407,-77.102,3,20:00,23:00,216.07,Lurín
+1192,Hotel Hilton Premium,-11.9918,-77.0201,1,11:00,23:00,267.32,Independencia
+1193,Hotel Marriott Este,-12.0521,-76.9589,1,16:00,18:00,405.66,Ate
+1194,Farmacia San Pablo Este,-12.1399,-77.0162,3,11:00,19:00,113.81,Barranco
+1195,Clínica Internacional Plus,-12.0506,-77.0425,1,11:00,13:00,297.32,Jesús María
+1196,Hospital María Auxiliadora Oeste,-12.0883,-77.0027,4,07:00,10:00,54.22,San Borja
+1197,Plaza Dos de Mayo Principal,-12.0255,-77.0288,3,11:00,15:00,226.39,Rímac
+1198,Mercado de Magdalena Premium,-12.0913,-77.0145,3,10:00,12:00,100.77,San Luis
+1199,Farmacia El Súper Terciario,-12.0346,-77.1299,3,13:00,15:00,132.61,Carmen de la Legua
+1200,Parque de la Reserva Plus,-12.0728,-76.9943,1,15:00,19:00,494.74,San Borja
+1201,Clínica Internacional 4,-12.1093,-77.0402,1,11:00,14:00,342.74,San Isidro
+1202,Centro Comercial Plaza Bellavista Oeste,-12.0491,-77.1117,3,20:00,23:00,215.78,Carmen de la Legua
+1203,Centro Comercial Plaza Lima Sur Express,-11.8783,-77.1009,3,17:00,19:00,181.67,Villa María del Triunfo
+1204,Parque de las Leyendas - Chorrillos,-11.944,-77.0412,1,18:00,23:00,306.48,Comas
+1205,Centro Comercial Plaza San Miguel 2,-12.07,-77.0418,5,12:00,18:00,98.25,Lince
+1206,Parque de la Media Luna Express,-12.0599,-77.1342,3,07:00,10:00,123.14,Bellavista
+1207,Clínica Internacional Premium,-11.7516,-77.1585,5,14:00,18:00,147.05,Ancón
+1208,Plaza de la Democracia Plus,-12.0009,-77.139,1,10:00,16:00,324.07,Mi Perú
+1209,Hotel Radisson - San Martín de Porres,-12.0626,-77.0739,1,17:00,21:00,200.11,San Miguel
+1210,Plaza de la Bandera - Rímac,-12.0651,-77.1374,1,19:00,23:00,308.27,Bellavista
+1211,Hotel JW Marriott Principal,-11.9401,-77.0599,5,12:00,20:00,140.51,Comas
+1212,Supermercado Metro Norte,-12.0675,-77.0424,3,17:00,20:00,251.88,Jesús María
+1213,Clínica San Felipe 4,-12.0726,-76.9671,3,12:00,14:00,115.32,San Juan de Lurigancho
+1214,Hospital Nacional Dos de Mayo Oeste,-12.0777,-77.0227,2,09:00,17:00,325.95,Pachacámac
+1215,Hotel Wyndham - Rímac,-11.7405,-77.1411,4,14:00,17:00,143.56,Ancón
+1216,Mercado de Miraflores 4,-12.0435,-76.9518,2,06:00,18:00,242.64,Ate
+1217,Clínica Ricardo Palma - La Punta,-11.8943,-77.0543,3,09:00,12:00,152.56,Carabayllo
+1218,Restaurante La Mar Terciario,-12.0513,-77.0443,3,10:00,16:00,201.31,Jesús María
+1219,Hotel Sonesta Terciario,-12.0143,-76.9584,4,11:00,19:00,177.52,San Juan de Lurigancho
+1220,Parque de la Reserva Principal,-12.4354,-76.8013,2,19:00,23:00,363.92,San Juan de Lurigancho
+1221,Supermercado El Triunfo Plus,-12.0678,-77.1351,2,19:00,23:00,315.93,Bellavista
+1222,Parque de la Media Luna Premium,-12.0603,-77.025,2,10:00,12:00,295.16,La Victoria
+1223,Parque de la Pera 3,-12.1148,-77.0327,2,13:00,17:00,348.51,Miraflores
+1224,Clínica Delgado Sur,-11.9924,-77.0543,3,11:00,13:00,288.5,San Martín de Porres
+1225,Farmacia El Rey - Miraflores,-12.0705,-77.0205,3,10:00,18:00,218.35,La Victoria
+1226,Plaza de la Revolución Terciario,-12.1887,-76.8068,1,06:00,09:00,286.17,San Juan de Lurigancho
+1227,Hotel Sheraton Express,-12.1001,-76.8734,2,09:00,17:00,357.93,San Juan de Miraflores
+1228,Restaurante Rafael 4,-11.8515,-76.8037,4,19:00,23:00,82.14,Pachacámac
+1229,Universidad UPC Express,-12.1352,-77.0239,4,06:00,10:00,148.85,Barranco
+1230,Farmacia El Rey 1,-11.9813,-77.0332,1,11:00,15:00,416.5,Independencia
+1231,Mercado de San Isidro Plus,-12.3987,-77.0887,1,17:00,23:00,456.35,Santiago de Surco
+1232,Mercado de Miraflores 4,-12.3986,-76.9829,2,14:00,18:00,388.86,Santiago de Surco
+1233,Mercado de Miraflores Oeste,-12.3742,-76.8644,5,06:00,09:00,52.0,Santiago de Surco
+1234,Plaza Dos de Mayo - El Agustino,-12.159,-76.997,3,11:00,15:00,112.18,Surco
+1235,Clínica Internacional Express,-11.8529,-77.1092,4,18:00,21:00,144.65,Puente Piedra
+1236,Universidad San Martín Premium,-12.0354,-77.1229,5,11:00,23:00,79.3,Carmen de la Legua
+1237,Parque de la Media Luna - Ventanilla,-12.2891,-76.8272,2,15:00,17:00,335.8,Chorrillos
+1238,Clínica Internacional Plus,-12.2464,-76.8373,2,10:00,13:00,274.0,San Juan de Lurigancho
+1239,Universidad Ricardo Palma Norte,-12.2376,-77.0346,2,20:00,23:00,316.87,Lurigancho
+1240,Hotel Radisson Premium,-12.1569,-76.9934,3,08:00,11:00,155.27,Surco
+1241,Hotel Westin - Lurigancho,-12.3156,-77.1404,3,14:00,17:00,213.59,Villa María del Triunfo
+1242,Plaza Francia - Carabayllo,-12.0706,-77.0614,2,12:00,23:00,375.74,Magdalena
+1243,Plaza Grau Principal,-12.0241,-77.027,2,15:00,18:00,396.53,Rímac
+1244,Mercado Central Oeste,-12.0617,-77.053,4,12:00,16:00,90.57,Pueblo Libre
+1245,Parque de la Exposición Premium,-12.0461,-77.0414,1,13:00,17:00,465.07,Breña
+1246,Universidad Ricardo Palma Secundario,-11.9905,-77.0289,2,08:00,10:00,175.72,Independencia
+1247,Hospital Alberto Sabogal Express,-12.4639,-77.0846,4,20:00,23:00,182.01,Lurín
+1248,Restaurante El Chinito - Surco,-12.0867,-77.0609,3,18:00,21:00,109.41,Magdalena
+1249,Plaza Vea - Independencia,-12.0587,-77.0588,4,09:00,11:00,109.49,Jesús María
+1250,Hotel Radisson Secundario,-12.0456,-76.9588,2,20:00,23:00,316.2,Ate
+1251,Hotel Country Club Premium,-12.0887,-76.9402,1,16:00,23:00,454.87,La Molina
+1252,Hospital Alberto Sabogal Express,-12.0813,-77.0103,1,18:00,21:00,476.01,San Luis
+1253,Hotel Radisson - Mi Perú,-11.7503,-77.1424,2,12:00,16:00,370.51,Ancón
+1254,Mercado de Barranco Principal,-12.0923,-77.0176,5,07:00,15:00,147.0,San Luis
+1255,Centro Comercial Plaza Bellavista Secundario,-11.9065,-77.0483,3,18:00,22:00,130.47,Carabayllo
+1256,Parque Reducto Oeste,-12.1928,-77.1303,3,10:00,12:00,137.51,Pachacámac
+1257,Clínica San Felipe Plus,-11.7436,-77.1423,2,14:00,18:00,204.85,Ancón
+1258,Mercado de San Isidro Plus,-12.0742,-76.9584,1,18:00,23:00,422.88,La Molina
+1259,Mercado Central Norte,-12.0013,-77.043,3,15:00,18:00,169.44,San Martín de Porres
+1260,Parque de la Pera Express,-12.048,-76.9589,1,15:00,23:00,280.88,Ate
+1261,Supermercado El Súper 5,-11.7402,-77.1469,5,18:00,23:00,104.35,Ancón
+1262,Centro Financiero Premium,-12.3097,-77.1686,2,09:00,12:00,190.9,Santa Rosa
+1263,Restaurante Osaka 3,-12.0636,-77.0298,4,07:00,10:00,113.1,La Victoria
+1264,Parque de la Amistad Premium,-12.1124,-77.0227,3,07:00,19:00,283.41,Miraflores
+1265,Farmacia Boticas - Pueblo Libre,-12.051,-77.0464,2,19:00,23:00,314.23,Breña
+1266,Centro Comercial Plaza Norte Secundario,-12.4887,-77.0098,3,15:00,17:00,224.83,San Juan de Lurigancho
+1267,Farmacia San Pablo Express,-11.8615,-76.8589,4,16:00,20:00,179.13,Santiago de Surco
+1268,Restaurante Maido Plus,-12.0321,-77.1111,2,11:00,17:00,243.46,Carmen de la Legua
+1269,Farmacia Boticas - El Agustino,-11.9803,-77.0758,3,11:00,23:00,242.78,Los Olivos
+1270,Supermercado Metro Express,-12.0681,-77.1296,5,16:00,22:00,97.82,Bellavista
+1271,Hotel Marriott Premium,-11.8456,-77.1809,3,18:00,23:00,221.2,Santa Rosa
+1272,Farmacia Cruz Verde - Surco,-11.847,-77.1694,3,13:00,16:00,245.63,Santa Rosa
+1273,Plaza de la Revolución Secundario,-11.8556,-76.9875,3,16:00,19:00,232.85,San Juan de Miraflores
+1274,Centro Comercial Plaza Bellavista Premium,-11.7525,-77.1578,5,16:00,22:00,32.81,Ancón
+1275,Clínica Internacional Sur,-12.3852,-76.8574,3,06:00,14:00,169.65,Lurín
+1276,Centro Comercial Real Plaza Express,-12.1935,-76.857,1,20:00,22:00,233.22,Villa El Salvador
+1277,Tottus - Ate,-12.0306,-77.0596,5,06:00,12:00,128.98,Santiago de Surco
+1278,Centro Comercial Plaza Bellavista 1,-12.0561,-77.153,1,19:00,23:00,386.69,Callao
+1279,Plaza Bolognesi Secundario,-12.1514,-76.8477,3,19:00,23:00,261.04,Chaclacayo
+1280,Hotel JW Marriott 5,-12.1078,-77.0338,4,11:00,17:00,59.77,San Isidro
+1281,Hotel Wyndham Premium,-12.0691,-77.1614,1,11:00,19:00,352.12,La Punta
+1282,Universidad ESAN Norte,-11.9722,-77.0775,1,06:00,12:00,362.83,Los Olivos
+1283,Farmacia El Ahorro Plus,-11.9754,-77.0775,2,20:00,23:00,272.19,Los Olivos
+1284,Universidad Católica Principal,-12.0623,-77.0556,1,09:00,21:00,494.2,Jesús María
+1285,Clínica San Felipe - San Luis,-11.9076,-77.1909,4,18:00,21:00,131.11,Ventanilla
+1286,Aeropuerto Jorge Chávez - San Borja,-11.8409,-76.8152,3,13:00,16:00,195.96,Chaclacayo
+1287,Farmacia San Pablo Express,-12.1573,-76.9976,4,15:00,21:00,105.55,Surco
+1288,Centro Comercial Open Plaza Plus,-12.0392,-77.021,4,07:00,13:00,131.29,Rímac
+1289,Farmacia San Pablo Plus,-12.0974,-77.0382,3,15:00,21:00,243.15,San Isidro
+1290,Hotel Marriott Principal,-11.9648,-77.1881,1,16:00,20:00,377.19,Santiago de Surco
+1291,Restaurante Rafael - Independencia,-11.9069,-77.2031,2,19:00,23:00,220.51,Ventanilla
+1292,Farmacia El Rey 4,-12.0885,-77.0626,2,06:00,18:00,255.93,Magdalena
+1293,Universidad San Martín 5,-12.1046,-77.0446,4,08:00,10:00,145.06,San Isidro
+1294,Restaurante Central Premium,-11.857,-77.0718,2,15:00,18:00,331.2,Villa El Salvador
+1295,Mercado de Magdalena - San Borja,-12.036,-77.0142,3,11:00,14:00,208.93,Rímac
+1296,Mercado de Magdalena Este,-12.1853,-77.0626,2,20:00,23:00,349.31,San Juan de Lurigancho
+1297,Santa Isabel Premium,-12.4336,-77.1754,5,06:00,08:00,100.84,Chosica
+1298,Centro Comercial Mall Aventura Express,-11.865,-77.0834,1,20:00,23:00,366.75,Villa El Salvador
+1299,Parque de la Media Luna 5,-12.4693,-77.1262,2,06:00,10:00,322.33,Lurigancho
+1300,Plaza de la Democracia - La Punta,-11.746,-77.1535,1,06:00,12:00,261.24,Ancón
+1301,Farmacia El Rey Sur,-12.067,-77.0523,1,14:00,17:00,204.52,Jesús María
+1302,Farmacia InkaFarma Plus,-12.0661,-77.0715,2,10:00,22:00,249.43,San Miguel
+1303,Supermercado El Súper 5,-12.06,-77.0709,4,20:00,23:00,91.6,San Miguel
+1304,Supermercado Metro Terciario,-11.9953,-77.0787,1,11:00,15:00,417.27,Chaclacayo
+1305,Farmacia InkaFarma Premium,-12.065,-77.067,2,20:00,23:00,381.77,Pueblo Libre
+1306,Estadio Nacional 2,-12.0565,-77.1522,1,18:00,23:00,393.05,Callao
+1307,Farmacia Boticas Plus,-12.0673,-77.0523,2,08:00,11:00,168.42,Pueblo Libre
+1308,Supermercado El Tigre Premium,-12.0558,-77.1447,2,07:00,13:00,345.73,Callao
+1309,Universidad Ricardo Palma Premium,-11.9836,-76.8746,3,20:00,22:00,103.9,Villa El Salvador
+1310,Farmacia El Ahorro Este,-12.4994,-76.9704,1,07:00,11:00,489.65,Villa María del Triunfo
+1311,Farmacia Mifarma Este,-11.903,-77.0598,1,17:00,23:00,250.19,Carabayllo
+1312,Farmacia El Súper Premium,-12.0603,-77.138,3,18:00,23:00,243.49,Bellavista
+1313,Centro Comercial Real Plaza Principal,-11.9705,-77.0684,1,09:00,13:00,297.92,Los Olivos
+1314,Clínica Ricardo Palma Express,-11.7542,-77.1555,3,10:00,16:00,132.71,Ancón
+1315,Plaza Dos de Mayo Plus,-12.1401,-77.0253,3,16:00,23:00,114.68,Barranco
+1316,Universidad San Marcos Express,-12.3804,-76.8033,3,15:00,19:00,134.8,Santiago de Surco
+1317,Universidad Privada del Norte 5,-12.0866,-77.0143,3,06:00,14:00,232.76,San Luis
+1318,Plaza de la Revolución 2,-12.0697,-77.1366,1,06:00,14:00,496.44,Bellavista
+1319,Centro Comercial Larcomar Express,-12.0792,-77.168,3,10:00,18:00,223.15,La Punta
+1320,Farmacia Mifarma Express,-12.3708,-77.1407,4,20:00,23:00,97.22,Lurigancho
+1321,Universidad San Marcos Express,-12.0785,-77.0709,2,11:00,23:00,182.35,Magdalena
+1322,Plaza Bolognesi 1,-12.3036,-77.1678,2,16:00,19:00,302.72,Pachacámac
+1323,Universidad Privada del Norte Sur,-12.0433,-77.0446,4,08:00,12:00,59.81,Breña
+1324,Parque de las Leyendas Plus,-12.1401,-77.0295,5,14:00,22:00,76.76,Barranco
+1325,Universidad UPC Premium,-11.9035,-77.2024,1,14:00,20:00,293.54,Ventanilla
+1326,Centro Comercial MegaPlaza Premium,-11.9045,-77.1959,5,11:00,14:00,106.99,Ventanilla
+1327,Universidad del Pacífico - Santa Rosa,-12.0564,-76.9482,2,20:00,23:00,397.06,Ate
+1328,Parque de la Media Luna Secundario,-12.0628,-77.0828,2,09:00,11:00,240.89,San Miguel
+1329,Clínica Delgado 1,-12.2094,-77.1381,2,16:00,19:00,281.78,Santa Rosa
+1330,Farmacia Arcángel Express,-12.3728,-77.0507,2,09:00,15:00,195.28,Lurín
+1331,Parque El Olivar Premium,-12.0823,-77.0514,3,07:00,10:00,280.19,Lince
+1332,Hotel Sheraton - Ate,-12.2404,-77.0559,3,11:00,23:00,190.5,Lurigancho
+1333,Supermercado El Súper Express,-12.0685,-77.0541,4,17:00,23:00,179.26,Pueblo Libre
+1334,Supermercado El Rey Norte,-12.0409,-77.0299,4,14:00,17:00,184.57,El Agustino
+1335,Parque de la Exposición - Comas,-12.0797,-77.0521,2,15:00,19:00,367.67,Pueblo Libre
+1336,Supermercado El Triunfo Premium,-11.909,-77.058,2,14:00,16:00,298.71,Carabayllo
+1337,Vivanda Premium,-11.98,-77.0617,3,14:00,16:00,215.48,Los Olivos
+1338,Restaurante El Rincón del Ceviche Express,-11.8483,-77.1084,2,18:00,23:00,179.49,Puente Piedra
+1339,Clínica Delgado - San Miguel,-11.9052,-77.0534,2,12:00,15:00,203.72,Carabayllo
+1340,Mercado de Magdalena Sur,-12.0723,-77.0616,1,19:00,23:00,354.94,Pueblo Libre
+1341,Universidad Privada del Norte - Carmen de la Legua,-11.9047,-77.1946,4,11:00,14:00,172.12,Ventanilla
+1342,Clínica Delgado Premium,-12.0603,-77.1626,3,09:00,21:00,196.77,La Punta
+1343,Hotel Country Club Premium,-12.0384,-77.0247,2,14:00,23:00,218.1,Rímac
+1344,Universidad del Pacífico Principal,-12.4977,-76.9448,2,18:00,23:00,355.6,Lurín
+1345,Hotel Westin Plus,-12.0454,-76.9416,3,10:00,13:00,202.76,Ate
+1346,Restaurante Maido Express,-12.0781,-76.994,2,13:00,19:00,337.49,San Borja
+1347,Universidad Científica del Sur Este,-12.0553,-77.0292,4,11:00,19:00,56.33,El Agustino
+1348,Wong - Breña,-11.9816,-77.0748,3,16:00,19:00,146.44,Los Olivos
+1349,Clínica San Felipe Plus,-11.9934,-77.0593,2,20:00,23:00,362.09,San Martín de Porres
+1350,Centro Financiero Principal,-12.0725,-76.9479,3,17:00,23:00,151.64,La Molina
+1351,Restaurante El Mercado 1,-11.8839,-77.1709,1,20:00,23:00,477.99,San Juan de Lurigancho
+1352,Hotel Marriott Plus,-12.1503,-77.1403,5,09:00,13:00,73.44,Chosica
+1353,Plaza Bolognesi Express,-11.9421,-77.0574,3,10:00,22:00,227.59,Comas
+1354,Hotel Westin Oeste,-12.1152,-77.0259,2,11:00,17:00,295.13,Miraflores
+1355,Hotel Hilton - Rímac,-12.3997,-76.9528,2,13:00,23:00,349.67,Chorrillos
+1356,Clínica San Felipe Norte,-12.148,-77.0207,3,08:00,10:00,278.31,Barranco
+1357,Supermercado Metro Express,-12.0661,-77.1335,1,13:00,16:00,420.0,Bellavista
+1358,Parque Kennedy - Rímac,-12.1679,-76.9994,1,12:00,20:00,373.4,Surco
+1359,Mercado Central Plus,-12.0072,-77.048,5,19:00,22:00,83.93,San Martín de Porres
+1360,Universidad Privada del Norte Premium,-11.8701,-76.8067,2,18:00,20:00,354.16,Lurín
+1361,Restaurante Maido Express,-12.3599,-77.085,2,12:00,15:00,192.07,Mi Perú
+1362,Mercado de Surquillo Premium,-12.0643,-77.0443,3,20:00,23:00,130.45,Jesús María
+1363,Vivanda - Puente Piedra,-12.0789,-76.9527,3,13:00,21:00,182.46,La Molina
+1364,Centro Comercial Open Plaza Secundario,-12.0431,-76.9543,4,12:00,23:00,95.15,Ate
+1365,Supermercado El Triunfo Express,-11.8963,-77.2003,4,19:00,23:00,188.12,Ventanilla
+1366,Farmacia Universal Express,-12.0026,-77.0523,1,19:00,23:00,482.65,Chosica
+1367,Restaurante Osaka Express,-12.3708,-76.8694,2,12:00,15:00,333.57,Lurigancho
+1368,Universidad de Lima Terciario,-12.0943,-77.0444,3,08:00,16:00,198.1,San Isidro
+1369,Universidad Ricardo Palma Plus,-12.1534,-77.1787,1,17:00,23:00,459.32,Chaclacayo
+1370,Tottus Plus,-12.0979,-77.0491,4,10:00,14:00,84.84,San Isidro
+1371,Mercado Central Premium,-11.9937,-77.0267,2,07:00,19:00,184.57,Independencia
+1372,Hotel Marriott Premium,-11.9731,-77.0616,1,11:00,23:00,447.08,Los Olivos
+1373,Parque Kennedy Premium,-12.0564,-77.1241,3,10:00,12:00,127.25,Bellavista
+1374,Restaurante Amaz Premium,-12.2267,-76.9087,3,11:00,23:00,136.64,Santiago de Surco
+1375,Clínica Anglo Americana 3,-12.1573,-77.0192,2,18:00,22:00,217.89,Lurín
+1376,Universidad UPC Secundario,-11.9192,-77.0604,2,20:00,22:00,272.64,Villa María del Triunfo
+1377,Restaurante El Chinito Principal,-12.0062,-76.8306,1,10:00,12:00,314.3,Chosica
+1378,Universidad San Martín Express,-12.0987,-76.8587,1,10:00,18:00,409.14,Lurigancho
+1379,Hotel Hilton Plus,-11.8462,-77.0901,1,08:00,20:00,212.41,Puente Piedra
+1380,Farmacia Cruz Verde Terciario,-11.9888,-76.9212,1,10:00,13:00,234.8,Chosica
+1381,Hotel Belmond 3,-12.3507,-77.0444,1,14:00,22:00,347.49,Pachacámac
+1382,Farmacia El Rey Secundario,-11.8549,-77.0968,3,13:00,16:00,208.74,Puente Piedra
+1383,Plaza San Martín Terciario,-12.0931,-77.0413,4,11:00,19:00,75.92,San Isidro
+1384,Restaurante La Mar Premium,-11.7408,-77.1418,1,11:00,17:00,422.03,Ancón
+1385,Clínica Internacional Plus,-12.0004,-77.0431,2,08:00,20:00,262.85,San Martín de Porres
+1386,Parque de la Exposición Premium,-12.3976,-77.0295,3,15:00,23:00,250.42,Villa El Salvador
+1387,Restaurante El Mercado 5,-12.2372,-77.1461,1,19:00,23:00,211.43,San Juan de Lurigancho
+1388,Parque de las Leyendas Premium,-12.1386,-76.8751,3,08:00,14:00,128.15,Chaclacayo
+1389,Restaurante El Chinito 2,-12.0502,-77.055,2,18:00,22:00,173.93,Jesús María
+1390,Restaurante El Rincón del Ceviche Express,-12.0273,-77.1974,2,09:00,11:00,386.82,Chorrillos
+1391,Universidad Privada del Norte Plus,-12.0793,-77.0424,1,06:00,08:00,415.4,Lince
+1392,Mercado de Barranco Express,-12.3249,-77.041,3,08:00,10:00,157.16,Mi Perú
+1393,Plaza Francia - La Punta,-12.0673,-77.0498,2,16:00,22:00,328.39,Jesús María
+1394,Restaurante Central Premium,-12.1209,-77.0356,4,14:00,16:00,68.71,Miraflores
+1395,Wong 3,-12.0387,-77.119,5,19:00,21:00,120.1,Carmen de la Legua
+1396,Estadio Nacional Sur,-12.1321,-77.0242,2,07:00,11:00,180.97,Barranco
+1397,Parque de la Familia Premium,-12.0057,-77.0419,4,17:00,19:00,149.33,San Martín de Porres
+1398,Farmacia El Rey Express,-12.0805,-76.9917,3,15:00,17:00,238.73,San Borja
+1399,Centro Comercial Jockey Plaza 3,-12.0744,-77.1697,2,10:00,12:00,307.56,La Punta
+1400,Hotel JW Marriott Premium,-12.0726,-77.0651,2,13:00,16:00,179.02,Pueblo Libre
+1401,Hotel Marriott Express,-11.7567,-77.1519,2,20:00,22:00,375.08,Ancón
+1402,Supermercado El Súper Plus,-12.4113,-76.9554,4,08:00,10:00,112.41,Lurín
+1403,Plaza San Martín Express,-12.0358,-77.0264,2,12:00,16:00,190.08,Rímac
+1404,Universidad de Lima Oeste,-12.4831,-77.0044,3,06:00,08:00,270.37,Chosica
+1405,Hotel Westin - Chorrillos,-12.045,-77.1179,2,17:00,23:00,386.73,Carmen de la Legua
+1406,Farmacia Boticas 5,-12.064,-77.05,2,11:00,13:00,349.59,Jesús María
+1407,Mercado de Surquillo Norte,-12.1396,-76.9213,1,19:00,23:00,433.86,Mi Perú
+1408,Farmacia Universal - Ate,-11.935,-77.0671,5,07:00,13:00,75.22,Pachacámac
+1409,Farmacia Boticas Terciario,-12.1039,-77.1891,2,17:00,23:00,377.23,San Juan de Miraflores
+1410,Farmacia El Rey 5,-11.9963,-77.047,4,09:00,12:00,50.24,San Martín de Porres
+1411,Centro Comercial MegaPlaza Premium,-12.005,-77.0539,3,07:00,10:00,102.7,Chosica
+1412,Centro Financiero Secundario,-11.8927,-77.2047,2,20:00,23:00,214.05,Ventanilla
+1413,Clínica Internacional Plus,-12.1556,-77.0036,3,08:00,12:00,210.25,Surco
+1414,Universidad San Marcos Plus,-11.9929,-77.0542,2,16:00,22:00,232.43,San Martín de Porres
+1415,Restaurante La Mar Express,-11.8914,-77.058,4,16:00,22:00,130.93,Carabayllo
+1416,Santa Isabel Premium,-11.7479,-77.1448,3,07:00,11:00,210.26,Ancón
+1417,Centro Comercial Plaza Bellavista Express,-12.1403,-77.0289,5,16:00,22:00,73.17,Barranco
+1418,Farmacia Boticas - Lurín,-12.088,-76.9583,1,13:00,21:00,285.11,La Molina
+1419,Hotel Hilton Express,-12.086,-77.0161,3,20:00,23:00,174.06,San Luis
+1420,Estadio Nacional Express,-12.4942,-77.0751,4,15:00,23:00,106.82,Chosica
+1421,Hotel Belmond Secundario,-12.0762,-77.002,2,16:00,20:00,398.15,San Borja
+1422,Centro Comercial MegaPlaza Secundario,-12.053,-77.055,2,12:00,20:00,296.83,Breña
+1423,Mercado de Magdalena Secundario,-12.0401,-77.0481,3,20:00,23:00,271.24,Breña
+1424,Farmacia Boticas Premium,-12.0723,-77.1725,2,06:00,14:00,246.98,La Punta
+1425,Restaurante El Mercado Express,-11.8487,-77.0907,3,10:00,18:00,268.54,Puente Piedra
+1426,Centro Comercial Open Plaza Plus,-11.8969,-77.057,3,16:00,18:00,264.53,Carabayllo
+1427,Hospital Alberto Sabogal Este,-12.0833,-76.958,2,15:00,18:00,308.88,La Molina
+1428,Centro Financiero - Ventanilla,-11.982,-77.0726,2,12:00,20:00,381.03,Los Olivos
+1429,Restaurante Amaz Express,-12.0519,-77.1468,1,13:00,21:00,472.3,Callao
+1430,Universidad Católica Express,-12.033,-77.1148,4,07:00,15:00,106.82,Carmen de la Legua
+1431,Tottus Express,-12.0794,-77.0599,5,15:00,17:00,41.21,Pueblo Libre
+1432,Supermercado El Súper Express,-12.0271,-77.012,2,06:00,08:00,208.52,Rímac
+1433,Hospital María Auxiliadora - Chosica,-12.0539,-77.076,1,19:00,23:00,288.65,San Miguel
+1434,Plaza Bolognesi Principal,-12.0706,-77.0356,3,06:00,12:00,287.66,La Victoria
+1435,Centro Comercial Plaza Central 3,-11.8621,-76.8638,3,17:00,23:00,280.31,Lurigancho
+1436,Farmacia InkaFarma Oeste,-12.4052,-77.0067,3,17:00,21:00,222.28,Santa Rosa
+1437,Clínica San Felipe Express,-12.1771,-76.8326,1,12:00,23:00,257.68,San Juan de Lurigancho
+1438,Restaurante Central Plus,-12.1453,-77.0204,4,09:00,17:00,121.83,Barranco
+1439,Hotel Belmond Express,-12.0664,-77.0327,3,16:00,18:00,196.62,La Victoria
+1440,Hotel Sonesta - Rímac,-12.0704,-77.1788,2,07:00,13:00,193.7,La Punta
+1441,Plaza Mayor de Lima - El Agustino,-11.9008,-76.8277,1,10:00,14:00,315.61,Santa Rosa
+1442,Centro Comercial Plaza Central Premium,-12.0563,-77.0198,2,12:00,15:00,158.1,El Agustino
+1443,Plaza Francia Plus,-12.1292,-77.0295,4,13:00,15:00,122.61,Miraflores
+1444,Mercado de Barranco Express,-12.0825,-77.0051,2,17:00,23:00,214.33,San Borja
+1445,Universidad ESAN 1,-12.0766,-77.0762,1,06:00,08:00,216.61,Magdalena
+1446,Hotel Marriott Este,-12.0583,-77.044,3,20:00,23:00,291.62,Breña
+1447,Centro Comercial Real Plaza Plus,-11.9919,-77.0226,3,17:00,21:00,115.19,Independencia
+1448,Universidad UPC Terciario,-12.0888,-76.9579,3,16:00,23:00,254.71,La Molina
+1449,Centro Comercial Jockey Plaza - Comas,-12.0618,-77.0537,4,17:00,20:00,110.75,Pueblo Libre
+1450,Universidad del Pacífico Plus,-12.0404,-77.0163,3,18:00,21:00,139.09,El Agustino
+1451,Clínica Internacional Premium,-12.0071,-77.0467,2,13:00,23:00,381.22,San Martín de Porres
+1452,Universidad ESAN Plus,-12.0488,-76.9442,4,14:00,16:00,75.81,Ate
+1453,Farmacia El Ahorro Plus,-12.1498,-77.0173,4,09:00,13:00,173.18,Barranco
+1454,Centro Comercial MegaPlaza Norte,-12.0584,-77.0589,1,18:00,21:00,496.71,Villa El Salvador
+1455,Restaurante Central Plus,-12.0763,-77.1739,1,15:00,17:00,376.78,La Punta
+1456,Centro Comercial Plaza Bellavista Sur,-12.4479,-76.8766,3,19:00,23:00,221.69,Santiago de Surco
+1457,Plaza Vea Este,-12.4318,-77.0745,2,07:00,10:00,220.01,Villa El Salvador
+1458,Universidad Científica del Sur 2,-12.0675,-77.0563,1,09:00,11:00,471.45,Jesús María
+1459,Tottus Principal,-12.0278,-77.0787,1,08:00,16:00,347.27,San Juan de Lurigancho
+1460,Plaza Dos de Mayo Terciario,-12.0675,-77.0566,4,12:00,18:00,124.46,Pueblo Libre
+1461,Mercado de Barranco Principal,-12.1261,-77.0748,2,18:00,23:00,201.62,Villa El Salvador
+1462,Centro Comercial Jockey Plaza 5,-12.0805,-76.9996,1,14:00,18:00,346.92,San Borja
+1463,Hotel Marriott 3,-11.8997,-77.0598,2,19:00,23:00,229.59,Carabayllo
+1464,Parque de la Pera Premium,-11.8708,-76.9694,2,17:00,21:00,272.6,Villa El Salvador
+1465,Clínica Ricardo Palma - Pueblo Libre,-12.3309,-77.186,3,11:00,14:00,278.91,San Juan de Lurigancho
+1466,Plaza de Acho 2,-12.3091,-77.1155,4,08:00,12:00,103.36,Chorrillos
+1467,Hotel Hilton Premium,-12.0528,-77.1393,3,16:00,23:00,117.04,Bellavista
+1468,Centro Comercial Open Plaza Norte,-12.0637,-77.0542,3,19:00,23:00,261.94,Jesús María
+1469,Centro Financiero 5,-12.0428,-77.1708,2,14:00,16:00,234.68,Chorrillos
+1470,Hotel Hilton Plus,-12.4053,-76.9594,3,13:00,16:00,136.45,Villa El Salvador
+1471,Centro Comercial Plaza Bellavista 1,-12.172,-76.969,5,07:00,10:00,71.07,Lurigancho
+1472,Supermercado Peruanito Norte,-12.2083,-76.8459,1,12:00,15:00,356.96,Villa El Salvador
+1473,Mercado de Barranco 2,-12.0438,-77.056,4,15:00,21:00,196.94,Breña
+1474,Plaza de la Democracia - Puente Piedra,-12.0759,-77.0244,3,13:00,15:00,211.23,La Victoria
+1475,Hotel Sheraton Premium,-12.4437,-76.8603,5,10:00,18:00,133.14,Chosica
+1476,Farmacia El Ahorro Premium,-12.0582,-77.0237,4,11:00,13:00,92.72,El Agustino
+1477,Centro Comercial Larcomar Secundario,-12.0469,-77.015,2,14:00,18:00,178.22,El Agustino
+1478,Restaurante Central - La Punta,-12.0838,-76.9434,4,06:00,18:00,113.18,La Molina
+1479,Parque Reducto Premium,-11.9535,-76.9644,3,20:00,23:00,297.41,Lurín
+1480,Hotel JW Marriott Plus,-12.0897,-76.9938,2,11:00,19:00,174.76,San Borja
+1481,Restaurante Amaz Express,-12.0589,-77.1371,1,19:00,23:00,260.68,Bellavista
+1482,Plaza Francia Premium,-12.1077,-77.0492,2,17:00,20:00,234.02,San Isidro
+1483,Farmacia El Ahorro Express,-12.075,-76.9369,4,16:00,23:00,58.09,Lurín
+1484,Restaurante La Picantería Principal,-11.9564,-76.9667,3,06:00,09:00,222.91,Lurigancho
+1485,Restaurante El Rincón del Ceviche Secundario,-11.9962,-76.9863,1,12:00,23:00,329.58,Villa El Salvador
+1486,Supermercado Metro Plus,-12.446,-76.9004,2,18:00,21:00,220.63,San Juan de Lurigancho
+1487,Universidad ESAN Express,-11.8926,-77.1927,4,17:00,20:00,130.34,Ventanilla
+1488,Mercado de San Isidro Express,-12.3733,-77.1855,2,16:00,23:00,325.1,Villa El Salvador
+1489,Farmacia Arcángel Express,-11.903,-77.2082,3,11:00,19:00,274.94,Ventanilla
+1490,Vivanda 5,-12.0642,-77.0832,1,16:00,23:00,405.82,San Miguel
+1491,Estadio Nacional Principal,-12.076,-77.0066,4,09:00,11:00,141.1,San Borja
+1492,Hospital María Auxiliadora - Bellavista,-11.9818,-77.033,2,18:00,23:00,388.21,Independencia
+1493,Centro Comercial Plaza Central Oeste,-11.9541,-77.0594,1,19:00,23:00,469.53,Comas
+1494,Parque de la Exposición 1,-11.908,-77.0464,3,06:00,08:00,271.28,Carabayllo
+1495,Supermercado El Tigre Express,-11.8607,-76.8833,1,09:00,21:00,378.78,Mi Perú
+1496,Supermercado El Rey Premium,-11.8579,-77.0291,3,08:00,12:00,286.33,Chosica
+1497,Farmacia Cruz Verde 2,-12.3123,-77.0242,3,12:00,18:00,247.77,Chosica
+1498,Parque de la Reserva 4,-12.1024,-77.0341,4,14:00,22:00,151.01,San Isidro
+1499,Universidad Privada del Norte - Lince,-11.8697,-76.8481,2,11:00,15:00,216.04,Lurín
+1500,Farmacia Arcángel Principal,-12.0123,-76.8454,2,18:00,23:00,264.88,Chaclacayo

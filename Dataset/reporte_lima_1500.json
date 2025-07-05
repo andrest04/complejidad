@@ -1,0 +1,714 @@
+{
+  "estadisticas_basicas": {
+    "total_clientes": 1500,
+    "pedido_total": 345437.44,
+    "pedido_promedio": 230.29,
+    "pedido_mediana": 221.2,
+    "pedido_maximo": 499.36,
+    "pedido_minimo": 25.93,
+    "pedido_desviacion": 108.32,
+    "prioridad_promedio": 2.66,
+    "distritos_unicos": 42,
+    "distribucion_prioridades": {
+      "1": 310,
+      "5": 139,
+      "3": 399,
+      "2": 412,
+      "4": 240
+    },
+    "distribucion_distritos": {
+      "Bellavista": 48,
+      "Pachacámac": 43,
+      "Chosica": 36,
+      "San Martín de Porres": 34,
+      "Barranco": 37,
+      "La Punta": 38,
+      "Chaclacayo": 47,
+      "Ate": 39,
+      "Comas": 35,
+      "Rímac": 41,
+      "Ventanilla": 39,
+      "Santiago de Surco": 29,
+      "Magdalena": 33,
+      "El Agustino": 30,
+      "Santa Rosa": 30,
+      "La Victoria": 33,
+      "Ancón": 45,
+      "La Molina": 33,
+      "Carabayllo": 41,
+      "Breña": 36,
+      "San Luis": 33,
+      "San Juan de Miraflores": 31,
+      "Surco": 35,
+      "San Juan de Lurigancho": 34,
+      "San Borja": 37,
+      "Pueblo Libre": 34,
+      "Lurigancho": 35,
+      "San Miguel": 34,
+      "Callao": 24,
+      "Villa El Salvador": 55,
+      "Mi Perú": 27,
+      "Jesús María": 42,
+      "Los Olivos": 39,
+      "Lurín": 33,
+      "San Isidro": 39,
+      "Miraflores": 35,
+      "Carmen de la Legua": 35,
+      "Puente Piedra": 25,
+      "Chorrillos": 29,
+      "Villa María del Triunfo": 37,
+      "Independencia": 29,
+      "Lince": 31
+    }
+  },
+  "analisis_geografico": {
+    "centroide": {
+      "latitud": -12.0674,
+      "longitud": -77.0416
+    },
+    "limites": {
+      "norte": -11.7402,
+      "sur": -12.4994,
+      "este": -76.8005,
+      "oeste": -77.2095
+    },
+    "area_grados": 0.310513,
+    "area_km2": 3825.83,
+    "densidad_clientes_km2": 0.39
+  },
+  "analisis_temporal": {
+    "hora_inicio_promedio": 13.02,
+    "hora_fin_promedio": 18.04,
+    "duracion_promedio_horas": 5.02,
+    "duracion_minima_horas": 2.0,
+    "duracion_maxima_horas": 12.0,
+    "distribucion_horas_inicio": {
+      "13": 103,
+      "7": 95,
+      "9": 100,
+      "6": 98,
+      "12": 104,
+      "8": 100,
+      "11": 119,
+      "14": 77,
+      "17": 99,
+      "16": 98,
+      "18": 101,
+      "19": 103,
+      "10": 96,
+      "15": 104,
+      "20": 103
+    },
+    "distribucion_horas_fin": {
+      "15": 83,
+      "19": 97,
+      "11": 51,
+      "14": 91,
+      "17": 83,
+      "18": 106,
+      "20": 75,
+      "21": 88,
+      "23": 400,
+      "10": 67,
+      "22": 101,
+      "16": 92,
+      "13": 61,
+      "8": 14,
+      "9": 30,
+      "12": 61
+    }
+  },
+  "analisis_por_distrito": {
+    "Bellavista": {
+      "total_clientes": 48,
+      "pedido_total": 11091.87,
+      "pedido_promedio": 231.08,
+      "prioridad_promedio": 2.71,
+      "distribucion_prioridades": {
+        "1": 11,
+        "5": 4,
+        "3": 15,
+        "2": 9,
+        "4": 9
+      },
+      "porcentaje_total": 3.2
+    },
+    "Pachacámac": {
+      "total_clientes": 43,
+      "pedido_total": 9247.03,
+      "pedido_promedio": 215.05,
+      "prioridad_promedio": 2.88,
+      "distribucion_prioridades": {
+        "5": 9,
+        "1": 8,
+        "3": 17,
+        "2": 8,
+        "4": 1
+      },
+      "porcentaje_total": 2.87
+    },
+    "Chosica": {
+      "total_clientes": 36,
+      "pedido_total": 7940.28,
+      "pedido_promedio": 220.56,
+      "prioridad_promedio": 2.94,
+      "distribucion_prioridades": {
+        "3": 13,
+        "4": 5,
+        "5": 6,
+        "1": 7,
+        "2": 5
+      },
+      "porcentaje_total": 2.4
+    },
+    "San Martín de Porres": {
+      "total_clientes": 34,
+      "pedido_total": 7465.75,
+      "pedido_promedio": 219.58,
+      "prioridad_promedio": 2.76,
+      "distribucion_prioridades": {
+        "2": 12,
+        "4": 10,
+        "1": 5,
+        "3": 5,
+        "5": 2
+      },
+      "porcentaje_total": 2.27
+    },
+    "Barranco": {
+      "total_clientes": 37,
+      "pedido_total": 8209.79,
+      "pedido_promedio": 221.89,
+      "prioridad_promedio": 2.76,
+      "distribucion_prioridades": {
+        "4": 7,
+        "2": 14,
+        "1": 4,
+        "3": 9,
+        "5": 3
+      },
+      "porcentaje_total": 2.47
+    },
+    "La Punta": {
+      "total_clientes": 38,
+      "pedido_total": 8950.28,
+      "pedido_promedio": 235.53,
+      "prioridad_promedio": 2.53,
+      "distribucion_prioridades": {
+        "3": 9,
+        "2": 13,
+        "1": 8,
+        "5": 3,
+        "4": 5
+      },
+      "porcentaje_total": 2.53
+    },
+    "Chaclacayo": {
+      "total_clientes": 47,
+      "pedido_total": 11347.32,
+      "pedido_promedio": 241.43,
+      "prioridad_promedio": 2.53,
+      "distribucion_prioridades": {
+        "2": 14,
+        "1": 10,
+        "4": 4,
+        "3": 15,
+        "5": 4
+      },
+      "porcentaje_total": 3.13
+    },
+    "Ate": {
+      "total_clientes": 39,
+      "pedido_total": 9472.59,
+      "pedido_promedio": 242.89,
+      "prioridad_promedio": 2.44,
+      "distribucion_prioridades": {
+        "3": 13,
+        "2": 11,
+        "1": 9,
+        "5": 1,
+        "4": 5
+      },
+      "porcentaje_total": 2.6
+    },
+    "Comas": {
+      "total_clientes": 35,
+      "pedido_total": 7731.41,
+      "pedido_promedio": 220.9,
+      "prioridad_promedio": 2.6,
+      "distribucion_prioridades": {
+        "5": 5,
+        "1": 10,
+        "2": 6,
+        "3": 12,
+        "4": 2
+      },
+      "porcentaje_total": 2.33
+    },
+    "Rímac": {
+      "total_clientes": 41,
+      "pedido_total": 10421.46,
+      "pedido_promedio": 254.18,
+      "prioridad_promedio": 2.51,
+      "distribucion_prioridades": {
+        "3": 11,
+        "4": 7,
+        "2": 11,
+        "1": 10,
+        "5": 2
+      },
+      "porcentaje_total": 2.73
+    },
+    "Ventanilla": {
+      "total_clientes": 39,
+      "pedido_total": 8266.5,
+      "pedido_promedio": 211.96,
+      "prioridad_promedio": 2.92,
+      "distribucion_prioridades": {
+        "4": 7,
+        "1": 7,
+        "5": 6,
+        "3": 11,
+        "2": 8
+      },
+      "porcentaje_total": 2.6
+    },
+    "Santiago de Surco": {
+      "total_clientes": 29,
+      "pedido_total": 6302.42,
+      "pedido_promedio": 217.32,
+      "prioridad_promedio": 3.17,
+      "distribucion_prioridades": {
+        "2": 6,
+        "5": 8,
+        "3": 8,
+        "1": 4,
+        "4": 3
+      },
+      "porcentaje_total": 1.93
+    },
+    "Magdalena": {
+      "total_clientes": 33,
+      "pedido_total": 7492.39,
+      "pedido_promedio": 227.04,
+      "prioridad_promedio": 2.73,
+      "distribucion_prioridades": {
+        "2": 11,
+        "1": 6,
+        "5": 4,
+        "3": 6,
+        "4": 6
+      },
+      "porcentaje_total": 2.2
+    },
+    "El Agustino": {
+      "total_clientes": 30,
+      "pedido_total": 6350.4,
+      "pedido_promedio": 211.68,
+      "prioridad_promedio": 2.87,
+      "distribucion_prioridades": {
+        "5": 3,
+        "3": 7,
+        "4": 8,
+        "1": 6,
+        "2": 6
+      },
+      "porcentaje_total": 2.0
+    },
+    "Santa Rosa": {
+      "total_clientes": 30,
+      "pedido_total": 6439.21,
+      "pedido_promedio": 214.64,
+      "prioridad_promedio": 2.73,
+      "distribucion_prioridades": {
+        "1": 7,
+        "5": 5,
+        "3": 8,
+        "2": 7,
+        "4": 3
+      },
+      "porcentaje_total": 2.0
+    },
+    "La Victoria": {
+      "total_clientes": 33,
+      "pedido_total": 6296.16,
+      "pedido_promedio": 190.79,
+      "prioridad_promedio": 3.15,
+      "distribucion_prioridades": {
+        "1": 3,
+        "2": 6,
+        "4": 15,
+        "3": 8,
+        "5": 1
+      },
+      "porcentaje_total": 2.2
+    },
+    "Ancón": {
+      "total_clientes": 45,
+      "pedido_total": 11020.69,
+      "pedido_promedio": 244.9,
+      "prioridad_promedio": 2.56,
+      "distribucion_prioridades": {
+        "2": 23,
+        "1": 5,
+        "4": 5,
+        "3": 8,
+        "5": 4
+      },
+      "porcentaje_total": 3.0
+    },
+    "La Molina": {
+      "total_clientes": 33,
+      "pedido_total": 8350.86,
+      "pedido_promedio": 253.06,
+      "prioridad_promedio": 2.58,
+      "distribucion_prioridades": {
+        "1": 9,
+        "2": 9,
+        "4": 5,
+        "3": 6,
+        "5": 4
+      },
+      "porcentaje_total": 2.2
+    },
+    "Carabayllo": {
+      "total_clientes": 41,
+      "pedido_total": 11285.45,
+      "pedido_promedio": 275.25,
+      "prioridad_promedio": 2.15,
+      "distribucion_prioridades": {
+        "4": 4,
+        "1": 14,
+        "2": 11,
+        "3": 12
+      },
+      "porcentaje_total": 2.73
+    },
+    "Breña": {
+      "total_clientes": 36,
+      "pedido_total": 8288.98,
+      "pedido_promedio": 230.25,
+      "prioridad_promedio": 2.78,
+      "distribucion_prioridades": {
+        "4": 7,
+        "2": 9,
+        "1": 8,
+        "5": 5,
+        "3": 7
+      },
+      "porcentaje_total": 2.4
+    },
+    "San Luis": {
+      "total_clientes": 33,
+      "pedido_total": 7143.97,
+      "pedido_promedio": 216.48,
+      "prioridad_promedio": 2.82,
+      "distribucion_prioridades": {
+        "1": 6,
+        "5": 3,
+        "3": 14,
+        "4": 5,
+        "2": 5
+      },
+      "porcentaje_total": 2.2
+    },
+    "San Juan de Miraflores": {
+      "total_clientes": 31,
+      "pedido_total": 6991.53,
+      "pedido_promedio": 225.53,
+      "prioridad_promedio": 2.81,
+      "distribucion_prioridades": {
+        "4": 5,
+        "1": 5,
+        "3": 11,
+        "2": 7,
+        "5": 3
+      },
+      "porcentaje_total": 2.07
+    },
+    "Surco": {
+      "total_clientes": 35,
+      "pedido_total": 7642.36,
+      "pedido_promedio": 218.35,
+      "prioridad_promedio": 2.6,
+      "distribucion_prioridades": {
+        "2": 11,
+        "1": 7,
+        "4": 5,
+        "3": 9,
+        "5": 3
+      },
+      "porcentaje_total": 2.33
+    },
+    "San Juan de Lurigancho": {
+      "total_clientes": 34,
+      "pedido_total": 8127.83,
+      "pedido_promedio": 239.05,
+      "prioridad_promedio": 2.68,
+      "distribucion_prioridades": {
+        "1": 9,
+        "4": 6,
+        "5": 4,
+        "3": 8,
+        "2": 7
+      },
+      "porcentaje_total": 2.27
+    },
+    "San Borja": {
+      "total_clientes": 37,
+      "pedido_total": 9486.09,
+      "pedido_promedio": 256.38,
+      "prioridad_promedio": 2.43,
+      "distribucion_prioridades": {
+        "4": 5,
+        "2": 14,
+        "5": 2,
+        "1": 8,
+        "3": 8
+      },
+      "porcentaje_total": 2.47
+    },
+    "Pueblo Libre": {
+      "total_clientes": 34,
+      "pedido_total": 7623.56,
+      "pedido_promedio": 224.22,
+      "prioridad_promedio": 2.79,
+      "distribucion_prioridades": {
+        "4": 9,
+        "1": 7,
+        "3": 7,
+        "2": 8,
+        "5": 3
+      },
+      "porcentaje_total": 2.27
+    },
+    "Lurigancho": {
+      "total_clientes": 35,
+      "pedido_total": 8114.22,
+      "pedido_promedio": 231.83,
+      "prioridad_promedio": 2.54,
+      "distribucion_prioridades": {
+        "1": 6,
+        "4": 4,
+        "2": 14,
+        "3": 8,
+        "5": 3
+      },
+      "porcentaje_total": 2.33
+    },
+    "San Miguel": {
+      "total_clientes": 34,
+      "pedido_total": 8367.46,
+      "pedido_promedio": 246.1,
+      "prioridad_promedio": 2.35,
+      "distribucion_prioridades": {
+        "2": 14,
+        "3": 8,
+        "4": 4,
+        "1": 7,
+        "5": 1
+      },
+      "porcentaje_total": 2.27
+    },
+    "Callao": {
+      "total_clientes": 24,
+      "pedido_total": 6384.18,
+      "pedido_promedio": 266.01,
+      "prioridad_promedio": 2.42,
+      "distribucion_prioridades": {
+        "3": 2,
+        "2": 8,
+        "5": 1,
+        "4": 6,
+        "1": 7
+      },
+      "porcentaje_total": 1.6
+    },
+    "Villa El Salvador": {
+      "total_clientes": 55,
+      "pedido_total": 11970.76,
+      "pedido_promedio": 217.65,
+      "prioridad_promedio": 2.55,
+      "distribucion_prioridades": {
+        "3": 14,
+        "5": 7,
+        "2": 17,
+        "1": 13,
+        "4": 4
+      },
+      "porcentaje_total": 3.67
+    },
+    "Mi Perú": {
+      "total_clientes": 27,
+      "pedido_total": 6229.76,
+      "pedido_promedio": 230.73,
+      "prioridad_promedio": 2.59,
+      "distribucion_prioridades": {
+        "2": 7,
+        "3": 9,
+        "5": 3,
+        "1": 6,
+        "4": 2
+      },
+      "porcentaje_total": 1.8
+    },
+    "Jesús María": {
+      "total_clientes": 42,
+      "pedido_total": 10599.24,
+      "pedido_promedio": 252.36,
+      "prioridad_promedio": 2.45,
+      "distribucion_prioridades": {
+        "3": 19,
+        "1": 8,
+        "4": 4,
+        "2": 11
+      },
+      "porcentaje_total": 2.8
+    },
+    "Los Olivos": {
+      "total_clientes": 39,
+      "pedido_total": 8900.01,
+      "pedido_promedio": 228.21,
+      "prioridad_promedio": 2.56,
+      "distribucion_prioridades": {
+        "2": 9,
+        "5": 4,
+        "3": 9,
+        "4": 6,
+        "1": 11
+      },
+      "porcentaje_total": 2.6
+    },
+    "Lurín": {
+      "total_clientes": 33,
+      "pedido_total": 7419.98,
+      "pedido_promedio": 224.85,
+      "prioridad_promedio": 2.79,
+      "distribucion_prioridades": {
+        "4": 6,
+        "1": 5,
+        "3": 10,
+        "5": 3,
+        "2": 9
+      },
+      "porcentaje_total": 2.2
+    },
+    "San Isidro": {
+      "total_clientes": 39,
+      "pedido_total": 8453.87,
+      "pedido_promedio": 216.77,
+      "prioridad_promedio": 2.87,
+      "distribucion_prioridades": {
+        "5": 3,
+        "2": 7,
+        "1": 7,
+        "4": 10,
+        "3": 12
+      },
+      "porcentaje_total": 2.6
+    },
+    "Miraflores": {
+      "total_clientes": 35,
+      "pedido_total": 7652.2,
+      "pedido_promedio": 218.63,
+      "prioridad_promedio": 2.77,
+      "distribucion_prioridades": {
+        "3": 8,
+        "5": 5,
+        "4": 5,
+        "2": 11,
+        "1": 6
+      },
+      "porcentaje_total": 2.33
+    },
+    "Carmen de la Legua": {
+      "total_clientes": 35,
+      "pedido_total": 7902.88,
+      "pedido_promedio": 225.8,
+      "prioridad_promedio": 2.77,
+      "distribucion_prioridades": {
+        "3": 7,
+        "2": 12,
+        "4": 8,
+        "5": 3,
+        "1": 5
+      },
+      "porcentaje_total": 2.33
+    },
+    "Puente Piedra": {
+      "total_clientes": 25,
+      "pedido_total": 5514.17,
+      "pedido_promedio": 220.57,
+      "prioridad_promedio": 2.56,
+      "distribucion_prioridades": {
+        "1": 5,
+        "2": 7,
+        "3": 8,
+        "4": 4,
+        "5": 1
+      },
+      "porcentaje_total": 1.67
+    },
+    "Chorrillos": {
+      "total_clientes": 29,
+      "pedido_total": 7077.5,
+      "pedido_promedio": 244.05,
+      "prioridad_promedio": 2.48,
+      "distribucion_prioridades": {
+        "2": 14,
+        "3": 5,
+        "1": 4,
+        "4": 5,
+        "5": 1
+      },
+      "porcentaje_total": 1.93
+    },
+    "Villa María del Triunfo": {
+      "total_clientes": 37,
+      "pedido_total": 8286.49,
+      "pedido_promedio": 223.96,
+      "prioridad_promedio": 2.78,
+      "distribucion_prioridades": {
+        "3": 10,
+        "1": 8,
+        "5": 3,
+        "4": 9,
+        "2": 7
+      },
+      "porcentaje_total": 2.47
+    },
+    "Independencia": {
+      "total_clientes": 29,
+      "pedido_total": 6580.1,
+      "pedido_promedio": 226.9,
+      "prioridad_promedio": 2.45,
+      "distribucion_prioridades": {
+        "2": 8,
+        "3": 8,
+        "5": 3,
+        "1": 8,
+        "4": 2
+      },
+      "porcentaje_total": 1.93
+    },
+    "Lince": {
+      "total_clientes": 31,
+      "pedido_total": 6998.44,
+      "pedido_promedio": 225.76,
+      "prioridad_promedio": 2.42,
+      "distribucion_prioridades": {
+        "1": 11,
+        "4": 8,
+        "2": 6,
+        "3": 5,
+        "5": 1
+      },
+      "porcentaje_total": 2.07
+    }
+  },
+  "metadata": {
+    "archivo": "Dataset/clientes_lima_1500.csv",
+    "fecha_analisis": "2024-01-01",
+    "version": "1.0"
+  }
+}

@@ -35,6 +35,41 @@ datos_globales = {
     'resultados': None
 }
 
+def cargar_dataset_lima():
+    """Carga automáticamente el dataset de 1500 clientes de Lima"""
+    try:
+        # Verificar si existe el archivo de 1500 clientes
+        archivo_lima = "Dataset/clientes_lima_1500.csv"
+        if os.path.exists(archivo_lima):
+            with open(archivo_lima, 'r', encoding='utf-8') as f:
+                # Simular un archivo para el parser
+                class MockFile:
+                    def __init__(self, content):
+                        self.content = content
+                        self.position = 0
+                    
+                    def read(self):
+                        return self.content.encode('utf-8')
+                    
+                    def seek(self, pos):
+                        self.position = pos
+                
+                mock_file = MockFile(f.read())
+                clientes = parser_csv.leer_clientes_csv(mock_file)
+                datos_globales['clientes'] = clientes
+                datos_globales['grafo'] = grafo_builder.construir_grafo(clientes)
+                print(f"Dataset de Lima cargado: {len(clientes)} clientes")
+                return True
+        else:
+            print("Dataset de Lima no encontrado, usando dataset vacío")
+            return False
+    except Exception as e:
+        print(f"Error al cargar dataset de Lima: {str(e)}")
+        return False
+
+# Cargar dataset al iniciar
+cargar_dataset_lima()
+
 @app.route('/')
 def index():
     """Página principal del dashboard"""
@@ -42,10 +77,7 @@ def index():
                         clientes_count=len(datos_globales['clientes']),
                         vehiculos_count=len(datos_globales['vehiculos']))
 
-@app.route('/cargar_datos')
-def cargar_datos():
-    """Página para cargar datos de clientes y rutas"""
-    return render_template('cargar_datos.html')
+
 
 @app.route('/registrar_vehiculos')
 def registrar_vehiculos():
@@ -71,35 +103,6 @@ def resultados():
                          resultados=datos_globales.get('resultados'))
 
 # API Routes
-@app.route('/api/cargar_csv', methods=['POST'])
-def api_cargar_csv():
-    """API para cargar archivo CSV de clientes"""
-    try:
-        if 'archivo' not in request.files:
-            return jsonify({'error': 'No se seleccionó archivo'}), 400
-        
-        archivo = request.files['archivo']
-        if archivo.filename == '':
-            return jsonify({'error': 'No se seleccionó archivo'}), 400
-        
-        if archivo and archivo.filename.endswith('.csv'):
-            # Leer y procesar CSV
-            clientes = parser_csv.leer_clientes_csv(archivo)
-            datos_globales['clientes'] = clientes
-            
-            # Construir grafo
-            datos_globales['grafo'] = grafo_builder.construir_grafo(clientes)
-            
-            return jsonify({
-                'success': True,
-                'message': f'Se cargaron {len(clientes)} clientes exitosamente',
-                'clientes_count': len(clientes)
-            })
-        else:
-            return jsonify({'error': 'Formato de archivo no válido'}), 400
-            
-    except Exception as e:
-        return jsonify({'error': f'Error al procesar archivo: {str(e)}'}), 500
 
 @app.route('/api/registrar_vehiculo', methods=['POST'])
 def api_registrar_vehiculo():
