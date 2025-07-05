@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Registrar Vehículos{% endblock %}
+{% block title %}Gestionar Flota de Vehículos{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
@@ -8,11 +8,8 @@
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h3 mb-0">
-                    <i class="fas fa-truck me-2"></i>Registrar Vehículos
+                    <i class="fas fa-truck me-2"></i>Gestionar Flota de Vehículos
                 </h1>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVehiculo">
-                    <i class="fas fa-plus me-2"></i>Nuevo Vehículo
-                </button>
             </div>
         </div>
     </div>
@@ -115,51 +112,7 @@
     </div>
 </div>
 
-<!-- Modal para nuevo vehículo -->
-<div class="modal fade" id="modalVehiculo" tabindex="-1" aria-labelledby="modalVehiculoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalVehiculoLabel">
-                    <i class="fas fa-plus me-2"></i>Registrar Nuevo Vehículo
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="formVehiculo">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="placa" class="form-label">Placa *</label>
-                        <input type="text" class="form-control" id="placa" name="placa" required 
-                               pattern="[A-Z]{3}-[0-9]{3}" placeholder="ABC-123">
-                        <div class="form-text">Formato: ABC-123</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tipo" class="form-label">Tipo de Vehículo *</label>
-                        <select class="form-select" id="tipo" name="tipo" required>
-                            <option value="">Seleccionar tipo...</option>
-                            <option value="Camión">Camión</option>
-                            <option value="Furgón">Furgón</option>
-                            <option value="Camioneta">Camioneta</option>
-                            <option value="Moto">Moto</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="capacidad" class="form-label">Capacidad (kg) *</label>
-                        <input type="number" class="form-control" id="capacidad" name="capacidad" 
-                               required min="100" max="5000" step="0.1" placeholder="1000">
-                        <div class="form-text">Entre 100 y 5000 kg</div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>Registrar
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
 
 <!-- Modal para editar vehículo -->
 <div class="modal fade" id="modalEditarVehiculo" tabindex="-1" aria-labelledby="modalEditarVehiculoLabel" aria-hidden="true">
@@ -220,12 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
     cargarVehiculos();
     actualizarEstadisticas();
     
-    // Formulario para nuevo vehículo
-    document.getElementById('formVehiculo').addEventListener('submit', function(e) {
-        e.preventDefault();
-        registrarVehiculo();
-    });
-    
     // Formulario para editar vehículo
     document.getElementById('formEditarVehiculo').addEventListener('submit', function(e) {
         e.preventDefault();
@@ -234,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function cargarVehiculos() {
-    fetch('/api/estadisticas')
+    fetch('/api/obtener_vehiculos')
         .then(response => response.json())
         .then(data => {
             if (data.vehiculos) {
@@ -277,42 +224,11 @@ function mostrarVehiculos(vehiculos) {
     });
 }
 
-function registrarVehiculo() {
-    const formData = new FormData(document.getElementById('formVehiculo'));
-    const data = {
-        placa: formData.get('placa'),
-        tipo: formData.get('tipo'),
-        capacidad: parseFloat(formData.get('capacidad'))
-    };
-    
-    fetch('/api/registrar_vehiculo', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            mostrarAlerta('Vehículo registrado exitosamente', 'success');
-            document.getElementById('formVehiculo').reset();
-            bootstrap.Modal.getInstance(document.getElementById('modalVehiculo')).hide();
-            cargarVehiculos();
-            actualizarEstadisticas();
-        } else {
-            mostrarAlerta(result.error, 'danger');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        mostrarAlerta('Error al registrar vehículo', 'danger');
-    });
-}
+
 
 function editarVehiculo(id) {
     // Cargar datos del vehículo en el modal
-    fetch('/api/estadisticas')
+    fetch('/api/obtener_vehiculos')
         .then(response => response.json())
         .then(data => {
             const vehiculo = data.vehiculos.find(v => v.id === id);
@@ -351,17 +267,25 @@ function eliminarVehiculo(id) {
 }
 
 function actualizarEstadisticas() {
-    fetch('/api/estadisticas')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('totalVehiculos').textContent = data.total_vehiculos || 0;
-            document.getElementById('vehiculosDisponibles').textContent = data.vehiculos_disponibles || 0;
-            document.getElementById('capacidadTotal').textContent = formatearPeso(data.capacidad_total || 0);
-            document.getElementById('tiposDiferentes').textContent = data.tipos_diferentes || 0;
-        })
-        .catch(error => {
-            console.error('Error al cargar estadísticas:', error);
-        });
+    Promise.all([
+        fetch('/api/estadisticas'),
+        fetch('/api/obtener_vehiculos')
+    ])
+    .then(responses => Promise.all(responses.map(r => r.json())))
+    .then(([stats, vehiculosData]) => {
+        document.getElementById('totalVehiculos').textContent = stats.total_vehiculos || 0;
+        document.getElementById('vehiculosDisponibles').textContent = stats.vehiculos_disponibles || 0;
+        document.getElementById('capacidadTotal').textContent = formatearPeso(stats.capacidad_total || 0);
+        
+        // Calcular tipos diferentes
+        if (vehiculosData && vehiculosData.vehiculos) {
+            const tipos = new Set(vehiculosData.vehiculos.map(v => v.tipo));
+            document.getElementById('tiposDiferentes').textContent = tipos.size;
+        }
+    })
+    .catch(error => {
+        console.error('Error al cargar estadísticas:', error);
+    });
 }
 
 function formatearPeso(peso) {

@@ -16,8 +16,12 @@ class ParserCSV:
         """Lee un archivo CSV y convierte los datos a formato de clientes"""
         try:
             # Leer el archivo CSV
-            contenido = archivo.read().decode('utf-8')
+            contenido = archivo.read()
             archivo.seek(0)  # Resetear el puntero del archivo
+            
+            # Si el contenido es bytes, decodificarlo
+            if isinstance(contenido, bytes):
+                contenido = contenido.decode('utf-8')
             
             # Usar pandas para manejar diferentes formatos de CSV
             df = pd.read_csv(io.StringIO(contenido))
@@ -132,7 +136,12 @@ class ParserCSV:
         """Lee un archivo JSON con información de vehículos"""
         try:
             import json
-            contenido = archivo.read().decode('utf-8')
+            contenido = archivo.read()
+            
+            # Si el contenido es bytes, decodificarlo
+            if isinstance(contenido, bytes):
+                contenido = contenido.decode('utf-8')
+            
             vehiculos = json.loads(contenido)
             
             # Validar estructura

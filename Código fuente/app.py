@@ -35,40 +35,50 @@ datos_globales = {
     'resultados': None
 }
 
-def cargar_dataset_lima():
-    """Carga automáticamente el dataset de 1500 clientes de Lima"""
+def cargar_datos_csv():
+    """Carga datos del CSV cuando sea necesario"""
     try:
-        # Verificar si existe el archivo de 1500 clientes
-        archivo_lima = "Dataset/clientes_lima_1500.csv"
-        if os.path.exists(archivo_lima):
-            with open(archivo_lima, 'r', encoding='utf-8') as f:
-                # Simular un archivo para el parser
-                class MockFile:
-                    def __init__(self, content):
-                        self.content = content
-                        self.position = 0
-                    
-                    def read(self):
-                        return self.content.encode('utf-8')
-                    
-                    def seek(self, pos):
-                        self.position = pos
-                
-                mock_file = MockFile(f.read())
-                clientes = parser_csv.leer_clientes_csv(mock_file)
+        archivo_csv = "Dataset/clientes_lima_1500.csv"
+        if os.path.exists(archivo_csv):
+            with open(archivo_csv, 'r', encoding='utf-8') as f:
+                clientes = parser_csv.leer_clientes_csv(f)
                 datos_globales['clientes'] = clientes
                 datos_globales['grafo'] = grafo_builder.construir_grafo(clientes)
-                print(f"Dataset de Lima cargado: {len(clientes)} clientes")
+                print(f"✅ CSV cargado: {len(clientes)} clientes")
                 return True
         else:
-            print("Dataset de Lima no encontrado, usando dataset vacío")
-            return False
+            print(f"❌ Archivo no encontrado: {archivo_csv}")
+        return False
     except Exception as e:
-        print(f"Error al cargar dataset de Lima: {str(e)}")
+        print(f"❌ Error al cargar CSV: {str(e)}")
         return False
 
-# Cargar dataset al iniciar
-cargar_dataset_lima()
+def cargar_datos_json():
+    """Carga datos del JSON cuando sea necesario"""
+    try:
+        archivo_json = "Dataset/flota_lima_1500.json"
+        if os.path.exists(archivo_json):
+            with open(archivo_json, 'r', encoding='utf-8') as f:
+                vehiculos = json.load(f)
+                for i, vehiculo in enumerate(vehiculos):
+                    vehiculo['id'] = i + 1
+                    vehiculo['disponible'] = True
+                    vehiculo['fecha_registro'] = datetime.now().isoformat()
+                datos_globales['vehiculos'] = vehiculos
+                print(f"✅ JSON cargado: {len(vehiculos)} vehículos")
+                return True
+        else:
+            print(f"❌ Archivo no encontrado: {archivo_json}")
+        return False
+    except Exception as e:
+        print(f"❌ Error al cargar JSON: {str(e)}")
+        return False
+
+# Cargar datos al iniciar la aplicación
+print("🚀 Iniciando carga de datos...")
+cargar_datos_csv()
+cargar_datos_json()
+print("✅ Carga de datos completada")
 
 @app.route('/')
 def index():
@@ -79,10 +89,10 @@ def index():
 
 
 
-@app.route('/registrar_vehiculos')
-def registrar_vehiculos():
-    """Página para registrar vehículos de la flota"""
-    return render_template('registrar_vehiculos.html', 
+@app.route('/gestionar_vehiculos')
+def gestionar_vehiculos():
+    """Página para gestionar la flota de vehículos"""
+    return render_template('gestionar_vehiculos.html', 
                          vehiculos=datos_globales['vehiculos'])
 
 @app.route('/gestionar_clientes')
@@ -233,6 +243,17 @@ def api_estadisticas():
         
     except Exception as e:
         return jsonify({'error': f'Error al obtener estadísticas: {str(e)}'}), 500
+
+@app.route('/api/obtener_vehiculos')
+def api_obtener_vehiculos():
+    """API para obtener la lista completa de vehículos"""
+    try:
+        return jsonify({
+            'vehiculos': datos_globales['vehiculos']
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Error al obtener vehículos: {str(e)}'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=config.PUERTO) 

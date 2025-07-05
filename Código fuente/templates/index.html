@@ -3,41 +3,7 @@
 {% block title %}Dashboard - Optimización de Rutas{% endblock %}
 
 {% block content %}
-<!-- Información de Datos Precargados -->
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="alert alert-info">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h6 class="alert-heading">
-                        <i class="fas fa-database me-2"></i>Dataset de Lima, Perú Precargado
-                    </h6>
-                    <p class="mb-0">
-                        El sistema está cargado con <strong>1500 clientes</strong> distribuidos por el área metropolitana de Lima, Perú. 
-                        Los datos incluyen supermercados, farmacias, centros comerciales, restaurantes, hoteles, universidades, 
-                        hospitales, parques y plazas reales de Lima.
-                    </p>
-                </div>
-                <div class="col-md-4 text-end">
-                    <div class="row text-center">
-                        <div class="col-6">
-                            <div class="border rounded p-2 bg-light">
-                                <small class="text-muted">Total Clientes</small>
-                                <div class="fw-bold text-primary">1500</div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="border rounded p-2 bg-light">
-                                <small class="text-muted">Distritos</small>
-                                <div class="fw-bold text-success">42</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="row">
     <!-- Estadísticas -->
@@ -185,16 +151,7 @@
     </div>
 </div>
 
-<!-- Botón Limpiar Datos -->
-<div class="row">
-    <div class="col-12">
-        <div class="text-end">
-            <button class="btn btn-outline-warning" onclick="limpiarDatos()">
-                <i class="fas fa-trash me-2"></i>Limpiar Datos
-            </button>
-        </div>
-    </div>
-</div>
+
 {% endblock %}
 
 {% block extra_js %}
@@ -294,18 +251,38 @@ function cargarDatosMapa() {
 }
 
 function cargarEstadisticas() {
-    fetch('/api/estadisticas')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('pedidos-total').textContent = formatNumber(data.pedidos_total);
-            document.getElementById('capacidad-total').textContent = formatNumber(data.capacidad_total);
+    Promise.all([
+        fetch('/api/estadisticas'),
+        fetch('/api/obtener_vehiculos')
+    ])
+    .then(responses => Promise.all(responses.map(r => r.json())))
+    .then(([stats, vehiculosData]) => {
+        document.getElementById('pedidos-total').textContent = formatNumber(stats.pedidos_total);
+        document.getElementById('capacidad-total').textContent = formatNumber(stats.capacidad_total);
+        
+        // Actualizar estadísticas de vehículos si están disponibles
+        if (vehiculosData && vehiculosData.vehiculos) {
+            const totalVehiculos = vehiculosData.vehiculos.length;
+            const capacidadTotal = vehiculosData.vehiculos.reduce((sum, v) => sum + v.capacidad, 0);
             
-            // Actualizar estadísticas de prioridad
-            actualizarEstadisticasPrioridad();
-        })
-        .catch(error => {
-            console.error('Error al cargar estadísticas:', error);
-        });
+            // Actualizar el contador de vehículos en la tarjeta
+            const vehiculosCard = document.querySelector('.card.bg-success h4');
+            if (vehiculosCard) {
+                vehiculosCard.textContent = totalVehiculos;
+            }
+            
+            // Actualizar capacidad total si no está disponible en stats
+            if (!stats.capacidad_total || stats.capacidad_total === 0) {
+                document.getElementById('capacidad-total').textContent = formatNumber(capacidadTotal);
+            }
+        }
+        
+        // Actualizar estadísticas de prioridad
+        actualizarEstadisticasPrioridad();
+    })
+    .catch(error => {
+        console.error('Error al cargar estadísticas:', error);
+    });
 }
 
 function actualizarEstadisticas() {
@@ -313,13 +290,31 @@ function actualizarEstadisticas() {
     
     Promise.all([
         fetch('/api/estadisticas'),
-        fetch('/api/obtener_datos_mapa')
+        fetch('/api/obtener_datos_mapa'),
+        fetch('/api/obtener_vehiculos')
     ])
     .then(responses => Promise.all(responses.map(r => r.json())))
-    .then(([stats, mapaData]) => {
+    .then(([stats, mapaData, vehiculosData]) => {
         // Actualizar estadísticas
         document.getElementById('pedidos-total').textContent = formatNumber(stats.pedidos_total);
         document.getElementById('capacidad-total').textContent = formatNumber(stats.capacidad_total);
+        
+        // Actualizar estadísticas de vehículos si están disponibles
+        if (vehiculosData && vehiculosData.vehiculos) {
+            const totalVehiculos = vehiculosData.vehiculos.length;
+            const capacidadTotal = vehiculosData.vehiculos.reduce((sum, v) => sum + v.capacidad, 0);
+            
+            // Actualizar el contador de vehículos en la tarjeta
+            const vehiculosCard = document.querySelector('.card.bg-success h4');
+            if (vehiculosCard) {
+                vehiculosCard.textContent = totalVehiculos;
+            }
+            
+            // Actualizar capacidad total si no está disponible en stats
+            if (!stats.capacidad_total || stats.capacidad_total === 0) {
+                document.getElementById('capacidad-total').textContent = formatNumber(capacidadTotal);
+            }
+        }
         
         // Actualizar mapa
         cargarDatosMapa();
@@ -489,15 +484,6 @@ function registrarVehiculosEjemplo() {
     });
 }
 
-function limpiarDatos() {
-    if (confirm('¿Estás seguro de que quieres limpiar todos los datos? Esta acción no se puede deshacer.')) {
-        showLoading('Limpiando datos...');
-        
-        // Recargar la página para limpiar datos
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
-    }
-}
+
 </script>
 {% endblock %} 

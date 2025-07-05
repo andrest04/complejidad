@@ -10,14 +10,7 @@
                 <h1 class="h3 mb-0">
                     <i class="fas fa-chart-line me-2"></i>Resultados de Optimización
                 </h1>
-                <div>
-                    <button class="btn btn-outline-primary me-2" onclick="exportarResultados()">
-                        <i class="fas fa-download me-2"></i>Exportar
-                    </button>
-                    <button class="btn btn-outline-secondary" onclick="window.print()">
-                        <i class="fas fa-print me-2"></i>Imprimir
-                    </button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -456,10 +449,7 @@ function generarAlertas(resultados) {
     }
 }
 
-function exportarResultados() {
-    // Aquí se implementaría la exportación de resultados
-    mostrarAlerta('Función de exportación en desarrollo', 'info');
-}
+
 
 function formatearDistancia(distancia) {
     return `${distancia.toFixed(1)} km`;

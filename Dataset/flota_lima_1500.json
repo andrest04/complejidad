@@ -1,0 +1,272 @@
+[
+  {
+    "placa": "ABC-123",
+    "capacidad": 2000,
+    "tipo": "Camión Grande",
+    "descripcion": "Camión de distribución principal"
+  },
+  {
+    "placa": "XYZ-789",
+    "capacidad": 1500,
+    "tipo": "Camión",
+    "descripcion": "Camión de carga media"
+  },
+  {
+    "placa": "DEF-456",
+    "capacidad": 1000,
+    "tipo": "Camión",
+    "descripcion": "Camión estándar"
+  },
+  {
+    "placa": "GHI-789",
+    "capacidad": 800,
+    "tipo": "Furgón Grande",
+    "descripcion": "Furgón de alta capacidad"
+  },
+  {
+    "placa": "JKL-012",
+    "capacidad": 600,
+    "tipo": "Furgón",
+    "descripcion": "Furgón estándar"
+  },
+  {
+    "placa": "MNO-345",
+    "capacidad": 400,
+    "tipo": "Furgón",
+    "descripcion": "Furgón pequeño"
+  },
+  {
+    "placa": "PQR-678",
+    "capacidad": 300,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta de reparto"
+  },
+  {
+    "placa": "STU-901",
+    "capacidad": 250,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta urbana"
+  },
+  {
+    "placa": "VWX-234",
+    "capacidad": 200,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta compacta"
+  },
+  {
+    "placa": "YZA-567",
+    "capacidad": 150,
+    "tipo": "Moto",
+    "descripcion": "Moto de reparto rápido"
+  },
+  {
+    "placa": "BCD-890",
+    "capacidad": 120,
+    "tipo": "Moto",
+    "descripcion": "Moto urbana"
+  },
+  {
+    "placa": "EFG-123",
+    "capacidad": 100,
+    "tipo": "Moto",
+    "descripcion": "Moto de última milla"
+  },
+  {
+    "placa": "HIJ-456",
+    "capacidad": 1800,
+    "tipo": "Camión",
+    "descripcion": "Camión refrigerado"
+  },
+  {
+    "placa": "KLM-789",
+    "capacidad": 1200,
+    "tipo": "Camión",
+    "descripcion": "Camión de reparto"
+  },
+  {
+    "placa": "NOP-012",
+    "capacidad": 900,
+    "tipo": "Furgón",
+    "descripcion": "Furgón refrigerado"
+  },
+  {
+    "placa": "QRS-345",
+    "capacidad": 700,
+    "tipo": "Furgón",
+    "descripcion": "Furgón de reparto"
+  },
+  {
+    "placa": "TUV-678",
+    "capacidad": 500,
+    "tipo": "Furgón",
+    "descripcion": "Furgón urbano"
+  },
+  {
+    "placa": "WXY-901",
+    "capacidad": 350,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta de reparto"
+  },
+  {
+    "placa": "ZAB-234",
+    "capacidad": 280,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta compacta"
+  },
+  {
+    "placa": "CDE-567",
+    "capacidad": 220,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta urbana"
+  },
+  {
+    "placa": "FGH-890",
+    "capacidad": 180,
+    "tipo": "Moto",
+    "descripcion": "Moto de reparto"
+  },
+  {
+    "placa": "IJK-123",
+    "capacidad": 140,
+    "tipo": "Moto",
+    "descripcion": "Moto urbana"
+  },
+  {
+    "placa": "LMN-456",
+    "capacidad": 110,
+    "tipo": "Moto",
+    "descripcion": "Moto de última milla"
+  },
+  {
+    "placa": "OPQ-789",
+    "capacidad": 1600,
+    "tipo": "Camión",
+    "descripcion": "Camión de distribución"
+  },
+  {
+    "placa": "RST-012",
+    "capacidad": 1100,
+    "tipo": "Camión",
+    "descripcion": "Camión de reparto"
+  },
+  {
+    "placa": "UVW-345",
+    "capacidad": 850,
+    "tipo": "Furgón",
+    "descripcion": "Furgón de distribución"
+  },
+  {
+    "placa": "XYZ-678",
+    "capacidad": 650,
+    "tipo": "Furgón",
+    "descripcion": "Furgón de reparto"
+  },
+  {
+    "placa": "ABC-901",
+    "capacidad": 450,
+    "tipo": "Furgón",
+    "descripcion": "Furgón urbano"
+  },
+  {
+    "placa": "DEF-234",
+    "capacidad": 320,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta de reparto"
+  },
+  {
+    "placa": "GHI-567",
+    "capacidad": 260,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta compacta"
+  },
+  {
+    "placa": "JKL-890",
+    "capacidad": 200,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta urbana"
+  },
+  {
+    "placa": "MNO-123",
+    "capacidad": 160,
+    "tipo": "Moto",
+    "descripcion": "Moto de reparto"
+  },
+  {
+    "placa": "PQR-456",
+    "capacidad": 130,
+    "tipo": "Moto",
+    "descripcion": "Moto urbana"
+  },
+  {
+    "placa": "STU-789",
+    "capacidad": 95,
+    "tipo": "Moto",
+    "descripcion": "Moto de última milla"
+  },
+  {
+    "placa": "VWX-012",
+    "capacidad": 1700,
+    "tipo": "Camión",
+    "descripcion": "Camión de distribución"
+  },
+  {
+    "placa": "YZA-345",
+    "capacidad": 1300,
+    "tipo": "Camión",
+    "descripcion": "Camión de reparto"
+  },
+  {
+    "placa": "BCD-678",
+    "capacidad": 950,
+    "tipo": "Furgón",
+    "descripcion": "Furgón de distribución"
+  },
+  {
+    "placa": "EFG-901",
+    "capacidad": 750,
+    "tipo": "Furgón",
+    "descripcion": "Furgón de reparto"
+  },
+  {
+    "placa": "HIJ-234",
+    "capacidad": 550,
+    "tipo": "Furgón",
+    "descripcion": "Furgón urbano"
+  },
+  {
+    "placa": "KLM-567",
+    "capacidad": 380,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta de reparto"
+  },
+  {
+    "placa": "NOP-890",
+    "capacidad": 290,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta compacta"
+  },
+  {
+    "placa": "QRS-123",
+    "capacidad": 230,
+    "tipo": "Camioneta",
+    "descripcion": "Camioneta urbana"
+  },
+  {
+    "placa": "TUV-456",
+    "capacidad": 170,
+    "tipo": "Moto",
+    "descripcion": "Moto de reparto"
+  },
+  {
+    "placa": "WXY-789",
+    "capacidad": 145,
+    "tipo": "Moto",
+    "descripcion": "Moto urbana"
+  },
+  {
+    "placa": "ZAB-012",
+    "capacidad": 105,
+    "tipo": "Moto",
+    "descripcion": "Moto de última milla"
+  }
+] 
