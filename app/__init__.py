@@ -93,7 +93,3 @@ def create_app():
     app.register_blueprint(api_general_bp, url_prefix="/api")
 
     return app
-
-
-# Create the app instance
-app = create_app()

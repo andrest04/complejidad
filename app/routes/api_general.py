@@ -2,12 +2,9 @@ from flask import Blueprint, request, jsonify, current_app
 from datetime import datetime
 import io
 import csv
+from ..utils.calculos_comunes import get_datos_globales
 
 general_bp = Blueprint("general", __name__)
-
-
-def get_datos_globales():
-    return current_app.config["DATOS_GLOBALES"]
 
 
 @general_bp.route("/obtener_datos_mapa")
@@ -157,13 +154,3 @@ def api_cargar_csv():
 
     except Exception as e:
         return jsonify({"error": f"Error al cargar CSV: {str(e)}"}), 500
-
-
-@general_bp.route("/obtener_clientes")
-def api_obtener_clientes():
-    """Obtener lista de clientes"""
-    datos = get_datos_globales()
-    try:
-        return jsonify({"clientes": datos["clientes"]})
-    except Exception as e:
-        return jsonify({"error": f"Error al obtener clientes: {str(e)}"}), 500

@@ -36,16 +36,6 @@ def resultados():
     return render_template("resultados.html", resultados=datos.get("resultados"))
 
 
-@main_bp.route("/test")
-def test_api():
-    return render_template("test_api.html")
-
-
 @main_bp.route("/diagnostico")
 def diagnostico():
     return render_template("diagnostico.html")
-
-
-@main_bp.route("/test_completo")
-def test_completo():
-    return render_template("test_completo.html")
