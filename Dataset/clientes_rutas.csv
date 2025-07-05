@@ -1,0 +1,21 @@
+id,nombre,latitud,longitud,prioridad,ventana_inicio,ventana_fin,pedido
+1,Supermercado Metro,-12.0464,-77.0428,1,08:00,12:00,150.5
+2,Farmacia InkaFarma,-12.0564,-77.0328,2,09:00,17:00,200.0
+3,Restaurante La Mar,-12.0364,-77.0528,3,10:00,16:00,75.25
+4,Centro Comercial Jockey Plaza,-12.0664,-77.0228,1,08:30,11:30,300.0
+5,Hotel Sheraton,-12.0264,-77.0628,4,14:00,18:00,125.75
+6,Universidad Católica,-12.0764,-77.0128,2,07:00,15:00,180.0
+7,Clínica Anglo Americana,-12.0164,-77.0728,1,06:00,14:00,250.0
+8,Plaza Mayor de Lima,-12.0464,-77.0328,5,09:00,18:00,90.0
+9,Aeropuerto Jorge Chávez,-12.0219,-77.1143,1,00:00,23:59,400.0
+10,Mall Aventura,-12.0864,-77.0028,3,10:00,20:00,160.0
+11,Estadio Nacional,-12.0664,-77.0428,4,16:00,22:00,120.0
+12,Parque Kennedy,-12.0364,-77.0228,5,08:00,20:00,80.0
+13,Centro Financiero,-12.0564,-77.0528,2,08:00,18:00,220.0
+14,Hospital Edgardo Rebagliati,-12.0764,-77.0328,1,06:00,16:00,280.0
+15,Plaza San Martín,-12.0464,-77.0128,3,09:00,19:00,110.0
+16,Centro Comercial Larcomar,-12.1364,-77.0228,4,10:00,21:00,140.0
+17,Universidad San Marcos,-12.0564,-77.0728,2,07:00,17:00,190.0
+18,Parque de la Reserva,-12.0664,-77.0128,5,08:00,22:00,70.0
+19,Centro Comercial MegaPlaza,-12.0164,-77.0128,3,09:00,20:00,170.0
+20,Clínica Delgado,-12.0864,-77.0528,1,06:00,14:00,260.0 

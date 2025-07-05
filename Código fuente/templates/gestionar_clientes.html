@@ -1,0 +1,549 @@
+{% extends "layout.html" %}
+
+{% block title %}Gestionar Clientes{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 mb-0">
+                    <i class="fas fa-users me-2"></i>Gestionar Clientes
+                </h1>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">
+                    <i class="fas fa-plus me-2"></i>Nuevo Cliente
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas de clientes -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="card-title">Total Clientes</h6>
+                            <h3 class="mb-0" id="totalClientes">0</h3>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="card-title">Prioridad Alta</h6>
+                            <h3 class="mb-0" id="prioridadAlta">0</h3>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-exclamation-triangle fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="card-title">Pedidos Totales</h6>
+                            <h3 class="mb-0" id="pedidosTotales">0 kg</h3>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-box fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="card-title">Promedio Pedido</h6>
+                            <h3 class="mb-0" id="promedioPedido">0 kg</h3>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-chart-line fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mapa y tabla de clientes -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-map-marked-alt me-2"></i>Mapa de Clientes
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="mapaClientes" style="height: 500px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-list me-2"></i>Lista de Clientes
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <table class="table table-sm table-hover" id="tablaClientes">
+                            <thead class="table-dark sticky-top">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Prioridad</th>
+                                    <th>Pedido</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyClientes">
+                                <!-- Los clientes se cargarán dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para nuevo cliente -->
+<div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="modalClienteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalClienteLabel">
+                    <i class="fas fa-plus me-2"></i>Agregar Nuevo Cliente
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formCliente">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre del Cliente *</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="prioridad" class="form-label">Prioridad *</label>
+                                <select class="form-select" id="prioridad" name="prioridad" required>
+                                    <option value="">Seleccionar prioridad...</option>
+                                    <option value="1">1 - Muy Alta</option>
+                                    <option value="2">2 - Alta</option>
+                                    <option value="3">3 - Media</option>
+                                    <option value="4">4 - Baja</option>
+                                    <option value="5">5 - Muy Baja</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="latitud" class="form-label">Latitud *</label>
+                                <input type="number" class="form-control" id="latitud" name="latitud" 
+                                       required step="0.0001" placeholder="-12.0464">
+                                <div class="form-text">Coordenada latitudinal (ej: -12.0464)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="longitud" class="form-label">Longitud *</label>
+                                <input type="number" class="form-control" id="longitud" name="longitud" 
+                                       required step="0.0001" placeholder="-77.0428">
+                                <div class="form-text">Coordenada longitudinal (ej: -77.0428)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="pedido" class="form-label">Pedido (kg) *</label>
+                                <input type="number" class="form-control" id="pedido" name="pedido" 
+                                       required min="0.1" step="0.1" placeholder="150.5">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="ventana_inicio" class="form-label">Ventana Inicio *</label>
+                                <input type="time" class="form-control" id="ventana_inicio" name="ventana_inicio" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="ventana_fin" class="form-label">Ventana Fin *</label>
+                                <input type="time" class="form-control" id="ventana_fin" name="ventana_fin" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="seleccionarUbicacion()">
+                            <i class="fas fa-map-marker-alt me-2"></i>Seleccionar en Mapa
+                        </button>
+                        <div class="form-text">Haga clic en el mapa para seleccionar la ubicación automáticamente</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Guardar Cliente
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar cliente -->
+<div class="modal fade" id="modalEditarCliente" tabindex="-1" aria-labelledby="modalEditarClienteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarClienteLabel">
+                    <i class="fas fa-edit me-2"></i>Editar Cliente
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formEditarCliente">
+                <div class="modal-body">
+                    <input type="hidden" id="editId" name="id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editNombre" class="form-label">Nombre del Cliente *</label>
+                                <input type="text" class="form-control" id="editNombre" name="nombre" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editPrioridad" class="form-label">Prioridad *</label>
+                                <select class="form-select" id="editPrioridad" name="prioridad" required>
+                                    <option value="1">1 - Muy Alta</option>
+                                    <option value="2">2 - Alta</option>
+                                    <option value="3">3 - Media</option>
+                                    <option value="4">4 - Baja</option>
+                                    <option value="5">5 - Muy Baja</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editLatitud" class="form-label">Latitud *</label>
+                                <input type="number" class="form-control" id="editLatitud" name="latitud" 
+                                       required step="0.0001">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editLongitud" class="form-label">Longitud *</label>
+                                <input type="number" class="form-control" id="editLongitud" name="longitud" 
+                                       required step="0.0001">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="editPedido" class="form-label">Pedido (kg) *</label>
+                                <input type="number" class="form-control" id="editPedido" name="pedido" 
+                                       required min="0.1" step="0.1">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="editVentanaInicio" class="form-label">Ventana Inicio *</label>
+                                <input type="time" class="form-control" id="editVentanaInicio" name="ventana_inicio" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="editVentanaFin" class="form-label">Ventana Fin *</label>
+                                <input type="time" class="form-control" id="editVentanaFin" name="ventana_fin" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let mapaClientes;
+let marcadoresClientes = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+    inicializarMapa();
+    cargarClientes();
+    actualizarEstadisticas();
+    
+    // Formulario para nuevo cliente
+    document.getElementById('formCliente').addEventListener('submit', function(e) {
+        e.preventDefault();
+        agregarCliente();
+    });
+    
+    // Formulario para editar cliente
+    document.getElementById('formEditarCliente').addEventListener('submit', function(e) {
+        e.preventDefault();
+        actualizarCliente();
+    });
+});
+
+function inicializarMapa() {
+    // Inicializar mapa centrado en Lima
+    mapaClientes = L.map('mapaClientes').setView([-12.0464, -77.0428], 12);
+    
+    // Agregar capa de OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(mapaClientes);
+    
+    // Agregar marcador del depósito central
+    const depositoIcon = L.divIcon({
+        className: 'custom-div-icon',
+        html: '<div style="background-color: #dc3545; width: 20px; height: 20px; border-radius: 50%; border: 2px solid white;"></div>',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+    });
+    
+    L.marker([-12.0464, -77.0428], {icon: depositoIcon})
+        .addTo(mapaClientes)
+        .bindPopup('<b>Depósito Central</b><br>Punto de partida de todas las rutas');
+    
+    // Evento de clic en el mapa para seleccionar ubicación
+    mapaClientes.on('click', function(e) {
+        if (document.getElementById('modalCliente').classList.contains('show')) {
+            document.getElementById('latitud').value = e.latlng.lat.toFixed(4);
+            document.getElementById('longitud').value = e.latlng.lng.toFixed(4);
+        }
+    });
+}
+
+function cargarClientes() {
+    fetch('/api/estadisticas')
+        .then(response => response.json())
+        .then(data => {
+            if (data.clientes) {
+                mostrarClientes(data.clientes);
+                agregarMarcadoresMapa(data.clientes);
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar clientes:', error);
+            mostrarAlerta('Error al cargar clientes', 'danger');
+        });
+}
+
+function mostrarClientes(clientes) {
+    const tbody = document.getElementById('tbodyClientes');
+    tbody.innerHTML = '';
+    
+    clientes.forEach(cliente => {
+        const row = document.createElement('tr');
+        const prioridadColor = obtenerColorPrioridad(cliente.prioridad);
+        
+        row.innerHTML = `
+            <td>${cliente.id}</td>
+            <td>${cliente.nombre}</td>
+            <td><span class="badge ${prioridadColor}">${cliente.prioridad}</span></td>
+            <td>${formatearPeso(cliente.pedido)}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="editarCliente(${cliente.id})">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" onclick="eliminarCliente(${cliente.id})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+function agregarMarcadoresMapa(clientes) {
+    // Limpiar marcadores existentes
+    marcadoresClientes.forEach(marcador => mapaClientes.removeLayer(marcador));
+    marcadoresClientes = [];
+    
+    clientes.forEach(cliente => {
+        const color = obtenerColorPrioridad(cliente.prioridad).replace('bg-', '');
+        const icon = L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div style="background-color: ${obtenerColorHex(color)}; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white;"></div>`,
+            iconSize: [15, 15],
+            iconAnchor: [7.5, 7.5]
+        });
+        
+        const marcador = L.marker([cliente.latitud, cliente.longitud], {icon: icon})
+            .addTo(mapaClientes)
+            .bindPopup(`
+                <b>${cliente.nombre}</b><br>
+                Prioridad: ${cliente.prioridad}<br>
+                Pedido: ${formatearPeso(cliente.pedido)}<br>
+                Ventana: ${cliente.ventana_inicio} - ${cliente.ventana_fin}
+            `);
+        
+        marcadoresClientes.push(marcador);
+    });
+}
+
+function agregarCliente() {
+    const formData = new FormData(document.getElementById('formCliente'));
+    const data = {
+        nombre: formData.get('nombre'),
+        latitud: parseFloat(formData.get('latitud')),
+        longitud: parseFloat(formData.get('longitud')),
+        prioridad: parseInt(formData.get('prioridad')),
+        ventana_inicio: formData.get('ventana_inicio'),
+        ventana_fin: formData.get('ventana_fin'),
+        pedido: parseFloat(formData.get('pedido'))
+    };
+    
+    fetch('/api/agregar_cliente', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            mostrarAlerta('Cliente agregado exitosamente', 'success');
+            document.getElementById('formCliente').reset();
+            bootstrap.Modal.getInstance(document.getElementById('modalCliente')).hide();
+            cargarClientes();
+            actualizarEstadisticas();
+        } else {
+            mostrarAlerta(result.error, 'danger');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        mostrarAlerta('Error al agregar cliente', 'danger');
+    });
+}
+
+function editarCliente(id) {
+    // Cargar datos del cliente en el modal
+    fetch('/api/estadisticas')
+        .then(response => response.json())
+        .then(data => {
+            const cliente = data.clientes.find(c => c.id === id);
+            if (cliente) {
+                document.getElementById('editId').value = cliente.id;
+                document.getElementById('editNombre').value = cliente.nombre;
+                document.getElementById('editPrioridad').value = cliente.prioridad;
+                document.getElementById('editLatitud').value = cliente.latitud;
+                document.getElementById('editLongitud').value = cliente.longitud;
+                document.getElementById('editPedido').value = cliente.pedido;
+                document.getElementById('editVentanaInicio').value = cliente.ventana_inicio;
+                document.getElementById('editVentanaFin').value = cliente.ventana_fin;
+                
+                new bootstrap.Modal(document.getElementById('modalEditarCliente')).show();
+            }
+        });
+}
+
+function actualizarCliente() {
+    const formData = new FormData(document.getElementById('formEditarCliente'));
+    const data = {
+        id: parseInt(formData.get('id')),
+        nombre: formData.get('nombre'),
+        latitud: parseFloat(formData.get('latitud')),
+        longitud: parseFloat(formData.get('longitud')),
+        prioridad: parseInt(formData.get('prioridad')),
+        ventana_inicio: formData.get('ventana_inicio'),
+        ventana_fin: formData.get('ventana_fin'),
+        pedido: parseFloat(formData.get('pedido'))
+    };
+    
+    // Aquí se implementaría la API para actualizar cliente
+    mostrarAlerta('Función de edición en desarrollo', 'info');
+    bootstrap.Modal.getInstance(document.getElementById('modalEditarCliente')).hide();
+}
+
+function eliminarCliente(id) {
+    if (confirm('¿Está seguro de eliminar este cliente?')) {
+        // Aquí se implementaría la API para eliminar cliente
+        mostrarAlerta('Función de eliminación en desarrollo', 'info');
+    }
+}
+
+function seleccionarUbicacion() {
+    mostrarAlerta('Haga clic en el mapa para seleccionar la ubicación', 'info');
+}
+
+function actualizarEstadisticas() {
+    fetch('/api/estadisticas')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('totalClientes').textContent = data.total_clientes || 0;
+            document.getElementById('prioridadAlta').textContent = data.prioridad_alta || 0;
+            document.getElementById('pedidosTotales').textContent = formatearPeso(data.pedidos_total || 0);
+            document.getElementById('promedioPedido').textContent = formatearPeso(data.promedio_pedido || 0);
+        })
+        .catch(error => {
+            console.error('Error al cargar estadísticas:', error);
+        });
+}
+
+function obtenerColorPrioridad(prioridad) {
+    switch(prioridad) {
+        case 1: return 'bg-danger';
+        case 2: return 'bg-warning';
+        case 3: return 'bg-info';
+        case 4: return 'bg-primary';
+        case 5: return 'bg-secondary';
+        default: return 'bg-secondary';
+    }
+}
+
+function obtenerColorHex(color) {
+    const colores = {
+        'danger': '#dc3545',
+        'warning': '#ffc107',
+        'info': '#17a2b8',
+        'primary': '#007bff',
+        'secondary': '#6c757d'
+    };
+    return colores[color] || '#6c757d';
+}
+
+function formatearPeso(peso) {
+    return `${peso.toLocaleString()} kg`;
+}
+</script>
+{% endblock %} 

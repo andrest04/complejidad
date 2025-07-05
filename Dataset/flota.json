@@ -1,0 +1,42 @@
+[
+  {
+    "placa": "ABC-123",
+    "capacidad": 1000,
+    "tipo": "Camión"
+  },
+  {
+    "placa": "XYZ-789",
+    "capacidad": 500,
+    "tipo": "Furgón"
+  },
+  {
+    "placa": "DEF-456",
+    "capacidad": 200,
+    "tipo": "Camioneta"
+  },
+  {
+    "placa": "GHI-789",
+    "capacidad": 1500,
+    "tipo": "Camión"
+  },
+  {
+    "placa": "JKL-012",
+    "capacidad": 300,
+    "tipo": "Furgón"
+  },
+  {
+    "placa": "MNO-345",
+    "capacidad": 100,
+    "tipo": "Moto"
+  },
+  {
+    "placa": "PQR-678",
+    "capacidad": 800,
+    "tipo": "Camión"
+  },
+  {
+    "placa": "STU-901",
+    "capacidad": 400,
+    "tipo": "Furgón"
+  }
+] 
