@@ -7,24 +7,6 @@ endblock %} {% block content %}
         <h1 class="h3 mb-0">
           <i class="fas fa-truck me-2"></i>Gestionar Flota de Vehículos
         </h1>
-        <div class="btn-group">
-          <button
-            type="button"
-            class="btn btn-success"
-            onclick="cargarVehiculosManual()"
-            title="Cargar Vehículos"
-          >
-            <i class="fas fa-truck"></i> Cargar Vehículos
-          </button>
-          <button
-            type="button"
-            class="btn btn-info"
-            onclick="actualizarEstadisticasManual()"
-            title="Actualizar Estadísticas"
-          >
-            <i class="fas fa-sync"></i> Estadísticas
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -426,19 +408,6 @@ endblock %} {% block content %}
 
   function formatearFecha(fecha) {
     return new Date(fecha).toLocaleDateString("es-ES");
-  }
-
-  // Funciones manuales para debugging
-  function cargarVehiculosManual() {
-    console.log("🔄 Carga manual de vehículos iniciada...");
-    showToast("Info", "Cargando vehículos manualmente...", "info");
-    cargarVehiculos();
-  }
-
-  function actualizarEstadisticasManual() {
-    console.log("🔄 Actualización manual de estadísticas iniciada...");
-    showToast("Info", "Actualizando estadísticas...", "info");
-    actualizarEstadisticas();
   }
 </script>
 {% endblock %}

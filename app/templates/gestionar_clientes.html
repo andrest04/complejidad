@@ -9,22 +9,6 @@ block content %}
         </h1>
         <div class="btn-group">
           <button
-            type="button"
-            class="btn btn-success"
-            onclick="cargarClientesManual()"
-            title="Cargar Clientes"
-          >
-            <i class="fas fa-users"></i> Cargar Clientes
-          </button>
-          <button
-            type="button"
-            class="btn btn-info"
-            onclick="actualizarEstadisticasManual()"
-            title="Actualizar Estadísticas"
-          >
-            <i class="fas fa-sync"></i> Estadísticas
-          </button>
-          <button
             class="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#modalCliente"
@@ -712,18 +696,6 @@ block content %}
       .catch((error) => {
         console.error("Error al cargar estadísticas:", error);
       });
-  }
-
-  function cargarClientesManual() {
-    console.log("🔄 Carga manual de clientes iniciada...");
-    showToast("Info", "Cargando clientes manualmente...", "info");
-    cargarClientes();
-  }
-
-  function actualizarEstadisticasManual() {
-    console.log("🔄 Actualización manual de estadísticas iniciada...");
-    showToast("Info", "Actualizando estadísticas...", "info");
-    actualizarEstadisticas();
   }
 
   function obtenerColorPrioridad(prioridad) {

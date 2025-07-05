@@ -496,6 +496,13 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTooltips();
     initializePopovers();
     
+    // Cargar mapa automáticamente si estamos en la página principal
+    const mapaContainer = document.getElementById('mapa-principal');
+    if (mapaContainer) {
+        console.log("🗺️ Cargando mapa automáticamente...");
+        cargarMapaManual();
+    }
+    
     // Agregar listeners para formularios
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
