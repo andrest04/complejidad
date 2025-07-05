@@ -7,15 +7,6 @@ block content %}
         <h1 class="h3 mb-0">
           <i class="fas fa-users me-2"></i>Gestionar Clientes
         </h1>
-        <div class="btn-group">
-          <button
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#modalCliente"
-          >
-            <i class="fas fa-plus me-2"></i>Nuevo Cliente
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -127,174 +118,6 @@ block content %}
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal para nuevo cliente -->
-<div
-  class="modal fade"
-  id="modalCliente"
-  tabindex="-1"
-  aria-labelledby="modalClienteLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalClienteLabel">
-          <i class="fas fa-plus me-2"></i>Agregar Nuevo Cliente
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <form id="formCliente">
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="nombre" class="form-label"
-                  >Nombre del Cliente *</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nombre"
-                  name="nombre"
-                  required
-                />
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="prioridad" class="form-label">Prioridad *</label>
-                <select
-                  class="form-select"
-                  id="prioridad"
-                  name="prioridad"
-                  required
-                >
-                  <option value="">Seleccionar prioridad...</option>
-                  <option value="1">1 - Muy Alta</option>
-                  <option value="2">2 - Alta</option>
-                  <option value="3">3 - Media</option>
-                  <option value="4">4 - Baja</option>
-                  <option value="5">5 - Muy Baja</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="latitud" class="form-label">Latitud *</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="latitud"
-                  name="latitud"
-                  required
-                  step="0.0001"
-                  placeholder="-12.0464"
-                />
-                <div class="form-text">
-                  Coordenada latitudinal (ej: -12.0464)
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="longitud" class="form-label">Longitud *</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="longitud"
-                  name="longitud"
-                  required
-                  step="0.0001"
-                  placeholder="-77.0428"
-                />
-                <div class="form-text">
-                  Coordenada longitudinal (ej: -77.0428)
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="pedido" class="form-label">Pedido (kg) *</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="pedido"
-                  name="pedido"
-                  required
-                  min="0.1"
-                  step="0.1"
-                  placeholder="150.5"
-                />
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="ventana_inicio" class="form-label"
-                  >Ventana Inicio *</label
-                >
-                <input
-                  type="time"
-                  class="form-control"
-                  id="ventana_inicio"
-                  name="ventana_inicio"
-                  required
-                />
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="ventana_fin" class="form-label"
-                  >Ventana Fin *</label
-                >
-                <input
-                  type="time"
-                  class="form-control"
-                  id="ventana_fin"
-                  name="ventana_fin"
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <button
-              type="button"
-              class="btn btn-outline-secondary btn-sm"
-              onclick="seleccionarUbicacion()"
-            >
-              <i class="fas fa-map-marker-alt me-2"></i>Seleccionar en Mapa
-            </button>
-            <div class="form-text">
-              Haga clic en el mapa para seleccionar la ubicación automáticamente
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cancelar
-          </button>
-          <button type="submit" class="btn btn-primary">
-            <i class="fas fa-save me-2"></i>Guardar Cliente
-          </button>
-        </div>
-      </form>
     </div>
   </div>
 </div>
@@ -457,14 +280,6 @@ block content %}
     cargarClientes();
     actualizarEstadisticas();
 
-    // Formulario para nuevo cliente
-    document
-      .getElementById("formCliente")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-        agregarCliente();
-      });
-
     // Formulario para editar cliente
     document
       .getElementById("formEditarCliente")
@@ -496,14 +311,6 @@ block content %}
       .bindPopup(
         "<b>Depósito Central</b><br>Punto de partida de todas las rutas"
       );
-
-    // Evento de clic en el mapa para seleccionar ubicación
-    mapaClientes.on("click", function (e) {
-      if (document.getElementById("modalCliente").classList.contains("show")) {
-        document.getElementById("latitud").value = e.latlng.lat.toFixed(4);
-        document.getElementById("longitud").value = e.latlng.lng.toFixed(4);
-      }
-    });
   }
 
   function cargarClientes() {
@@ -584,45 +391,6 @@ block content %}
     });
   }
 
-  function agregarCliente() {
-    const formData = new FormData(document.getElementById("formCliente"));
-    const data = {
-      nombre: formData.get("nombre"),
-      latitud: parseFloat(formData.get("latitud")),
-      longitud: parseFloat(formData.get("longitud")),
-      prioridad: parseInt(formData.get("prioridad")),
-      ventana_inicio: formData.get("ventana_inicio"),
-      ventana_fin: formData.get("ventana_fin"),
-      pedido: parseFloat(formData.get("pedido")),
-    };
-
-    fetch("/api/agregar_cliente", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.success) {
-          mostrarAlerta("Cliente agregado exitosamente", "success");
-          document.getElementById("formCliente").reset();
-          bootstrap.Modal.getInstance(
-            document.getElementById("modalCliente")
-          ).hide();
-          cargarClientes();
-          actualizarEstadisticas();
-        } else {
-          mostrarAlerta(result.error, "danger");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        mostrarAlerta("Error al agregar cliente", "danger");
-      });
-  }
-
   function editarCliente(id) {
     // Cargar datos del cliente en el modal
     fetch("/api/obtener_clientes")
@@ -672,10 +440,6 @@ block content %}
       // Aquí se implementaría la API para eliminar cliente
       mostrarAlerta("Función de eliminación en desarrollo", "info");
     }
-  }
-
-  function seleccionarUbicacion() {
-    mostrarAlerta("Haga clic en el mapa para seleccionar la ubicación", "info");
   }
 
   function actualizarEstadisticas() {
