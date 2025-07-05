@@ -205,25 +205,27 @@ function cargarDatosMapa() {
             marcadores = {};
             
             // Agregar marcadores de clientes
-            data.clientes.forEach(cliente => {
-                const icon = L.divIcon({
-                    className: 'custom-div-icon',
-                    html: `<i class="fas fa-store fa-lg" style="color: ${cliente.color}"></i>`,
-                    iconSize: [20, 20],
-                    iconAnchor: [10, 10]
+            if (data.clientes && data.clientes.length > 0) {
+                data.clientes.forEach(cliente => {
+                    const icon = L.divIcon({
+                        className: 'custom-div-icon',
+                        html: `<i class="fas fa-store fa-lg" style="color: ${cliente.color}"></i>`,
+                        iconSize: [20, 20],
+                        iconAnchor: [10, 10]
+                    });
+                    
+                    const marker = L.marker([cliente.lat, cliente.lng], {icon: icon})
+                        .addTo(mapa)
+                        .bindPopup(`
+                            <b>${cliente.nombre}</b><br>
+                            Prioridad: ${cliente.prioridad}<br>
+                            Pedido: ${formatNumber(cliente.pedido)} kg<br>
+                            Ventana: ${cliente.ventana_inicio} - ${cliente.ventana_fin}
+                        `);
+                    
+                    marcadores[cliente.id] = marker;
                 });
-                
-                const marker = L.marker([cliente.lat, cliente.lng], {icon: icon})
-                    .addTo(mapa)
-                    .bindPopup(`
-                        <b>${cliente.nombre}</b><br>
-                        Prioridad: ${cliente.prioridad}<br>
-                        Pedido: ${formatNumber(cliente.pedido)} kg<br>
-                        Ventana: ${cliente.ventana_inicio} - ${cliente.ventana_fin}
-                    `);
-                
-                marcadores[cliente.id] = marker;
-            });
+            }
             
             // Agregar rutas si existen
             if (data.rutas && data.rutas.length > 0) {

@@ -354,7 +354,7 @@ function inicializarMapa() {
 }
 
 function cargarClientes() {
-    fetch('/api/estadisticas')
+    fetch('/api/obtener_clientes')
         .then(response => response.json())
         .then(data => {
             if (data.clientes) {
@@ -460,7 +460,7 @@ function agregarCliente() {
 
 function editarCliente(id) {
     // Cargar datos del cliente en el modal
-    fetch('/api/estadisticas')
+    fetch('/api/obtener_clientes')
         .then(response => response.json())
         .then(data => {
             const cliente = data.clientes.find(c => c.id === id);

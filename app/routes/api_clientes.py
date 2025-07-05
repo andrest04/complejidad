@@ -5,6 +5,14 @@ clientes_bp = Blueprint('clientes', __name__)
 def get_datos_globales():
     return current_app.config['DATOS_GLOBALES']
 
+@clientes_bp.route('/obtener_clientes')
+def api_obtener_clientes():
+    datos = get_datos_globales()
+    try:
+        return jsonify({'clientes': datos['clientes']})
+    except Exception as e:
+        return jsonify({'error': f'Error al obtener clientes: {str(e)}'}), 500
+
 @clientes_bp.route('/agregar_cliente', methods=['POST'])
 def api_agregar_cliente():
     datos = get_datos_globales()

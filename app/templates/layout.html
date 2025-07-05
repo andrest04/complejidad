@@ -168,6 +168,11 @@
         function formatDistance(km) {
             return `${formatNumber(km)} km`;
         }
+        
+        // Función para mostrar alertas
+        function mostrarAlerta(mensaje, tipo = 'info') {
+            showToast(tipo === 'danger' ? 'Error' : tipo === 'success' ? 'Éxito' : 'Información', mensaje, tipo);
+        }
     </script>
 </body>
 </html> 
