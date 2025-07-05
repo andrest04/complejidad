@@ -78,7 +78,11 @@ def cargar_datos_json():
 print("🚀 Iniciando carga de datos...")
 cargar_datos_csv()
 cargar_datos_json()
-print("✅ Carga de datos completada")
+print(f"✅ Carga de datos completada: {len(datos_globales['clientes'])} clientes, {len(datos_globales['vehiculos'])} vehículos")
+if datos_globales['clientes']:
+    print("Primeros pedidos:", [c['pedido'] for c in datos_globales['clientes'][:5]])
+if datos_globales['vehiculos']:
+    print("Primeras capacidades:", [v['capacidad'] for v in datos_globales['vehiculos'][:5]])
 
 @app.route('/')
 def index():
