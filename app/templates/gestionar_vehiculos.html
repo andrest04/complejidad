@@ -1,25 +1,43 @@
-{% extends "layout.html" %} {% block title %}Gestionar Flota de Vehículos{%
-endblock %} {% block content %}
-<div class="container-fluid">
+{% extends "layout.html" %} {% block title %}Gestionar Vehículos{% endblock %}
+{% block content %}
+<div class="container-fluid py-4">
   <div class="row">
     <div class="col-12">
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0">
-          <i class="fas fa-truck me-2"></i>Gestionar Flota de Vehículos
-        </h1>
+        <h2><i class="fas fa-truck"></i> Gestión de Vehículos</h2>
+        <div>
+          <small class="text-muted">
+            <i class="fas fa-info-circle me-1"></i>
+            Vehículos cargados desde flota_lima_1500.json
+          </small>
+          <button
+            class="btn btn-success me-2"
+            data-bs-toggle="modal"
+            data-bs-target="#modalRegistrarVehiculo"
+          >
+            <i class="fas fa-plus"></i> Registrar Vehículo
+          </button>
+          <button
+            class="btn btn-info"
+            data-bs-toggle="modal"
+            data-bs-target="#modalCargarFlota"
+          >
+            <i class="fas fa-upload"></i> Cargar Flota
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Estadísticas de la flota -->
+  <!-- Estadísticas -->
   <div class="row mb-4">
     <div class="col-md-3">
       <div class="card bg-primary text-white">
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <div>
-              <h6 class="card-title">Total Vehículos</h6>
-              <h3 class="mb-0" id="totalVehiculos">0</h3>
+              <h5 class="card-title">Total Vehículos</h5>
+              <h3 id="total-vehiculos">{{ vehiculos|length }}</h3>
             </div>
             <div class="align-self-center">
               <i class="fas fa-truck fa-2x"></i>
@@ -33,8 +51,10 @@ endblock %} {% block content %}
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <div>
-              <h6 class="card-title">Disponibles</h6>
-              <h3 class="mb-0" id="vehiculosDisponibles">0</h3>
+              <h5 class="card-title">Disponibles</h5>
+              <h3 id="vehiculos-disponibles">
+                {{ vehiculos|selectattr("disponible")|list|length }}
+              </h3>
             </div>
             <div class="align-self-center">
               <i class="fas fa-check-circle fa-2x"></i>
@@ -48,11 +68,13 @@ endblock %} {% block content %}
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <div>
-              <h6 class="card-title">Capacidad Total</h6>
-              <h3 class="mb-0" id="capacidadTotal">0 kg</h3>
+              <h5 class="card-title">Capacidad Total</h5>
+              <h3 id="capacidad-total">
+                {{ vehiculos|sum(attribute='capacidad')|int }} kg
+              </h3>
             </div>
             <div class="align-self-center">
-              <i class="fas fa-weight-hanging fa-2x"></i>
+              <i class="fas fa-weight fa-2x"></i>
             </div>
           </div>
         </div>
@@ -63,11 +85,13 @@ endblock %} {% block content %}
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <div>
-              <h6 class="card-title">Tipos Diferentes</h6>
-              <h3 class="mb-0" id="tiposDiferentes">0</h3>
+              <h5 class="card-title">En Uso</h5>
+              <h3 id="vehiculos-en-uso">
+                {{ vehiculos|rejectattr("disponible")|list|length }}
+              </h3>
             </div>
             <div class="align-self-center">
-              <i class="fas fa-tags fa-2x"></i>
+              <i class="fas fa-route fa-2x"></i>
             </div>
           </div>
         </div>
@@ -75,31 +99,99 @@ endblock %} {% block content %}
     </div>
   </div>
 
-  <!-- Tabla de vehículos -->
+  <!-- Filtros -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <input
+        type="text"
+        class="form-control"
+        id="filtro-placa"
+        placeholder="Buscar por placa..."
+      />
+    </div>
+    <div class="col-md-3">
+      <select class="form-control" id="filtro-tipo">
+        <option value="">Todos los tipos</option>
+        <option value="Camión">Camión</option>
+        <option value="Furgón">Furgón</option>
+        <option value="Camioneta">Camioneta</option>
+        <option value="Moto">Moto</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select class="form-control" id="filtro-estado">
+        <option value="">Todos los estados</option>
+        <option value="true">Disponible</option>
+        <option value="false">En uso</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button
+        class="btn btn-outline-secondary w-100"
+        onclick="limpiarFiltros()"
+      >
+        <i class="fas fa-times"></i> Limpiar
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabla de Vehículos -->
   <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title mb-0">
-            <i class="fas fa-list me-2"></i>Flota de Vehículos
-          </h5>
+          <h5 class="card-title mb-0">Lista de Vehículos</h5>
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-hover" id="tablaVehiculos">
+            <table class="table table-striped table-hover" id="tabla-vehiculos">
               <thead class="table-dark">
                 <tr>
                   <th>ID</th>
                   <th>Placa</th>
                   <th>Tipo</th>
-                  <th>Capacidad (kg)</th>
+                  <th>Modelo</th>
+                  <th>Capacidad</th>
                   <th>Estado</th>
                   <th>Fecha Registro</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
-              <tbody id="tbodyVehiculos">
-                <!-- Los vehículos se cargarán dinámicamente -->
+              <tbody>
+                {% for vehiculo in vehiculos %}
+                <tr>
+                  <td>{{ vehiculo.id }}</td>
+                  <td><strong>{{ vehiculo.placa }}</strong></td>
+                  <td>{{ vehiculo.tipo }}</td>
+                  <td>{{ vehiculo.modelo or 'No especificado' }}</td>
+                  <td>{{ vehiculo.capacidad|int }} kg</td>
+                  <td>
+                    {% if vehiculo.disponible %}
+                    <span class="badge bg-success">Disponible</span>
+                    {% else %}
+                    <span class="badge bg-warning">En uso</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {{ vehiculo.fecha_registro[:10] if vehiculo.fecha_registro
+                    else 'N/A' }}
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-sm btn-outline-primary me-1"
+                      onclick="editarVehiculo({{ vehiculo.id }})"
+                    >
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button
+                      class="btn btn-sm btn-outline-danger"
+                      onclick="eliminarVehiculo({{ vehiculo.id }}, '{{ vehiculo.placa }}')"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
@@ -109,305 +201,422 @@ endblock %} {% block content %}
   </div>
 </div>
 
-<!-- Modal para editar vehículo -->
+<!-- Modal Registrar Vehículo -->
 <div
   class="modal fade"
-  id="modalEditarVehiculo"
+  id="modalRegistrarVehiculo"
   tabindex="-1"
-  aria-labelledby="modalEditarVehiculoLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalEditarVehiculoLabel">
-          <i class="fas fa-edit me-2"></i>Editar Vehículo
-        </h5>
+        <h5 class="modal-title">Registrar Nuevo Vehículo</h5>
         <button
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
-          aria-label="Close"
         ></button>
       </div>
-      <form id="formEditarVehiculo">
-        <div class="modal-body">
-          <input type="hidden" id="editId" name="id" />
+      <div class="modal-body">
+        <form id="form-vehiculo">
           <div class="mb-3">
-            <label for="editPlaca" class="form-label">Placa *</label>
+            <label for="placa" class="form-label">Placa *</label>
             <input
               type="text"
               class="form-control"
-              id="editPlaca"
-              name="placa"
+              id="placa"
               required
-              pattern="[A-Z]{3}-[0-9]{3}"
+              placeholder="ABC-123"
             />
           </div>
-          <div class="mb-3">
-            <label for="editTipo" class="form-label">Tipo de Vehículo *</label>
-            <select class="form-select" id="editTipo" name="tipo" required>
-              <option value="Camión">Camión</option>
-              <option value="Furgón">Furgón</option>
-              <option value="Camioneta">Camioneta</option>
-              <option value="Moto">Moto</option>
-            </select>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="tipo" class="form-label">Tipo *</label>
+                <select class="form-control" id="tipo" required>
+                  <option value="">Seleccionar...</option>
+                  <option value="Camión">Camión</option>
+                  <option value="Furgón">Furgón</option>
+                  <option value="Camioneta">Camioneta</option>
+                  <option value="Moto">Moto</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="capacidad" class="form-label"
+                  >Capacidad (kg) *</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="capacidad"
+                  required
+                  min="1"
+                  placeholder="1000"
+                />
+              </div>
+            </div>
           </div>
           <div class="mb-3">
-            <label for="editCapacidad" class="form-label"
-              >Capacidad (kg) *</label
-            >
+            <label for="modelo" class="form-label">Modelo</label>
             <input
-              type="number"
+              type="text"
               class="form-control"
-              id="editCapacidad"
-              name="capacidad"
-              required
-              min="100"
-              max="5000"
-              step="0.1"
+              id="modelo"
+              placeholder="Opcional"
             />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="registrarVehiculo()"
+        >
+          Registrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cargar Flota -->
+<div class="modal fade" id="modalCargarFlota" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cargar Flota desde JSON</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="archivo-flota" class="form-label"
+            >Seleccionar archivo JSON</label
+          >
+          <input
+            type="file"
+            class="form-control"
+            id="archivo-flota"
+            accept=".json"
+          />
+        </div>
+        <div class="alert alert-info">
+          <strong>Formato esperado:</strong>
+          <pre>
+[
+  {
+    "placa": "ABC-123",
+    "capacidad": 1000,
+    "tipo": "Camión",
+    "modelo": "Volvo FH"
+  }
+]</pre
+          >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-info" onclick="cargarFlota()">
+          Cargar Flota
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Editar Vehículo -->
+<div
+  class="modal fade"
+  id="modalEditarVehiculo"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Vehículo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="form-editar-vehiculo">
+          <input type="hidden" id="edit-vehiculo-id" />
+          <div class="mb-3">
+            <label for="edit-placa" class="form-label">Placa</label>
+            <input type="text" class="form-control" id="edit-placa" readonly />
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="edit-tipo" class="form-label">Tipo</label>
+                <select class="form-control" id="edit-tipo">
+                  <option value="Camión">Camión</option>
+                  <option value="Furgón">Furgón</option>
+                  <option value="Camioneta">Camioneta</option>
+                  <option value="Moto">Moto</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="edit-capacidad" class="form-label"
+                  >Capacidad (kg)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="edit-capacidad"
+                  min="1"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="edit-modelo" class="form-label">Modelo</label>
+            <input type="text" class="form-control" id="edit-modelo" />
           </div>
           <div class="mb-3">
             <div class="form-check">
               <input
                 class="form-check-input"
                 type="checkbox"
-                id="editDisponible"
-                name="disponible"
+                id="edit-disponible"
               />
-              <label class="form-check-label" for="editDisponible">
-                Vehículo disponible
+              <label class="form-check-label" for="edit-disponible">
+                Disponible para rutas
               </label>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cancelar
-          </button>
-          <button type="submit" class="btn btn-primary">
-            <i class="fas fa-save me-2"></i>Guardar Cambios
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="actualizarVehiculo()"
+        >
+          Actualizar
+        </button>
+      </div>
     </div>
   </div>
 </div>
-{% endblock %} {% block scripts %}
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    cargarVehiculos();
-    actualizarEstadisticas();
+  // Variables globales
+  let vehiculos = {{ vehiculos | tojson }};
 
-    // Formulario para editar vehículo
-    document
-      .getElementById("formEditarVehiculo")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-        actualizarVehiculo();
-      });
-  });
+  // Funciones de gestión
+  async function registrarVehiculo() {
+      const form = document.getElementById('form-vehiculo');
+      const formData = new FormData(form);
 
-  function cargarVehiculos() {
-    console.log("Cargando lista de vehículos...");
-    fetch("/api/obtener_vehiculos")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Vehículos recibidos:", data);
-        const tbody = document.getElementById("tbodyVehiculos");
-        if (data.vehiculos && data.vehiculos.length > 0) {
-          tbody.innerHTML = "";
-          data.vehiculos.forEach((vehiculo) => {
-            const row = `
-                        <tr>
-                            <td>${vehiculo.id}</td>
-                            <td><span class="badge bg-secondary">${
-                              vehiculo.placa
-                            }</span></td>
-                            <td>${vehiculo.tipo}</td>
-                            <td>${formatearPeso(vehiculo.capacidad)}</td>
-                            <td>
-                                <span class="badge ${
-                                  vehiculo.disponible
-                                    ? "bg-success"
-                                    : "bg-danger"
-                                }">
-                                    ${
-                                      vehiculo.disponible
-                                        ? "Disponible"
-                                        : "Ocupado"
-                                    }
-                                </span>
-                            </td>
-                            <td>${
-                              vehiculo.fecha_registro
-                                ? formatearFecha(vehiculo.fecha_registro)
-                                : "N/A"
-                            }</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary me-1" onclick="editarVehiculo(${
-                                  vehiculo.id
-                                })" title="Editar">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger" onclick="eliminarVehiculo(${
-                                  vehiculo.id
-                                })" title="Eliminar">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    `;
-            tbody.innerHTML += row;
+      const vehiculoData = {
+          placa: document.getElementById('placa').value.trim(),
+          tipo: document.getElementById('tipo').value,
+          capacidad: parseFloat(document.getElementById('capacidad').value),
+          modelo: document.getElementById('modelo').value.trim()
+      };
+
+      // Validaciones
+      if (!vehiculoData.placa || !vehiculoData.tipo || !vehiculoData.capacidad) {
+          AppUtils.showToast('Error', 'Por favor complete todos los campos requeridos', 'error');
+          return;
+      }
+
+      if (vehiculoData.capacidad <= 0) {
+          AppUtils.showToast('Error', 'La capacidad debe ser mayor a 0', 'error');
+          return;
+      }
+
+      try {
+          AppUtils.showLoading();
+          const response = await AppUtils.apiCall('/api/registrar_vehiculo', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(vehiculoData)
           });
-          console.log(
-            `${data.vehiculos.length} vehículos cargados en la tabla`
-          );
-        } else {
-          tbody.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="text-center py-4">
-                            <i class="fas fa-truck fa-3x text-muted mb-3"></i>
-                            <p class="text-muted">No hay vehículos registrados</p>
-                            <p class="text-muted small">Agregue vehículos usando el botón "Agregar Vehículo"</p>
-                        </td>
-                    </tr>
-                `;
-          console.log("No se encontraron vehículos");
-        }
-      })
-      .catch((error) => {
-        console.error("Error al cargar vehículos:", error);
-        const tbody = document.getElementById("tbodyVehiculos");
-        tbody.innerHTML = `
-                <tr>
-                    <td colspan="7" class="text-center py-4">
-                        <i class="fas fa-exclamation-triangle fa-2x text-danger mb-2"></i>
-                        <p class="text-danger">Error al cargar vehículos</p>
-                        <p class="text-muted small">${error.message}</p>
-                    </td>
-                </tr>
-            `;
+
+          if (response.success) {
+              AppUtils.showToast('Éxito', response.message, 'success');
+              bootstrap.Modal.getInstance(document.getElementById('modalRegistrarVehiculo')).hide();
+              form.reset();
+              location.reload(); // Recargar para mostrar el nuevo vehículo
+          } else {
+              AppUtils.showToast('Error', response.error || 'Error al registrar vehículo', 'error');
+          }
+      } catch (error) {
+          AppUtils.showToast('Error', 'Error de conexión: ' + error.message, 'error');
+      } finally {
+          AppUtils.hideLoading();
+      }
+  }
+
+  async function cargarFlota() {
+      const archivoInput = document.getElementById('archivo-flota');
+      const archivo = archivoInput.files[0];
+
+      if (!archivo) {
+          AppUtils.showToast('Error', 'Por favor seleccione un archivo', 'error');
+          return;
+      }
+
+      const formData = new FormData();
+      formData.append('archivo', archivo);
+
+      try {
+          AppUtils.showLoading();
+          const response = await AppUtils.uploadFile('/api/cargar_flota', formData);
+
+          if (response.success) {
+              AppUtils.showToast('Éxito', response.message, 'success');
+              bootstrap.Modal.getInstance(document.getElementById('modalCargarFlota')).hide();
+              archivoInput.value = '';
+              location.reload();
+          } else {
+              AppUtils.showToast('Error', response.error || 'Error al cargar flota', 'error');
+          }
+      } catch (error) {
+          AppUtils.showToast('Error', 'Error de conexión: ' + error.message, 'error');
+      } finally {
+          AppUtils.hideLoading();
+      }
+  }
+
+  async function editarVehiculo(vehiculoId) {
+      const vehiculo = vehiculos.find(v => v.id === vehiculoId);
+      if (!vehiculo) {
+          AppUtils.showToast('Error', 'Vehículo no encontrado', 'error');
+          return;
+      }
+
+      // Llenar el formulario de edición
+      document.getElementById('edit-vehiculo-id').value = vehiculo.id;
+      document.getElementById('edit-placa').value = vehiculo.placa;
+      document.getElementById('edit-tipo').value = vehiculo.tipo;
+      document.getElementById('edit-capacidad').value = vehiculo.capacidad;
+      document.getElementById('edit-modelo').value = vehiculo.modelo || '';
+      document.getElementById('edit-disponible').checked = vehiculo.disponible;
+
+      // Mostrar modal
+      new bootstrap.Modal(document.getElementById('modalEditarVehiculo')).show();
+  }
+
+  async function actualizarVehiculo() {
+      const vehiculoId = document.getElementById('edit-vehiculo-id').value;
+      const vehiculoData = {
+          tipo: document.getElementById('edit-tipo').value,
+          capacidad: parseFloat(document.getElementById('edit-capacidad').value),
+          modelo: document.getElementById('edit-modelo').value.trim(),
+          disponible: document.getElementById('edit-disponible').checked
+      };
+
+      if (vehiculoData.capacidad <= 0) {
+          AppUtils.showToast('Error', 'La capacidad debe ser mayor a 0', 'error');
+          return;
+      }
+
+      try {
+          AppUtils.showLoading();
+          const response = await AppUtils.apiCall(`/api/actualizar_vehiculo/${vehiculoId}`, {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(vehiculoData)
+          });
+
+          if (response.success) {
+              AppUtils.showToast('Éxito', response.message, 'success');
+              bootstrap.Modal.getInstance(document.getElementById('modalEditarVehiculo')).hide();
+              location.reload();
+          } else {
+              AppUtils.showToast('Error', response.error || 'Error al actualizar vehículo', 'error');
+          }
+      } catch (error) {
+          AppUtils.showToast('Error', 'Error de conexión: ' + error.message, 'error');
+      } finally {
+          AppUtils.hideLoading();
+      }
+  }
+
+  async function eliminarVehiculo(vehiculoId, placa) {
+      if (!confirm(`¿Está seguro que desea eliminar el vehículo ${placa}?`)) {
+          return;
+      }
+
+      try {
+          AppUtils.showLoading();
+          const response = await AppUtils.apiCall(`/api/eliminar_vehiculo/${vehiculoId}`, {
+              method: 'DELETE'
+          });
+
+          if (response.success) {
+              AppUtils.showToast('Éxito', response.message, 'success');
+              location.reload();
+          } else {
+              AppUtils.showToast('Error', response.error || 'Error al eliminar vehículo', 'error');
+          }
+      } catch (error) {
+          AppUtils.showToast('Error', 'Error de conexión: ' + error.message, 'error');
+      } finally {
+          AppUtils.hideLoading();
+      }
+  }
+
+  // Funciones de filtrado
+  function aplicarFiltros() {
+      const filtroPlaca = document.getElementById('filtro-placa').value.toLowerCase();
+      const filtroTipo = document.getElementById('filtro-tipo').value;
+      const filtroEstado = document.getElementById('filtro-estado').value;
+      const filas = document.querySelectorAll('#tabla-vehiculos tbody tr');
+
+      filas.forEach(fila => {
+          const placa = fila.cells[1].textContent.toLowerCase();
+          const tipo = fila.cells[2].textContent;
+          const estado = fila.cells[5].textContent.includes('Disponible') ? 'true' : 'false';
+
+          const cumplePlaca = !filtroPlaca || placa.includes(filtroPlaca);
+          const cumpleTipo = !filtroTipo || tipo === filtroTipo;
+          const cumpleEstado = !filtroEstado || estado === filtroEstado;
+
+          fila.style.display = cumplePlaca && cumpleTipo && cumpleEstado ? '' : 'none';
       });
   }
 
-  function mostrarVehiculos(vehiculos) {
-    const tbody = document.getElementById("tbodyVehiculos");
-    tbody.innerHTML = "";
-
-    vehiculos.forEach((vehiculo) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-            <td>${vehiculo.id}</td>
-            <td><span class="badge bg-secondary">${vehiculo.placa}</span></td>
-            <td>${vehiculo.tipo}</td>
-            <td>${formatearPeso(vehiculo.capacidad)}</td>
-            <td>
-                <span class="badge ${
-                  vehiculo.disponible ? "bg-success" : "bg-danger"
-                }">
-                    ${vehiculo.disponible ? "Disponible" : "Ocupado"}
-                </span>
-            </td>
-            <td>${formatearFecha(vehiculo.fecha_registro)}</td>
-            <td>
-                <button class="btn btn-sm btn-outline-primary" onclick="editarVehiculo(${
-                  vehiculo.id
-                })">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn btn-sm btn-outline-danger" onclick="eliminarVehiculo(${
-                  vehiculo.id
-                })">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </td>
-        `;
-      tbody.appendChild(row);
-    });
+  function limpiarFiltros() {
+      document.getElementById('filtro-placa').value = '';
+      document.getElementById('filtro-tipo').value = '';
+      document.getElementById('filtro-estado').value = '';
+      aplicarFiltros();
   }
 
-  function editarVehiculo(id) {
-    // Cargar datos del vehículo en el modal
-    fetch("/api/obtener_vehiculos")
-      .then((response) => response.json())
-      .then((data) => {
-        const vehiculo = data.vehiculos.find((v) => v.id === id);
-        if (vehiculo) {
-          document.getElementById("editId").value = vehiculo.id;
-          document.getElementById("editPlaca").value = vehiculo.placa;
-          document.getElementById("editTipo").value = vehiculo.tipo;
-          document.getElementById("editCapacidad").value = vehiculo.capacidad;
-          document.getElementById("editDisponible").checked =
-            vehiculo.disponible;
-
-          new bootstrap.Modal(
-            document.getElementById("modalEditarVehiculo")
-          ).show();
-        }
-      });
-  }
-
-  function actualizarVehiculo() {
-    const formData = new FormData(
-      document.getElementById("formEditarVehiculo")
-    );
-    const data = {
-      id: parseInt(formData.get("id")),
-      placa: formData.get("placa"),
-      tipo: formData.get("tipo"),
-      capacidad: parseFloat(formData.get("capacidad")),
-      disponible: formData.get("disponible") === "on",
-    };
-
-    // Aquí se implementaría la API para actualizar vehículo
-    mostrarAlerta("Función de edición en desarrollo", "info");
-    bootstrap.Modal.getInstance(
-      document.getElementById("modalEditarVehiculo")
-    ).hide();
-  }
-
-  function eliminarVehiculo(id) {
-    if (confirm("¿Está seguro de eliminar este vehículo?")) {
-      // Aquí se implementaría la API para eliminar vehículo
-      mostrarAlerta("Función de eliminación en desarrollo", "info");
-    }
-  }
-
-  function actualizarEstadisticas() {
-    Promise.all([fetch("/api/estadisticas"), fetch("/api/obtener_vehiculos")])
-      .then((responses) => Promise.all(responses.map((r) => r.json())))
-      .then(([stats, vehiculosData]) => {
-        document.getElementById("totalVehiculos").textContent =
-          stats.total_vehiculos || 0;
-        document.getElementById("vehiculosDisponibles").textContent =
-          stats.vehiculos_disponibles || 0;
-        document.getElementById("capacidadTotal").textContent = formatearPeso(
-          stats.capacidad_total || 0
-        );
-
-        // Calcular tipos diferentes
-        if (vehiculosData && vehiculosData.vehiculos) {
-          const tipos = new Set(vehiculosData.vehiculos.map((v) => v.tipo));
-          document.getElementById("tiposDiferentes").textContent = tipos.size;
-        }
-      })
-      .catch((error) => {
-        console.error("Error al cargar estadísticas:", error);
-      });
-  }
-
-  function formatearPeso(peso) {
-    return `${peso.toLocaleString()} kg`;
-  }
-
-  function formatearFecha(fecha) {
-    return new Date(fecha).toLocaleDateString("es-ES");
-  }
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', function() {
+      // Aplicar filtros en tiempo real
+      document.getElementById('filtro-placa').addEventListener('input', aplicarFiltros);
+      document.getElementById('filtro-tipo').addEventListener('change', aplicarFiltros);
+      document.getElementById('filtro-estado').addEventListener('change', aplicarFiltros);
+  });
 </script>
 {% endblock %}

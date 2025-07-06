@@ -68,6 +68,77 @@ endblock %} {% block content %}
   </div>
 </div>
 
+<!-- Acciones Rápidas -->
+<div class="row mb-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title mb-0">
+          <i class="fas fa-bolt me-2"></i>Acciones Rápidas
+        </h6>
+      </div>
+      <div class="card-body">
+        <div class="row g-2">
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <a
+              href="{{ url_for('main.gestionar_vehiculos') }}"
+              class="btn btn-outline-primary w-100"
+            >
+              <i class="fas fa-truck me-1"></i>
+              <br /><small>Gestionar Vehículos</small>
+            </a>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <a
+              href="{{ url_for('main.gestionar_clientes') }}"
+              class="btn btn-outline-info w-100"
+            >
+              <i class="fas fa-users me-1"></i>
+              <br /><small>Gestionar Clientes</small>
+            </a>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <a
+              href="{{ url_for('main.ejecutar') }}"
+              class="btn btn-outline-success w-100"
+            >
+              <i class="fas fa-cogs me-1"></i>
+              <br /><small>Ejecutar Algoritmo</small>
+            </a>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <a
+              href="{{ url_for('main.resultados') }}"
+              class="btn btn-outline-warning w-100"
+            >
+              <i class="fas fa-chart-line me-1"></i>
+              <br /><small>Ver Resultados</small>
+            </a>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <button
+              class="btn btn-outline-secondary w-100"
+              onclick="cargarDatosEjemplo()"
+            >
+              <i class="fas fa-database me-1"></i>
+              <br /><small>Datos Ejemplo</small>
+            </button>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <a
+              href="{{ url_for('main.diagnostico') }}"
+              class="btn btn-outline-dark w-100"
+            >
+              <i class="fas fa-stethoscope me-1"></i>
+              <br /><small>Diagnóstico</small>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <!-- Mapa Principal -->
   <div class="col-lg-8 mb-4">
@@ -801,7 +872,7 @@ endblock %} {% block content %}
   function cargarDatosEjemplo() {
     showLoading("Cargando datos de ejemplo...");
 
-    // Crear datos de ejemplo
+    // Crear datos de ejemplo para clientes
     const datosEjemplo = `id,nombre,latitud,longitud,prioridad,ventana_inicio,ventana_fin,pedido
   1,Cliente A,-12.0464,-77.0428,1,08:00,12:00,150.5
   2,Cliente B,-12.0564,-77.0328,2,09:00,17:00,200.0
@@ -815,17 +886,18 @@ endblock %} {% block content %}
     const formData = new FormData();
     formData.append("archivo", file);
 
+    // Cargar clientes primero
     fetch("/api/cargar_csv", {
       method: "POST",
       body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
-        hideLoading();
         if (data.success) {
-          showToast("Éxito", data.message, "success");
-          actualizarEstadisticas();
+          // Después cargar vehículos de ejemplo
+          registrarVehiculosEjemplo();
         } else {
+          hideLoading();
           showToast("Error", data.error, "error");
         }
       })
@@ -862,7 +934,7 @@ endblock %} {% block content %}
             hideLoading();
             showToast(
               "Éxito",
-              `${registrados} vehículos registrados correctamente`,
+              `Datos de ejemplo cargados: ${registrados} vehículos registrados`,
               "success"
             );
             actualizarEstadisticas();
