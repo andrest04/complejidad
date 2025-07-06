@@ -164,58 +164,14 @@ endblock %} {% block content %}
 
 {% endblock %} {% block extra_js %}
 <script>
-  // Funciones de utilidad
-  function formatNumber(num) {
-    return new Intl.NumberFormat("es-PE").format(num);
-  }
+  // Variables globales para evitar conflictos
+  let mapa = null;
+  let marcadores = [];
+  let capas = { clientes: true, vehiculos: false, rutas: false };
+  let datosCache = null; // Cache para evitar llamadas repetidas
+  let cargandoDatos = false; // Evitar múltiples cargas simultáneas
 
-  function formatTime(minutes) {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return `${hours}h ${mins}m`;
-  }
-
-  function formatDistance(km) {
-    return `${formatNumber(km)} km`;
-  }
-
-  // Función de notificaciones
-  function showToast(title, message, type = "info") {
-    console.log("Toast:", title, message, type);
-    // Buscar el elemento toast
-    const toast = document.getElementById("toast");
-    const toastTitle = document.getElementById("toast-title");
-    const toastMessage = document.getElementById("toast-message");
-
-    if (toast && toastTitle && toastMessage) {
-      toastTitle.textContent = title;
-      toastMessage.textContent = message;
-
-      // Cambiar clase según tipo
-      toast.className = `toast ${
-        type === "error"
-          ? "bg-danger text-white"
-          : type === "success"
-          ? "bg-success text-white"
-          : ""
-      }`;
-
-      const bsToast = new bootstrap.Toast(toast);
-      bsToast.show();
-    } else {
-      // Fallback si no existe el toast
-      console.log(`${title}: ${message}`);
-      alert(`${title}: ${message}`);
-    }
-  }
-
-  let mapa;
-  let marcadores = {};
-  let capas = {
-    clientes: true,
-    rutas: false,
-    congestion: false,
-  };
+  // Las funciones de utilidad están disponibles desde scripts.js
 
   // Inicializar mapa
   document.addEventListener("DOMContentLoaded", function () {
@@ -267,6 +223,23 @@ endblock %} {% block content %}
 
   function inicializarMapa() {
     console.log("Inicializando mapa...");
+
+    // Verificar si el mapa ya existe
+    if (mapa) {
+      console.log("Mapa ya existe, saltando inicialización");
+      return;
+    }
+
+    // Verificar si el contenedor ya tiene un mapa
+    const container = document.getElementById("mapa-principal");
+    if (container._leaflet_id) {
+      console.log("Contenedor ya tiene un mapa, limpiando...");
+      if (mapa) {
+        mapa.remove();
+      }
+      container._leaflet_id = null;
+    }
+
     try {
       // Crear mapa centrado en Lima
       mapa = L.map("mapa-principal").setView([-12.0464, -77.0428], 12);
@@ -308,111 +281,175 @@ endblock %} {% block content %}
 
   function cargarDatosMapa() {
     console.log("Iniciando carga de datos del mapa...");
-    fetch("/api/obtener_datos_mapa")
+
+    // Evitar múltiples cargas simultáneas
+    if (cargandoDatos) {
+      console.log("Ya se están cargando los datos, evitando duplicación");
+      return Promise.resolve();
+    }
+
+    // Si tenemos datos en cache, usarlos
+    if (datosCache) {
+      console.log("Usando datos del cache");
+      procesarDatosMapa(datosCache);
+      return Promise.resolve();
+    }
+
+    cargandoDatos = true;
+
+    // Intentar primero obtener_datos_mapa, luego obtener_clientes como fallback
+    return fetch("/api/obtener_datos_mapa")
       .then((response) => {
-        console.log("Respuesta recibida:", response.status);
+        console.log("Respuesta obtener_datos_mapa:", response.status);
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Datos recibidos:", data);
-        console.log(
-          "Número de clientes:",
-          data.clientes ? data.clientes.length : 0
-        );
-
-        // Limpiar marcadores existentes
-        Object.values(marcadores).forEach((marker) => mapa.removeLayer(marker));
-        marcadores = {};
-
-        // Agregar marcadores de clientes (limitamos a 100 para mejor rendimiento)
-        if (data.clientes && data.clientes.length > 0) {
-          console.log("Agregando marcadores de clientes...");
-          let clientesAgregados = 0;
-
-          // Solo mostrar los primeros 100 clientes para mejor rendimiento
-          const clientesAMostrar = data.clientes.slice(0, 100);
-
-          clientesAMostrar.forEach((cliente) => {
-            try {
-              const icon = L.divIcon({
-                className: "custom-div-icon",
-                html: `<i class="fas fa-store" style="color: ${cliente.color}"></i>`,
-                iconSize: [15, 15],
-                iconAnchor: [7, 7],
-              });
-
-              const marker = L.marker([cliente.lat, cliente.lng], {
-                icon: icon,
-              }).addTo(mapa).bindPopup(`
-                                <b>${cliente.nombre}</b><br>
-                                Prioridad: ${cliente.prioridad}<br>
-                                Pedido: ${formatNumber(cliente.pedido)} kg<br>
-                                Ventana: ${cliente.ventana_inicio} - ${
-                cliente.ventana_fin
-              }
-                            `);
-
-              marcadores[cliente.id] = marker;
-              clientesAgregados++;
-            } catch (error) {
-              console.error("Error al agregar cliente:", cliente, error);
+        console.log("Datos del mapa recibidos:", data);
+        datosCache = data; // Guardar en cache
+        procesarDatosMapa(data);
+      })
+      .catch((error) => {
+        console.warn("Error en obtener_datos_mapa, usando fallback:", error);
+        // Fallback: usar obtener_clientes
+        return fetch("/api/obtener_clientes")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}`);
             }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Datos de clientes (fallback) recibidos:", data);
+            // Adaptar formato para la función procesarDatosMapa
+            const datosFallback = {
+              clientes: data.clientes || [],
+              rutas: [],
+            };
+            datosCache = datosFallback; // Guardar en cache
+            procesarDatosMapa(datosFallback);
           });
-          console.log(
-            `${clientesAgregados} marcadores de clientes agregados (de ${data.clientes.length} totales)`
-          );
-
-          // Mostrar notificación si hay más clientes
-          if (data.clientes.length > 100) {
-            showToast(
-              "Info",
-              `Mostrando 100 de ${data.clientes.length} clientes para mejor rendimiento`,
-              "info"
-            );
-          }
-        } else {
-          console.warn("No se encontraron clientes en los datos");
-          showToast(
-            "Advertencia",
-            "No se encontraron datos de clientes",
-            "warning"
-          );
-        }
-
-        // Agregar rutas si existen
-        if (data.rutas && data.rutas.length > 0) {
-          console.log("Agregando rutas...");
-          data.rutas.forEach((ruta) => {
-            const polyline = L.polyline(ruta.coordenadas, {
-              color: ruta.color,
-              weight: 3,
-              opacity: 0.7,
-            }).addTo(mapa);
-
-            polyline.bindPopup(`
-                        <b>Ruta ${ruta.id}</b><br>
-                        Vehículo: ${ruta.placa}<br>
-                        Distancia: ${formatDistance(ruta.distancia_total)}<br>
-                        Tiempo: ${formatTime(ruta.tiempo_estimado)}<br>
-                        Carga: ${formatNumber(ruta.carga_total)} kg
-                    `);
-          });
-          console.log("Rutas agregadas");
-        } else {
-          console.log("No hay rutas para mostrar");
-        }
       })
       .catch((error) => {
         console.error("Error al cargar datos del mapa:", error);
-        showToast(
-          "Error",
-          "No se pudieron cargar los datos del mapa: " + error.message,
-          "error"
-        );
+        showToast("Error", "No se pudieron cargar los datos del mapa", "error");
+      })
+      .finally(() => {
+        cargandoDatos = false;
       });
+  }
+
+  function procesarDatosMapa(data) {
+    console.log("Procesando datos del mapa:", data);
+    console.log(
+      "Número de clientes:",
+      data.clientes ? data.clientes.length : 0
+    );
+
+    if (!mapa) {
+      console.warn("Mapa no inicializado, no se pueden agregar datos");
+      return;
+    }
+
+    // Limpiar marcadores existentes
+    Object.values(marcadores).forEach((marker) => mapa.removeLayer(marker));
+    marcadores = {};
+
+    // Agregar marcadores de clientes (limitamos a 100 para mejor rendimiento)
+    if (data.clientes && data.clientes.length > 0) {
+      console.log("Agregando marcadores de clientes...");
+      let clientesAgregados = 0;
+
+      // Solo mostrar los primeros 100 clientes para mejor rendimiento
+      const clientesAMostrar = data.clientes.slice(0, 100);
+
+      clientesAMostrar.forEach((cliente) => {
+        try {
+          // Usar latitud/longitud o lat/lng según disponibilidad
+          const lat = cliente.lat || cliente.latitud;
+          const lng = cliente.lng || cliente.longitud;
+
+          if (!lat || !lng) {
+            console.warn("Cliente sin coordenadas:", cliente);
+            return;
+          }
+
+          const icon = L.divIcon({
+            className: "custom-div-icon",
+            html: `<i class="fas fa-store" style="color: ${
+              cliente.color || "#007bff"
+            }"></i>`,
+            iconSize: [15, 15],
+            iconAnchor: [7, 7],
+          });
+
+          const marker = L.marker([parseFloat(lat), parseFloat(lng)], {
+            icon: icon,
+          }).addTo(mapa).bindPopup(`
+                              <b>${cliente.nombre}</b><br>
+                              Prioridad: ${cliente.prioridad || "N/A"}<br>
+                              Pedido: ${
+                                cliente.pedido
+                                  ? formatNumber(cliente.pedido)
+                                  : "N/A"
+                              } kg<br>
+                              Ventana: ${cliente.ventana_inicio || "N/A"} - ${
+            cliente.ventana_fin || "N/A"
+          }
+                          `);
+
+          marcadores[cliente.id] = marker;
+          clientesAgregados++;
+        } catch (error) {
+          console.error("Error al agregar cliente:", cliente, error);
+        }
+      });
+
+      console.log(
+        `${clientesAgregados} marcadores de clientes agregados (de ${data.clientes.length} totales)`
+      );
+
+      // Mostrar notificación si hay más clientes
+      if (data.clientes.length > 100) {
+        showToast(
+          "Info",
+          `Mostrando 100 de ${data.clientes.length} clientes para mejor rendimiento`,
+          "info"
+        );
+      }
+    } else {
+      console.warn("No se encontraron clientes en los datos");
+      showToast(
+        "Advertencia",
+        "No se encontraron datos de clientes",
+        "warning"
+      );
+    }
+
+    // Agregar rutas si existen
+    if (data.rutas && data.rutas.length > 0) {
+      console.log("Agregando rutas...");
+      data.rutas.forEach((ruta) => {
+        const polyline = L.polyline(ruta.coordenadas, {
+          color: ruta.color,
+          weight: 3,
+          opacity: 0.7,
+        }).addTo(mapa);
+
+        polyline.bindPopup(`
+                      <b>Ruta ${ruta.id}</b><br>
+                      Vehículo: ${ruta.placa}<br>
+                      Distancia: ${formatDistance(ruta.distancia_total)}<br>
+                      Tiempo: ${formatTime(ruta.tiempo_estimado)}<br>
+                      Carga: ${formatNumber(ruta.carga_total)} kg
+                  `);
+      });
+      console.log("Rutas agregadas");
+    } else {
+      console.log("No hay rutas para mostrar");
+    }
   }
 
   function cargarEstadisticas() {
@@ -463,8 +500,10 @@ endblock %} {% block content %}
           );
         }
 
-        // Actualizar estadísticas de prioridad
-        actualizarEstadisticasPrioridad();
+        // Actualizar estadísticas de prioridad (sin esperar su resultado en la inicialización)
+        actualizarEstadisticasPrioridad().catch((error) => {
+          console.warn("Error al actualizar estadísticas de prioridad:", error);
+        });
       })
       .catch((error) => {
         console.error("Error al cargar estadísticas:", error);
@@ -479,20 +518,44 @@ endblock %} {% block content %}
   function actualizarEstadisticas() {
     showLoading("Actualizando estadísticas...");
 
-    Promise.all([
-      fetch("/api/estadisticas"),
-      fetch("/api/obtener_datos_mapa"),
-      fetch("/api/obtener_vehiculos"),
-    ])
-      .then((responses) => Promise.all(responses.map((r) => r.json())))
-      .then(([stats, mapaData, vehiculosData]) => {
-        // Actualizar estadísticas
-        document.getElementById("pedidos-total").textContent = formatNumber(
-          stats.pedidos_total
+    // Timeout de seguridad para ocultar el modal después de 30 segundos
+    const timeoutId = setTimeout(() => {
+      console.warn(
+        "Timeout: ocultando modal de loading después de 30 segundos"
+      );
+      hideLoading();
+      showToast(
+        "Advertencia",
+        "La actualización está tomando más tiempo del esperado",
+        "warning"
+      );
+    }, 30000);
+
+    Promise.all([fetch("/api/estadisticas"), fetch("/api/obtener_vehiculos")])
+      .then((responses) => {
+        console.log(
+          "Respuestas recibidas:",
+          responses.map((r) => r.status)
         );
-        document.getElementById("capacidad-total").textContent = formatNumber(
-          stats.capacidad_total
-        );
+        return Promise.all(responses.map((r) => r.json()));
+      })
+      .then(([stats, vehiculosData]) => {
+        console.log("Estadísticas:", stats);
+        console.log("Datos de vehículos:", vehiculosData);
+
+        // Actualizar estadísticas básicas
+        const pedidosElement = document.getElementById("pedidos-total");
+        const capacidadElement = document.getElementById("capacidad-total");
+
+        if (pedidosElement && stats.pedidos_total !== undefined) {
+          pedidosElement.textContent = formatNumber(stats.pedidos_total);
+          console.log("Pedidos total actualizado:", stats.pedidos_total);
+        }
+
+        if (capacidadElement && stats.capacidad_total !== undefined) {
+          capacidadElement.textContent = formatNumber(stats.capacidad_total);
+          console.log("Capacidad total actualizada:", stats.capacidad_total);
+        }
 
         // Actualizar estadísticas de vehículos si están disponibles
         if (vehiculosData && vehiculosData.vehiculos) {
@@ -510,17 +573,39 @@ endblock %} {% block content %}
 
           // Actualizar capacidad total si no está disponible en stats
           if (!stats.capacidad_total || stats.capacidad_total === 0) {
-            document.getElementById("capacidad-total").textContent =
-              formatNumber(capacidadTotal);
+            const capacidadElement = document.getElementById("capacidad-total");
+            if (capacidadElement) {
+              capacidadElement.textContent = formatNumber(capacidadTotal);
+            }
           }
         }
 
-        // Actualizar mapa
-        cargarDatosMapa();
+        // Actualizar estadísticas de prioridad
+        const promesaPrioridad = actualizarEstadisticasPrioridad();
 
-        // Actualizar gráfico
-        actualizarGraficoPrioridades(mapaData.clientes);
+        // Usar datos del mapa (cache primero, luego cargar si es necesario)
+        let promesaGrafico = Promise.resolve();
 
+        if (datosCache && datosCache.clientes) {
+          console.log("Usando datos de cache para gráfico");
+          actualizarGraficoPrioridades(datosCache.clientes);
+        } else {
+          // Intentar cargar datos del mapa para el gráfico
+          promesaGrafico = cargarDatosMapa()
+            .then(() => {
+              if (datosCache && datosCache.clientes) {
+                actualizarGraficoPrioridades(datosCache.clientes);
+              }
+            })
+            .catch((error) => {
+              console.warn("Error al cargar datos para gráfico:", error);
+            });
+        }
+
+        return Promise.all([promesaPrioridad, promesaGrafico]);
+      })
+      .then(() => {
+        clearTimeout(timeoutId); // Cancelar el timeout si todo salió bien
         hideLoading();
         showToast(
           "Éxito",
@@ -529,86 +614,163 @@ endblock %} {% block content %}
         );
       })
       .catch((error) => {
+        clearTimeout(timeoutId); // Cancelar el timeout en caso de error
         hideLoading();
         console.error("Error al actualizar estadísticas:", error);
         showToast(
           "Error",
-          "No se pudieron actualizar las estadísticas",
+          "Error al actualizar estadísticas: " + error.message,
           "error"
         );
       });
   }
 
   function actualizarEstadisticasPrioridad() {
-    fetch("/api/obtener_datos_mapa")
-      .then((response) => response.json())
+    // Primero verificar si tenemos datos en cache
+    if (datosCache && datosCache.clientes) {
+      console.log("Usando datos de cache para estadísticas de prioridad");
+      procesarEstadisticasPrioridad(datosCache.clientes);
+      return Promise.resolve();
+    }
+
+    // Intentar obtener_datos_mapa, luego obtener_clientes como fallback
+    return fetch("/api/obtener_datos_mapa")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
-        const prioridadAlta = data.clientes.filter(
-          (c) => c.prioridad <= 2
-        ).length;
-        const ventanasCriticas = data.clientes.filter((c) => {
-          const inicio = c.ventana_inicio;
-          const fin = c.ventana_fin;
-          return inicio === "08:00" || fin === "18:00";
-        }).length;
-
-        document.getElementById("prioridad-alta").textContent = prioridadAlta;
-        document.getElementById("ventanas-criticas").textContent =
-          ventanasCriticas;
-
-        // Actualizar gráfico
-        actualizarGraficoPrioridades(data.clientes);
+        procesarEstadisticasPrioridad(data.clientes || []);
+      })
+      .catch((error) => {
+        console.warn(
+          "Error en obtener_datos_mapa para estadísticas, usando fallback:",
+          error
+        );
+        // Fallback: usar obtener_clientes
+        return fetch("/api/obtener_clientes")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            procesarEstadisticasPrioridad(data.clientes || []);
+          });
       })
       .catch((error) => {
         console.error("Error al actualizar estadísticas de prioridad:", error);
+        // Valores por defecto en caso de error
+        const prioridadAltaElement = document.getElementById("prioridad-alta");
+        const ventanasCriticasElement =
+          document.getElementById("ventanas-criticas");
+
+        if (prioridadAltaElement) prioridadAltaElement.textContent = "0";
+        if (ventanasCriticasElement) ventanasCriticasElement.textContent = "0";
       });
   }
 
+  function procesarEstadisticasPrioridad(clientes) {
+    if (!clientes || !Array.isArray(clientes)) {
+      console.warn("No hay datos de clientes para estadísticas de prioridad");
+      return;
+    }
+
+    const prioridadAlta = clientes.filter((c) => c.prioridad <= 2).length;
+    const ventanasCriticas = clientes.filter((c) => {
+      const inicio = c.ventana_inicio;
+      const fin = c.ventana_fin;
+      return inicio === "08:00" || fin === "18:00";
+    }).length;
+
+    document.getElementById("prioridad-alta").textContent = prioridadAlta;
+    document.getElementById("ventanas-criticas").textContent = ventanasCriticas;
+
+    // Actualizar gráfico
+    actualizarGraficoPrioridades(clientes);
+  }
+
   function actualizarGraficoPrioridades(clientes) {
-    const ctx = document.getElementById("chart-prioridades").getContext("2d");
+    // Validar que tenemos datos y el elemento del gráfico existe
+    if (!clientes || !Array.isArray(clientes)) {
+      console.warn("No hay datos de clientes para el gráfico de prioridades");
+      return;
+    }
 
-    // Contar clientes por prioridad
-    const prioridades = [1, 2, 3, 4, 5];
-    const datos = prioridades.map(
-      (p) => clientes.filter((c) => c.prioridad === p).length
-    );
+    const chartElement = document.getElementById("chart-prioridades");
+    if (!chartElement) {
+      console.warn("Elemento del gráfico de prioridades no encontrado");
+      return;
+    }
 
-    const colores = ["#FF0000", "#FF6600", "#FFCC00", "#00CC00", "#0066CC"];
+    // Verificar que Chart.js esté disponible
+    if (typeof Chart === "undefined") {
+      console.warn("Chart.js no está disponible");
+      return;
+    }
 
-    new Chart(ctx, {
-      type: "doughnut",
-      data: {
-        labels: [
-          "Prioridad 1",
-          "Prioridad 2",
-          "Prioridad 3",
-          "Prioridad 4",
-          "Prioridad 5",
-        ],
-        datasets: [
-          {
-            data: datos,
-            backgroundColor: colores,
-            borderWidth: 2,
-            borderColor: "#fff",
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: "bottom",
-            labels: {
-              font: {
-                size: 10,
+    try {
+      const ctx = chartElement.getContext("2d");
+
+      // Destruir gráfico existente si existe
+      if (window.chartPrioridades) {
+        window.chartPrioridades.destroy();
+      }
+
+      // Contar clientes por prioridad con validación
+      const prioridades = [1, 2, 3, 4, 5];
+      const datos = prioridades.map(
+        (p) => clientes.filter((c) => c && c.prioridad === p).length
+      );
+
+      const colores = ["#FF0000", "#FF6600", "#FFCC00", "#00CC00", "#0066CC"];
+
+      window.chartPrioridades = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: [
+            "Prioridad 1",
+            "Prioridad 2",
+            "Prioridad 3",
+            "Prioridad 4",
+            "Prioridad 5",
+          ],
+          datasets: [
+            {
+              data: datos,
+              backgroundColor: colores,
+              borderWidth: 2,
+              borderColor: "#fff",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                font: {
+                  size: 10,
+                },
               },
             },
           },
         },
-      },
-    });
+      });
+
+      console.log(
+        "Gráfico de prioridades actualizado con",
+        datos.reduce((a, b) => a + b, 0),
+        "clientes"
+      );
+    } catch (error) {
+      console.error("Error al crear gráfico de prioridades:", error);
+    }
   }
 
   function toggleCapa(tipo) {
@@ -641,11 +803,11 @@ endblock %} {% block content %}
 
     // Crear datos de ejemplo
     const datosEjemplo = `id,nombre,latitud,longitud,prioridad,ventana_inicio,ventana_fin,pedido
-1,Cliente A,-12.0464,-77.0428,1,08:00,12:00,150.5
-2,Cliente B,-12.0564,-77.0328,2,09:00,17:00,200.0
-3,Cliente C,-12.0364,-77.0528,3,10:00,16:00,75.25
-4,Cliente D,-12.0664,-77.0228,1,08:30,11:30,300.0
-5,Cliente E,-12.0264,-77.0628,4,14:00,18:00,125.75`;
+  1,Cliente A,-12.0464,-77.0428,1,08:00,12:00,150.5
+  2,Cliente B,-12.0564,-77.0328,2,09:00,17:00,200.0
+  3,Cliente C,-12.0364,-77.0528,3,10:00,16:00,75.25
+  4,Cliente D,-12.0664,-77.0228,1,08:30,11:30,300.0
+  5,Cliente E,-12.0264,-77.0628,4,14:00,18:00,125.75`;
 
     const blob = new Blob([datosEjemplo], { type: "text/csv" });
     const file = new File([blob], "clientes_ejemplo.csv", { type: "text/csv" });
@@ -714,25 +876,6 @@ endblock %} {% block content %}
           }
         });
     });
-  }
-
-  // Funciones manuales para debugging
-  function cargarMapaManual() {
-    console.log("🔄 Carga manual del mapa iniciada...");
-    showToast("Info", "Cargando mapa manualmente...", "info");
-
-    try {
-      if (!mapa) {
-        console.log("Mapa no existe, inicializando...");
-        inicializarMapa();
-      } else {
-        console.log("Mapa existe, cargando datos...");
-        cargarDatosMapa();
-      }
-    } catch (error) {
-      console.error("Error en carga manual:", error);
-      showToast("Error", "Error en carga manual: " + error.message, "error");
-    }
   }
 </script>
 

@@ -10,33 +10,61 @@ general_bp = Blueprint("general", __name__)
 @general_bp.route("/obtener_datos_mapa")
 def api_obtener_datos_mapa():
     """Obtener datos para mostrar en el mapa"""
-    datos = get_datos_globales()
     try:
+        datos = get_datos_globales()
+
+        if not datos:
+            return jsonify({"error": "Datos globales no inicializados"}), 500
+
+        if "clientes" not in datos:
+            datos["clientes"] = []
+
         clientes_con_color = []
         for cliente in datos["clientes"]:
-            cliente_copia = cliente.copy()
-            # Agregar color basado en prioridad
-            colores_prioridad = {
-                1: "#FF0000",  # Rojo - Prioridad más alta
-                2: "#FF6600",  # Naranja
-                3: "#FFCC00",  # Amarillo
-                4: "#00CC00",  # Verde
-                5: "#0066CC",  # Azul - Prioridad más baja
-            }
-            cliente_copia["color"] = colores_prioridad.get(
-                cliente.get("prioridad", 3), "#999999"
-            )
-            cliente_copia["lat"] = cliente.get("latitud", cliente.get("lat", 0))
-            cliente_copia["lng"] = cliente.get("longitud", cliente.get("lng", 0))
-            clientes_con_color.append(cliente_copia)
+            try:
+                cliente_copia = cliente.copy()
+                # Agregar color basado en prioridad
+                colores_prioridad = {
+                    1: "#FF0000",  # Rojo - Prioridad más alta
+                    2: "#FF6600",  # Naranja
+                    3: "#FFCC00",  # Amarillo
+                    4: "#00CC00",  # Verde
+                    5: "#0066CC",  # Azul - Prioridad más baja
+                }
+                cliente_copia["color"] = colores_prioridad.get(
+                    cliente.get("prioridad", 3), "#999999"
+                )
+                # Asegurar que tenemos coordenadas válidas
+                lat = cliente.get("latitud", cliente.get("lat", 0))
+                lng = cliente.get("longitud", cliente.get("lng", 0))
+
+                if lat == 0 and lng == 0:
+                    continue  # Saltar clientes con coordenadas inválidas
+
+                cliente_copia["lat"] = float(lat)
+                cliente_copia["lng"] = float(lng)
+                cliente_copia["latitud"] = float(lat)
+                cliente_copia["longitud"] = float(lng)
+
+                clientes_con_color.append(cliente_copia)
+            except (ValueError, TypeError, KeyError) as e:
+                print(f"Error procesando cliente {cliente.get('id', 'unknown')}: {e}")
+                continue  # Saltar este cliente y continuar
+
+        rutas = []
+        if datos.get("resultados") and isinstance(datos["resultados"], dict):
+            rutas = datos["resultados"].get("rutas", [])
 
         return jsonify(
             {
                 "clientes": clientes_con_color,
-                "rutas": datos.get("resultados", {}).get("rutas", []),
+                "rutas": rutas,
+                "total_clientes": len(clientes_con_color),
+                "clientes_omitidos": len(datos["clientes"]) - len(clientes_con_color),
             }
         )
     except Exception as e:
+        print(f"Error completo en obtener_datos_mapa: {e}")
         return jsonify({"error": f"Error al obtener datos del mapa: {str(e)}"}), 500
 
 

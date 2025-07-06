@@ -290,41 +290,67 @@ block content %}
   });
 
   function inicializarMapa() {
-    // Inicializar mapa centrado en Lima
-    mapaClientes = L.map("mapaClientes").setView([-12.0464, -77.0428], 12);
+    // Verificar que Leaflet esté disponible
+    if (typeof L === "undefined") {
+      console.error("Leaflet no está disponible");
+      mostrarAlerta("Error: Leaflet no está cargado", "danger");
+      return;
+    }
 
-    // Agregar capa de OpenStreetMap
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors",
-    }).addTo(mapaClientes);
+    try {
+      // Inicializar mapa centrado en Lima
+      mapaClientes = L.map("mapaClientes").setView([-12.0464, -77.0428], 12);
 
-    // Agregar marcador del depósito central
-    const depositoIcon = L.divIcon({
-      className: "custom-div-icon",
-      html: '<div style="background-color: #dc3545; width: 20px; height: 20px; border-radius: 50%; border: 2px solid white;"></div>',
-      iconSize: [20, 20],
-      iconAnchor: [10, 10],
-    });
+      // Agregar capa de OpenStreetMap
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(mapaClientes);
 
-    L.marker([-12.0464, -77.0428], { icon: depositoIcon })
-      .addTo(mapaClientes)
-      .bindPopup(
-        "<b>Depósito Central</b><br>Punto de partida de todas las rutas"
-      );
+      // Agregar marcador del depósito central
+      const depositoIcon = L.divIcon({
+        className: "custom-div-icon",
+        html: '<div style="background-color: #dc3545; width: 20px; height: 20px; border-radius: 50%; border: 2px solid white;"></div>',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+      });
+
+      L.marker([-12.0464, -77.0428], { icon: depositoIcon })
+        .addTo(mapaClientes)
+        .bindPopup(
+          "<b>Depósito Central</b><br>Punto de partida de todas las rutas"
+        );
+
+      console.log("Mapa inicializado correctamente");
+    } catch (error) {
+      console.error("Error al inicializar mapa:", error);
+      mostrarAlerta("Error al inicializar el mapa: " + error.message, "danger");
+    }
   }
 
   function cargarClientes() {
     fetch("/api/obtener_clientes")
       .then((response) => response.json())
       .then((data) => {
-        if (data.clientes) {
+        console.log("Datos de clientes recibidos:", data);
+
+        if (data.clientes && Array.isArray(data.clientes)) {
+          console.log(`Se encontraron ${data.clientes.length} clientes`);
+
+          // Verificar estructura de datos
+          if (data.clientes.length > 0) {
+            console.log("Ejemplo de cliente:", data.clientes[0]);
+          }
+
           mostrarClientes(data.clientes);
           agregarMarcadoresMapa(data.clientes);
+        } else {
+          console.warn("No se encontraron clientes o el formato es incorrecto");
+          mostrarAlerta("No se encontraron clientes", "warning");
         }
       })
       .catch((error) => {
         console.error("Error al cargar clientes:", error);
-        mostrarAlerta("Error al cargar clientes", "danger");
+        mostrarAlerta("Error al cargar clientes: " + error.message, "danger");
       });
   }
 
@@ -332,7 +358,19 @@ block content %}
     const tbody = document.getElementById("tbodyClientes");
     tbody.innerHTML = "";
 
+    if (!clientes || clientes.length === 0) {
+      tbody.innerHTML =
+        '<tr><td colspan="5" class="text-center">No se encontraron clientes</td></tr>';
+      return;
+    }
+
     clientes.forEach((cliente) => {
+      // Validar datos básicos del cliente
+      if (!cliente.id || !cliente.nombre) {
+        console.warn("Cliente con datos incompletos:", cliente);
+        return;
+      }
+
       const row = document.createElement("tr");
       const prioridadColor = obtenerColorPrioridad(cliente.prioridad);
 
@@ -340,9 +378,9 @@ block content %}
             <td>${cliente.id}</td>
             <td>${cliente.nombre}</td>
             <td><span class="badge ${prioridadColor}">${
-        cliente.prioridad
+        cliente.prioridad || "N/A"
       }</span></td>
-            <td>${formatearPeso(cliente.pedido)}</td>
+            <td>${cliente.pedido ? formatearPeso(cliente.pedido) : "N/A"}</td>
             <td>
                 <button class="btn btn-sm btn-outline-primary" onclick="editarCliente(${
                   cliente.id
@@ -368,6 +406,20 @@ block content %}
     marcadoresClientes = [];
 
     clientes.forEach((cliente) => {
+      // Validar que las coordenadas existan y sean válidas
+      if (
+        !cliente.latitud ||
+        !cliente.longitud ||
+        isNaN(cliente.latitud) ||
+        isNaN(cliente.longitud)
+      ) {
+        console.warn(
+          `Cliente ${cliente.nombre} (ID: ${cliente.id}) tiene coordenadas inválidas:`,
+          `lat: ${cliente.latitud}, lng: ${cliente.longitud}`
+        );
+        return; // Saltar este cliente
+      }
+
       const color = obtenerColorPrioridad(cliente.prioridad).replace("bg-", "");
       const icon = L.divIcon({
         className: "custom-div-icon",
@@ -378,16 +430,26 @@ block content %}
         iconAnchor: [7.5, 7.5],
       });
 
-      const marcador = L.marker([cliente.latitud, cliente.longitud], {
-        icon: icon,
-      }).addTo(mapaClientes).bindPopup(`
-                <b>${cliente.nombre}</b><br>
-                Prioridad: ${cliente.prioridad}<br>
-                Pedido: ${formatearPeso(cliente.pedido)}<br>
-                Ventana: ${cliente.ventana_inicio} - ${cliente.ventana_fin}
-            `);
+      try {
+        const marcador = L.marker(
+          [parseFloat(cliente.latitud), parseFloat(cliente.longitud)],
+          {
+            icon: icon,
+          }
+        ).addTo(mapaClientes).bindPopup(`
+                  <b>${cliente.nombre}</b><br>
+                  Prioridad: ${cliente.prioridad}<br>
+                  Pedido: ${formatearPeso(cliente.pedido)}<br>
+                  Ventana: ${cliente.ventana_inicio} - ${cliente.ventana_fin}
+              `);
 
-      marcadoresClientes.push(marcador);
+        marcadoresClientes.push(marcador);
+      } catch (error) {
+        console.error(
+          `Error al crear marcador para cliente ${cliente.nombre}:`,
+          error
+        );
+      }
     });
   }
 
@@ -460,6 +522,23 @@ block content %}
       .catch((error) => {
         console.error("Error al cargar estadísticas:", error);
       });
+  }
+
+  function mostrarAlerta(mensaje, tipo = "info") {
+    // Crear y mostrar una alerta simple
+    console.log(`[${tipo.toUpperCase()}] ${mensaje}`);
+
+    // Si existe la función showToast global, usarla
+    if (typeof showToast !== "undefined") {
+      showToast(
+        tipo === "danger" ? "Error" : "Información",
+        mensaje,
+        tipo === "danger" ? "error" : tipo
+      );
+    } else {
+      // Fallback a alert nativo
+      alert(`${tipo === "danger" ? "Error" : "Información"}: ${mensaje}`);
+    }
   }
 
   function obtenerColorPrioridad(prioridad) {

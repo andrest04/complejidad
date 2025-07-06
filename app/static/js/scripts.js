@@ -1,15 +1,7 @@
 // Scripts comunes para la aplicación de optimización de rutas
 
-// Variables globales
-let mapa = null;
-let marcadores = {};
+// Variables globales (cada página maneja su propio estado)
 let rutas = [];
-let capas = {
-    clientes: true,
-    rutas: false,
-    congestion: false,
-    prioridades: false
-};
 
 // Funciones de utilidad
 function formatNumber(num) {
@@ -117,18 +109,15 @@ function validateTimeFormat(time) {
 
 // Funciones de mapa
 function initializeMap(containerId, center = [-12.0464, -77.0428], zoom = 12) {
-    if (mapa) {
-        mapa.remove();
-    }
-    
-    mapa = L.map(containerId).setView(center, zoom);
+    // Esta función ahora retorna un nuevo mapa en lugar de usar variable global
+    const mapaLocal = L.map(containerId).setView(center, zoom);
     
     // Agregar capa de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
-    }).addTo(mapa);
+    }).addTo(mapaLocal);
     
-    return mapa;
+    return mapaLocal;
 }
 
 function addDepositMarker(map, position = [-12.0464, -77.0428]) {
@@ -144,12 +133,22 @@ function addDepositMarker(map, position = [-12.0464, -77.0428]) {
         .bindPopup('<b>Depósito Central</b><br>Punto de partida de todas las rutas');
 }
 
-function addClientMarkers(map, clientes) {
+function addClientMarkers(map, clientes, marcadoresObj = {}) {
     // Limpiar marcadores existentes
-    Object.values(marcadores).forEach(marker => map.removeLayer(marker));
-    marcadores = {};
+    Object.values(marcadoresObj).forEach(marker => map.removeLayer(marker));
+    marcadoresObj = {};
     
     clientes.forEach(cliente => {
+        // Validar coordenadas - soportar tanto lat/lng como latitud/longitud
+        const lat = cliente.lat || cliente.latitud;
+        const lng = cliente.lng || cliente.longitud;
+        
+        if (!lat || !lng || isNaN(lat) || isNaN(lng)) {
+            console.warn(`Cliente ${cliente.nombre} (ID: ${cliente.id}) tiene coordenadas inválidas:`, 
+                         `lat: ${lat}, lng: ${lng}`);
+            return; // Saltar este cliente
+        }
+        
         const color = getPriorityColor(cliente.prioridad);
         const icon = L.divIcon({
             className: 'custom-div-icon',
@@ -158,17 +157,23 @@ function addClientMarkers(map, clientes) {
             iconAnchor: [10, 10]
         });
         
-        const marker = L.marker([cliente.lat, cliente.lng], {icon: icon})
-            .addTo(map)
-            .bindPopup(`
-                <b>${cliente.nombre}</b><br>
-                Prioridad: ${cliente.prioridad}<br>
-                Pedido: ${formatNumber(cliente.pedido)} kg<br>
-                Ventana: ${cliente.ventana_inicio} - ${cliente.ventana_fin}
-            `);
-        
-        marcadores[cliente.id] = marker;
+        try {
+            const marker = L.marker([parseFloat(lat), parseFloat(lng)], {icon: icon})
+                .addTo(map)
+                .bindPopup(`
+                    <b>${cliente.nombre}</b><br>
+                    Prioridad: ${cliente.prioridad || 'N/A'}<br>
+                    Pedido: ${cliente.pedido ? formatNumber(cliente.pedido) : 'N/A'} kg<br>
+                    Ventana: ${cliente.ventana_inicio || 'N/A'} - ${cliente.ventana_fin || 'N/A'}
+                `);
+            
+            marcadoresObj[cliente.id] = marker;
+        } catch (error) {
+            console.error(`Error al crear marcador para cliente ${cliente.nombre}:`, error);
+        }
     });
+    
+    return marcadoresObj;
 }
 
 function addRouteLines(map, rutas) {
@@ -496,12 +501,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTooltips();
     initializePopovers();
     
-    // Cargar mapa automáticamente si estamos en la página principal
-    const mapaContainer = document.getElementById('mapa-principal');
-    if (mapaContainer) {
-        console.log("🗺️ Cargando mapa automáticamente...");
-        cargarMapaManual();
-    }
+    // El mapa se inicializa automáticamente en cada página que lo necesite
+    console.log("� Scripts globales cargados correctamente");
     
     // Agregar listeners para formularios
     const forms = document.querySelectorAll('form');
@@ -572,10 +573,9 @@ window.AppUtils = {
     populateSelect,
     clearForm,
     animateValue,
-    // Nuevas funciones de carga manual
+    // Funciones de carga manual (excepto cargarMapaManual que se eliminó)
     cargarClientesManual,
     cargarVehiculosManual,
-    cargarMapaManual,
     cargarEstadisticasManual,
     mostrarDebugInfo
 };
@@ -670,41 +670,6 @@ async function cargarVehiculosManual() {
     }
 }
 
-async function cargarMapaManual() {
-    console.log("🔄 Carga manual del mapa iniciada...");
-    showToast("Info", "Cargando mapa manualmente...", "info");
-    
-    try {
-        // Verificar si existe el contenedor del mapa
-        const mapaContainer = document.getElementById('mapa-principal');
-        if (!mapaContainer) {
-            throw new Error("Contenedor del mapa no encontrado");
-        }
-        
-        // Inicializar mapa si no existe
-        if (!mapa) {
-            console.log("Inicializando mapa...");
-            mapa = initializeMap('mapa-principal', [-12.0464, -77.0428], 11);
-            addDepositMarker(mapa);
-        }
-        
-        // Cargar clientes para el mapa
-        const response = await apiCall('/api/obtener_clientes');
-        if (response && response.clientes) {
-            console.log(`Agregando ${response.clientes.length} marcadores al mapa...`);
-            
-            // Limitar a los primeros 500 clientes para mejor rendimiento
-            const clientesLimitados = response.clientes.slice(0, 500);
-            addClientMarkers(mapa, clientesLimitados);
-            
-            showToast("Éxito", `Mapa cargado con ${clientesLimitados.length} clientes`, "success");
-        }
-    } catch (error) {
-        console.error("❌ Error al cargar mapa:", error);
-        showToast("Error", "Error al cargar mapa: " + error.message, "error");
-    }
-}
-
 async function cargarEstadisticasManual() {
     console.log("🔄 Carga manual de estadísticas iniciada...");
     showToast("Info", "Actualizando estadísticas...", "info");
@@ -763,20 +728,18 @@ function mostrarDebugInfo() {
 🔍 INFORMACIÓN DE DEBUG:
 • Leaflet disponible: ${typeof L !== 'undefined' ? '✅' : '❌'}
 • Bootstrap disponible: ${typeof bootstrap !== 'undefined' ? '✅' : '❌'}
-• Mapa inicializado: ${mapa ? '✅' : '❌'}
-• Marcadores en mapa: ${Object.keys(marcadores).length}
 • AppUtils disponible: ${typeof window.AppUtils !== 'undefined' ? '✅' : '❌'}
 • URL actual: ${window.location.href}
 • Página: ${document.title}
+• Scripts globales: ✅ Cargados
     `;
     
     console.log(info);
     alert(info);
 }
 
-// Hacer funciones disponibles globalmente para compatibilidad
+// Hacer funciones disponibles globalmente para compatibilidad (excepto cargarMapaManual que se eliminó)
 window.cargarClientesManual = cargarClientesManual;
 window.cargarVehiculosManual = cargarVehiculosManual;
-window.cargarMapaManual = cargarMapaManual;
 window.cargarEstadisticasManual = cargarEstadisticasManual;
 window.mostrarDebugInfo = mostrarDebugInfo;
