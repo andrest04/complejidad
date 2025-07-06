@@ -66,6 +66,7 @@ class BellmanFord:
         predecesores: Dict,
     ) -> List[Dict]:
         """Asigna clientes a vehículos basándose en capacidad y distancia"""
+        
         rutas = []
         clientes_asignados = set()
 
@@ -97,34 +98,37 @@ class BellmanFord:
                 if cliente["id"] in clientes_asignados:
                     continue
 
-                if cliente["pedido"] <= capacidad_restante:
-                    # Calcular distancia desde el último punto de la ruta
-                    if not ruta_vehiculo["clientes"]:
-                        # Primer cliente desde depósito
-                        distancia = distancias.get(cliente["id"], float("inf"))
-                        camino = self.reconstruir_camino(predecesores, cliente["id"])
-                    else:
-                        # Desde el último cliente
-                        ultimo_cliente = ruta_vehiculo["clientes"][-1]
-                        distancia = calcular_distancia(
-                            ultimo_cliente["latitud"],
-                            ultimo_cliente["longitud"],
-                            cliente["latitud"],
-                            cliente["longitud"],
-                        )
-                        camino = [ultimo_cliente["id"], cliente["id"]]
+                # Verificar capacidad
+                if cliente["pedido"] > capacidad_restante:
+                    continue
 
-                    # Verificar restricciones de tiempo
-                    tiempo_estimado = distancia * 2  # 2 minutos por km (estimación)
-                    if (
-                        ruta_vehiculo["tiempo_estimado"] + tiempo_estimado <= 480
-                    ):  # 8 horas
-                        ruta_vehiculo["clientes"].append(cliente)
-                        ruta_vehiculo["distancia_total"] += distancia
-                        ruta_vehiculo["carga_total"] += cliente["pedido"]
-                        ruta_vehiculo["tiempo_estimado"] += tiempo_estimado
-                        capacidad_restante -= cliente["pedido"]
-                        clientes_asignados.add(cliente["id"])
+                # Calcular distancia desde el último punto de la ruta
+                if not ruta_vehiculo["clientes"]:
+                    # Primer cliente desde depósito
+                    distancia = distancias.get(cliente["id"], float("inf"))
+                    camino = self.reconstruir_camino(predecesores, cliente["id"])
+                else:
+                    # Desde el último cliente
+                    ultimo_cliente = ruta_vehiculo["clientes"][-1]
+                    distancia = calcular_distancia(
+                        ultimo_cliente["latitud"],
+                        ultimo_cliente["longitud"],
+                        cliente["latitud"],
+                        cliente["longitud"],
+                    )
+                    camino = [ultimo_cliente["id"], cliente["id"]]
+
+                # Verificar restricciones de tiempo (8 horas máximo)
+                tiempo_estimado = distancia * 2  # 2 minutos por km (estimación)
+                if ruta_vehiculo["tiempo_estimado"] + tiempo_estimado > 480:  # 8 horas
+                    continue
+
+                ruta_vehiculo["clientes"].append(cliente)
+                ruta_vehiculo["distancia_total"] += distancia
+                ruta_vehiculo["carga_total"] += cliente["pedido"]
+                ruta_vehiculo["tiempo_estimado"] += tiempo_estimado
+                capacidad_restante -= cliente["pedido"]
+                clientes_asignados.add(cliente["id"])
 
             if ruta_vehiculo["clientes"]:
                 # Agregar retorno al depósito
@@ -192,3 +196,36 @@ class BellmanFord:
                 "error": str(e),
                 "tiempo_ejecucion": time.time() - tiempo_inicio,
             }
+
+
+def optimizar_rutas_bellman_ford(clientes: List[Dict], vehiculos: List[Dict], **kwargs) -> Dict:
+    """
+    Función principal para optimizar rutas usando el algoritmo Bellman-Ford
+    
+    Args:
+        clientes: Lista de clientes con sus coordenadas y pedidos
+        vehiculos: Lista de vehículos con sus capacidades
+        **kwargs: Parámetros adicionales (ignorados para simplificar)
+    
+    Returns:
+        Dict con los resultados de la optimización
+    """
+    try:
+        # Crear instancia del algoritmo
+        bellman_ford = BellmanFord({})
+        
+        # Ejecutar optimización directamente
+        resultados = bellman_ford.optimizar_rutas(clientes, vehiculos)
+        
+        # Agregar información básica
+        resultados["fecha_ejecucion"] = time.time()
+        
+        return resultados
+        
+    except Exception as e:
+        return {
+            "algoritmo": "Bellman-Ford",
+            "error": f"Error en optimización: {str(e)}",
+            "tiempo_ejecucion": 0,
+            "fecha_ejecucion": time.time()
+        }

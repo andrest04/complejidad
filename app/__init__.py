@@ -82,14 +82,12 @@ def create_app():
         main_bp,
         api_clientes_bp,
         api_vehiculos_bp,
-        api_algoritmos_bp,
         api_general_bp,
     )
 
     app.register_blueprint(main_bp)
     app.register_blueprint(api_clientes_bp)
     app.register_blueprint(api_vehiculos_bp, url_prefix="/api")
-    app.register_blueprint(api_algoritmos_bp, url_prefix="/api")
     app.register_blueprint(api_general_bp, url_prefix="/api")
 
     return app

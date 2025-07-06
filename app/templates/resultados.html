@@ -1,0 +1,384 @@
+{% extends "layout.html" %}
+
+{% block title %}Resultados de Optimización{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <!-- Header -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="h3 mb-0">
+            <i class="fas fa-chart-line me-2"></i>Resultados de Optimización
+          </h1>
+          <p class="text-muted mb-0">Análisis de rutas optimizadas</p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary" onclick="abrirModal()">
+            <i class="fas fa-cogs me-2"></i>Nueva Optimización
+          </button>
+          <button class="btn btn-outline-secondary" onclick="exportarDatos()">
+            <i class="fas fa-download me-2"></i>Exportar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estado sin resultados -->
+  <div id="estadoSinResultados" class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body text-center py-5">
+          <i class="fas fa-chart-line fa-3x text-muted mb-3"></i>
+          <h3 class="text-muted">No hay resultados disponibles</h3>
+          <p class="text-muted">Ejecuta un algoritmo de optimización para ver los resultados aquí.</p>
+          <button class="btn btn-primary" onclick="abrirModal()">
+            <i class="fas fa-cogs me-2"></i>Ejecutar Algoritmos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido con resultados -->
+  <div id="contenidoResultados" style="display: none;">
+    <!-- Resumen de resultados -->
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <div class="card bg-primary text-white">
+          <div class="card-body text-center">
+            <i class="fas fa-route fa-2x mb-2"></i>
+            <h4 id="totalRutas">-</h4>
+            <p class="mb-0">Rutas Optimizadas</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-success text-white">
+          <div class="card-body text-center">
+            <i class="fas fa-users fa-2x mb-2"></i>
+            <h4 id="totalClientes">-</h4>
+            <p class="mb-0">Clientes Atendidos</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-info text-white">
+          <div class="card-body text-center">
+            <i class="fas fa-truck fa-2x mb-2"></i>
+            <h4 id="vehiculosUtilizados">-</h4>
+            <p class="mb-0">Vehículos Usados</p>
+        </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-warning text-white">
+          <div class="card-body text-center">
+            <i class="fas fa-clock fa-2x mb-2"></i>
+            <h4 id="tiempoTotal">-</h4>
+            <p class="mb-0">Tiempo Total</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mapa de rutas -->
+    <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-map-marked-alt me-2"></i>Visualización de Rutas
+          </h5>
+        </div>
+        <div class="card-body">
+          <div id="mapaRutas" style="height: 500px; background-color: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+            <div class="text-center">
+              <i class="fas fa-map fa-3x text-muted mb-3"></i>
+              <p class="text-muted">Mapa de rutas se cargará aquí</p>
+              <button class="btn btn-primary" onclick="cargarMapa()">
+                <i class="fas fa-map me-2"></i>Cargar Mapa
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Tabla de rutas -->
+    <div class="row mb-4">
+      <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+              <i class="fas fa-route me-2"></i>Rutas Optimizadas
+          </h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover" id="tablaRutas">
+                <thead class="table-light">
+                  <tr>
+                    <th>Vehículo</th>
+                    <th>Clientes</th>
+                    <th>Distancia</th>
+                    <th>Tiempo</th>
+                    <th>Carga</th>
+                    <th>Eficiencia</th>
+                  </tr>
+                </thead>
+                <tbody id="cuerpoTablaRutas">
+                  <!-- Se llena dinámicamente -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+          </div>
+        </div>
+
+<!-- Modal de nueva optimización -->
+<div class="modal fade" id="modalOptimizacion" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fas fa-cogs me-2"></i>Nueva Optimización de Rutas
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formOptimizacion">
+          <div class="mb-3">
+            <label for="algoritmo" class="form-label">Algoritmo de Optimización</label>
+            <select class="form-select" id="algoritmo" required>
+              <option value="">Seleccionar algoritmo...</option>
+              <option value="bellman_ford">Bellman-Ford (Rutas más cortas)</option>
+              <option value="backtracking">Backtracking (Exploración completa)</option>
+              <option value="programacion_dinamica">Programación Dinámica (Optimización global)</option>
+            </select>
+            <div class="form-text">
+              <strong>Bellman-Ford:</strong> Encuentra las rutas más cortas entre todos los puntos.<br>
+              <strong>Backtracking:</strong> Explora todas las combinaciones posibles.<br>
+              <strong>Programación Dinámica:</strong> Optimiza considerando restricciones globales.
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="iniciarOptimizacion()">
+          <i class="fas fa-play me-2"></i>Iniciar Optimización
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+console.log('🚀 Script de resultados iniciando...');
+
+// Variables globales
+let resultadosActuales = null;
+
+// Función para abrir modal
+function abrirModal() {
+  console.log('🖱️ Botón clickeado - abriendo modal');
+  try {
+    const modal = new bootstrap.Modal(document.getElementById('modalOptimizacion'));
+    modal.show();
+    console.log('✅ Modal abierto correctamente');
+  } catch (error) {
+    console.error('❌ Error al abrir modal:', error);
+    alert('Error al abrir modal: ' + error.message);
+  }
+}
+
+// Función para iniciar optimización
+function iniciarOptimizacion() {
+  console.log('🚀 Iniciando optimización...');
+  
+  const algoritmo = document.getElementById('algoritmo').value;
+
+  if (!algoritmo) {
+    alert('Por favor selecciona un algoritmo');
+    return;
+  }
+
+  console.log('📋 Datos del formulario:', {
+    algoritmo: algoritmo
+  });
+
+  // Cerrar modal
+  try {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalOptimizacion'));
+    if (modal) modal.hide();
+  } catch (error) {
+    console.error('Error al cerrar modal:', error);
+  }
+
+    // Mostrar loading
+  mostrarLoading('Ejecutando optimización...');
+
+  // Preparar datos
+  const datosOptimizacion = {
+    algoritmo: algoritmo
+  };
+
+  console.log('📡 Enviando datos a la API:', datosOptimizacion);
+
+  // Llamar API
+  fetch('/api/ejecutar_optimizacion', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(datosOptimizacion)
+  })
+  .then(response => {
+    console.log('📥 Respuesta recibida:', response);
+    return response.json();
+  })
+  .then(data => {
+    console.log('📊 Datos de respuesta:', data);
+    ocultarLoading();
+    
+    if (data.success) {
+      alert('Optimización completada exitosamente');
+      cargarResultados();
+    } else {
+      alert('Error: ' + (data.message || 'Error desconocido'));
+    }
+  })
+  .catch(error => {
+    console.error('❌ Error en la petición:', error);
+      ocultarLoading();
+    alert('Error de conexión: ' + error.message);
+  });
+}
+
+// Función para cargar mapa
+function cargarMapa() {
+  console.log('🗺️ Cargando mapa...');
+  const mapaDiv = document.getElementById('mapaRutas');
+  
+  mapaDiv.innerHTML = `
+    <div class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando mapa...</span>
+      </div>
+      <p class="mt-2">Cargando mapa de rutas...</p>
+    </div>
+  `;
+
+  fetch('/api/obtener_datos_mapa')
+    .then(response => response.json())
+    .then(data => {
+      console.log('🗺️ Datos del mapa recibidos:', data);
+      mostrarMapaConDatos(data);
+    })
+    .catch(error => {
+      console.error('❌ Error al cargar mapa:', error);
+      mapaDiv.innerHTML = `
+        <div class="text-center">
+          <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+          <h5>Error al Cargar Mapa</h5>
+          <p class="text-muted">No se pudieron cargar los datos del mapa</p>
+          <button class="btn btn-sm btn-outline-primary mt-2" onclick="cargarMapa()">
+            <i class="fas fa-redo me-1"></i>Reintentar
+          </button>
+        </div>
+      `;
+    });
+}
+
+// Función para exportar datos
+function exportarDatos() {
+  console.log('📤 Exportando datos...');
+  if (!resultadosActuales) {
+    alert('No hay resultados para exportar');
+    return;
+  }
+
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(resultadosActuales, null, 2));
+  const downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href", dataStr);
+  downloadAnchorNode.setAttribute("download", "resultados_optimizacion.json");
+  document.body.appendChild(downloadAnchorNode);
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+  
+  alert('Resultados exportados correctamente');
+}
+
+// Función para mostrar mapa con datos
+function mostrarMapaConDatos(datos) {
+  const mapaDiv = document.getElementById('mapaRutas');
+  const rutas = datos.rutas || [];
+  const totalClientes = datos.total_clientes || 0;
+  
+  let contenido = `
+    <div class="text-center">
+      <i class="fas fa-map fa-3x text-primary mb-3"></i>
+      <h5>Mapa de Rutas Optimizadas</h5>
+      <p class="text-muted">${totalClientes} clientes • ${rutas.length} rutas</p>
+  `;
+
+  if (rutas.length > 0) {
+    contenido += '<div class="mt-3">';
+    rutas.forEach((ruta, index) => {
+      const vehiculo = ruta.vehiculo || `Vehículo ${index + 1}`;
+      contenido += `
+        <div class="btn-group me-2 mb-2" role="group">
+          <button class="btn btn-outline-primary btn-sm">
+            <i class="fas fa-route me-1"></i>${vehiculo}
+          </button>
+        </div>
+      `;
+    });
+    contenido += '</div>';
+  }
+  contenido += '</div>';
+  mapaDiv.innerHTML = contenido;
+}
+
+// Función para mostrar overlay de loading
+function mostrarLoading(mensaje) {
+  const overlay = document.createElement('div');
+  overlay.id = 'loading-overlay';
+  overlay.innerHTML = `
+    <div class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2">${mensaje}</p>
+    </div>
+  `;
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  `;
+  document.body.appendChild(overlay);
+}
+
+function ocultarLoading() {
+  const overlay = document.getElementById('loading-overlay');
+  if (overlay) {
+    overlay.remove();
+  }
+}
+</script>
+{% endblock %}

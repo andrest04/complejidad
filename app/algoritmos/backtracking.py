@@ -332,3 +332,36 @@ class Backtracking:
                 "error": str(e),
                 "tiempo_ejecucion": time.time() - tiempo_inicio,
             }
+
+
+def optimizar_rutas_backtracking(clientes: List[Dict], vehiculos: List[Dict], **kwargs) -> Dict:
+    """
+    Función principal para optimizar rutas usando el algoritmo Backtracking
+    
+    Args:
+        clientes: Lista de clientes con sus coordenadas y pedidos
+        vehiculos: Lista de vehículos con sus capacidades
+        **kwargs: Parámetros adicionales (ignorados para simplificar)
+    
+    Returns:
+        Dict con los resultados de la optimización
+    """
+    try:
+        # Crear instancia del algoritmo
+        backtracking = Backtracking({})
+        
+        # Ejecutar optimización directamente
+        resultados = backtracking.optimizar_rutas(clientes, vehiculos)
+        
+        # Agregar información básica
+        resultados["fecha_ejecucion"] = time.time()
+        
+        return resultados
+        
+    except Exception as e:
+        return {
+            "algoritmo": "Backtracking con Poda",
+            "error": f"Error en optimización: {str(e)}",
+            "tiempo_ejecucion": 0,
+            "fecha_ejecucion": time.time()
+        }

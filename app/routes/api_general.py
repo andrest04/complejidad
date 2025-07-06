@@ -182,3 +182,81 @@ def api_cargar_csv():
 
     except Exception as e:
         return jsonify({"error": f"Error al cargar CSV: {str(e)}"}), 500
+
+
+@general_bp.route("/ejecutar_optimizacion", methods=["POST"])
+def api_ejecutar_optimizacion():
+    """Ejecutar algoritmo de optimización de rutas"""
+    try:
+        datos = request.get_json()
+        if not datos:
+            return jsonify({"success": False, "message": "No se recibieron datos"}), 400
+
+        # Obtener solo el algoritmo
+        algoritmo = datos.get("algoritmo")
+
+        if not algoritmo:
+            return jsonify({"success": False, "message": "Algoritmo no especificado"}), 400
+
+        # Obtener datos globales
+        datos_globales = get_datos_globales()
+        
+        if not datos_globales or not datos_globales.get("clientes"):
+            return jsonify({"success": False, "message": "No hay clientes disponibles para optimizar"}), 400
+
+        # Importar y ejecutar algoritmos según sea necesario
+        if algoritmo == "bellman_ford":
+            from ..algoritmos.bellman_ford import optimizar_rutas_bellman_ford
+            resultado = optimizar_rutas_bellman_ford(
+                datos_globales["clientes"],
+                datos_globales["vehiculos"]
+            )
+        elif algoritmo == "backtracking":
+            from ..algoritmos.backtracking import optimizar_rutas_backtracking
+            resultado = optimizar_rutas_backtracking(
+                datos_globales["clientes"],
+                datos_globales["vehiculos"]
+            )
+        elif algoritmo == "programacion_dinamica":
+            from ..algoritmos.programacion_dinamica import optimizar_rutas_programacion_dinamica
+            resultado = optimizar_rutas_programacion_dinamica(
+                datos_globales["clientes"],
+                datos_globales["vehiculos"]
+            )
+        else:
+            return jsonify({"success": False, "message": f"Algoritmo '{algoritmo}' no soportado"}), 400
+
+        # Guardar resultados en datos globales
+        datos_globales["resultados"] = resultado
+        
+        # Agregar información básica
+        resultado["configuracion"] = {
+            "algoritmo": algoritmo,
+            "fecha_ejecucion": datetime.now().isoformat()
+        }
+
+        return jsonify({
+            "success": True,
+            "message": f"Optimización completada exitosamente usando {algoritmo}",
+            "resultados": resultado
+        })
+
+    except Exception as e:
+        print(f"Error en ejecutar_optimizacion: {e}")
+        return jsonify({"success": False, "message": f"Error al ejecutar optimización: {str(e)}"}), 500
+
+
+@general_bp.route("/obtener_resultados")
+def api_obtener_resultados():
+    """Obtener resultados de la última optimización"""
+    try:
+        datos = get_datos_globales()
+        if not datos or "resultados" not in datos or not datos["resultados"]:
+            return jsonify({"success": False, "message": "No hay resultados disponibles"}), 404
+        
+        return jsonify({
+            "success": True,
+            "resultados": datos["resultados"]
+        })
+    except Exception as e:
+        return jsonify({"success": False, "message": f"Error al obtener resultados: {str(e)}"}), 500

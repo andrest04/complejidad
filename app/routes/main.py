@@ -25,11 +25,6 @@ def gestionar_clientes():
     return render_template("gestionar_clientes.html", clientes=datos["clientes"])
 
 
-@main_bp.route("/ejecutar")
-def ejecutar():
-    return render_template("ejecutar.html")
-
-
 @main_bp.route("/resultados")
 def resultados():
     datos = current_app.config["DATOS_GLOBALES"]
