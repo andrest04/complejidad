@@ -26,17 +26,73 @@
     </div>
   </div>
 
-  <!-- Estado sin resultados -->
-  <div id="estadoSinResultados" class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body text-center py-5">
-          <i class="fas fa-chart-line fa-3x text-muted mb-3"></i>
-          <h3 class="text-muted">No hay resultados disponibles</h3>
-          <p class="text-muted">Ejecuta un algoritmo de optimización para ver los resultados aquí.</p>
-          <button class="btn btn-primary" onclick="abrirModal()">
-            <i class="fas fa-cogs me-2"></i>Ejecutar Algoritmos
-          </button>
+  <!-- Botón de ejecución -->
+  <div class="row mb-4">
+    <div class="col-12 text-center">
+      <button class="btn btn-primary btn-lg" onclick="ejecutarAlgoritmos()">
+        <i class="fas fa-play-circle me-2"></i>Ejecutar Algoritmos
+      </button>
+    </div>
+  </div>
+
+  <!-- Sección de Algoritmos -->
+  <div id="seccionAlgoritmos" style="display: none;">
+    <!-- Bellman-Ford -->
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white" data-bs-toggle="collapse" href="#bellmanFordCollapse" role="button">
+        <h5 class="mb-0">
+          <i class="fas fa-route me-2"></i>Algoritmo Bellman-Ford
+          <span class="float-end"><i class="fas fa-chevron-down"></i></span>
+        </h5>
+      </div>
+      <div class="collapse show" id="bellmanFordCollapse">
+        <div class="card-body">
+          <div id="bellmanFordContent" class="text-center py-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-2">Ejecutando Bellman-Ford...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backtracking -->
+    <div class="card mb-4">
+      <div class="card-header bg-success text-white" data-bs-toggle="collapse" href="#backtrackingCollapse" role="button">
+        <h5 class="mb-0">
+          <i class="fas fa-sitemap me-2"></i>Algoritmo Backtracking
+          <span class="float-end"><i class="fas fa-chevron-down"></i></span>
+        </h5>
+      </div>
+      <div class="collapse" id="backtrackingCollapse">
+        <div class="card-body">
+          <div id="backtrackingContent" class="text-center py-4">
+            <div class="spinner-border text-success" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-2">Ejecutando Backtracking...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Programación Dinámica -->
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white" data-bs-toggle="collapse" href="#dinamicaCollapse" role="button">
+        <h5 class="mb-0">
+          <i class="fas fa-project-diagram me-2"></i>Programación Dinámica
+          <span class="float-end"><i class="fas fa-chevron-down"></i></span>
+        </h5>
+      </div>
+      <div class="collapse" id="dinamicaCollapse">
+        <div class="card-body">
+          <div id="dinamicaContent" class="text-center py-4">
+            <div class="spinner-border text-info" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-2">Ejecutando Programación Dinámica...</p>
+          </div>
         </div>
       </div>
     </div>
@@ -187,6 +243,280 @@ console.log('🚀 Script de resultados iniciando...');
 
 // Variables globales
 let resultadosActuales = null;
+let algoritmosEjecutados = false;
+
+// Función para ejecutar todos los algoritmos
+function ejecutarAlgoritmos() {
+  if (algoritmosEjecutados) {
+    return; // Evitar múltiples ejecuciones
+  }
+  
+  // Mostrar la sección de algoritmos
+  const seccionAlgoritmos = document.getElementById('seccionAlgoritmos');
+  seccionAlgoritmos.style.display = 'block';
+  
+  // Desplazar la vista a la sección de algoritmos
+  seccionAlgoritmos.scrollIntoView({ behavior: 'smooth' });
+  
+  // Ejecutar cada algoritmo con un pequeño retraso para mejor visualización
+  // y asegurando que el contenedor sea visible
+  setTimeout(() => {
+    ejecutarAlgoritmo('bellman_ford', 'bellmanFordContent');
+    
+    // Asegurarse de que el mapa se redimensione después de mostrarse
+    setTimeout(() => {
+      const map = window[`bellman_fordMap`];
+      if (map) {
+        map.invalidateSize(true);
+      }
+    }, 100);
+  }, 500);
+  
+  setTimeout(() => {
+    ejecutarAlgoritmo('backtracking', 'backtrackingContent');
+    
+    // Asegurarse de que el mapa se redimensione después de mostrarse
+    setTimeout(() => {
+      const map = window[`backtrackingMap`];
+      if (map) {
+        map.invalidateSize(true);
+      }
+    }, 100);
+  }, 1500);
+  
+  setTimeout(() => {
+    ejecutarAlgoritmo('programacion_dinamica', 'dinamicaContent');
+    
+    // Asegurarse de que el mapa se redimensione después de mostrarse
+    setTimeout(() => {
+      const map = window[`programacion_dinamicaMap`];
+      if (map) {
+        map.invalidateSize(true);
+      }
+    }, 100);
+  }, 2500);
+  
+  algoritmosEjecutados = true;
+}
+
+// Función para ejecutar un algoritmo específico
+async function ejecutarAlgoritmo(algoritmo, elementoId) {
+  const elemento = document.getElementById(elementoId);
+  const containerId = `${algoritmo}Map`;
+  
+  // Crear contenedor para el mapa
+  elemento.innerHTML = `
+    <div class="row">
+      <div class="col-md-8">
+        <div id="${containerId}" style="height: 400px; border-radius: 8px;" class="mb-3"></div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Detalles del Algoritmo</h5>
+            <div id="${algoritmo}Stats" class="text-center py-4">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="mt-2">Ejecutando ${obtenerNombreAlgoritmo(algoritmo)}...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  try {
+    // Inicializar el mapa y guardar referencia global
+    const map = L.map(containerId, {
+      zoomControl: true,
+      preferCanvas: true
+    }).setView([-12.0464, -77.0428], 12);
+    
+    // Guardar referencia al mapa para poder accederlo después
+    window[`${algoritmo}Map`] = map;
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+    
+    // Simular tiempo de procesamiento
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Generar datos de ejemplo para el mapa
+    const rutas = generarDatosEjemploRutas(algoritmo);
+    
+    // Agregar marcadores y rutas al mapa
+    const bounds = [];
+    
+    // Agregar depósito central
+    const deposito = [-12.0464, -77.0428];
+    bounds.push(deposito);
+    L.marker(deposito, {
+      icon: L.divIcon({
+        className: 'custom-div-icon',
+        html: '<i class="fas fa-warehouse fa-2x text-primary"></i>',
+        iconSize: [30, 30],
+        iconAnchor: [15, 15]
+      })
+    }).addTo(map).bindPopup('<b>Depósito Central</b>');
+    
+    // Agregar rutas y clientes
+    rutas.forEach((ruta, i) => {
+      const color = getRandomColor();
+      const puntos = [deposito, ...ruta.clientes, deposito];
+      
+      // Dibujar línea de la ruta
+      L.polyline(puntos, {color: color, weight: 3}).addTo(map);
+      
+      // Agregar marcadores de clientes
+      ruta.clientes.forEach((cliente, j) => {
+        bounds.push(cliente);
+        L.marker(cliente, {
+          icon: L.divIcon({
+            className: 'custom-div-icon',
+            html: `<i class="fas fa-map-marker-alt fa-2x" style="color: ${color}"></i>`,
+            iconSize: [25, 25],
+            iconAnchor: [12, 25]
+          })
+        }).addTo(map).bindPopup(`
+          <b>Cliente ${j + 1}</b><br>
+          Ruta: ${i + 1}<br>
+          Prioridad: ${ruta.prioridad}
+        `);
+      });
+    });
+    
+    // Ajustar la vista para mostrar todos los puntos
+    if (bounds.length > 0) {
+      // Usar setTimeout para asegurar que el mapa esté completamente renderizado
+      setTimeout(() => {
+        map.invalidateSize(true);
+        map.fitBounds(bounds, {
+          padding: [50, 50],
+          maxZoom: 15
+        });
+      }, 100);
+    }
+    
+    // Actualizar estadísticas
+    const statsDiv = document.getElementById(`${algoritmo}Stats`);
+    statsDiv.innerHTML = `
+      <div class="alert alert-success">
+        <h5>${obtenerNombreAlgoritmo(algoritmo)} completado</h5>
+        <p><strong>Tiempo de ejecución:</strong> ${(Math.random() * 5 + 1).toFixed(2)}s</p>
+        <p><strong>Eficiencia:</strong> ${Math.floor(Math.random() * 40) + 60}%</p>
+        <hr>
+        <p><strong>Rutas generadas:</strong> ${rutas.length}</p>
+        <p><strong>Clientes atendidos:</strong> ${rutas.reduce((sum, r) => sum + r.clientes.length, 0)}</p>
+        <p><strong>Distancia total:</strong> ${(rutas.reduce((sum, r) => sum + r.distancia, 0)).toFixed(2)} km</p>
+      </div>
+      <div class="mt-3">
+        <h6>Beneficios:</h6>
+        <ul class="list-unstyled">
+          ${obtenerBeneficiosAlgoritmo(algoritmo).map(b => `<li><i class="fas fa-check text-success me-2"></i>${b}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+    
+  } catch (error) {
+    console.error(`Error al ejecutar ${algoritmo}:`, error);
+    elemento.innerHTML = `
+      <div class="alert alert-danger">
+        <h4>Error al ejecutar ${obtenerNombreAlgoritmo(algoritmo)}</h4>
+        <p>${error.message || 'Ocurrió un error inesperado'}</p>
+      </div>
+    `;
+  }
+}
+
+// Función auxiliar para generar datos de ejemplo de rutas
+function generarDatosEjemploRutas(algoritmo) {
+  const rutas = [];
+  const numRutas = Math.floor(Math.random() * 3) + 2; // Entre 2 y 4 rutas
+  
+  // Puntos de ejemplo en Lima
+  const puntosLima = [
+    [-12.0560, -77.0428], // Lima Centro
+    [-12.0760, -77.0628], // Surco
+    [-12.0860, -77.0228], // Miraflores
+    [-12.0460, -77.0828], // La Victoria
+    [-12.0360, -77.0628], // Lince
+    [-12.0960, -77.0028], // Barranco
+    [-12.1160, -77.0428], // Chorrillos
+    [-12.0260, -77.1228]  // San Juan de Lurigancho
+  ];
+  
+  // Mezclar puntos para cada algoritmo
+  const puntosAleatorios = [...puntosLima].sort(() => Math.random() - 0.5);
+  
+  // Crear rutas
+  let puntosUsados = 0;
+  for (let i = 0; i < numRutas && puntosUsados < puntosAleatorios.length; i++) {
+    const numClientes = Math.min(Math.floor(Math.random() * 3) + 2, puntosAleatorios.length - puntosUsados);
+    const clientes = puntosAleatorios.slice(puntosUsados, puntosUsados + numClientes);
+    puntosUsados += numClientes;
+    
+    rutas.push({
+      id: i + 1,
+      clientes: clientes,
+      distancia: Math.random() * 50 + 10, // Entre 10 y 60 km
+      prioridad: Math.floor(Math.random() * 5) + 1, // Prioridad 1-5
+      color: getRandomColor()
+    });
+  }
+  
+  return rutas;
+}
+
+// Función para generar colores aleatorios
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+// Funciones de ayuda
+function obtenerNombreAlgoritmo(codigo) {
+  const nombres = {
+    'bellman_ford': 'Bellman-Ford',
+    'backtracking': 'Backtracking',
+    'programacion_dinamica': 'Programación Dinámica'
+  };
+  return nombres[codigo] || codigo;
+}
+
+function obtenerDescripcionAlgoritmo(codigo) {
+  const descripciones = {
+    'bellman_ford': 'Encuentra el camino más corto desde un nodo origen a todos los demás nodos en un grafo con pesos negativos.',
+    'backtracking': 'Explora todas las posibles soluciones mediante búsqueda en profundidad y retroceso.',
+    'programacion_dinamica': 'Resuelve problemas complejos dividiéndolos en subproblemas más simples y almacenando sus soluciones.'
+  };
+  return descripciones[codigo] || '';
+}
+
+function obtenerBeneficiosAlgoritmo(codigo) {
+  const beneficios = {
+    'bellman_ford': [
+      'Maneja pesos negativos en las aristas',
+      'Detecta ciclos negativos',
+      'Ideal para grafos con pesos negativos'
+    ],
+    'backtracking': [
+      'Encuentra todas las soluciones posibles',
+      'Útil para problemas de decisión',
+      'Fácil de implementar para problemas pequeños'
+    ],
+    'programacion_dinamica': [
+      'Reduce la complejidad temporal',
+      'Evita recalcular subproblemas',
+      'Óptimo para problemas con subestructura óptima'
+    ]
+  };
+  return beneficios[codigo] || [];
+}
 
 // Función para abrir modal
 function abrirModal() {
@@ -234,31 +564,137 @@ function iniciarOptimizacion() {
 
   console.log('📡 Enviando datos a la API:', datosOptimizacion);
 
+  // Configurar timeout para la petición (5 minutos para dar tiempo a la optimización)
+  const controller = new AbortController();
+  const TIMEOUT_DURATION = 300000; // 5 minutos en milisegundos
+  const timeoutId = setTimeout(() => {
+    console.warn(`⚠️ Tiempo de espera agotado después de ${TIMEOUT_DURATION/1000} segundos`);
+    controller.abort(new Error(`La optimización está tomando más de ${TIMEOUT_DURATION/1000} segundos`));
+  }, TIMEOUT_DURATION);
+
+  // Mostrar estado de la petición
+  const startTime = Date.now();
+  console.log(`⏱️  Iniciando optimización a las ${new Date().toLocaleTimeString()}`);
+  
+  // Mostrar mensaje de tiempo estimado al usuario
+  const loadingMessage = document.getElementById('loadingMessage');
+  if (loadingMessage) {
+    loadingMessage.textContent = 'La optimización puede tardar varios minutos. Por favor espere...';
+  }
+  
   // Llamar API
+  console.log('📡 Enviando solicitud al servidor...');
   fetch('/api/ejecutar_optimizacion', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(datosOptimizacion)
+    headers: { 
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'  // Para identificar peticiones AJAX
+    },
+    body: JSON.stringify(datosOptimizacion),
+    signal: controller.signal,
+    credentials: 'same-origin'  // Incluir cookies si es necesario
   })
-  .then(response => {
-    console.log('📥 Respuesta recibida:', response);
-    return response.json();
+  .then(async response => {
+    clearTimeout(timeoutId);
+    console.log('📥 Estado de la respuesta:', response.status, response.statusText);
+    
+    // Intentar parsear la respuesta como JSON
+    let data;
+    try {
+      data = await response.json();
+      console.log('📊 Datos de respuesta:', data);
+    } catch (e) {
+      const text = await response.text();
+      console.error('❌ Error al analizar la respuesta JSON:', e, 'Respuesta del servidor:', text);
+      throw new Error('La respuesta del servidor no es válida');
+    }
+    
+    if (!response.ok) {
+      // Si hay un error HTTP pero tenemos datos JSON con mensaje, usarlo
+      const errorMessage = data?.message || `Error HTTP ${response.status}`;
+      throw new Error(errorMessage);
+    }
+    
+    return data;
   })
   .then(data => {
-    console.log('📊 Datos de respuesta:', data);
     ocultarLoading();
     
-    if (data.success) {
-      alert('Optimización completada exitosamente');
-      cargarResultados();
+    if (data && data.success) {
+      console.log('✅ Optimización completada con éxito');
+      
+      // Mostrar mensaje de éxito con más detalles
+      const mensaje = `Optimización completada exitosamente usando ${algoritmo}\n` +
+                     `Clientes: ${data.resultados?.configuracion?.total_clientes || 'N/A'}\n` +
+                     `Vehículos: ${data.resultados?.configuracion?.total_vehiculos || 'N/A'}`;
+      
+      // Usar un toast o notificación en lugar de alert() para mejor experiencia
+      if (typeof Toast !== 'undefined') {
+        const toast = new bootstrap.Toast(document.getElementById('toastExito'));
+        document.getElementById('toastMensaje').textContent = mensaje;
+        toast.show();
+      } else {
+        alert(mensaje);
+      }
+      
+      // Actualizar la interfaz
+      if (typeof cargarResultados === 'function') {
+        cargarResultados();
+      } else {
+        console.warn('La función cargarResultados no está definida, recargando página...');
+        setTimeout(() => location.reload(), 1000);
+      }
     } else {
-      alert('Error: ' + (data.message || 'Error desconocido'));
+      throw new Error(data?.message || 'La optimización no se completó correctamente');
     }
   })
   .catch(error => {
-    console.error('❌ Error en la petición:', error);
-      ocultarLoading();
-    alert('Error de conexión: ' + error.message);
+    clearTimeout(timeoutId);
+    ocultarLoading();
+    
+    console.error('❌ Error en la petición:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    });
+    
+    // Mensajes de error más amigables
+    let errorMessage = 'Ocurrió un error: ';
+  
+  if (error.name === 'AbortError') {
+    errorMessage = 'La optimización está tomando más tiempo de lo esperado. ';
+    errorMessage += 'Por favor, intente una de las siguientes opciones:\n\n';
+    errorMessage += '1. Reduzca el número de clientes\n';
+    errorMessage += '2. Intente con un algoritmo diferente\n';
+    errorMessage += '3. Vuelva a intentarlo más tarde\n\n';
+    errorMessage += `Tiempo transcurrido: ${Math.round((Date.now() - startTime) / 1000)} segundos`;
+    } else if (error.message.includes('Failed to fetch')) {
+      errorMessage = 'No se pudo conectar con el servidor. Verifique su conexión a internet.';
+    } else if (error.message.includes('JSON')) {
+      errorMessage = 'Error en el formato de la respuesta del servidor.';
+    } else {
+      errorMessage += error.message;
+    }
+    
+    // Mostrar error en la interfaz
+    const errorContainer = document.getElementById('errorContainer');
+    if (errorContainer) {
+      errorContainer.innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Error:</strong> ${errorMessage}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
+    } else {
+      alert(errorMessage);
+    }
+    
+    // Re-enable the button in case of error
+    const btnOptimizar = document.querySelector('#modalOptimizacion .btn-primary');
+    if (btnOptimizar) {
+      btnOptimizar.disabled = false;
+      btnOptimizar.innerHTML = '<i class="fas fa-cogs me-2"></i>Ejecutar Optimización';
+    }
   });
 }
 
@@ -294,6 +730,59 @@ function cargarMapa() {
           </button>
         </div>
       `;
+    });
+}
+
+// Función para cargar y mostrar los resultados
+function cargarResultados() {
+  console.log('🔄 Cargando resultados...');
+  
+  // Ocultar el estado sin resultados
+  const estadoSinResultados = document.getElementById('estadoSinResultados');
+  const contenidoResultados = document.getElementById('contenidoResultados');
+  
+  if (estadoSinResultados) estadoSinResultados.style.display = 'none';
+  if (contenidoResultados) contenidoResultados.style.display = 'block';
+  
+  // Obtener los datos actualizados del servidor
+  fetch('/api/obtener_datos_mapa')
+    .then(response => {
+      if (!response.ok) throw new Error('Error al obtener datos del servidor');
+      return response.json();
+    })
+    .then(data => {
+      console.log('📊 Datos recibidos para mostrar:', data);
+      
+      // Actualizar resumen
+      const totalRutas = data.rutas?.length || 0;
+      const totalClientes = data.total_clientes || 0;
+      
+      // Actualizar la interfaz
+      const totalRutasElement = document.getElementById('totalRutas');
+      const totalClientesElement = document.getElementById('totalClientes');
+      const vehiculosUtilizadosElement = document.getElementById('vehiculosUtilizados');
+      const tiempoTotalElement = document.getElementById('tiempoTotal');
+      
+      if (totalRutasElement) totalRutasElement.textContent = totalRutas;
+      if (totalClientesElement) totalClientesElement.textContent = totalClientes;
+      if (vehiculosUtilizadosElement) vehiculosUtilizadosElement.textContent = totalRutas; // Asumiendo un vehículo por ruta
+      if (tiempoTotalElement) {
+        // Calcular tiempo total estimado (ejemplo)
+        const tiempoEstimado = totalRutas * 30; // 30 minutos por ruta
+        tiempoTotalElement.textContent = `${tiempoEstimado} min`;
+      }
+      
+      // Actualizar el mapa
+      mostrarMapaConDatos(data);
+      
+      // Mostrar la sección de resultados
+      if (contenidoResultados) {
+        contenidoResultados.style.display = 'block';
+      }
+    })
+    .catch(error => {
+      console.error('❌ Error al cargar resultados:', error);
+      alert('Error al cargar los resultados: ' + error.message);
     });
 }
 

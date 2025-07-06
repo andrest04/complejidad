@@ -188,53 +188,84 @@ def api_cargar_csv():
 def api_ejecutar_optimizacion():
     """Ejecutar algoritmo de optimización de rutas"""
     try:
+        print("🔍 Iniciando optimización...")
         datos = request.get_json()
         if not datos:
+            print("❌ No se recibieron datos en la solicitud")
             return jsonify({"success": False, "message": "No se recibieron datos"}), 400
 
         # Obtener solo el algoritmo
         algoritmo = datos.get("algoritmo")
+        print(f"🔄 Algoritmo seleccionado: {algoritmo}")
 
         if not algoritmo:
+            print("❌ Algoritmo no especificado")
             return jsonify({"success": False, "message": "Algoritmo no especificado"}), 400
 
         # Obtener datos globales
+        print("📊 Obteniendo datos globales...")
         datos_globales = get_datos_globales()
         
-        if not datos_globales or not datos_globales.get("clientes"):
+        if not datos_globales:
+            print("❌ No se pudieron obtener los datos globales")
+            return jsonify({"success": False, "message": "Error al obtener datos del sistema"}), 500
+            
+        if not datos_globales.get("clientes"):
+            print("⚠️ No hay clientes disponibles para optimizar")
             return jsonify({"success": False, "message": "No hay clientes disponibles para optimizar"}), 400
 
+        print(f"📝 Procesando {len(datos_globales['clientes'])} clientes...")
+
         # Importar y ejecutar algoritmos según sea necesario
-        if algoritmo == "bellman_ford":
-            from ..algoritmos.bellman_ford import optimizar_rutas_bellman_ford
-            resultado = optimizar_rutas_bellman_ford(
-                datos_globales["clientes"],
-                datos_globales["vehiculos"]
-            )
-        elif algoritmo == "backtracking":
-            from ..algoritmos.backtracking import optimizar_rutas_backtracking
-            resultado = optimizar_rutas_backtracking(
-                datos_globales["clientes"],
-                datos_globales["vehiculos"]
-            )
-        elif algoritmo == "programacion_dinamica":
-            from ..algoritmos.programacion_dinamica import optimizar_rutas_programacion_dinamica
-            resultado = optimizar_rutas_programacion_dinamica(
-                datos_globales["clientes"],
-                datos_globales["vehiculos"]
-            )
-        else:
-            return jsonify({"success": False, "message": f"Algoritmo '{algoritmo}' no soportado"}), 400
+        try:
+            if algoritmo == "bellman_ford":
+                print("🚀 Ejecutando Bellman-Ford...")
+                from ..algoritmos.bellman_ford import optimizar_rutas_bellman_ford
+                resultado = optimizar_rutas_bellman_ford(
+                    datos_globales["clientes"],
+                    datos_globales["vehiculos"]
+                )
+            elif algoritmo == "backtracking":
+                print("🔍 Ejecutando Backtracking...")
+                from ..algoritmos.backtracking import optimizar_rutas_backtracking
+                resultado = optimizar_rutas_backtracking(
+                    datos_globales["clientes"],
+                    datos_globales["vehiculos"]
+                )
+            elif algoritmo == "programacion_dinamica":
+                print("⚡ Ejecutando Programación Dinámica...")
+                from ..algoritmos.programacion_dinamica import optimizar_rutas_programacion_dinamica
+                resultado = optimizar_rutas_programacion_dinamica(
+                    datos_globales["clientes"],
+                    datos_globales["vehiculos"]
+                )
+            else:
+                print(f"❌ Algoritmo no soportado: {algoritmo}")
+                return jsonify({"success": False, "message": f"Algoritmo '{algoritmo}' no soportado"}), 400
+        except ImportError as ie:
+            print(f"❌ Error al importar módulo del algoritmo: {str(ie)}")
+            return jsonify({"success": False, "message": f"Error al cargar el módulo del algoritmo: {str(ie)}"}), 500
+        except Exception as algo_error:
+            print(f"❌ Error durante la ejecución del algoritmo: {str(algo_error)}")
+            return jsonify({"success": False, "message": f"Error durante la ejecución: {str(algo_error)}"}), 500
+
+        if not resultado:
+            print("⚠️ El algoritmo no devolvió resultados")
+            return jsonify({"success": False, "message": "El algoritmo no generó resultados válidos"}), 500
 
         # Guardar resultados en datos globales
+        print("💾 Guardando resultados...")
         datos_globales["resultados"] = resultado
         
         # Agregar información básica
         resultado["configuracion"] = {
             "algoritmo": algoritmo,
-            "fecha_ejecucion": datetime.now().isoformat()
+            "fecha_ejecucion": datetime.now().isoformat(),
+            "total_clientes": len(datos_globales["clientes"]),
+            "total_vehiculos": len(datos_globales.get("vehiculos", []))
         }
 
+        print("✅ Optimización completada exitosamente")
         return jsonify({
             "success": True,
             "message": f"Optimización completada exitosamente usando {algoritmo}",
@@ -242,7 +273,11 @@ def api_ejecutar_optimizacion():
         })
 
     except Exception as e:
-        print(f"Error en ejecutar_optimizacion: {e}")
+        error_msg = f"Error en ejecutar_optimizacion: {str(e)}"
+        print(f"❌ {error_msg}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"success": False, "message": error_msg}), 500
         return jsonify({"success": False, "message": f"Error al ejecutar optimización: {str(e)}"}), 500
 
 
