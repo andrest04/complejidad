@@ -5,26 +5,6 @@
     <div class="col-12">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2><i class="fas fa-truck"></i> Gestión de Vehículos</h2>
-        <div>
-          <small class="text-muted">
-            <i class="fas fa-info-circle me-1"></i>
-            Vehículos cargados desde flota_lima_1500.json
-          </small>
-          <button
-            class="btn btn-success me-2"
-            data-bs-toggle="modal"
-            data-bs-target="#modalRegistrarVehiculo"
-          >
-            <i class="fas fa-plus"></i> Registrar Vehículo
-          </button>
-          <button
-            class="btn btn-info"
-            data-bs-toggle="modal"
-            data-bs-target="#modalCargarFlota"
-          >
-            <i class="fas fa-upload"></i> Cargar Flota
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -150,11 +130,8 @@
                   <th>ID</th>
                   <th>Placa</th>
                   <th>Tipo</th>
-                  <th>Modelo</th>
                   <th>Capacidad</th>
                   <th>Estado</th>
-                  <th>Fecha Registro</th>
-                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -163,7 +140,6 @@
                   <td>{{ vehiculo.id }}</td>
                   <td><strong>{{ vehiculo.placa }}</strong></td>
                   <td>{{ vehiculo.tipo }}</td>
-                  <td>{{ vehiculo.modelo or 'No especificado' }}</td>
                   <td>{{ vehiculo.capacidad|int }} kg</td>
                   <td>
                     {% if vehiculo.disponible %}
@@ -171,24 +147,6 @@
                     {% else %}
                     <span class="badge bg-warning">En uso</span>
                     {% endif %}
-                  </td>
-                  <td>
-                    {{ vehiculo.fecha_registro[:10] if vehiculo.fecha_registro
-                    else 'N/A' }}
-                  </td>
-                  <td>
-                    <button
-                      class="btn btn-sm btn-outline-primary me-1"
-                      onclick="editarVehiculo({{ vehiculo.id }})"
-                    >
-                      <i class="fas fa-edit"></i>
-                    </button>
-                    <button
-                      class="btn btn-sm btn-outline-danger"
-                      onclick="eliminarVehiculo({{ vehiculo.id }}, '{{ vehiculo.placa }}')"
-                    >
-                      <i class="fas fa-trash"></i>
-                    </button>
                   </td>
                 </tr>
                 {% endfor %}
@@ -201,388 +159,9 @@
   </div>
 </div>
 
-<!-- Modal Registrar Vehículo -->
-<div
-  class="modal fade"
-  id="modalRegistrarVehiculo"
-  tabindex="-1"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Registrar Nuevo Vehículo</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form id="form-vehiculo">
-          <div class="mb-3">
-            <label for="placa" class="form-label">Placa *</label>
-            <input
-              type="text"
-              class="form-control"
-              id="placa"
-              required
-              placeholder="ABC-123"
-            />
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="tipo" class="form-label">Tipo *</label>
-                <select class="form-control" id="tipo" required>
-                  <option value="">Seleccionar...</option>
-                  <option value="Camión">Camión</option>
-                  <option value="Furgón">Furgón</option>
-                  <option value="Camioneta">Camioneta</option>
-                  <option value="Moto">Moto</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="capacidad" class="form-label"
-                  >Capacidad (kg) *</label
-                >
-                <input
-                  type="number"
-                  class="form-control"
-                  id="capacidad"
-                  required
-                  min="1"
-                  placeholder="1000"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="modelo" class="form-label">Modelo</label>
-            <input
-              type="text"
-              class="form-control"
-              id="modelo"
-              placeholder="Opcional"
-            />
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cancelar
-        </button>
-        <button
-          type="button"
-          class="btn btn-success"
-          onclick="registrarVehiculo()"
-        >
-          Registrar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Cargar Flota -->
-<div class="modal fade" id="modalCargarFlota" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cargar Flota desde JSON</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="archivo-flota" class="form-label"
-            >Seleccionar archivo JSON</label
-          >
-          <input
-            type="file"
-            class="form-control"
-            id="archivo-flota"
-            accept=".json"
-          />
-        </div>
-        <div class="alert alert-info">
-          <strong>Formato esperado:</strong>
-          <pre>
-[
-  {
-    "placa": "ABC-123",
-    "capacidad": 1000,
-    "tipo": "Camión",
-    "modelo": "Volvo FH"
-  }
-]</pre
-          >
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cancelar
-        </button>
-        <button type="button" class="btn btn-info" onclick="cargarFlota()">
-          Cargar Flota
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Editar Vehículo -->
-<div
-  class="modal fade"
-  id="modalEditarVehiculo"
-  tabindex="-1"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar Vehículo</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form id="form-editar-vehiculo">
-          <input type="hidden" id="edit-vehiculo-id" />
-          <div class="mb-3">
-            <label for="edit-placa" class="form-label">Placa</label>
-            <input type="text" class="form-control" id="edit-placa" readonly />
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="edit-tipo" class="form-label">Tipo</label>
-                <select class="form-control" id="edit-tipo">
-                  <option value="Camión">Camión</option>
-                  <option value="Furgón">Furgón</option>
-                  <option value="Camioneta">Camioneta</option>
-                  <option value="Moto">Moto</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="edit-capacidad" class="form-label"
-                  >Capacidad (kg)</label
-                >
-                <input
-                  type="number"
-                  class="form-control"
-                  id="edit-capacidad"
-                  min="1"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="edit-modelo" class="form-label">Modelo</label>
-            <input type="text" class="form-control" id="edit-modelo" />
-          </div>
-          <div class="mb-3">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="edit-disponible"
-              />
-              <label class="form-check-label" for="edit-disponible">
-                Disponible para rutas
-              </label>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cancelar
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          onclick="actualizarVehiculo()"
-        >
-          Actualizar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
   // Variables globales
   let vehiculos = {{ vehiculos | tojson }};
-
-  // Funciones de gestión
-  async function registrarVehiculo() {
-      const form = document.getElementById('form-vehiculo');
-      const formData = new FormData(form);
-
-      const vehiculoData = {
-          placa: document.getElementById('placa').value.trim(),
-          tipo: document.getElementById('tipo').value,
-          capacidad: parseFloat(document.getElementById('capacidad').value),
-          modelo: document.getElementById('modelo').value.trim()
-      };
-
-      // Validaciones
-      if (!vehiculoData.placa || !vehiculoData.tipo || !vehiculoData.capacidad) {
-          AppUtils.showToast('Error', 'Por favor complete todos los campos requeridos', 'error');
-          return;
-      }
-
-      if (vehiculoData.capacidad <= 0) {
-          AppUtils.showToast('Error', 'La capacidad debe ser mayor a 0', 'error');
-          return;
-      }
-
-      try {
-          AppUtils.showLoading();
-          const response = await AppUtils.apiCall('/api/registrar_vehiculo', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(vehiculoData)
-          });
-
-          if (response.success) {
-              AppUtils.showToast('Éxito', response.message, 'success');
-              bootstrap.Modal.getInstance(document.getElementById('modalRegistrarVehiculo')).hide();
-              form.reset();
-              location.reload(); // Recargar para mostrar el nuevo vehículo
-          } else {
-              AppUtils.showToast('Error', response.error || 'Error al registrar vehículo', 'error');
-          }
-      } catch (error) {
-          AppUtils.showToast('Error', 'Error de conexión: ' + error.message, 'error');
-      } finally {
-          AppUtils.hideLoading();
-      }
-  }
-
-  async function cargarFlota() {
-      const archivoInput = document.getElementById('archivo-flota');
-      const archivo = archivoInput.files[0];
-
-      if (!archivo) {
-          AppUtils.showToast('Error', 'Por favor seleccione un archivo', 'error');
-          return;
-      }
-
-      const formData = new FormData();
-      formData.append('archivo', archivo);
-
-      try {
-          AppUtils.showLoading();
-          const response = await AppUtils.uploadFile('/api/cargar_flota', formData);
-
-          if (response.success) {
-              AppUtils.showToast('Éxito', response.message, 'success');
-              bootstrap.Modal.getInstance(document.getElementById('modalCargarFlota')).hide();
-              archivoInput.value = '';
-              location.reload();
-          } else {
-              AppUtils.showToast('Error', response.error || 'Error al cargar flota', 'error');
-          }
-      } catch (error) {
-          AppUtils.showToast('Error', 'Error de conexión: ' + error.message, 'error');
-      } finally {
-          AppUtils.hideLoading();
-      }
-  }
-
-  async function editarVehiculo(vehiculoId) {
-      const vehiculo = vehiculos.find(v => v.id === vehiculoId);
-      if (!vehiculo) {
-          AppUtils.showToast('Error', 'Vehículo no encontrado', 'error');
-          return;
-      }
-
-      // Llenar el formulario de edición
-      document.getElementById('edit-vehiculo-id').value = vehiculo.id;
-      document.getElementById('edit-placa').value = vehiculo.placa;
-      document.getElementById('edit-tipo').value = vehiculo.tipo;
-      document.getElementById('edit-capacidad').value = vehiculo.capacidad;
-      document.getElementById('edit-modelo').value = vehiculo.modelo || '';
-      document.getElementById('edit-disponible').checked = vehiculo.disponible;
-
-      // Mostrar modal
-      new bootstrap.Modal(document.getElementById('modalEditarVehiculo')).show();
-  }
-
-  async function actualizarVehiculo() {
-      const vehiculoId = document.getElementById('edit-vehiculo-id').value;
-      const vehiculoData = {
-          tipo: document.getElementById('edit-tipo').value,
-          capacidad: parseFloat(document.getElementById('edit-capacidad').value),
-          modelo: document.getElementById('edit-modelo').value.trim(),
-          disponible: document.getElementById('edit-disponible').checked
-      };
-
-      if (vehiculoData.capacidad <= 0) {
-          AppUtils.showToast('Error', 'La capacidad debe ser mayor a 0', 'error');
-          return;
-      }
-
-      try {
-          AppUtils.showLoading();
-          const response = await AppUtils.apiCall(`/api/actualizar_vehiculo/${vehiculoId}`, {
-              method: 'PUT',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(vehiculoData)
-          });
-
-          if (response.success) {
-              AppUtils.showToast('Éxito', response.message, 'success');
-              bootstrap.Modal.getInstance(document.getElementById('modalEditarVehiculo')).hide();
-              location.reload();
-          } else {
-              AppUtils.showToast('Error', response.error || 'Error al actualizar vehículo', 'error');
-          }
-      } catch (error) {
-          AppUtils.showToast('Error', 'Error de conexión: ' + error.message, 'error');
-      } finally {
-          AppUtils.hideLoading();
-      }
-  }
-
-  async function eliminarVehiculo(vehiculoId, placa) {
-      if (!confirm(`¿Está seguro que desea eliminar el vehículo ${placa}?`)) {
-          return;
-      }
-
-      try {
-          AppUtils.showLoading();
-          const response = await AppUtils.apiCall(`/api/eliminar_vehiculo/${vehiculoId}`, {
-              method: 'DELETE'
-          });
-
-          if (response.success) {
-              AppUtils.showToast('Éxito', response.message, 'success');
-              location.reload();
-          } else {
-              AppUtils.showToast('Error', response.error || 'Error al eliminar vehículo', 'error');
-          }
-      } catch (error) {
-          AppUtils.showToast('Error', 'Error de conexión: ' + error.message, 'error');
-      } finally {
-          AppUtils.hideLoading();
-      }
-  }
 
   // Funciones de filtrado
   function aplicarFiltros() {
@@ -594,7 +173,7 @@
       filas.forEach(fila => {
           const placa = fila.cells[1].textContent.toLowerCase();
           const tipo = fila.cells[2].textContent;
-          const estado = fila.cells[5].textContent.includes('Disponible') ? 'true' : 'false';
+          const estado = fila.cells[4].textContent.includes('Disponible') ? 'true' : 'false';
 
           const cumplePlaca = !filtroPlaca || placa.includes(filtroPlaca);
           const cumpleTipo = !filtroTipo || tipo === filtroTipo;

@@ -68,77 +68,6 @@ endblock %} {% block content %}
   </div>
 </div>
 
-<!-- Acciones Rápidas -->
-<div class="row mb-4">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-header">
-        <h6 class="card-title mb-0">
-          <i class="fas fa-bolt me-2"></i>Acciones Rápidas
-        </h6>
-      </div>
-      <div class="card-body">
-        <div class="row g-2">
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <a
-              href="{{ url_for('main.gestionar_vehiculos') }}"
-              class="btn btn-outline-primary w-100"
-            >
-              <i class="fas fa-truck me-1"></i>
-              <br /><small>Gestionar Vehículos</small>
-            </a>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <a
-              href="{{ url_for('main.gestionar_clientes') }}"
-              class="btn btn-outline-info w-100"
-            >
-              <i class="fas fa-users me-1"></i>
-              <br /><small>Gestionar Clientes</small>
-            </a>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <a
-              href="{{ url_for('main.ejecutar') }}"
-              class="btn btn-outline-success w-100"
-            >
-              <i class="fas fa-cogs me-1"></i>
-              <br /><small>Ejecutar Algoritmo</small>
-            </a>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <a
-              href="{{ url_for('main.resultados') }}"
-              class="btn btn-outline-warning w-100"
-            >
-              <i class="fas fa-chart-line me-1"></i>
-              <br /><small>Ver Resultados</small>
-            </a>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <button
-              class="btn btn-outline-secondary w-100"
-              onclick="cargarDatosEjemplo()"
-            >
-              <i class="fas fa-database me-1"></i>
-              <br /><small>Datos Ejemplo</small>
-            </button>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <a
-              href="{{ url_for('main.diagnostico') }}"
-              class="btn btn-outline-dark w-100"
-            >
-              <i class="fas fa-stethoscope me-1"></i>
-              <br /><small>Diagnóstico</small>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="row">
   <!-- Mapa Principal -->
   <div class="col-lg-8 mb-4">
@@ -587,21 +516,6 @@ endblock %} {% block content %}
   }
 
   function actualizarEstadisticas() {
-    showLoading("Actualizando estadísticas...");
-
-    // Timeout de seguridad para ocultar el modal después de 30 segundos
-    const timeoutId = setTimeout(() => {
-      console.warn(
-        "Timeout: ocultando modal de loading después de 30 segundos"
-      );
-      hideLoading();
-      showToast(
-        "Advertencia",
-        "La actualización está tomando más tiempo del esperado",
-        "warning"
-      );
-    }, 30000);
-
     Promise.all([fetch("/api/estadisticas"), fetch("/api/obtener_vehiculos")])
       .then((responses) => {
         console.log(
@@ -676,8 +590,6 @@ endblock %} {% block content %}
         return Promise.all([promesaPrioridad, promesaGrafico]);
       })
       .then(() => {
-        clearTimeout(timeoutId); // Cancelar el timeout si todo salió bien
-        hideLoading();
         showToast(
           "Éxito",
           "Estadísticas actualizadas correctamente",
@@ -685,8 +597,6 @@ endblock %} {% block content %}
         );
       })
       .catch((error) => {
-        clearTimeout(timeoutId); // Cancelar el timeout en caso de error
-        hideLoading();
         console.error("Error al actualizar estadísticas:", error);
         showToast(
           "Error",

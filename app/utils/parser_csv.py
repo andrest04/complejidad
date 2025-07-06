@@ -17,6 +17,7 @@ class ParserCSV:
             "ventana_inicio",
             "ventana_fin",
             "pedido",
+            "distrito",
         ]
 
     def leer_clientes_csv(self, archivo) -> List[Dict]:
@@ -50,6 +51,7 @@ class ParserCSV:
                     "ventana_inicio": str(row["ventana_inicio"]),
                     "ventana_fin": str(row["ventana_fin"]),
                     "pedido": float(row["pedido"]),
+                    "distrito": str(row["distrito"]) if "distrito" in row else "Lima",
                 }
 
                 # Validar datos
@@ -131,12 +133,12 @@ class ParserCSV:
 
     def crear_csv_ejemplo(self) -> str:
         """Crea un ejemplo de CSV para que los usuarios sepan el formato"""
-        ejemplo_csv = """id,nombre,latitud,longitud,prioridad,ventana_inicio,ventana_fin,pedido
-1,Cliente A,-12.0464,-77.0428,1,08:00,12:00,150.5
-2,Cliente B,-12.0564,-77.0328,2,09:00,17:00,200.0
-3,Cliente C,-12.0364,-77.0528,3,10:00,16:00,75.25
-4,Cliente D,-12.0664,-77.0228,1,08:30,11:30,300.0
-5,Cliente E,-12.0264,-77.0628,4,14:00,18:00,125.75"""
+        ejemplo_csv = """id,nombre,latitud,longitud,prioridad,ventana_inicio,ventana_fin,pedido,distrito
+1,Cliente A,-12.0464,-77.0428,1,08:00,12:00,150.5,Miraflores
+2,Cliente B,-12.0564,-77.0328,2,09:00,17:00,200.0,San Isidro
+3,Cliente C,-12.0364,-77.0528,3,10:00,16:00,75.25,Barranco
+4,Cliente D,-12.0664,-77.0228,1,08:30,11:30,300.0,La Victoria
+5,Cliente E,-12.0264,-77.0628,4,14:00,18:00,125.75,Surco"""
 
         return ejemplo_csv
 
@@ -222,21 +224,5 @@ def cargar_clientes_csv(archivo_csv="Dataset/clientes_lima_1500.csv"):
 
     with open(archivo_csv, "r", encoding="utf-8") as f:
         clientes = parser.leer_clientes_csv(f)
-
-    # Añadir campo distrito si no existe (basado en el CSV que vi)
-    if clientes and "distrito" not in clientes[0]:
-        # Si no tienen distrito, asignar uno por defecto o leerlo del CSV
-        try:
-            import pandas as pd
-
-            df = pd.read_csv(archivo_csv)
-            if "distrito" in df.columns:
-                for i, row in df.iterrows():
-                    if i < len(clientes):
-                        clientes[i]["distrito"] = str(row["distrito"])
-        except:
-            # Si falla, asignar distrito por defecto
-            for cliente in clientes:
-                cliente["distrito"] = "Lima"
 
     return clientes

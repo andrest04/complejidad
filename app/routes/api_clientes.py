@@ -49,51 +49,6 @@ def obtener_cliente(cliente_id):
 
     return jsonify(cliente)
 
-
-@api_clientes_bp.route("/api/clientes/<int:cliente_id>", methods=["PUT"])
-def actualizar_cliente(cliente_id):
-    """Actualiza un cliente específico"""
-    datos = current_app.config["DATOS_GLOBALES"]
-    clientes = datos.get("clientes", [])
-
-    cliente_index = next(
-        (i for i, c in enumerate(clientes) if c.get("id") == cliente_id), None
-    )
-
-    if cliente_index is None:
-        return jsonify({"error": "Cliente no encontrado"}), 404
-
-    data = request.get_json()
-
-    # Validaciones básicas
-    campos_requeridos = ["nombre", "latitud", "longitud", "distrito"]
-    for campo in campos_requeridos:
-        if campo not in data:
-            return jsonify({"error": f"Campo requerido: {campo}"}), 400
-
-    # Actualizar cliente
-    cliente_actualizado = clientes[cliente_index].copy()
-    cliente_actualizado.update(
-        {
-            "nombre": data["nombre"],
-            "latitud": float(data["latitud"]),
-            "longitud": float(data["longitud"]),
-            "distrito": data["distrito"],
-            "prioridad": int(data.get("prioridad", 1)),
-            "ventana_inicio": data.get("ventana_inicio", "08:00"),
-            "ventana_fin": data.get("ventana_fin", "18:00"),
-            "pedido": float(data.get("pedido", 0)),
-        }
-    )
-
-    clientes[cliente_index] = cliente_actualizado
-    current_app.config["DATOS_GLOBALES"]["clientes"] = clientes
-
-    return jsonify(
-        {"mensaje": "Cliente actualizado correctamente", "cliente": cliente_actualizado}
-    )
-
-
 @api_clientes_bp.route("/api/clientes/estadisticas", methods=["GET"])
 def estadisticas_clientes():
     """Obtiene estadísticas de los clientes"""
@@ -138,16 +93,3 @@ def estadisticas_clientes():
             },
         }
     )
-
-
-@api_clientes_bp.route("/api/clientes/recargar", methods=["POST"])
-def recargar_clientes():
-    """Recarga los clientes desde el CSV"""
-    try:
-        clientes = cargar_clientes_csv()
-        current_app.config["DATOS_GLOBALES"]["clientes"] = clientes
-        return jsonify(
-            {"mensaje": "Clientes recargados correctamente", "total": len(clientes)}
-        )
-    except Exception as e:
-        return jsonify({"error": f"Error al recargar clientes: {str(e)}"}), 500

@@ -438,4 +438,88 @@ footer {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Estilos específicos para la página de clientes */
+.prioridad-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+}
+
+.prioridad-1 {
+    background-color: #dc3545;
+}
+
+.prioridad-2 {
+    background-color: #fd7e14;
+}
+
+.prioridad-3 {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.prioridad-4 {
+    background-color: #20c997;
+}
+
+.prioridad-5 {
+    background-color: #198754;
+}
+
+.coordenadas {
+    font-family: "Courier New", monospace;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.pedido-valor {
+    font-weight: 600;
+    color: #28a745;
+}
+
+.horario {
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.table-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.entries-info {
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+}
+
+/* Responsive table para clientes */
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.85em;
+    }
+
+    .table td,
+    .table th {
+        padding: 8px 5px;
+    }
+
+    .coordenadas {
+        font-size: 0.75em;
+    }
 } 

@@ -46,23 +46,6 @@ function showToast(title, message, type = 'info') {
     }
 }
 
-function showLoading(message = 'Procesando...') {
-    const loadingMessage = document.getElementById('loading-message');
-    if (loadingMessage) {
-        loadingMessage.textContent = message;
-    }
-    
-    const modal = new bootstrap.Modal(document.getElementById('loadingModal'));
-    modal.show();
-}
-
-function hideLoading() {
-    const modal = bootstrap.Modal.getInstance(document.getElementById('loadingModal'));
-    if (modal) {
-        modal.hide();
-    }
-}
-
 // Funciones de validación
 function validateForm(formId) {
     const form = document.getElementById(formId);
@@ -145,7 +128,7 @@ function addClientMarkers(map, clientes, marcadoresObj = {}) {
         
         if (!lat || !lng || isNaN(lat) || isNaN(lng)) {
             console.warn(`Cliente ${cliente.nombre} (ID: ${cliente.id}) tiene coordenadas inválidas:`, 
-                         `lat: ${lat}, lng: ${lng}`);
+                        `lat: ${lat}, lng: ${lng}`);
             return; // Saltar este cliente
         }
         
@@ -502,7 +485,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePopovers();
     
     // El mapa se inicializa automáticamente en cada página que lo necesite
-    console.log("� Scripts globales cargados correctamente");
+    console.log("🚀 Scripts globales cargados correctamente");
     
     // Agregar listeners para formularios
     const forms = document.querySelectorAll('form');
@@ -551,8 +534,6 @@ window.AppUtils = {
     formatDistance,
     formatCurrency,
     showToast,
-    showLoading,
-    hideLoading,
     validateForm,
     validateCoordinates,
     validateTimeFormat,
@@ -586,7 +567,7 @@ async function cargarClientesManual() {
     showToast("Info", "Cargando clientes manualmente...", "info");
     
     try {
-        const response = await apiCall('/api/obtener_clientes');
+        const response = await apiCall('/api/clientes');
         console.log("✅ Clientes cargados:", response);
         
         if (response && response.clientes) {
@@ -631,7 +612,7 @@ async function cargarVehiculosManual() {
     showToast("Info", "Cargando vehículos manualmente...", "info");
     
     try {
-        const response = await apiCall('/api/obtener_vehiculos');
+        const response = await apiCall('/api/vehiculos');
         console.log("✅ Vehículos cargados:", response);
         
         if (response && response.vehiculos) {
@@ -676,8 +657,8 @@ async function cargarEstadisticasManual() {
     
     try {
         const [clientesResponse, vehiculosResponse] = await Promise.all([
-            apiCall('/api/obtener_clientes'),
-            apiCall('/api/obtener_vehiculos')
+            apiCall('/api/clientes'),
+            apiCall('/api/vehiculos')
         ]);
         
         if (clientesResponse && clientesResponse.clientes) {
