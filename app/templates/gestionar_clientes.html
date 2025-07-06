@@ -1,178 +1,299 @@
-{% extends "layout.html" %} {% block title %}Gestionar Clientes{% endblock %} {%
-block content %}
+{% extends "layout.html" %} {% block title %}Gestión de Clientes{% endblock %}
+{% block styles %}
+<style>
+  .prioridad-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .prioridad-1 {
+    background-color: #dc3545;
+  }
+  .prioridad-2 {
+    background-color: #fd7e14;
+  }
+  .prioridad-3 {
+    background-color: #ffc107;
+    color: #000;
+  }
+  .prioridad-4 {
+    background-color: #20c997;
+  }
+  .prioridad-5 {
+    background-color: #198754;
+  }
+
+  .filtros {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .estadisticas {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+  }
+
+  .modal-lg {
+    max-width: 800px;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 40px;
+  }
+
+  /* Estilos para la tabla */
+  .table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .table {
+    margin-bottom: 0;
+  }
+
+  .table thead th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 15px 10px;
+    vertical-align: middle;
+  }
+
+  .table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+
+  .table tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  .table td {
+    vertical-align: middle;
+    padding: 12px 10px;
+    border-top: 1px solid #dee2e6;
+  }
+
+  .btn-action {
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-edit {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .btn-edit:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+
+  .coordenadas {
+    font-family: "Courier New", monospace;
+    font-size: 0.85em;
+    color: #666;
+  }
+
+  .pedido-valor {
+    font-weight: 600;
+    color: #28a745;
+  }
+
+  .horario {
+    font-size: 0.9em;
+    color: #6c757d;
+  }
+
+  /* Responsive table */
+  @media (max-width: 768px) {
+    .table-responsive {
+      font-size: 0.85em;
+    }
+
+    .table td,
+    .table th {
+      padding: 8px 5px;
+    }
+
+    .coordenadas {
+      font-size: 0.75em;
+    }
+  }
+
+  .table-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+
+  .entries-info {
+    color: #6c757d;
+    font-size: 0.9em;
+  }
+</style>
+{% endblock %} {% block content %}
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0">
-          <i class="fas fa-users me-2"></i>Gestionar Clientes
-        </h1>
-      </div>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3">
+      <i class="fas fa-users text-primary"></i>
+      Gestión de Clientes
+    </h1>
+    <div>
+      <button class="btn btn-success" onclick="recargarClientes()">
+        <i class="fas fa-sync-alt"></i> Recargar
+      </button>
+      <button class="btn btn-info" onclick="toggleEstadisticas()">
+        <i class="fas fa-chart-bar"></i> Estadísticas
+      </button>
     </div>
   </div>
 
-  <!-- Estadísticas de clientes -->
-  <div class="row mb-4">
-    <div class="col-md-3">
-      <div class="card bg-primary text-white">
-        <div class="card-body">
-          <div class="d-flex justify-content-between">
-            <div>
-              <h6 class="card-title">Total Clientes</h6>
-              <h3 class="mb-0" id="totalClientes">0</h3>
-            </div>
-            <div class="align-self-center">
-              <i class="fas fa-users fa-2x"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card bg-danger text-white">
-        <div class="card-body">
-          <div class="d-flex justify-content-between">
-            <div>
-              <h6 class="card-title">Prioridad Alta</h6>
-              <h3 class="mb-0" id="prioridadAlta">0</h3>
-            </div>
-            <div class="align-self-center">
-              <i class="fas fa-exclamation-triangle fa-2x"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card bg-info text-white">
-        <div class="card-body">
-          <div class="d-flex justify-content-between">
-            <div>
-              <h6 class="card-title">Pedidos Totales</h6>
-              <h3 class="mb-0" id="pedidosTotales">0 kg</h3>
-            </div>
-            <div class="align-self-center">
-              <i class="fas fa-box fa-2x"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card bg-success text-white">
-        <div class="card-body">
-          <div class="d-flex justify-content-between">
-            <div>
-              <h6 class="card-title">Promedio Pedido</h6>
-              <h3 class="mb-0" id="promedioPedido">0 kg</h3>
-            </div>
-            <div class="align-self-center">
-              <i class="fas fa-chart-line fa-2x"></i>
-            </div>
-          </div>
+  <!-- Estadísticas (ocultas por defecto) -->
+  <div id="estadisticas" class="estadisticas" style="display: none">
+    <h4><i class="fas fa-chart-pie"></i> Estadísticas de Clientes</h4>
+    <div class="row" id="estadisticas-content">
+      <div class="col-12 text-center">
+        <div class="spinner-border text-light" role="status">
+          <span class="sr-only">Cargando...</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Mapa y tabla de clientes -->
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title mb-0">
-            <i class="fas fa-map-marked-alt me-2"></i>Mapa de Clientes
-          </h5>
-        </div>
-        <div class="card-body">
-          <div id="mapaClientes" style="height: 500px"></div>
-        </div>
+  <!-- Filtros -->
+  <div class="filtros">
+    <h5><i class="fas fa-filter"></i> Filtros y Búsqueda</h5>
+    <div class="row">
+      <div class="col-md-3">
+        <label for="buscar-cliente">Buscar Cliente:</label>
+        <input
+          type="text"
+          id="buscar-cliente"
+          class="form-control"
+          placeholder="Nombre o distrito..."
+          onkeyup="buscarClientes()"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="filtro-distrito">Distrito:</label>
+        <select id="filtro-distrito" class="form-control">
+          <option value="">Todos los distritos</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="filtro-prioridad">Prioridad:</label>
+        <select id="filtro-prioridad" class="form-control">
+          <option value="">Todas las prioridades</option>
+          <option value="1">Prioridad 1 (Crítica)</option>
+          <option value="2">Prioridad 2 (Alta)</option>
+          <option value="3">Prioridad 3 (Media)</option>
+          <option value="4">Prioridad 4 (Baja)</option>
+          <option value="5">Prioridad 5 (Muy Baja)</option>
+        </select>
+      </div>
+      <div class="col-md-3 d-flex align-items-end">
+        <button class="btn btn-primary btn-block" onclick="filtrarClientes()">
+          <i class="fas fa-search"></i> Filtrar
+        </button>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title mb-0">
-            <i class="fas fa-list me-2"></i>Lista de Clientes
-          </h5>
-        </div>
-        <div class="card-body">
-          <div
-            class="table-responsive"
-            style="max-height: 500px; overflow-y: auto"
-          >
-            <table class="table table-sm table-hover" id="tablaClientes">
-              <thead class="table-dark sticky-top">
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Prioridad</th>
-                  <th>Pedido</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody id="tbodyClientes">
-                <!-- Los clientes se cargarán dinámicamente -->
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label for="registros-por-pagina">Registros por página:</label>
+        <select
+          id="registros-por-pagina"
+          class="form-control"
+          onchange="cambiarPaginacion()"
+        >
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="0">Todos</option>
+        </select>
+      </div>
+      <div class="col-md-6 d-flex align-items-end">
+        <button class="btn btn-secondary btn-block" onclick="limpiarFiltros()">
+          <i class="fas fa-eraser"></i> Limpiar Filtros
+        </button>
       </div>
     </div>
+  </div>
+
+  <!-- Información de resultados -->
+  <div class="alert alert-info">
+    <span id="total-clientes">Cargando clientes...</span>
+  </div>
+
+  <!-- Lista de clientes en tabla -->
+  <div id="clientes-container" class="loading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Cargando...</span>
+    </div>
+    <p>Cargando clientes...</p>
   </div>
 </div>
 
 <!-- Modal para editar cliente -->
-<div
-  class="modal fade"
-  id="modalEditarCliente"
-  tabindex="-1"
-  aria-labelledby="modalEditarClienteLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="editarClienteModal" tabindex="-1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalEditarClienteLabel">
-          <i class="fas fa-edit me-2"></i>Editar Cliente
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <h5 class="modal-title"><i class="fas fa-edit"></i> Editar Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
       </div>
-      <form id="formEditarCliente">
-        <div class="modal-body">
-          <input type="hidden" id="editId" name="id" />
+      <div class="modal-body">
+        <form id="form-editar-cliente">
+          <input type="hidden" id="cliente-id" />
+
           <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="editNombre" class="form-label"
-                  >Nombre del Cliente *</label
-                >
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="cliente-nombre">Nombre</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="editNombre"
-                  name="nombre"
+                  id="cliente-nombre"
                   required
                 />
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="editPrioridad" class="form-label"
-                  >Prioridad *</label
-                >
-                <select
-                  class="form-select"
-                  id="editPrioridad"
-                  name="prioridad"
-                  required
-                >
-                  <option value="1">1 - Muy Alta</option>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="cliente-prioridad">Prioridad</label>
+                <select class="form-control" id="cliente-prioridad" required>
+                  <option value="1">1 - Crítica</option>
                   <option value="2">2 - Alta</option>
                   <option value="3">3 - Media</option>
                   <option value="4">4 - Baja</option>
@@ -181,396 +302,598 @@ block content %}
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-6">
-              <div class="mb-3">
-                <label for="editLatitud" class="form-label">Latitud *</label>
+              <div class="form-group">
+                <label for="cliente-latitud">Latitud</label>
                 <input
                   type="number"
+                  step="any"
                   class="form-control"
-                  id="editLatitud"
-                  name="latitud"
+                  id="cliente-latitud"
                   required
-                  step="0.0001"
                 />
               </div>
             </div>
             <div class="col-md-6">
-              <div class="mb-3">
-                <label for="editLongitud" class="form-label">Longitud *</label>
+              <div class="form-group">
+                <label for="cliente-longitud">Longitud</label>
                 <input
                   type="number"
+                  step="any"
                   class="form-control"
-                  id="editLongitud"
-                  name="longitud"
-                  required
-                  step="0.0001"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="editPedido" class="form-label">Pedido (kg) *</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="editPedido"
-                  name="pedido"
-                  required
-                  min="0.1"
-                  step="0.1"
-                />
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="editVentanaInicio" class="form-label"
-                  >Ventana Inicio *</label
-                >
-                <input
-                  type="time"
-                  class="form-control"
-                  id="editVentanaInicio"
-                  name="ventana_inicio"
-                  required
-                />
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="editVentanaFin" class="form-label"
-                  >Ventana Fin *</label
-                >
-                <input
-                  type="time"
-                  class="form-control"
-                  id="editVentanaFin"
-                  name="ventana_fin"
+                  id="cliente-longitud"
                   required
                 />
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cancelar
-          </button>
-          <button type="submit" class="btn btn-primary">
-            <i class="fas fa-save me-2"></i>Guardar Cambios
-          </button>
-        </div>
-      </form>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="cliente-distrito">Distrito</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cliente-distrito"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="cliente-ventana-inicio">Ventana Inicio</label>
+                <input
+                  type="time"
+                  class="form-control"
+                  id="cliente-ventana-inicio"
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="cliente-ventana-fin">Ventana Fin</label>
+                <input
+                  type="time"
+                  class="form-control"
+                  id="cliente-ventana-fin"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cliente-pedido">Valor del Pedido (S/)</label>
+            <input
+              type="number"
+              step="0.01"
+              class="form-control"
+              id="cliente-pedido"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="guardarCliente()"
+        >
+          <i class="fas fa-save"></i> Guardar Cambios
+        </button>
+      </div>
     </div>
   </div>
 </div>
-{% endblock %} {% block scripts %}
+
 <script>
-  let mapaClientes;
-  let marcadoresClientes = [];
+  let clientesActuales = [];
+  let clientesFiltrados = [];
+  let paginaActual = 1;
+  let registrosPorPagina = 25;
 
+  // Cargar clientes al iniciar
   document.addEventListener("DOMContentLoaded", function () {
-    inicializarMapa();
     cargarClientes();
-    actualizarEstadisticas();
-
-    // Formulario para editar cliente
-    document
-      .getElementById("formEditarCliente")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-        actualizarCliente();
-      });
+    cargarDistritosEnFiltro();
   });
 
-  function inicializarMapa() {
-    // Verificar que Leaflet esté disponible
-    if (typeof L === "undefined") {
-      console.error("Leaflet no está disponible");
-      mostrarAlerta("Error: Leaflet no está cargado", "danger");
+  async function cargarClientes() {
+    try {
+      const response = await fetch("/api/clientes");
+      const data = await response.json();
+
+      clientesActuales = data.clientes;
+      clientesFiltrados = [...clientesActuales];
+      paginaActual = 1;
+      mostrarClientesPaginados();
+    } catch (error) {
+      console.error("Error al cargar clientes:", error);
+      document.getElementById("clientes-container").innerHTML =
+        '<div class="alert alert-danger">Error al cargar los clientes</div>';
+    }
+  }
+
+  function mostrarClientesPaginados() {
+    const totalRegistros = clientesFiltrados.length;
+    document.getElementById(
+      "total-clientes"
+    ).textContent = `Mostrando ${totalRegistros} clientes`;
+
+    if (registrosPorPagina === 0) {
+      // Mostrar todos
+      mostrarClientes(clientesFiltrados);
+    } else {
+      // Paginación
+      const inicio = (paginaActual - 1) * registrosPorPagina;
+      const fin = inicio + registrosPorPagina;
+      const clientesPagina = clientesFiltrados.slice(inicio, fin);
+      mostrarClientes(
+        clientesPagina,
+        totalRegistros,
+        inicio + 1,
+        Math.min(fin, totalRegistros)
+      );
+    }
+  }
+
+  function mostrarClientes(clientes, totalRegistros = 0, inicio = 1, fin = 0) {
+    const container = document.getElementById("clientes-container");
+
+    if (clientes.length === 0) {
+      container.innerHTML =
+        '<div class="alert alert-warning">No se encontraron clientes</div>';
+      return;
+    }
+
+    const html = `
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">#</th>
+                            <th style="width: 25%">
+                                <i class="fas fa-user"></i> Nombre
+                                <button class="btn btn-sm float-end" onclick="ordenarPor('nombre')" title="Ordenar">
+                                    <i class="fas fa-sort"></i>
+                                </button>
+                            </th>
+                            <th style="width: 12%">
+                                <i class="fas fa-map-marker-alt"></i> Distrito
+                                <button class="btn btn-sm float-end" onclick="ordenarPor('distrito')" title="Ordenar">
+                                    <i class="fas fa-sort"></i>
+                                </button>
+                            </th>
+                            <th style="width: 8%">
+                                <i class="fas fa-star"></i> Prioridad
+                                <button class="btn btn-sm float-end" onclick="ordenarPor('prioridad')" title="Ordenar">
+                                    <i class="fas fa-sort"></i>
+                                </button>
+                            </th>
+                            <th style="width: 10%">
+                                <i class="fas fa-dollar-sign"></i> Pedido
+                                <button class="btn btn-sm float-end" onclick="ordenarPor('pedido')" title="Ordenar">
+                                    <i class="fas fa-sort"></i>
+                                </button>
+                            </th>
+                            <th style="width: 15%"><i class="fas fa-clock"></i> Horario</th>
+                            <th style="width: 15%"><i class="fas fa-globe"></i> Coordenadas</th>
+                            <th style="width: 10%"><i class="fas fa-cogs"></i> Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${clientes
+                          .map(
+                            (cliente) => `
+                            <tr>
+                                <td><strong>${cliente.id}</strong></td>
+                                <td>
+                                    <div style="font-weight: 500;">${
+                                      cliente.nombre
+                                    }</div>
+                                </td>
+                                <td>
+                                    <i class="fas fa-map-marker-alt text-danger"></i>
+                                    ${cliente.distrito}
+                                </td>
+                                <td>
+                                    <span class="prioridad-badge prioridad-${
+                                      cliente.prioridad
+                                    }">
+                                        ${cliente.prioridad}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="pedido-valor">
+                                        S/ ${parseFloat(cliente.pedido).toFixed(
+                                          2
+                                        )}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="horario">
+                                        <i class="fas fa-clock text-info"></i>
+                                        ${cliente.ventana_inicio} - ${
+                              cliente.ventana_fin
+                            }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="coordenadas">
+                                        <i class="fas fa-globe text-success"></i>
+                                        ${parseFloat(cliente.latitud).toFixed(
+                                          4
+                                        )}, ${parseFloat(
+                              cliente.longitud
+                            ).toFixed(4)}
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn-action btn-edit" onclick="editarCliente(${
+                                      cliente.id
+                                    })" title="Editar Cliente">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `
+                          )
+                          .join("")}
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-pagination">
+                <div class="entries-info">
+                    ${
+                      totalRegistros > 0
+                        ? `Mostrando ${inicio} a ${fin} de ${totalRegistros} cliente(s)`
+                        : `Mostrando ${clientes.length} cliente(s)`
+                    }
+                </div>
+                <div>
+                    ${
+                      totalRegistros > registrosPorPagina &&
+                      registrosPorPagina > 0
+                        ? crearPaginacion()
+                        : ""
+                    }
+                    <small class="text-muted ml-3">
+                        <i class="fas fa-info-circle"></i>
+                        Haz clic en <i class="fas fa-edit text-primary"></i> para editar
+                    </small>
+                </div>
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = html;
+  }
+
+  function crearPaginacion() {
+    const totalPaginas = Math.ceil(
+      clientesFiltrados.length / registrosPorPagina
+    );
+
+    if (totalPaginas <= 1) return "";
+
+    let paginacion = '<nav><ul class="pagination pagination-sm mb-0">';
+
+    // Botón anterior
+    paginacion += `
+        <li class="page-item ${paginaActual === 1 ? "disabled" : ""}">
+            <button class="page-link" onclick="cambiarPagina(${
+              paginaActual - 1
+            })" ${paginaActual === 1 ? "disabled" : ""}>
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </li>
+    `;
+
+    // Páginas
+    for (let i = 1; i <= totalPaginas; i++) {
+      if (
+        i === 1 ||
+        i === totalPaginas ||
+        (i >= paginaActual - 2 && i <= paginaActual + 2)
+      ) {
+        paginacion += `
+                <li class="page-item ${i === paginaActual ? "active" : ""}">
+                    <button class="page-link" onclick="cambiarPagina(${i})">${i}</button>
+                </li>
+            `;
+      } else if (i === paginaActual - 3 || i === paginaActual + 3) {
+        paginacion +=
+          '<li class="page-item disabled"><span class="page-link">...</span></li>';
+      }
+    }
+
+    // Botón siguiente
+    paginacion += `
+        <li class="page-item ${
+          paginaActual === totalPaginas ? "disabled" : ""
+        }">
+            <button class="page-link" onclick="cambiarPagina(${
+              paginaActual + 1
+            })" ${paginaActual === totalPaginas ? "disabled" : ""}>
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </li>
+    `;
+
+    paginacion += "</ul></nav>";
+    return paginacion;
+  }
+
+  function cambiarPagina(nuevaPagina) {
+    const totalPaginas = Math.ceil(
+      clientesFiltrados.length / registrosPorPagina
+    );
+
+    if (nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
+      paginaActual = nuevaPagina;
+      mostrarClientesPaginados();
+    }
+  }
+
+  function cambiarPaginacion() {
+    registrosPorPagina = parseInt(
+      document.getElementById("registros-por-pagina").value
+    );
+    paginaActual = 1;
+    mostrarClientesPaginados();
+  }
+
+  function buscarClientes() {
+    const termino = document
+      .getElementById("buscar-cliente")
+      .value.toLowerCase();
+
+    if (termino === "") {
+      clientesFiltrados = [...clientesActuales];
+    } else {
+      clientesFiltrados = clientesActuales.filter(
+        (cliente) =>
+          cliente.nombre.toLowerCase().includes(termino) ||
+          cliente.distrito.toLowerCase().includes(termino) ||
+          cliente.id.toString().includes(termino)
+      );
+    }
+
+    paginaActual = 1;
+    mostrarClientesPaginados();
+  }
+
+  function ordenarPor(campo) {
+    clientesFiltrados.sort((a, b) => {
+      if (campo === "pedido" || campo === "prioridad") {
+        return parseFloat(b[campo]) - parseFloat(a[campo]);
+      } else {
+        return a[campo].toString().localeCompare(b[campo].toString());
+      }
+    });
+
+    mostrarClientesPaginados();
+  }
+
+  function limpiarFiltros() {
+    document.getElementById("buscar-cliente").value = "";
+    document.getElementById("filtro-distrito").value = "";
+    document.getElementById("filtro-prioridad").value = "";
+    document.getElementById("registros-por-pagina").value = "25";
+
+    registrosPorPagina = 25;
+    clientesFiltrados = [...clientesActuales];
+    paginaActual = 1;
+    mostrarClientesPaginados();
+  }
+
+  async function cargarDistritosEnFiltro() {
+    try {
+      const response = await fetch("/api/clientes");
+      const data = await response.json();
+
+      const distritos = [
+        ...new Set(data.clientes.map((c) => c.distrito)),
+      ].sort();
+      const select = document.getElementById("filtro-distrito");
+
+      distritos.forEach((distrito) => {
+        const option = document.createElement("option");
+        option.value = distrito;
+        option.textContent = distrito;
+        select.appendChild(option);
+      });
+    } catch (error) {
+      console.error("Error al cargar distritos:", error);
+    }
+  }
+
+  async function filtrarClientes() {
+    const distrito = document.getElementById("filtro-distrito").value;
+    const prioridad = document.getElementById("filtro-prioridad").value;
+    const busqueda = document
+      .getElementById("buscar-cliente")
+      .value.toLowerCase();
+
+    // Aplicar filtros
+    clientesFiltrados = clientesActuales.filter((cliente) => {
+      let cumpleFiltros = true;
+
+      // Filtro por distrito
+      if (distrito && cliente.distrito !== distrito) {
+        cumpleFiltros = false;
+      }
+
+      // Filtro por prioridad
+      if (prioridad && cliente.prioridad.toString() !== prioridad) {
+        cumpleFiltros = false;
+      }
+
+      // Filtro por búsqueda
+      if (
+        busqueda &&
+        !(
+          cliente.nombre.toLowerCase().includes(busqueda) ||
+          cliente.distrito.toLowerCase().includes(busqueda) ||
+          cliente.id.toString().includes(busqueda)
+        )
+      ) {
+        cumpleFiltros = false;
+      }
+
+      return cumpleFiltros;
+    });
+
+    paginaActual = 1;
+    mostrarClientesPaginados();
+  }
+
+  async function editarCliente(id) {
+    try {
+      const response = await fetch(`/api/clientes/${id}`);
+      const cliente = await response.json();
+
+      document.getElementById("cliente-id").value = cliente.id;
+      document.getElementById("cliente-nombre").value = cliente.nombre;
+      document.getElementById("cliente-latitud").value = cliente.latitud;
+      document.getElementById("cliente-longitud").value = cliente.longitud;
+      document.getElementById("cliente-distrito").value = cliente.distrito;
+      document.getElementById("cliente-prioridad").value = cliente.prioridad;
+      document.getElementById("cliente-ventana-inicio").value =
+        cliente.ventana_inicio;
+      document.getElementById("cliente-ventana-fin").value =
+        cliente.ventana_fin;
+      document.getElementById("cliente-pedido").value = cliente.pedido;
+
+      $("#editarClienteModal").modal("show");
+    } catch (error) {
+      console.error("Error al cargar cliente:", error);
+      alert("Error al cargar los datos del cliente");
+    }
+  }
+
+  async function guardarCliente() {
+    const id = document.getElementById("cliente-id").value;
+    const data = {
+      nombre: document.getElementById("cliente-nombre").value,
+      latitud: document.getElementById("cliente-latitud").value,
+      longitud: document.getElementById("cliente-longitud").value,
+      distrito: document.getElementById("cliente-distrito").value,
+      prioridad: document.getElementById("cliente-prioridad").value,
+      ventana_inicio: document.getElementById("cliente-ventana-inicio").value,
+      ventana_fin: document.getElementById("cliente-ventana-fin").value,
+      pedido: document.getElementById("cliente-pedido").value,
+    };
+
+    try {
+      const response = await fetch(`/api/clientes/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        $("#editarClienteModal").modal("hide");
+        await cargarClientes();
+        alert("Cliente actualizado correctamente");
+      } else {
+        alert("Error: " + result.error);
+      }
+    } catch (error) {
+      console.error("Error al guardar cliente:", error);
+      alert("Error al guardar los cambios");
+    }
+  }
+
+  async function recargarClientes() {
+    if (
+      !confirm(
+        "¿Estás seguro de que quieres recargar los clientes desde el archivo CSV?"
+      )
+    ) {
       return;
     }
 
     try {
-      // Inicializar mapa centrado en Lima
-      mapaClientes = L.map("mapaClientes").setView([-12.0464, -77.0428], 12);
-
-      // Agregar capa de OpenStreetMap
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "© OpenStreetMap contributors",
-      }).addTo(mapaClientes);
-
-      // Agregar marcador del depósito central
-      const depositoIcon = L.divIcon({
-        className: "custom-div-icon",
-        html: '<div style="background-color: #dc3545; width: 20px; height: 20px; border-radius: 50%; border: 2px solid white;"></div>',
-        iconSize: [20, 20],
-        iconAnchor: [10, 10],
+      const response = await fetch("/api/clientes/recargar", {
+        method: "POST",
       });
 
-      L.marker([-12.0464, -77.0428], { icon: depositoIcon })
-        .addTo(mapaClientes)
-        .bindPopup(
-          "<b>Depósito Central</b><br>Punto de partida de todas las rutas"
-        );
+      const result = await response.json();
 
-      console.log("Mapa inicializado correctamente");
+      if (response.ok) {
+        alert(`Clientes recargados: ${result.total} clientes cargados`);
+        await cargarClientes();
+        cargarDistritosEnFiltro();
+        limpiarFiltros();
+      } else {
+        alert("Error: " + result.error);
+      }
     } catch (error) {
-      console.error("Error al inicializar mapa:", error);
-      mostrarAlerta("Error al inicializar el mapa: " + error.message, "danger");
+      console.error("Error al recargar clientes:", error);
+      alert("Error al recargar los clientes");
     }
   }
 
-  function cargarClientes() {
-    fetch("/api/obtener_clientes")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Datos de clientes recibidos:", data);
+  async function toggleEstadisticas() {
+    const estadisticasDiv = document.getElementById("estadisticas");
 
-        if (data.clientes && Array.isArray(data.clientes)) {
-          console.log(`Se encontraron ${data.clientes.length} clientes`);
-
-          // Verificar estructura de datos
-          if (data.clientes.length > 0) {
-            console.log("Ejemplo de cliente:", data.clientes[0]);
-          }
-
-          mostrarClientes(data.clientes);
-          agregarMarcadoresMapa(data.clientes);
-        } else {
-          console.warn("No se encontraron clientes o el formato es incorrecto");
-          mostrarAlerta("No se encontraron clientes", "warning");
-        }
-      })
-      .catch((error) => {
-        console.error("Error al cargar clientes:", error);
-        mostrarAlerta("Error al cargar clientes: " + error.message, "danger");
-      });
-  }
-
-  function mostrarClientes(clientes) {
-    const tbody = document.getElementById("tbodyClientes");
-    tbody.innerHTML = "";
-
-    if (!clientes || clientes.length === 0) {
-      tbody.innerHTML =
-        '<tr><td colspan="5" class="text-center">No se encontraron clientes</td></tr>';
-      return;
-    }
-
-    clientes.forEach((cliente) => {
-      // Validar datos básicos del cliente
-      if (!cliente.id || !cliente.nombre) {
-        console.warn("Cliente con datos incompletos:", cliente);
-        return;
-      }
-
-      const row = document.createElement("tr");
-      const prioridadColor = obtenerColorPrioridad(cliente.prioridad);
-
-      row.innerHTML = `
-            <td>${cliente.id}</td>
-            <td>${cliente.nombre}</td>
-            <td><span class="badge ${prioridadColor}">${
-        cliente.prioridad || "N/A"
-      }</span></td>
-            <td>${cliente.pedido ? formatearPeso(cliente.pedido) : "N/A"}</td>
-            <td>
-                <button class="btn btn-sm btn-outline-primary" onclick="editarCliente(${
-                  cliente.id
-                })">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn btn-sm btn-outline-danger" onclick="eliminarCliente(${
-                  cliente.id
-                })">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </td>
-        `;
-      tbody.appendChild(row);
-    });
-  }
-
-  function agregarMarcadoresMapa(clientes) {
-    // Limpiar marcadores existentes
-    marcadoresClientes.forEach((marcador) =>
-      mapaClientes.removeLayer(marcador)
-    );
-    marcadoresClientes = [];
-
-    clientes.forEach((cliente) => {
-      // Validar que las coordenadas existan y sean válidas
-      if (
-        !cliente.latitud ||
-        !cliente.longitud ||
-        isNaN(cliente.latitud) ||
-        isNaN(cliente.longitud)
-      ) {
-        console.warn(
-          `Cliente ${cliente.nombre} (ID: ${cliente.id}) tiene coordenadas inválidas:`,
-          `lat: ${cliente.latitud}, lng: ${cliente.longitud}`
-        );
-        return; // Saltar este cliente
-      }
-
-      const color = obtenerColorPrioridad(cliente.prioridad).replace("bg-", "");
-      const icon = L.divIcon({
-        className: "custom-div-icon",
-        html: `<div style="background-color: ${obtenerColorHex(
-          color
-        )}; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white;"></div>`,
-        iconSize: [15, 15],
-        iconAnchor: [7.5, 7.5],
-      });
-
-      try {
-        const marcador = L.marker(
-          [parseFloat(cliente.latitud), parseFloat(cliente.longitud)],
-          {
-            icon: icon,
-          }
-        ).addTo(mapaClientes).bindPopup(`
-                  <b>${cliente.nombre}</b><br>
-                  Prioridad: ${cliente.prioridad}<br>
-                  Pedido: ${formatearPeso(cliente.pedido)}<br>
-                  Ventana: ${cliente.ventana_inicio} - ${cliente.ventana_fin}
-              `);
-
-        marcadoresClientes.push(marcador);
-      } catch (error) {
-        console.error(
-          `Error al crear marcador para cliente ${cliente.nombre}:`,
-          error
-        );
-      }
-    });
-  }
-
-  function editarCliente(id) {
-    // Cargar datos del cliente en el modal
-    fetch("/api/obtener_clientes")
-      .then((response) => response.json())
-      .then((data) => {
-        const cliente = data.clientes.find((c) => c.id === id);
-        if (cliente) {
-          document.getElementById("editId").value = cliente.id;
-          document.getElementById("editNombre").value = cliente.nombre;
-          document.getElementById("editPrioridad").value = cliente.prioridad;
-          document.getElementById("editLatitud").value = cliente.latitud;
-          document.getElementById("editLongitud").value = cliente.longitud;
-          document.getElementById("editPedido").value = cliente.pedido;
-          document.getElementById("editVentanaInicio").value =
-            cliente.ventana_inicio;
-          document.getElementById("editVentanaFin").value = cliente.ventana_fin;
-
-          new bootstrap.Modal(
-            document.getElementById("modalEditarCliente")
-          ).show();
-        }
-      });
-  }
-
-  function actualizarCliente() {
-    const formData = new FormData(document.getElementById("formEditarCliente"));
-    const data = {
-      id: parseInt(formData.get("id")),
-      nombre: formData.get("nombre"),
-      latitud: parseFloat(formData.get("latitud")),
-      longitud: parseFloat(formData.get("longitud")),
-      prioridad: parseInt(formData.get("prioridad")),
-      ventana_inicio: formData.get("ventana_inicio"),
-      ventana_fin: formData.get("ventana_fin"),
-      pedido: parseFloat(formData.get("pedido")),
-    };
-
-    // Aquí se implementaría la API para actualizar cliente
-    mostrarAlerta("Función de edición en desarrollo", "info");
-    bootstrap.Modal.getInstance(
-      document.getElementById("modalEditarCliente")
-    ).hide();
-  }
-
-  function eliminarCliente(id) {
-    if (confirm("¿Está seguro de eliminar este cliente?")) {
-      // Aquí se implementaría la API para eliminar cliente
-      mostrarAlerta("Función de eliminación en desarrollo", "info");
-    }
-  }
-
-  function actualizarEstadisticas() {
-    fetch("/api/estadisticas")
-      .then((response) => response.json())
-      .then((data) => {
-        document.getElementById("totalClientes").textContent =
-          data.total_clientes || 0;
-        document.getElementById("prioridadAlta").textContent =
-          data.prioridad_alta || 0;
-        document.getElementById("pedidosTotales").textContent = formatearPeso(
-          data.pedidos_total || 0
-        );
-        document.getElementById("promedioPedido").textContent = formatearPeso(
-          data.promedio_pedido || 0
-        );
-      })
-      .catch((error) => {
-        console.error("Error al cargar estadísticas:", error);
-      });
-  }
-
-  function mostrarAlerta(mensaje, tipo = "info") {
-    // Crear y mostrar una alerta simple
-    console.log(`[${tipo.toUpperCase()}] ${mensaje}`);
-
-    // Si existe la función showToast global, usarla
-    if (typeof showToast !== "undefined") {
-      showToast(
-        tipo === "danger" ? "Error" : "Información",
-        mensaje,
-        tipo === "danger" ? "error" : tipo
-      );
+    if (estadisticasDiv.style.display === "none") {
+      estadisticasDiv.style.display = "block";
+      await cargarEstadisticas();
     } else {
-      // Fallback a alert nativo
-      alert(`${tipo === "danger" ? "Error" : "Información"}: ${mensaje}`);
+      estadisticasDiv.style.display = "none";
     }
   }
 
-  function obtenerColorPrioridad(prioridad) {
-    switch (prioridad) {
-      case 1:
-        return "bg-danger";
-      case 2:
-        return "bg-warning";
-      case 3:
-        return "bg-info";
-      case 4:
-        return "bg-primary";
-      case 5:
-        return "bg-secondary";
-      default:
-        return "bg-secondary";
+  async function cargarEstadisticas() {
+    try {
+      const response = await fetch("/api/clientes/estadisticas");
+      const stats = await response.json();
+
+      const html = `
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <h4>${stats.total_clientes}</h4>
+                    <p>Total Clientes</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <h4>S/ ${stats.pedidos.total}</h4>
+                    <p>Valor Total Pedidos</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <h4>S/ ${stats.pedidos.promedio}</h4>
+                    <p>Promedio por Pedido</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <h4>${Object.keys(stats.por_distrito).length}</h4>
+                    <p>Distritos Cubiertos</p>
+                </div>
+            </div>
+        `;
+
+      document.getElementById("estadisticas-content").innerHTML = html;
+    } catch (error) {
+      console.error("Error al cargar estadísticas:", error);
+      document.getElementById("estadisticas-content").innerHTML =
+        '<div class="col-12"><div class="alert alert-danger">Error al cargar estadísticas</div></div>';
     }
-  }
-
-  function obtenerColorHex(color) {
-    const colores = {
-      danger: "#dc3545",
-      warning: "#ffc107",
-      info: "#17a2b8",
-      primary: "#007bff",
-      secondary: "#6c757d",
-    };
-    return colores[color] || "#6c757d";
-  }
-
-  function formatearPeso(peso) {
-    return `${peso.toLocaleString()} kg`;
   }
 </script>
 {% endblock %}

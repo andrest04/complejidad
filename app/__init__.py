@@ -87,7 +87,7 @@ def create_app():
     )
 
     app.register_blueprint(main_bp)
-    app.register_blueprint(api_clientes_bp, url_prefix="/api")
+    app.register_blueprint(api_clientes_bp)
     app.register_blueprint(api_vehiculos_bp, url_prefix="/api")
     app.register_blueprint(api_algoritmos_bp, url_prefix="/api")
     app.register_blueprint(api_general_bp, url_prefix="/api")
