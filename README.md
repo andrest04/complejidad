@@ -33,75 +33,115 @@ Este sistema permite optimizar rutas de entrega para empresas de distribución, 
 
 ## Instalación
 
-### Prerrequisitos
-- Python 3.10 o superior
+### � Guía de Instalación Simple
+
+#### Prerrequisitos
+- Python 3.10 o superior ([Descargar aquí](https://www.python.org/downloads/))
 - pip (gestor de paquetes de Python)
 
-### Pasos de Instalación
+#### Pasos de Instalación
 
-1. **Clonar o descargar el proyecto**
+1. **Verificar Python (versión 3.10 o superior)**
    ```bash
-   git clone <url-del-repositorio>
+   python --version
+   ```
+   Si no tienes Python instalado, descárgalo desde [python.org](https://www.python.org/downloads/)
+
+2. **Descargar el proyecto**
+   - Descarga el proyecto como ZIP y extráelo
+   - O clona el repositorio si está disponible
+
+3. **Navegar al directorio del proyecto**
+   ```bash
    cd complejidad
    ```
 
-2. **Crear entorno virtual (recomendado)**
+4. **Crear entorno virtual (RECOMENDADO)**
    ```bash
    python -m venv venv
    
-   # En Windows
+   # Activar en Windows
    venv\Scripts\activate
    
-   # En macOS/Linux
+   # Activar en macOS/Linux
    source venv/bin/activate
    ```
 
-3. **Instalar dependencias**
+5. **Instalar dependencias**
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Ejecutar la aplicación**
+6. **Ejecutar la aplicación**
    ```bash
-   cd "Código fuente"
-   python app.py
+   python run.py
    ```
 
-5. **Abrir en el navegador**
-   ```
-   http://localhost:5000
-   ```
+7. **Abrir en el navegador**
+   - Ve a: `http://localhost:5000`
+   - Deberías ver el dashboard principal del sistema
+
+### Verificación de Instalación
+
+Si todo funciona correctamente, deberías ver:
+- ✅ Un dashboard con un mapa interactivo de Lima
+- ✅ Menús para gestionar clientes y vehículos
+- ✅ Opciones para cargar datos y ejecutar algoritmos
+
+Si encuentras errores, verifica que:
+
+- Tienes Python 3.10+ instalado
+- El entorno virtual está activado
+- Todas las dependencias se instalaron correctamente
+
+### 📖 Más ayuda
+
+- Ver `INSTALACION_RAPIDA.md` para instrucciones detalladas y solución de problemas
+- Los pasos anteriores funcionan en Windows, macOS y Linux por igual
 
 ## Estructura del Proyecto
 
 ```
 complejidad/
-├── Código fuente/                     # Lógica principal del sistema
-│   ├── app.py                         # Servidor Flask principal
+├── app/                               # Lógica principal del sistema
+│   ├── __init__.py                    # Inicialización de la aplicación
 │   ├── config.py                      # Configuraciones
 │   ├── algoritmos/                    # Implementaciones algorítmicas
 │   │   ├── bellman_ford.py
 │   │   ├── programacion_dinamica.py
 │   │   └── backtracking.py
+│   ├── routes/                        # Rutas de la aplicación
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   ├── api_clientes.py
+│   │   ├── api_vehiculos.py
+│   │   └── api_general.py
 │   ├── utils/                         # Utilidades
 │   │   ├── parser_csv.py
 │   │   ├── grafo_builder.py
-│   │   └── mapa_utils.py
+│   │   ├── mapa_utils.py
+│   │   ├── calculos_comunes.py
+│   │   ├── analisis_dataset.py
+│   │   └── resultados_generator.py
 │   ├── templates/                     # Plantillas HTML
 │   │   ├── layout.html
 │   │   ├── index.html
-│   │   ├── cargar_datos.html
-│   │   ├── registrar_vehiculos.html
 │   │   ├── gestionar_clientes.html
-│   │   ├── ejecutar.html
+│   │   ├── gestionar_vehiculos.html
+│   │   ├── diagnostico.html
 │   │   └── resultados.html
 │   └── static/                        # Archivos estáticos
 │       ├── css/estilos.css
 │       └── js/scripts.js
 ├── Dataset/                           # Datos de ejemplo
+│   ├── clientes_lima_1500.csv
 │   ├── clientes_rutas.csv
-│   └── flota.json
-├── requirements.txt                   # Dependencias
+│   ├── flota_lima_1500.json
+│   ├── flota.json
+│   └── reporte_lima_1500.json
+├── uploads/                           # Archivos subidos por usuarios
+├── run.py                             # Archivo principal para ejecutar
+├── requirements.txt                   # Dependencias del proyecto
 └── README.md                         # Este archivo
 ```
 
