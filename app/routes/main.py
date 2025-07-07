@@ -34,3 +34,8 @@ def resultados():
 @main_bp.route("/diagnostico")
 def diagnostico():
     return render_template("diagnostico.html")
+
+
+@main_bp.route("/mapa-simple")
+def mapa_simple():
+    return render_template("mapa_simple.html")

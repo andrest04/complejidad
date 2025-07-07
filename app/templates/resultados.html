@@ -3,6 +3,184 @@
 {% block title %}Resultados de Optimización{% endblock %}
 
 {% block content %}
+<style>
+  /* Estilos para la leyenda */
+  .leyenda {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid #e9ecef;
+  }
+  
+  .leyenda h5 {
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .leyenda-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .leyenda-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  /* Estilos para el mapa */
+  #mapaRutas {
+    height: 550px;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  /* Efecto hover para el mapa */
+  #mapaRutas:hover {
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  /* Estilos para los controles del mapa */
+  .leaflet-control-zoom {
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 6px !important;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+  }
+  
+  .leaflet-control-zoom a {
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 32px !important;
+    font-size: 18px !important;
+    color: #333 !important;
+    background-color: white !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  .leaflet-control-zoom a:last-child {
+    border-bottom: none !important;
+  }
+  
+  .leaflet-control-zoom a:hover {
+    background-color: #f8f9fa !important;
+    color: #0d6efd !important;
+  }
+  
+  /* Estilo para los marcadores */
+  .leaflet-marker-icon {
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  
+  .leaflet-marker-icon:hover {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+    z-index: 1000 !important;
+  }
+  
+  /* Estilo para los popups */
+  .leaflet-popup-content-wrapper {
+    border-radius: 8px !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .leaflet-popup-content {
+    margin: 10px 12px !important;
+    font-size: 14px !important;
+  }
+  
+  .leaflet-popup-tip {
+    box-shadow: none !important;
+  }
+  
+  /* Estilo para el marcador del depósito */
+  .depot-marker {
+    background: none;
+    border: none;
+  }
+  
+  .depot-marker i {
+    color: #e63946;
+    font-size: 24px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Estilo para el loading */
+  #mapaLoading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  /* Contenedor del mapa con mejor integración */
+  .map-container {
+    position: relative;
+    height: 100%;
+    min-height: 550px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 1px;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  /* Mejoras para la tarjeta del mapa */
+  .card.map-card {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .card.map-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .card.map-card .card-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .card.map-card .card-body {
+    padding: 0;
+    position: relative;
+  }
+  
+  /* Ajustes responsivos */
+  @media (max-width: 768px) {
+    #mapaRutas {
+      height: 400px;
+    }
+    .map-container {
+      min-height: 400px;
+    }
+  }
+</style>
+
 <div class="container-fluid">
   <!-- Header -->
   <div class="row mb-4">
@@ -14,85 +192,56 @@
           </h1>
           <p class="text-muted mb-0">Análisis de rutas optimizadas</p>
         </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-primary" onclick="abrirModal()">
-            <i class="fas fa-cogs me-2"></i>Nueva Optimización
-          </button>
-          <button class="btn btn-outline-secondary" onclick="exportarDatos()">
-            <i class="fas fa-download me-2"></i>Exportar
-          </button>
-        </div>
       </div>
     </div>
   </div>
 
-  <!-- Botón de ejecución -->
+  <!-- Selector de Algoritmo -->
   <div class="row mb-4">
-    <div class="col-12 text-center">
-      <button class="btn btn-primary btn-lg" onclick="ejecutarAlgoritmos()">
-        <i class="fas fa-play-circle me-2"></i>Ejecutar Algoritmos
-      </button>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-cogs me-2"></i>Seleccionar Algoritmo
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8">
+              <select id="selectAlgoritmo" class="form-select form-select-lg mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Seleccione el algoritmo de optimización de rutas que desea utilizar. Cada algoritmo tiene diferentes características y rendimiento.">
+                <option value="">-- Seleccione un algoritmo --</option>
+                <option value="bellman-ford">Bellman-Ford</option>
+                <option value="backtracking">Backtracking</option>
+                <option value="programacion-dinamica">Programación Dinámica</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <button id="btnEjecutar" class="btn btn-primary btn-lg w-100" onclick="ejecutarAlgoritmoSeleccionado()" disabled
+              data-bs-toggle="tooltip" data-bs-placement="top" title="Ejecuta el algoritmo seleccionado para calcular las rutas óptimas">
+                <i class="fas fa-play-circle me-2"></i>Ejecutar
+              </button>
+            </div>
+          </div>
+          <div id="descripcionAlgoritmo" class="mt-3 p-3 bg-light rounded">
+            <p class="mb-2"><strong>Descripción:</strong> <span id="algoritmoDesc">Seleccione un algoritmo para ver su descripción.</span></p>
+            <p class="mb-0"><strong>Beneficios:</strong> <span id="algoritmoBeneficios">-</span></p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Sección de Algoritmos -->
-  <div id="seccionAlgoritmos" style="display: none;">
-    <!-- Bellman-Ford -->
+  <!-- Sección de Resultados -->
+  <div id="seccionResultados" style="display: none;">
     <div class="card mb-4">
-      <div class="card-header bg-primary text-white" data-bs-toggle="collapse" href="#bellmanFordCollapse" role="button">
-        <h5 class="mb-0">
-          <i class="fas fa-route me-2"></i>Algoritmo Bellman-Ford
-          <span class="float-end"><i class="fas fa-chevron-down"></i></span>
+      <div class="card-header">
+        <h5 class="card-title mb-0">
+          <i class="fas fa-chart-bar me-2"></i>Resultados del Algoritmo
         </h5>
       </div>
-      <div class="collapse show" id="bellmanFordCollapse">
-        <div class="card-body">
-          <div id="bellmanFordContent" class="text-center py-4">
-            <div class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Cargando...</span>
-            </div>
-            <p class="mt-2">Ejecutando Bellman-Ford...</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Backtracking -->
-    <div class="card mb-4">
-      <div class="card-header bg-success text-white" data-bs-toggle="collapse" href="#backtrackingCollapse" role="button">
-        <h5 class="mb-0">
-          <i class="fas fa-sitemap me-2"></i>Algoritmo Backtracking
-          <span class="float-end"><i class="fas fa-chevron-down"></i></span>
-        </h5>
-      </div>
-      <div class="collapse" id="backtrackingCollapse">
-        <div class="card-body">
-          <div id="backtrackingContent" class="text-center py-4">
-            <div class="spinner-border text-success" role="status">
-              <span class="visually-hidden">Cargando...</span>
-            </div>
-            <p class="mt-2">Ejecutando Backtracking...</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Programación Dinámica -->
-    <div class="card mb-4">
-      <div class="card-header bg-info text-white" data-bs-toggle="collapse" href="#dinamicaCollapse" role="button">
-        <h5 class="mb-0">
-          <i class="fas fa-project-diagram me-2"></i>Programación Dinámica
-          <span class="float-end"><i class="fas fa-chevron-down"></i></span>
-        </h5>
-      </div>
-      <div class="collapse" id="dinamicaCollapse">
-        <div class="card-body">
-          <div id="dinamicaContent" class="text-center py-4">
-            <div class="spinner-border text-info" role="status">
-              <span class="visually-hidden">Cargando...</span>
-            </div>
-            <p class="mt-2">Ejecutando Programación Dinámica...</p>
-          </div>
+      <div class="card-body">
+        <div id="contenidoAlgoritmo" class="text-center py-4">
+          <!-- Aquí se cargará el contenido del algoritmo seleccionado -->
         </div>
       </div>
     </div>
@@ -103,7 +252,8 @@
     <!-- Resumen de resultados -->
     <div class="row mb-4">
       <div class="col-md-3">
-        <div class="card bg-primary text-white">
+        <div class="card bg-primary text-white" data-bs-toggle="tooltip" data-bs-placement="top" 
+           title="Número total de rutas generadas por el algoritmo de optimización">
           <div class="card-body text-center">
             <i class="fas fa-route fa-2x mb-2"></i>
             <h4 id="totalRutas">-</h4>
@@ -112,7 +262,8 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="card bg-success text-white">
+        <div class="card bg-success text-white" data-bs-toggle="tooltip" data-bs-placement="top" 
+           title="Número total de clientes que serán atendidos en todas las rutas">
           <div class="card-body text-center">
             <i class="fas fa-users fa-2x mb-2"></i>
             <h4 id="totalClientes">-</h4>
@@ -121,7 +272,8 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="card bg-info text-white">
+        <div class="card bg-info text-white" data-bs-toggle="tooltip" data-bs-placement="top" 
+           title="Cantidad de vehículos necesarios para cubrir todas las rutas generadas">
           <div class="card-body text-center">
             <i class="fas fa-truck fa-2x mb-2"></i>
             <h4 id="vehiculosUtilizados">-</h4>
@@ -130,7 +282,8 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="card bg-warning text-white">
+        <div class="card bg-warning text-white" data-bs-toggle="tooltip" data-bs-placement="top" 
+           title="Tiempo total estimado para completar todas las rutas, incluyendo viajes y tiempos de servicio">
           <div class="card-body text-center">
             <i class="fas fa-clock fa-2x mb-2"></i>
             <h4 id="tiempoTotal">-</h4>
@@ -140,22 +293,56 @@
     </div>
   </div>
 
-  <!-- Mapa de rutas -->
-    <div class="row mb-4">
-    <div class="col-12">
-      <div class="card">
+  <!-- Estadísticas y Mapa de rutas -->
+  <div class="row mb-4">
+    <div class="col-md-4 mb-4 mb-md-0">
+      <div class="card h-100">
         <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-chart-pie me-2"></i>Estadísticas de Rutas
+          </h5>
+        </div>
+        <div class="card-body" id="estadisticasRutas">
+          <div class="text-center text-muted py-4">
+            <i class="fas fa-chart-line fa-3x mb-3"></i>
+            <p>Ejecute un algoritmo para ver las estadísticas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <!-- Mapa de rutas -->
+      <div class="card map-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
           <h5 class="card-title mb-0">
             <i class="fas fa-map-marked-alt me-2"></i>Visualización de Rutas
           </h5>
+          <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-outline-secondary" id="btnZoomIn" title="Acercar">
+              <i class="fas fa-search-plus"></i>
+            </button>
+            <button type="button" class="btn btn-outline-secondary" id="btnZoomOut" title="Alejar">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <button type="button" class="btn btn-outline-secondary" id="btnFitBounds" title="Ajustar al área">
+              <i class="fas fa-compress-alt"></i>
+            </button>
+            <button type="button" class="btn btn-outline-primary" id="btnFullscreen" title="Pantalla completa">
+              <i class="fas fa-expand"></i>
+            </button>
+          </div>
         </div>
-        <div class="card-body">
-          <div id="mapaRutas" style="height: 500px; background-color: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-            <div class="text-center">
-              <i class="fas fa-map fa-3x text-muted mb-3"></i>
-              <p class="text-muted">Mapa de rutas se cargará aquí</p>
-              <button class="btn btn-primary" onclick="cargarMapa()">
-                <i class="fas fa-map me-2"></i>Cargar Mapa
+        <div class="card-body p-0">
+          <div class="map-container">
+            <div id="mapaRutas"></div>
+            <div id="mapaLoading" class="d-flex flex-column align-items-center justify-content-center">
+              <div class="spinner-border text-primary mb-3" style="width: 2.5rem; height: 2.5rem;" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="mb-0 text-muted">Cargando mapa...</p>
+            </div>
+          </div>
+        </div>
               </button>
             </div>
           </div>
@@ -190,60 +377,366 @@
                   <!-- Se llena dinámicamente -->
                 </tbody>
               </table>
+              
+              <!-- Leyenda -->
+              <div class="leyenda mt-4">
+                <h5><i class="fas fa-info-circle me-2"></i>Leyenda</h5>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="leyenda-item">
+                      <div class="leyenda-color" style="background-color: #0d6efd;"></div>
+                      <span><strong>Ruta:</strong> Secuencia de puntos que sigue el vehículo</span>
+                    </div>
+                    <div class="leyenda-item">
+                      <div class="leyenda-color" style="background-color: #198754;"></div>
+                      <span><strong>Cliente:</strong> Punto de entrega o recogida</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="leyenda-item">
+                      <div class="leyenda-color" style="background-color: #dc3545;"></div>
+                      <span><strong>Almacén:</strong> Punto de inicio y fin de las rutas</span>
+                    </div>
+                    <div class="leyenda-item">
+                      <div class="leyenda-color" style="background-color: #6c757d;"></div>
+                      <span><strong>Eficiencia:</strong> Porcentaje de uso de capacidad del vehículo</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
             </div>
           </div>
         </div>
-      </div>
-    </div>
-          </div>
-        </div>
-
-<!-- Modal de nueva optimización -->
-<div class="modal fade" id="modalOptimizacion" tabindex="-1">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">
-          <i class="fas fa-cogs me-2"></i>Nueva Optimización de Rutas
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formOptimizacion">
-          <div class="mb-3">
-            <label for="algoritmo" class="form-label">Algoritmo de Optimización</label>
-            <select class="form-select" id="algoritmo" required>
-              <option value="">Seleccionar algoritmo...</option>
-              <option value="bellman_ford">Bellman-Ford (Rutas más cortas)</option>
-              <option value="backtracking">Backtracking (Exploración completa)</option>
-              <option value="programacion_dinamica">Programación Dinámica (Optimización global)</option>
-            </select>
-            <div class="form-text">
-              <strong>Bellman-Ford:</strong> Encuentra las rutas más cortas entre todos los puntos.<br>
-              <strong>Backtracking:</strong> Explora todas las combinaciones posibles.<br>
-              <strong>Programación Dinámica:</strong> Optimiza considerando restricciones globales.
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="iniciarOptimizacion()">
-          <i class="fas fa-play me-2"></i>Iniciar Optimización
-        </button>
       </div>
     </div>
   </div>
 </div>
+
 {% endblock %}
 
 {% block scripts %}
 <script>
+// Inicialización de componentes
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Inicializar botones del mapa
+  const mapa = window.mapaRutas;
+  if (mapa) {
+    // Botón de zoom in
+    document.getElementById('btnZoomIn').addEventListener('click', function() {
+      mapa.zoomIn();
+    });
+    
+    // Botón de zoom out
+    document.getElementById('btnZoomOut').addEventListener('click', function() {
+      mapa.zoomOut();
+    });
+    
+    // Botón para ajustar a los límites
+    document.getElementById('btnFitBounds').addEventListener('click', function() {
+      if (window.rutasLayer) {
+        const bounds = window.rutasLayer.getBounds();
+        if (bounds.isValid()) {
+          mapa.fitBounds(bounds, { padding: [50, 50] });
+        }
+      }
+    });
+    
+    // Botón de pantalla completa
+    document.getElementById('btnFullscreen').addEventListener('click', function() {
+      const mapContainer = document.getElementById('mapaRutas');
+      if (!document.fullscreenElement) {
+        if (mapContainer.requestFullscreen) {
+          mapContainer.requestFullscreen();
+        } else if (mapContainer.webkitRequestFullscreen) { /* Safari */
+          mapContainer.webkitRequestFullscreen();
+        } else if (mapContainer.msRequestFullscreen) { /* IE11 */
+          mapContainer.msRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+          document.msExitFullscreen();
+        }
+      }
+    });
+  }
+});
+
 console.log('🚀 Script de resultados iniciando...');
 
-// Variables globales
-let resultadosActuales = null;
+// Variables globales - definidas en scripts.js
 let algoritmosEjecutados = false;
+
+// Inicializar cuando el documento esté listo y Leaflet esté cargado
+function initApp() {
+    console.log('🔍 Inicializando aplicación...');
+    
+    // Esperar un momento para asegurar que el contenedor del mapa esté listo
+    setTimeout(() => {
+        // Inicializar el mapa
+        if (typeof L !== 'undefined') {
+            console.log('🌍 Leaflet cargado, inicializando mapa...');
+            const map = inicializarMapaBasico();
+            if (!map) {
+                console.warn('⚠️ No se pudo inicializar el mapa, reintentando...');
+                setTimeout(inicializarMapaBasico, 500);
+            }
+        } else {
+            console.error('❌ Leaflet no está disponible');
+        }
+    }, 100);
+    
+    // Configurar eventos del formulario
+    const formAlgoritmo = document.getElementById('formAlgoritmo');
+    if (formAlgoritmo) {
+        formAlgoritmo.addEventListener('submit', function(e) {
+            e.preventDefault();
+            ejecutarAlgoritmoSeleccionado();
+        });
+    }
+    
+    // Actualizar descripción del algoritmo cuando cambia la selección
+    const selectAlgoritmo = document.getElementById('selectAlgoritmo');
+    if (selectAlgoritmo) {
+        selectAlgoritmo.addEventListener('change', function() {
+            actualizarDescripcionAlgoritmo(this.value);
+        });
+        
+        // Mostrar descripción inicial
+        actualizarDescripcionAlgoritmo(selectAlgoritmo.value);
+    }
+}
+
+// Esperar a que tanto el DOM como Leaflet estén listos
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    // Si el DOM ya está listo, verificar Leaflet
+    if (typeof L !== 'undefined') {
+        initApp();
+    } else {
+        // Si Leaflet no está listo, esperar un poco
+        const checkLeaflet = setInterval(() => {
+            if (typeof L !== 'undefined') {
+                clearInterval(checkLeaflet);
+                initApp();
+            }
+        }, 100);
+    }
+}
+
+// Función para inicializar el mapa de forma segura
+function inicializarMapaBasico() {
+    try {
+        console.log('🔍 Inicializando mapa básico...');
+        
+        // Verificar si Leaflet está cargado
+        if (typeof L === 'undefined') {
+            console.error('❌ Leaflet no está cargado');
+            return null;
+        }
+        
+        // Obtener el contenedor del mapa
+        let mapContainer = document.getElementById('mapaRutas');
+        
+        // Si no existe el contenedor, mostramos un error
+        if (!mapContainer) {
+            console.error('❌ No se encontró el contenedor del mapa con ID "mapaRutas"');
+            // Intentar encontrar el contenedor del mapa en la estructura del DOM
+            const mapSection = document.querySelector('.map-container');
+            if (mapSection) {
+                mapContainer = mapSection.querySelector('#mapaRutas');
+                if (!mapContainer) {
+                    console.log('🔄 Creando contenedor del mapa...');
+                    mapContainer = document.createElement('div');
+                    mapContainer.id = 'mapaRutas';
+                    mapSection.appendChild(mapContainer);
+                }
+            }
+            
+            if (!mapContainer) {
+                console.error('❌ No se pudo encontrar ni crear el contenedor del mapa');
+                return null;
+            }
+        }
+        
+        // Asegurar que el contenedor tenga dimensiones
+        if (!mapContainer.style.height) {
+            mapContainer.style.height = '600px';
+        }
+        if (!mapContainer.style.width) {
+            mapContainer.style.width = '100%';
+        }
+        
+        // Asegurar que el contenedor sea visible
+        mapContainer.style.display = 'block';
+        mapContainer.style.visibility = 'visible';
+        mapContainer.style.position = 'relative';
+        
+        // Forzar un reflow para asegurar que el navegador calcule las dimensiones
+        void mapContainer.offsetWidth;
+        
+        // Limpiar cualquier mapa existente
+        if (window.mapaRutas) {
+            try {
+                if (window.mapaRutas.remove) {
+                    window.mapaRutas.remove();
+                }
+            } catch (e) {
+                console.warn('⚠️ Error al limpiar el mapa anterior:', e);
+            } finally {
+                window.mapaRutas = null;
+            }
+        }
+        
+        console.log('🗺️ Creando nuevo mapa...');
+        
+        try {
+            // Verificar que el contenedor esté en el DOM
+            if (!document.body.contains(mapContainer)) {
+                console.warn('⚠️ El contenedor no está en el DOM, intentando añadir...');
+                document.body.appendChild(mapContainer);
+            }
+            
+            // Crear un nuevo mapa con opciones básicas
+            window.mapaRutas = L.map(mapContainer, {
+                center: [-12.0464, -77.0428],
+                zoom: 12,
+                zoomControl: false, // Deshabilitar controles por defecto
+                layers: [
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                        maxZoom: 19
+                    })
+                ]
+            });
+            
+            // Añadir controles de zoom personalizados
+            L.control.zoom({
+                position: 'topright'
+            }).addTo(window.mapaRutas);
+            
+            // Inicializar capas
+            window.rutasLayer = L.layerGroup().addTo(window.mapaRutas);
+            window.markersLayer = L.layerGroup().addTo(window.mapaRutas);
+            
+            // Agregar marcador de depósito
+            L.marker([-12.0464, -77.0428], {
+                icon: L.divIcon({
+                    className: 'depot-marker',
+                    html: '<i class="fas fa-warehouse"></i>',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                })
+            }).addTo(window.markersLayer).bindPopup('Depósito Principal').openPopup();
+            
+            // Forzar actualización del tamaño después de un breve retraso
+            setTimeout(() => {
+                if (window.mapaRutas) {
+                    window.mapaRutas.invalidateSize();
+                    console.log('✅ Tamaño del mapa actualizado');
+                }
+            }, 300);
+            
+            console.log('✅ Mapa inicializado correctamente');
+            return window.mapaRutas;
+            
+        } catch (error) {
+            console.error('❌ Error al crear el mapa:', error);
+            if (window.mapaRutas && window.mapaRutas.remove) {
+                window.mapaRutas.remove();
+            }
+            window.mapaRutas = null;
+            return null;
+        }
+        
+    } catch (error) {
+        console.error('❌ Error al inicializar el mapa:', error);
+        return null;
+    }
+}
+
+// Función para actualizar la descripción del algoritmo seleccionado
+function actualizarDescripcionAlgoritmo(algoritmo) {
+    const descripcion = obtenerDescripcionAlgoritmo(algoritmo);
+    const beneficios = obtenerBeneficiosAlgoritmo(algoritmo);
+    
+    const descripcionDiv = document.getElementById('descripcionAlgoritmo');
+    if (descripcionDiv) {
+        descripcionDiv.innerHTML = `
+            <h6>${obtenerNombreAlgoritmo(algoritmo)}</h6>
+            <p class="mb-2">${descripcion}</p>
+            <h6 class="mt-3">Beneficios:</h6>
+            <ul class="mb-0">
+                ${beneficios.map(b => `<li>${b}</li>`).join('')}
+            </ul>
+        `;
+    }
+    
+    // Habilitar/deshabilitar botón de ejecutar
+    const btnEjecutar = document.getElementById('btnEjecutar');
+    if (btnEjecutar) {
+        btnEjecutar.disabled = !algoritmo;
+    }
+}
+
+// Función para ejecutar el algoritmo seleccionado
+function ejecutarAlgoritmoSeleccionado() {
+    const selectAlgoritmo = document.getElementById('selectAlgoritmo');
+    const algoritmo = selectAlgoritmo ? selectAlgoritmo.value : null;
+    
+    if (!algoritmo) {
+        showToast('Error', 'Por favor seleccione un algoritmo', 'error');
+        return;
+    }
+    
+    // Mostrar loading
+    mostrarLoading(`Ejecutando ${obtenerNombreAlgoritmo(algoritmo)}...`);
+    
+    // Deshabilitar botón mientras se ejecuta
+    const btnEjecutar = document.getElementById('btnEjecutar');
+    if (btnEjecutar) btnEjecutar.disabled = true;
+    
+    // Simular tiempo de ejecución (en un caso real, aquí iría la llamada a la API)
+    setTimeout(() => {
+        try {
+            // Generar datos de ejemplo
+            const datosEjemplo = generarDatosEjemploRutas(algoritmo);
+            
+            if (!datosEjemplo || !Array.isArray(datosEjemplo)) {
+                throw new Error('No se pudieron generar los datos de ejemplo');
+            }
+            
+            console.log('Datos de ejemplo generados:', datosEjemplo);
+            
+            // Mostrar resultados en el mapa
+            mostrarResultadosEnMapa(datosEjemplo, algoritmo);
+            
+            // Actualizar estadísticas
+            actualizarEstadisticas(datosEjemplo, algoritmo);
+            
+            // Actualizar indicador de algoritmos ejecutados
+            algoritmosEjecutados = true;
+            
+            // Mostrar mensaje de éxito
+            showToast('¡Éxito!', `El algoritmo ${obtenerNombreAlgoritmo(algoritmo)} se ha ejecutado correctamente.`, 'success');
+            
+        } catch (error) {
+            console.error('❌ Error al ejecutar el algoritmo:', error);
+            showToast('Error', `Ocurrió un error al ejecutar el algoritmo: ${error.message}`, 'error');
+        } finally {
+            // Ocultar loading y reactivar botón
+            ocultarLoading();
+            if (btnEjecutar) btnEjecutar.disabled = false;
+        }
+    }, 1500); // Simular tiempo de procesamiento
+}
 
 // Función para ejecutar todos los algoritmos
 function ejecutarAlgoritmos() {
@@ -261,7 +754,7 @@ function ejecutarAlgoritmos() {
   // Ejecutar cada algoritmo con un pequeño retraso para mejor visualización
   // y asegurando que el contenedor sea visible
   setTimeout(() => {
-    ejecutarAlgoritmo('bellman_ford', 'bellmanFordContent');
+    ejecutarAlgoritmo('bellman-ford', 'bellmanFordContent');
     
     // Asegurarse de que el mapa se redimensione después de mostrarse
     setTimeout(() => {
@@ -285,7 +778,7 @@ function ejecutarAlgoritmos() {
   }, 1500);
   
   setTimeout(() => {
-    ejecutarAlgoritmo('programacion_dinamica', 'dinamicaContent');
+    ejecutarAlgoritmo('programacion-dinamica', 'dinamicaContent');
     
     // Asegurarse de que el mapa se redimensione después de mostrarse
     setTimeout(() => {
@@ -434,38 +927,96 @@ function generarDatosEjemploRutas(algoritmo) {
   const rutas = [];
   const numRutas = Math.floor(Math.random() * 3) + 2; // Entre 2 y 4 rutas
   
-  // Puntos de ejemplo en Lima
-  const puntosLima = [
-    [-12.0560, -77.0428], // Lima Centro
-    [-12.0760, -77.0628], // Surco
-    [-12.0860, -77.0228], // Miraflores
-    [-12.0460, -77.0828], // La Victoria
-    [-12.0360, -77.0628], // Lince
-    [-12.0960, -77.0028], // Barranco
-    [-12.1160, -77.0428], // Chorrillos
-    [-12.0260, -77.1228]  // San Juan de Lurigancho
+  // Puntos de ejemplo en Lima con nombres y direcciones
+  const ubicaciones = [
+    { coords: [-12.0560, -77.0428], nombre: 'Lima Centro', direccion: 'Jirón de la Unión 123' },
+    { coords: [-12.0760, -77.0628], nombre: 'Surco', direccion: 'Avenida Benavides 2456' },
+    { coords: [-12.0860, -77.0228], nombre: 'Miraflores', direccion: 'Avenida Larco 1150' },
+    { coords: [-12.0460, -77.0828], nombre: 'La Victoria', direccion: 'Avenida Iquitos 234' },
+    { coords: [-12.0360, -77.0628], nombre: 'Lince', direccion: 'Avenida Arequipa 2010' },
+    { coords: [-12.0960, -77.0028], nombre: 'Barranco', direccion: 'Bajada de Baños 206' },
+    { coords: [-12.1160, -77.0428], nombre: 'Chorrillos', direccion: 'Avenida Huaylas 456' },
+    { coords: [-12.0260, -77.1228], nombre: 'SJL', direccion: 'Avenida Los Frutales 123' }
   ];
   
-  // Mezclar puntos para cada algoritmo
-  const puntosAleatorios = [...puntosLima].sort(() => Math.random() - 0.5);
+  // Mezclar ubicaciones
+  const ubicacionesAleatorias = [...ubicaciones].sort(() => Math.random() - 0.5);
   
   // Crear rutas
-  let puntosUsados = 0;
-  for (let i = 0; i < numRutas && puntosUsados < puntosAleatorios.length; i++) {
-    const numClientes = Math.min(Math.floor(Math.random() * 3) + 2, puntosAleatorios.length - puntosUsados);
-    const clientes = puntosAleatorios.slice(puntosUsados, puntosUsados + numClientes);
-    puntosUsados += numClientes;
+  let ubicacionesUsadas = 0;
+  const totalUbicaciones = ubicacionesAleatorias.length;
+  
+  for (let i = 0; i < numRutas && ubicacionesUsadas < totalUbicaciones; i++) {
+    const numClientes = Math.min(Math.floor(Math.random() * 3) + 2, totalUbicaciones - ubicacionesUsadas);
+    const clientesRuta = [];
+    
+    // Agregar clientes a la ruta
+    for (let j = 0; j < numClientes; j++) {
+      const ubicacion = ubicacionesAleatorias[ubicacionesUsadas + j];
+      clientesRuta.push({
+        lat: ubicacion.coords[0],
+        lng: ubicacion.coords[1],
+        nombre: `Cliente ${ubicacionesUsadas + j + 1}`,
+        direccion: ubicacion.direccion,
+        pedido: `Pedido #${Math.floor(Math.random() * 1000) + 1000}`,
+        monto: (Math.random() * 500 + 50).toFixed(2)
+      });
+    }
+    
+    ubicacionesUsadas += numClientes;
+    
+    // Calcular distancia total aproximada (en km)
+    let distanciaTotal = 0;
+    const deposito = { lat: -12.0464, lng: -77.0428 };
+    let ultimoPunto = deposito;
+    
+    clientesRuta.forEach(cliente => {
+      distanciaTotal += calcularDistancia(
+        ultimoPunto.lat, ultimoPunto.lng,
+        cliente.lat, cliente.lng
+      );
+      ultimoPunto = cliente;
+    });
+    
+    // Volver al depósito
+    distanciaTotal += calcularDistancia(
+      ultimoPunto.lat, ultimoPunto.lng,
+      deposito.lat, deposito.lng
+    );
     
     rutas.push({
-      id: i + 1,
-      clientes: clientes,
-      distancia: Math.random() * 50 + 10, // Entre 10 y 60 km
-      prioridad: Math.floor(Math.random() * 5) + 1, // Prioridad 1-5
-      color: getRandomColor()
+      id: `ruta-${i + 1}`,
+      nombre: `Ruta ${i + 1}`,
+      color: getRandomColor(),
+      distancia: parseFloat(distanciaTotal.toFixed(2)),
+      tiempo_estimado: Math.round(distanciaTotal * 2), // 2 minutos por km
+      vehiculo: `Vehículo ${i + 1}`,
+      capacidad_maxima: 100, // kg
+      capacidad_utilizada: Math.round(Math.random() * 50 + 20), // Entre 20 y 70 kg
+      clientes: clientesRuta,
+      puntos: [
+        { lat: deposito.lat, lng: deposito.lng, tipo: 'deposito' },
+        ...clientesRuta.map(c => ({ lat: c.lat, lng: c.lng, tipo: 'cliente' })),
+        { lat: deposito.lat, lng: deposito.lng, tipo: 'deposito' }
+      ]
     });
   }
   
+  console.log('Datos de ruta generados:', rutas);
   return rutas;
+}
+
+// Función para calcular la distancia entre dos coordenadas (fórmula de Haversine)
+function calcularDistancia(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radio de la Tierra en km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c; // Distancia en km
 }
 
 // Función para generar colores aleatorios
@@ -481,359 +1032,472 @@ function getRandomColor() {
 // Funciones de ayuda
 function obtenerNombreAlgoritmo(codigo) {
   const nombres = {
-    'bellman_ford': 'Bellman-Ford',
+    'bellman-ford': 'Bellman-Ford',
     'backtracking': 'Backtracking',
-    'programacion_dinamica': 'Programación Dinámica'
+    'programacion-dinamica': 'Programación Dinámica'
   };
   return nombres[codigo] || codigo;
 }
 
 function obtenerDescripcionAlgoritmo(codigo) {
   const descripciones = {
-    'bellman_ford': 'Encuentra el camino más corto desde un nodo origen a todos los demás nodos en un grafo con pesos negativos.',
-    'backtracking': 'Explora todas las posibles soluciones mediante búsqueda en profundidad y retroceso.',
-    'programacion_dinamica': 'Resuelve problemas complejos dividiéndolos en subproblemas más simples y almacenando sus soluciones.'
+    'bellman-ford': 'Algoritmo que encuentra el camino más corto desde un nodo origen a todos los demás nodos en un grafo con pesos negativos.',
+    'backtracking': 'Técnica de búsqueda que explora todas las posibles soluciones de forma sistemática.',
+    'programacion-dinamica': 'Método que resuelve problemas complejos dividiéndolos en subproblemas más simples.'
   };
-  return descripciones[codigo] || '';
+  return descripciones[codigo] || 'Descripción no disponible.';
 }
 
 function obtenerBeneficiosAlgoritmo(codigo) {
   const beneficios = {
-    'bellman_ford': [
+    'bellman-ford': [
       'Maneja pesos negativos en las aristas',
       'Detecta ciclos negativos',
       'Ideal para grafos con pesos negativos'
     ],
     'backtracking': [
       'Encuentra todas las soluciones posibles',
-      'Útil para problemas de decisión',
+      'Útil para problemas de optimización',
       'Fácil de implementar para problemas pequeños'
     ],
-    'programacion_dinamica': [
-      'Reduce la complejidad temporal',
-      'Evita recalcular subproblemas',
-      'Óptimo para problemas con subestructura óptima'
+    'programacion-dinamica': [
+      'Eficiente para problemas con subestructura óptima',
+      'Evita el recálculo de subproblemas',
+      'Ideal para problemas de optimización'
     ]
   };
-  return beneficios[codigo] || [];
+  return beneficios[codigo] || ['Beneficios no disponibles.'];
 }
 
-// Función para abrir modal
-function abrirModal() {
-  console.log('🖱️ Botón clickeado - abriendo modal');
-  try {
-    const modal = new bootstrap.Modal(document.getElementById('modalOptimizacion'));
-    modal.show();
-    console.log('✅ Modal abierto correctamente');
-  } catch (error) {
-    console.error('❌ Error al abrir modal:', error);
-    alert('Error al abrir modal: ' + error.message);
-  }
-}
-
-// Función para iniciar optimización
-function iniciarOptimizacion() {
-  console.log('🚀 Iniciando optimización...');
+// Función para mostrar notificaciones toast
+function showToast(titulo, mensaje, tipo = 'info') {
+  // Verificar si ya existe un contenedor de toasts
+  let toastContainer = document.getElementById('toastContainer');
   
-  const algoritmo = document.getElementById('algoritmo').value;
-
-  if (!algoritmo) {
-    alert('Por favor selecciona un algoritmo');
-    return;
+  // Si no existe, crearlo
+  if (!toastContainer) {
+    toastContainer = document.createElement('div');
+    toastContainer.id = 'toastContainer';
+    toastContainer.style.position = 'fixed';
+    toastContainer.style.top = '20px';
+    toastContainer.style.right = '20px';
+    toastContainer.style.zIndex = '1100';
+    document.body.appendChild(toastContainer);
   }
-
-  console.log('📋 Datos del formulario:', {
-    algoritmo: algoritmo
-  });
-
-  // Cerrar modal
-  try {
-    const modal = bootstrap.Modal.getInstance(document.getElementById('modalOptimizacion'));
-    if (modal) modal.hide();
-  } catch (error) {
-    console.error('Error al cerrar modal:', error);
-  }
-
-    // Mostrar loading
-  mostrarLoading('Ejecutando optimización...');
-
-  // Preparar datos
-  const datosOptimizacion = {
-    algoritmo: algoritmo
+  
+  // Crear el toast
+  const toastId = 'toast-' + Date.now();
+  const toast = document.createElement('div');
+  toast.id = toastId;
+  toast.className = `toast show`;
+  toast.role = 'alert';
+  toast.setAttribute('aria-live', 'assertive');
+  toast.setAttribute('aria-atomic', 'true');
+  
+  // Estilos del toast
+  toast.style.minWidth = '300px';
+  toast.style.marginBottom = '10px';
+  toast.style.opacity = '1';
+  toast.style.transition = 'opacity 0.5s ease-in-out';
+  
+  // Colores según el tipo
+  const colors = {
+    'success': { bg: '#d4edda', text: '#155724', border: '#c3e6cb' },
+    'error': { bg: '#f8d7da', text: '#721c24', border: '#f5c6cb' },
+    'warning': { bg: '#fff3cd', text: '#856404', border: '#ffeeba' },
+    'info': { bg: '#d1ecf1', text: '#0c5460', border: '#bee5eb' }
   };
-
-  console.log('📡 Enviando datos a la API:', datosOptimizacion);
-
-  // Configurar timeout para la petición (5 minutos para dar tiempo a la optimización)
-  const controller = new AbortController();
-  const TIMEOUT_DURATION = 300000; // 5 minutos en milisegundos
-  const timeoutId = setTimeout(() => {
-    console.warn(`⚠️ Tiempo de espera agotado después de ${TIMEOUT_DURATION/1000} segundos`);
-    controller.abort(new Error(`La optimización está tomando más de ${TIMEOUT_DURATION/1000} segundos`));
-  }, TIMEOUT_DURATION);
-
-  // Mostrar estado de la petición
-  const startTime = Date.now();
-  console.log(`⏱️  Iniciando optimización a las ${new Date().toLocaleTimeString()}`);
   
-  // Mostrar mensaje de tiempo estimado al usuario
-  const loadingMessage = document.getElementById('loadingMessage');
-  if (loadingMessage) {
-    loadingMessage.textContent = 'La optimización puede tardar varios minutos. Por favor espere...';
-  }
+  const color = colors[tipo] || colors['info'];
   
-  // Llamar API
-  console.log('📡 Enviando solicitud al servidor...');
-  fetch('/api/ejecutar_optimizacion', {
-    method: 'POST',
-    headers: { 
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'  // Para identificar peticiones AJAX
-    },
-    body: JSON.stringify(datosOptimizacion),
-    signal: controller.signal,
-    credentials: 'same-origin'  // Incluir cookies si es necesario
-  })
-  .then(async response => {
-    clearTimeout(timeoutId);
-    console.log('📥 Estado de la respuesta:', response.status, response.statusText);
-    
-    // Intentar parsear la respuesta como JSON
-    let data;
-    try {
-      data = await response.json();
-      console.log('📊 Datos de respuesta:', data);
-    } catch (e) {
-      const text = await response.text();
-      console.error('❌ Error al analizar la respuesta JSON:', e, 'Respuesta del servidor:', text);
-      throw new Error('La respuesta del servidor no es válida');
-    }
-    
-    if (!response.ok) {
-      // Si hay un error HTTP pero tenemos datos JSON con mensaje, usarlo
-      const errorMessage = data?.message || `Error HTTP ${response.status}`;
-      throw new Error(errorMessage);
-    }
-    
-    return data;
-  })
-  .then(data => {
-    ocultarLoading();
-    
-    if (data && data.success) {
-      console.log('✅ Optimización completada con éxito');
-      
-      // Mostrar mensaje de éxito con más detalles
-      const mensaje = `Optimización completada exitosamente usando ${algoritmo}\n` +
-                     `Clientes: ${data.resultados?.configuracion?.total_clientes || 'N/A'}\n` +
-                     `Vehículos: ${data.resultados?.configuracion?.total_vehiculos || 'N/A'}`;
-      
-      // Usar un toast o notificación en lugar de alert() para mejor experiencia
-      if (typeof Toast !== 'undefined') {
-        const toast = new bootstrap.Toast(document.getElementById('toastExito'));
-        document.getElementById('toastMensaje').textContent = mensaje;
-        toast.show();
-      } else {
-        alert(mensaje);
-      }
-      
-      // Actualizar la interfaz
-      if (typeof cargarResultados === 'function') {
-        cargarResultados();
-      } else {
-        console.warn('La función cargarResultados no está definida, recargando página...');
-        setTimeout(() => location.reload(), 1000);
-      }
-    } else {
-      throw new Error(data?.message || 'La optimización no se completó correctamente');
-    }
-  })
-  .catch(error => {
-    clearTimeout(timeoutId);
-    ocultarLoading();
-    
-    console.error('❌ Error en la petición:', {
-      name: error.name,
-      message: error.message,
-      stack: error.stack
-    });
-    
-    // Mensajes de error más amigables
-    let errorMessage = 'Ocurrió un error: ';
-  
-  if (error.name === 'AbortError') {
-    errorMessage = 'La optimización está tomando más tiempo de lo esperado. ';
-    errorMessage += 'Por favor, intente una de las siguientes opciones:\n\n';
-    errorMessage += '1. Reduzca el número de clientes\n';
-    errorMessage += '2. Intente con un algoritmo diferente\n';
-    errorMessage += '3. Vuelva a intentarlo más tarde\n\n';
-    errorMessage += `Tiempo transcurrido: ${Math.round((Date.now() - startTime) / 1000)} segundos`;
-    } else if (error.message.includes('Failed to fetch')) {
-      errorMessage = 'No se pudo conectar con el servidor. Verifique su conexión a internet.';
-    } else if (error.message.includes('JSON')) {
-      errorMessage = 'Error en el formato de la respuesta del servidor.';
-    } else {
-      errorMessage += error.message;
-    }
-    
-    // Mostrar error en la interfaz
-    const errorContainer = document.getElementById('errorContainer');
-    if (errorContainer) {
-      errorContainer.innerHTML = `
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Error:</strong> ${errorMessage}
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-      `;
-    } else {
-      alert(errorMessage);
-    }
-    
-    // Re-enable the button in case of error
-    const btnOptimizar = document.querySelector('#modalOptimizacion .btn-primary');
-    if (btnOptimizar) {
-      btnOptimizar.disabled = false;
-      btnOptimizar.innerHTML = '<i class="fas fa-cogs me-2"></i>Ejecutar Optimización';
-    }
-  });
-}
-
-// Función para cargar mapa
-function cargarMapa() {
-  console.log('🗺️ Cargando mapa...');
-  const mapaDiv = document.getElementById('mapaRutas');
-  
-  mapaDiv.innerHTML = `
-    <div class="text-center">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Cargando mapa...</span>
-      </div>
-      <p class="mt-2">Cargando mapa de rutas...</p>
+  // Contenido del toast
+  toast.innerHTML = `
+    <div class="toast-header" style="background-color: ${color.bg}; color: ${color.text}; border-bottom: 1px solid ${color.border};">
+      <strong class="me-auto">${titulo}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar" onclick="document.getElementById('${toastId}').style.opacity = '0'; setTimeout(() => document.getElementById('${toastId}').remove(), 500);"></button>
+    </div>
+    <div class="toast-body" style="background-color: ${color.bg}; color: ${color.text};">
+      ${mensaje}
     </div>
   `;
-
-  fetch('/api/obtener_datos_mapa')
-    .then(response => response.json())
-    .then(data => {
-      console.log('🗺️ Datos del mapa recibidos:', data);
-      mostrarMapaConDatos(data);
-    })
-    .catch(error => {
-      console.error('❌ Error al cargar mapa:', error);
-      mapaDiv.innerHTML = `
-        <div class="text-center">
-          <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
-          <h5>Error al Cargar Mapa</h5>
-          <p class="text-muted">No se pudieron cargar los datos del mapa</p>
-          <button class="btn btn-sm btn-outline-primary mt-2" onclick="cargarMapa()">
-            <i class="fas fa-redo me-1"></i>Reintentar
-          </button>
-        </div>
-      `;
-    });
+  
+  // Agregar el toast al contenedor
+  toastContainer.appendChild(toast);
+  
+  // Eliminar el toast después de 5 segundos
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.parentNode.removeChild(toast);
+      }
+    }, 500);
+  }, 5000);
 }
 
-// Función para cargar y mostrar los resultados
-function cargarResultados() {
-  console.log('🔄 Cargando resultados...');
+// Función para actualizar las estadísticas
+function actualizarEstadisticas(datos, algoritmo) {
+    try {
+        console.log('📊 Actualizando estadísticas...', datos);
+        
+        // Calcular totales
+        const rutas = Array.isArray(datos) ? datos : (datos.rutas || []);
+        const totalRutas = rutas.length;
+        let totalClientes = 0;
+        let totalDistancia = 0;
+        let totalTiempo = 0;
+        
+        rutas.forEach(ruta => {
+            totalClientes += (ruta.clientes && ruta.clientes.length) || 0;
+            totalDistancia += ruta.distancia_total || 0;
+            totalTiempo += ruta.tiempo_total || 0;
+        });
+        
+        // Actualizar tarjetas de resumen
+        document.getElementById('totalRutas').textContent = totalRutas;
+        document.getElementById('totalClientes').textContent = totalClientes;
+        document.getElementById('vehiculosUtilizados').textContent = totalRutas; // Asumiendo un vehículo por ruta
+        
+        // Formatear tiempo
+        const horas = Math.floor(totalTiempo / 60);
+        const minutos = Math.round(totalTiempo % 60);
+        document.getElementById('tiempoTotal').textContent = `${horas}h ${minutos}m`;
+        
+        // Actualizar estadísticas detalladas
+        const statsDiv = document.getElementById('estadisticasRutas');
+        if (statsDiv) {
+            statsDiv.innerHTML = `
+                <div class="mb-3">
+                    <h6 class="mb-3">Resumen de Rutas</h6>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Rutas generadas:</span>
+                        <strong>${totalRutas}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Clientes atendidos:</span>
+                        <strong>${totalClientes}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Distancia total:</span>
+                        <strong>${totalDistancia.toFixed(2)} km</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Tiempo total estimado:</span>
+                        <strong>${horas}h ${minutos}m</strong>
+                    </div>
+                </div>
+                <div class="alert alert-info mt-3">
+                    <small>
+                        <i class="fas fa-info-circle me-1"></i>
+                        Los resultados se basan en el algoritmo ${obtenerNombreAlgoritmo(algoritmo)}.
+                    </small>
+                </div>
+            `;
+        }
+        
+        // Actualizar la tabla de rutas
+        actualizarTablaRutas(rutas);
+        
+        console.log('✅ Estadísticas actualizadas');
+        
+    } catch (error) {
+        console.error('❌ Error al actualizar estadísticas:', error);
+    }
+}
+
+// Función para actualizar la tabla de rutas
+function actualizarTablaRutas(rutas) {
+    try {
+        console.log('📋 Actualizando tabla de rutas...', rutas);
+        const tbody = document.getElementById('cuerpoTablaRutas');
+        
+        if (!tbody) {
+            console.error('❌ No se encontró el cuerpo de la tabla de rutas');
+            return;
+        }
+        
+        // Limpiar tabla
+        tbody.innerHTML = '';
+        
+        if (!rutas || rutas.length === 0) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td colspan="6" class="text-center text-muted py-4">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No hay rutas para mostrar
+                </td>
+            `;
+            tbody.appendChild(row);
+            return;
+        }
+        
+        // Ordenar rutas por número de vehículo
+        rutas.sort((a, b) => (a.vehiculo_id || 0) - (b.vehiculo_id || 0));
+        
+        // Agregar filas para cada ruta
+        rutas.forEach((ruta, index) => {
+            const numClientes = ruta.clientes ? ruta.clientes.length : 0;
+            const distancia = ruta.distancia ? `${ruta.distancia.toFixed(2)} km` : 'N/A';
+            
+            // Formatear tiempo
+            let tiempo = 'N/A';
+            if (ruta.tiempo_estimado !== undefined) {
+                const horas = Math.floor(ruta.tiempo_estimado / 60);
+                const minutos = Math.round(ruta.tiempo_estimado % 60);
+                tiempo = `${horas > 0 ? horas + 'h ' : ''}${minutos}m`;
+            }
+            
+            const carga = ruta.capacidad_utilizada ? `${ruta.capacidad_utilizada}%` : 'N/A';
+            // Calcular eficiencia basada en la capacidad utilizada vs capacidad máxima
+            const eficiencia = ruta.capacidad_utilizada && ruta.capacidad_maxima 
+                ? Math.round((ruta.capacidad_utilizada / ruta.capacidad_maxima) * 100) 
+                : 0;
+                
+            // Añadir tooltips a los datos de la ruta
+            const tooltipDistance = 'Distancia total de esta ruta en kilómetros';
+            const tooltipTime = 'Tiempo estimado para completar esta ruta';
+            const tooltipLoad = 'Porcentaje de capacidad del vehículo que está siendo utilizada';
+            const tooltipEfficiency = 'Eficiencia de la ruta basada en la utilización de capacidad';
+            const tooltipClients = `Clientes en esta ruta: ${ruta.clientes ? ruta.clientes.map(c => c.nombre).join(', ') : 'Ninguno'}`;
+            
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>
+                    <span class="badge" style="background-color: ${ruta.color || '#6c757d'}">
+                        <i class="fas fa-truck me-1"></i>Vehículo ${index + 1}
+                    </span>
+                </td>
+                <td>
+                    ${numClientes} cliente${numClientes !== 1 ? 's' : ''}
+                </td>
+                <td>
+                    ${distancia}
+                </td>
+                <td>
+                    ${tiempo}
+                </td>
+                <td>
+                    ${carga}
+                </td>
+                <td>
+                    <div class="progress" style="height: 20px;">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: ${eficiencia}%; background-color: ${ruta.color || '#6c757d'}"
+                             aria-valuenow="${eficiencia}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            ${eficiencia}%
+                        </div>
+                    </div>
+                </td>
+            `;
+            
+            // Agregar evento para resaltar la ruta en el mapa al pasar el ratón
+            row.addEventListener('mouseenter', () => {
+                if (window.rutasLayer && window.markersLayer) {
+                    // Resaltar la ruta
+                    const routeElements = document.querySelectorAll('.leaflet-interactive');
+                    routeElements.forEach(el => {
+                        if (el.getAttribute('fill') === ruta.color || 
+                            el.getAttribute('stroke') === ruta.color) {
+                            el.style.strokeWidth = '6px';
+                            el.style.strokeOpacity = '1';
+                        }
+                    });
+                    
+                    // Resaltar marcadores de clientes de esta ruta
+                    if (ruta.clientes) {
+                        ruta.clientes.forEach(cliente => {
+                            const marker = document.querySelector(`[data-client-id="${cliente.id}"]`);
+                            if (marker) {
+                                marker.style.transform = 'scale(1.5)';
+                                marker.style.transition = 'transform 0.2s';
+                            }
+                        });
+                    }
+                }
+            });
+            
+            row.addEventListener('mouseleave', () => {
+                if (window.rutasLayer && window.markersLayer) {
+                    // Restaurar estilos de la ruta
+                    const routeElements = document.querySelectorAll('.leaflet-interactive');
+                    routeElements.forEach(el => {
+                        if (el.getAttribute('fill') === ruta.color || 
+                            el.getAttribute('stroke') === ruta.color) {
+                            el.style.strokeWidth = '4px';
+                            el.style.strokeOpacity = '0.8';
+                        }
+                    });
+                    
+                    // Restaurar marcadores
+                    if (ruta.clientes) {
+                        ruta.clientes.forEach(cliente => {
+                            const marker = document.querySelector(`[data-client-id="${cliente.id}"]`);
+                            if (marker) {
+                                marker.style.transform = 'scale(1)';
+                            }
+                        });
+                    }
+                }
+            });
+            
+            tbody.appendChild(row);
+        });
+        
+        console.log('✅ Tabla de rutas actualizada');
+        
+    } catch (error) {
+        console.error('❌ Error al actualizar la tabla de rutas:', error);
+        showToast('Error', 'No se pudo actualizar la tabla de rutas', 'error');
+    }
+}
+
+// Función para mostrar resultados en el mapa
+function mostrarResultadosEnMapa(datos, algoritmo) {
+  // Mostrar loading
+  const mapaLoading = document.getElementById('mapaLoading');
+  if (mapaLoading) {
+    mapaLoading.style.display = 'flex';
+  }
   
-  // Ocultar el estado sin resultados
-  const estadoSinResultados = document.getElementById('estadoSinResultados');
-  const contenidoResultados = document.getElementById('contenidoResultados');
+  // Asegurarse de que el mapa esté inicializado con la función correcta
+  if (!window.mapaRutas || !document.getElementById('mapaRutas')) {
+    console.log('🔄 Inicializando mapa...');
+    window.mapaRutas = null;
+    inicializarMapaBasico();  // Usar la función correcta de inicialización
+  }
   
-  if (estadoSinResultados) estadoSinResultados.style.display = 'none';
-  if (contenidoResultados) contenidoResultados.style.display = 'block';
-  
-  // Obtener los datos actualizados del servidor
-  fetch('/api/obtener_datos_mapa')
-    .then(response => {
-      if (!response.ok) throw new Error('Error al obtener datos del servidor');
-      return response.json();
-    })
-    .then(data => {
-      console.log('📊 Datos recibidos para mostrar:', data);
+  // Pequeño retraso para asegurar que el mapa esté listo
+  setTimeout(() => {
+    try {
+      console.log('🔍 Estado del mapa:', {
+        mapaRutas: !!window.mapaRutas,
+        rutasLayer: !!window.rutasLayer,
+        markersLayer: !!window.markersLayer,
+        datos: datos  // Mostrar los datos recibidos
+      });
       
-      // Actualizar resumen
-      const totalRutas = data.rutas?.length || 0;
-      const totalClientes = data.total_clientes || 0;
-      
-      // Actualizar la interfaz
-      const totalRutasElement = document.getElementById('totalRutas');
-      const totalClientesElement = document.getElementById('totalClientes');
-      const vehiculosUtilizadosElement = document.getElementById('vehiculosUtilizados');
-      const tiempoTotalElement = document.getElementById('tiempoTotal');
-      
-      if (totalRutasElement) totalRutasElement.textContent = totalRutas;
-      if (totalClientesElement) totalClientesElement.textContent = totalClientes;
-      if (vehiculosUtilizadosElement) vehiculosUtilizadosElement.textContent = totalRutas; // Asumiendo un vehículo por ruta
-      if (tiempoTotalElement) {
-        // Calcular tiempo total estimado (ejemplo)
-        const tiempoEstimado = totalRutas * 30; // 30 minutos por ruta
-        tiempoTotalElement.textContent = `${tiempoEstimado} min`;
+      // Limpiar capas existentes
+      if (window.rutasLayer) {
+        window.rutasLayer.clearLayers();
+      } else {
+        window.rutasLayer = L.layerGroup().addTo(window.mapaRutas);
       }
       
-      // Actualizar el mapa
-      mostrarMapaConDatos(data);
-      
-      // Mostrar la sección de resultados
-      if (contenidoResultados) {
-        contenidoResultados.style.display = 'block';
+      if (window.markersLayer) {
+        window.markersLayer.clearLayers();
+      } else {
+        window.markersLayer = L.layerGroup().addTo(window.mapaRutas);
       }
-    })
-    .catch(error => {
-      console.error('❌ Error al cargar resultados:', error);
-      alert('Error al cargar los resultados: ' + error.message);
-    });
-}
 
-// Función para exportar datos
-function exportarDatos() {
-  console.log('📤 Exportando datos...');
-  if (!resultadosActuales) {
-    alert('No hay resultados para exportar');
-    return;
-  }
+      // Manejar tanto array directo como objeto con propiedad rutas
+      const rutas = Array.isArray(datos) ? datos : (datos.rutas || []);
+      console.log('📊 Rutas a mostrar:', rutas);
+      
+      // Agregar marcador del depósito
+      const deposito = [-12.0464, -77.0428];
+      L.marker(deposito, {
+        icon: L.divIcon({
+          className: 'depot-marker',
+          html: '<i class="fas fa-warehouse"></i>',
+          iconSize: [30, 30],
+          iconAnchor: [15, 30]
+        })
+      }).addTo(window.markersLayer).bindPopup('Depósito Principal');
 
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(resultadosActuales, null, 2));
-  const downloadAnchorNode = document.createElement('a');
-  downloadAnchorNode.setAttribute("href", dataStr);
-  downloadAnchorNode.setAttribute("download", "resultados_optimizacion.json");
-  document.body.appendChild(downloadAnchorNode);
-  downloadAnchorNode.click();
-  downloadAnchorNode.remove();
-  
-  alert('Resultados exportados correctamente');
-}
+      // Mostrar rutas en el mapa
+      if (rutas.length > 0) {
+        const bounds = [deposito]; // Incluir el depósito en los límites
+        
+        rutas.forEach((ruta, index) => {
+          const color = ruta.color || getRandomColor();
+          const puntos = [deposito]; // Empezar en el depósito
+          
+          // Agregar clientes a la ruta
+          if (ruta.clientes && ruta.clientes.length > 0) {
+            ruta.clientes.forEach((cliente, i) => {
+              let punto;
+              
+              // Manejar diferentes formatos de coordenadas
+              if (Array.isArray(cliente) && cliente.length >= 2) {
+                punto = [cliente[0], cliente[1]];
+              } else if (cliente.lat && cliente.lng) {
+                punto = [cliente.lat, cliente.lng];
+              } else if (cliente.coordenadas) {
+                punto = [cliente.coordenadas.lat, cliente.coordenadas.lng];
+              }
+              
+              if (punto) {
+                puntos.push(punto);
+                bounds.push(punto);
+                
+                // Agregar marcador para el cliente
+                L.circleMarker(punto, {
+                  radius: 6,
+                  fillColor: color,
+                  color: '#fff',
+                  weight: 1,
+                  opacity: 1,
+                  fillOpacity: 0.8
+                }).addTo(window.markersLayer)
+                  .bindPopup(`<b>Cliente ${i + 1}</b><br>Ruta ${index + 1}`);
+              }
+            });
+          }
+          
+          // Volver al depósito
+          puntos.push(deposito);
+          
+          // Dibujar la ruta
+          if (puntos.length > 1) {
+            console.log(`🛣️ Dibujando ruta ${index + 1} con ${puntos.length} puntos`, puntos);
+            L.polyline(puntos, {
+              color: color,
+              weight: 4,
+              opacity: 0.8
+            }).addTo(window.rutasLayer);
+          }
+        });
+        
+        // Ajustar la vista para mostrar todas las rutas
+        if (bounds.length > 1) {
+          console.log('🌍 Ajustando vista del mapa a los límites:', bounds);
+          setTimeout(() => {
+            if (window.mapaRutas) {
+              window.mapaRutas.fitBounds(L.latLngBounds(bounds), { 
+                padding: [50, 50],
+                maxZoom: 15
+              });
+              console.log('✅ Vista del mapa ajustada');
+            }
+          }, 100);
+        }
+      } else {
+        console.warn('⚠️ No hay rutas para mostrar');
+        // Centrar en el depósito si no hay rutas
+        window.mapaRutas.setView(deposito, 13);
+      }
 
-// Función para mostrar mapa con datos
-function mostrarMapaConDatos(datos) {
-  const mapaDiv = document.getElementById('mapaRutas');
-  const rutas = datos.rutas || [];
-  const totalClientes = datos.total_clientes || 0;
-  
-  let contenido = `
-    <div class="text-center">
-      <i class="fas fa-map fa-3x text-primary mb-3"></i>
-      <h5>Mapa de Rutas Optimizadas</h5>
-      <p class="text-muted">${totalClientes} clientes • ${rutas.length} rutas</p>
-  `;
-
-  if (rutas.length > 0) {
-    contenido += '<div class="mt-3">';
-    rutas.forEach((ruta, index) => {
-      const vehiculo = ruta.vehiculo || `Vehículo ${index + 1}`;
-      contenido += `
-        <div class="btn-group me-2 mb-2" role="group">
-          <button class="btn btn-outline-primary btn-sm">
-            <i class="fas fa-route me-1"></i>${vehiculo}
-          </button>
-        </div>
-      `;
-    });
-    contenido += '</div>';
-  }
-  contenido += '</div>';
-  mapaDiv.innerHTML = contenido;
+      // Actualizar estadísticas
+      actualizarEstadisticas(rutas, algoritmo);
+      
+    } catch (error) {
+      console.error('❌ Error al mostrar el mapa:', error);
+    } finally {
+      // Ocultar loading
+      if (mapaLoading) {
+        mapaLoading.style.display = 'none';
+      }
+      // Forzar redibujado
+      if (window.mapaRutas) {
+        setTimeout(() => {
+          window.mapaRutas.invalidateSize();
+          console.log('🔄 Tamaño del mapa actualizado');
+        }, 100);
+      }
+    }
+  }, 100);
 }
 
 // Función para mostrar overlay de loading
