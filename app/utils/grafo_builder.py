@@ -4,7 +4,6 @@ from .calculos_comunes import calcular_distancia
 
 
 class GrafoBuilder:
-    """Clase para construir y gestionar la estructura del grafo de rutas"""
 
     def __init__(self):
         self.deposito = {
@@ -16,7 +15,6 @@ class GrafoBuilder:
         }
 
     def construir_grafo(self, clientes: List[Dict]) -> Dict:
-        """Construye la estructura del grafo completo"""
         grafo = {
             "nodos": {},
             "aristas": {},
